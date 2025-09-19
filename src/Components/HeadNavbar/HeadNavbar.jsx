@@ -13,7 +13,7 @@ function HeadNavbar() {
                   <li className="d-none d-xl-inline-block">
                     <a href="tel:(00)8757845682">
                       <span>
-                        <i class="fa-solid fa-phone-volume"></i>
+                        <i className="fa-solid fa-phone-volume"></i>
                       </span>
                       (00) 875 784 5682
                     </a>
@@ -21,7 +21,7 @@ function HeadNavbar() {
                   <li className="d-none d-xl-inline-block">
                     <a href="mailto:pacargoinfo@gmail.com">
                       <span>
-                        <i class="fa-solid fa-envelope-open-text"></i>
+                        <i className="fa-solid fa-envelope-open-text"></i>
                       </span>
                       pacargoinfo@gmail.com
                     </a>
@@ -29,7 +29,7 @@ function HeadNavbar() {
                   <li>
                     <a href="#">
                       <span>
-                        <i class="fa-solid fa-map-marker-alt"></i>
+                        <i className="fa-solid fa-map-marker-alt"></i>
                       </span>
                       Hudson, Wisconsin(WI), 54016
                     </a>
@@ -52,16 +52,16 @@ function HeadNavbar() {
                     <li>
                       <div className="head-social">
                         <a href="#">
-                          <i class="fab fa-facebook-f"></i>
+                          <i className="fab fa-facebook-f"></i>
                         </a>
                         <a href="#">
-                          <i class="fab fa-twitter"></i>
+                          <i className="fab fa-twitter"></i>
                         </a>
                         <a href="#">
-                          <i class="fab fa-skype"></i>
+                          <i className="fab fa-skype"></i>
                         </a>
                         <a href="#">
-                          <i class="fab fa-linkedin"></i>
+                          <i className="fab fa-linkedin"></i>
                         </a>
                       </div>
                     </li>

@@ -1,0 +1,48 @@
+.navbar-main {
+  background-color: #fff;
+  border-bottom: 1px solid #eaeaea;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  position: sticky;
+  top: 80px;
+  z-index: 1000;
+}
+
+.logo-navbar img {
+  width: 150px;
+}
+
+.links-navbar ul {
+  display: flex;
+  gap: 55px;
+}
+
+.links-navbar ul li a {
+  color: #333;
+  font-weight: 600;
+  transition: 0.7s;
+}
+
+/* .links-navbar ul li a.active, */
+.links-navbar ul li a:hover {
+  color: #17c9aa;
+}
+
+.cart-icon {
+  cursor: pointer;
+  color: #333;
+  transition: 0.3s;
+}
+
+.cart-icon:hover {
+  color: #17c9aa;
+}
+
+.right-navbar .btn-hamborgar {
+  display: flex;
+  align-items: center;
+  padding: 18px 20px;
+  border: none;
+  background-color: #0ab99d;
+  color: #fff;
+  border-radius: 6px;
+}
