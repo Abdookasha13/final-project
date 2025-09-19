@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import HeadNavbar from "./Components/HeadNavbar/HeadNavbar";
 
 function App() {
   return (
-    <div>App</div>
-  )
+    <>
+      <HeadNavbar />
+    </>
+  );
 }
 
-export default App
+export default App;
