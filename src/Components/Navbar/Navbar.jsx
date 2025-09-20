@@ -13,6 +13,7 @@ function Navbar() {
       <div className="navbar-main py-2 py-xl-0">
         <div className="container">
           <div className="row align-items-center">
+            {/* ================logo================== */}
             <div className="col-6 col-xl-2">
               <div className="logo-navbar">
                 <NavLink to="/">
@@ -20,7 +21,7 @@ function Navbar() {
                 </NavLink>
               </div>
             </div>
-
+            {/* =================links navbar======================= */}
             <div className="col-xl-7 d-none d-xl-block ps-5">
               <nav className="links-navbar ">
                 <ul>

@@ -2,9 +2,6 @@
   background-color: #fff;
   border-bottom: 1px solid #eaeaea;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-  position: sticky;
-  top: 80px;
-  z-index: 1000;
 }
 
 .logo-navbar img {
@@ -14,7 +11,7 @@
 .links-navbar ul {
   display: flex;
   align-items: center;
-  gap: 37px;
+  justify-content: space-between;
 }
 
 .links-navbar ul li > a {

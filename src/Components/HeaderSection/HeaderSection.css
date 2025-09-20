@@ -1,0 +1,44 @@
+.header-section {
+  position: relative;
+  background-image: url("/Images/headerBG.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 365px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  text-align: center;
+}
+
+.header-section-overlay {
+  position: absolute;
+  inset: 0;
+  background: #0e2a46;
+  opacity: 0.7;
+}
+
+.custom-container {
+  position: relative;
+}
+
+.custom-title {
+  font-size: clamp(1.8rem, 5vw, 3.5rem);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.custom-breadcrumb-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.custom-link {
+  color: #fff;
+}
+
+.custom-divider {
+  font-size: 20px;
+}
