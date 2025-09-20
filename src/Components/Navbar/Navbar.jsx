@@ -10,7 +10,7 @@ function Navbar() {
 
   return (
     <>
-      <div className="navbar-main py-2">
+      <div className="navbar-main py-2 py-xl-0">
         <div className="container">
           <div className="row align-items-center">
             <div className="col-6 col-xl-2">
@@ -21,24 +21,119 @@ function Navbar() {
               </div>
             </div>
 
-            <div className="col-xl-7 d-none d-xl-block">
-              <nav className="links-navbar">
+            <div className="col-xl-7 d-none d-xl-block ps-5">
+              <nav className="links-navbar ">
                 <ul>
+                  {/* ===========home================= */}
                   <li>
                     <NavLink to="/">Home</NavLink>
                   </li>
+                  {/* ============about us========================== */}
                   <li>
                     <NavLink to="/">About Us</NavLink>
                   </li>
-                  <li>
-                    <NavLink to="/">Services</NavLink>
+                  {/* ============services========================== */}
+                  <li className="dropdwn">
+                    <NavLink to="/" className="dropdwn-toggle">
+                      Services <i className="fa-solid fa-chevron-down"></i>
+                    </NavLink>
+                    <ul className="dropdwn-menu services-menue">
+                      <div>
+                        <li>
+                          <NavLink to="/">Services</NavLink>
+                        </li>
+                        <li>
+                          <NavLink to="/">Services Details</NavLink>
+                        </li>
+                      </div>
+                    </ul>
                   </li>
-                  <li>
-                    <NavLink to="/">Pages</NavLink>
+                  {/* ============pages========================== */}
+                  <li className="dropdwn">
+                    <NavLink to="/" className="dropdwn-toggle">
+                      Pages <i className="fa-solid fa-chevron-down"></i>
+                    </NavLink>
+                    <ul className="dropdwn-menu pages-menue">
+                      <div>
+                        <li>
+                          <NavLink to="/">Courses</NavLink>
+                        </li>
+                        <li>
+                          <NavLink to="/">Course Details</NavLink>
+                        </li>
+                        <li>
+                          <NavLink to="/">Teacher</NavLink>
+                        </li>
+                        <li>
+                          <NavLink to="/">Teacher Details</NavLink>
+                        </li>
+                        <li>
+                          <NavLink to="/">Event</NavLink>
+                        </li>
+                      </div>
+                      <div>
+                        <li>
+                          <NavLink to="/">Event Details</NavLink>
+                        </li>
+                        <li>
+                          <NavLink to="/">Checkout</NavLink>
+                        </li>
+                        <li>
+                          <NavLink to="/">Testimonial</NavLink>
+                        </li>
+                        <li>
+                          <NavLink to="/">Price</NavLink>
+                        </li>
+                        <li>
+                          <NavLink to="/">Cart</NavLink>
+                        </li>
+                        <li>
+                          <NavLink to="/">Student Registration 01</NavLink>
+                        </li>
+                      </div>
+
+                      <div>
+                        <li>
+                          <NavLink to="/">Student Registration 02</NavLink>
+                        </li>
+                        <li>
+                          <NavLink to="/">Instructor Registration</NavLink>
+                        </li>
+                        <li>
+                          <NavLink to="/">Faq</NavLink>
+                        </li>
+                        <li>
+                          <NavLink to="/">Sign In</NavLink>
+                        </li>
+                        <li>
+                          <NavLink to="/">Sign Up</NavLink>
+                        </li>
+                        <li>
+                          <NavLink to="/">Error</NavLink>
+                        </li>
+                      </div>
+                    </ul>
                   </li>
-                  <li>
-                    <NavLink to="/">Blog</NavLink>
+                  {/* ============blog========================== */}
+                  <li className="dropdwn">
+                    <NavLink to="/" className="dropdwn-toggle">
+                      Blog <i className="fa-solid fa-chevron-down"></i>
+                    </NavLink>
+                    <ul className="dropdwn-menu blog-menue">
+                      <div>
+                        <li>
+                          <NavLink to="/">Blog</NavLink>
+                        </li>
+                        <li>
+                          <NavLink to="/">Blog Sidebar</NavLink>
+                        </li>
+                        <li>
+                          <NavLink to="/">Blog Details</NavLink>
+                        </li>
+                      </div>
+                    </ul>
                   </li>
+                  {/* ============contact========================== */}
                   <li>
                     <NavLink to="/">Contact</NavLink>
                   </li>

@@ -13,13 +13,15 @@
 
 .links-navbar ul {
   display: flex;
-  gap: 55px;
+  align-items: center;
+  gap: 37px;
 }
 
-.links-navbar ul li a {
+.links-navbar ul li > a {
   color: #333;
   font-weight: 600;
   transition: 0.7s;
+  padding: 21px 0;
 }
 
 /* .links-navbar ul li a.active, */
@@ -45,4 +47,92 @@
   background-color: #0ab99d;
   color: #fff;
   border-radius: 6px;
+}
+
+/* ===============drop down ==================== */
+.links-navbar ul li.dropdwn {
+  position: relative;
+}
+
+.links-navbar ul li.dropdwn .dropdwn-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.links-navbar ul li.dropdwn i {
+  transition: transform 0.4s ease;
+}
+
+.links-navbar ul li.dropdwn:hover i {
+  transform: rotate(180deg);
+}
+
+/* ==============menu================ */
+.links-navbar ul li .dropdwn-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  background-color: #0e2a46;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transform: translateX(-50%) perspective(800px) rotateX(-90deg);
+  transform-origin: top center;
+  transition: 0.2s ease;
+  z-index: 1000;
+  border-top: 4px solid #0ab99d;
+}
+
+.pages-menue {
+  width: 1000px;
+  display: flex;
+  align-items: first baseline !important;
+  justify-content: space-evenly;
+  padding: 30px !important;
+}
+.pages-menue div {
+  width: 33.33%;
+}
+
+.services-menue,
+.blog-menue {
+  width: 200px;
+  padding: 20px !important;
+}
+
+.links-navbar ul li.dropdwn:hover .dropdwn-menu {
+  opacity: 1;
+  transform: translateX(-50%) perspective(800px) rotateX(0deg);
+}
+
+.links-navbar ul li .dropdwn-menu li a {
+  position: relative;
+  width: fit-content;
+  color: #fff;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 5px;
+  transition: 0.3s;
+  padding: 0;
+}
+
+.links-navbar ul li .dropdwn-menu li a::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 0;
+  height: 0;
+  background-color: #fff;
+  transition: transform 0.3s;
+}
+
+.links-navbar ul li .dropdwn-menu li a:hover {
+  padding-left: 22px;
+}
+
+.links-navbar ul li .dropdwn-menu li a:hover::before {
+  width: 18px;
+  height: 1px;
+  background-color: #0ab99d;
 }
