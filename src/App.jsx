@@ -1,17 +1,22 @@
-import { BrowserRouter } from "react-router-dom";
-import HeadNavbar from "./Components/HeadNavbar/HeadNavbar";
-import Navbar from "./Components/Navbar/Navbar";
-import HeaderSection from "./Components/headerSection/headerSection";
-import Newsletter from "./Components/Newsletter/Newsletter";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Layout from "./Components/Layout/Layout";
+import AboutUs from "./Pages/AboutUs/AboutUs";
+import Contact from "./Pages/Contact/Contact";
 
 function App() {
   return (
     <>
       <BrowserRouter>
-        <HeadNavbar />
-        <Navbar />
-        <HeaderSection />
-        <Newsletter />
+        <Layout>
+          <Routes>
+            <Route path="/home" element={<Contact />} />
+            <Route path="/about" element={<AboutUs />} />
+            <Route path="/services" element={<AboutUs />} />
+            <Route path="/pages" element={<AboutUs />} />
+            <Route path="/blog" element={<AboutUs />} />
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
+        </Layout>
       </BrowserRouter>
     </>
   );

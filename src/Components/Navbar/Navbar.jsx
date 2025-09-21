@@ -27,21 +27,21 @@ function Navbar() {
                 <ul>
                   {/* ===========home================= */}
                   <li>
-                    <NavLink to="/">Home</NavLink>
+                    <NavLink to="/home">Home</NavLink>
                   </li>
                   {/* ============about us========================== */}
                   <li>
-                    <NavLink to="/">About Us</NavLink>
+                    <NavLink to="/about">About Us</NavLink>
                   </li>
                   {/* ============services========================== */}
                   <li className="dropdwn">
-                    <NavLink to="/" className="dropdwn-toggle">
+                    <NavLink to="/services" className="dropdwn-toggle">
                       Services <i className="fa-solid fa-chevron-down"></i>
                     </NavLink>
                     <ul className="dropdwn-menu services-menue">
                       <div>
                         <li>
-                          <NavLink to="/">Services</NavLink>
+                          <NavLink to="/services">Services</NavLink>
                         </li>
                         <li>
                           <NavLink to="/">Services Details</NavLink>
@@ -51,7 +51,7 @@ function Navbar() {
                   </li>
                   {/* ============pages========================== */}
                   <li className="dropdwn">
-                    <NavLink to="/" className="dropdwn-toggle">
+                    <NavLink to="/pages" className="dropdwn-toggle">
                       Pages <i className="fa-solid fa-chevron-down"></i>
                     </NavLink>
                     <ul className="dropdwn-menu pages-menue">
@@ -117,13 +117,13 @@ function Navbar() {
                   </li>
                   {/* ============blog========================== */}
                   <li className="dropdwn">
-                    <NavLink to="/" className="dropdwn-toggle">
+                    <NavLink to="/blog" className="dropdwn-toggle">
                       Blog <i className="fa-solid fa-chevron-down"></i>
                     </NavLink>
                     <ul className="dropdwn-menu blog-menue">
                       <div>
                         <li>
-                          <NavLink to="/">Blog</NavLink>
+                          <NavLink to="/blog">Blog</NavLink>
                         </li>
                         <li>
                           <NavLink to="/">Blog Sidebar</NavLink>
@@ -136,7 +136,7 @@ function Navbar() {
                   </li>
                   {/* ============contact========================== */}
                   <li>
-                    <NavLink to="/">Contact</NavLink>
+                    <NavLink to="/contact">Contact</NavLink>
                   </li>
                 </ul>
               </nav>
