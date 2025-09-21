@@ -3,7 +3,7 @@ import HeadNavbar from "../HeadNavbar/HeadNavbar";
 import Navbar from "../Navbar/Navbar";
 import HeaderSection from "../headerSection/headerSection";
 import Newsletter from "../Newsletter/Newsletter";
-// import Footer from "../Footer/Footer";
+import Footer from "../Footer/Footer";
 function Layout({ children }) {
   return (
     <div className="app-container">
@@ -12,7 +12,7 @@ function Layout({ children }) {
       <HeaderSection />
       <div className="main-content container">{children}</div>
       <Newsletter />
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }
