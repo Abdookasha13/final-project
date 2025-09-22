@@ -6,26 +6,6 @@
   color: #fff;
 }
 
-a {
-  color: #fff;
-}
-
-.footer-social a {
-  height: 45px;
-  width: 45px;
-  border-radius: 50%;
-  display: inline-block;
-  background-color: #4d5756;
-  line-height: 50px;
-  text-align: center;
-  transition: 0.3s;
-  margin-right: 10px;
-}
-
-.footer-social a:hover {
-  background-color: #0ab99d;
-}
-
 .footer-title {
   font-weight: 700;
   font-size: 22px;
@@ -35,6 +15,7 @@ a {
 .footer-list ul li a {
   font-weight: 400;
   text-transform: capitalize;
+  color: #fff;
 }
 
 .footer-list ul li a span {
@@ -90,7 +71,6 @@ a {
 .itfadeUp {
   animation: itfadeUp 0.9s ease-out 0.3s forwards;
 }
-
 
 @keyframes itfadeUp {
   0% {

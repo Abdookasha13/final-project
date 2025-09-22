@@ -15,7 +15,7 @@ function Routess() {
         <Route path="/services" element={<Services />} />
         <Route path="/pages" element={<Cart />} />
         <Route path="/blog" element={<Blog />} />
-        <Route path="/contact" element={<Contact />} />
+        <Route path="/contact" element={<Contact/>} />
       </Routes>
     </>
   );

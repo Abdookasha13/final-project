@@ -1,3 +1,5 @@
+import Socialicons from "../Socialicons/Socialicons";
+
 import "./Footer.css";
 
 function Footer() {
@@ -15,19 +17,9 @@ function Footer() {
                 Interdum velit laoreet id donec ultrices tincidunt arcu.
                 Tincidunt tortor aliquam nulla facilisi cras fermentum odio eu.
               </p>
-              <div className="footer-social">
-                <a href="#">
-                  <i className="fa-brands fa-facebook-f"></i>
-                </a>
-                <a href="#">
-                  <i className="fa-brands fa-instagram"></i>
-                </a>
-                <a href="#">
-                  <i className="fa-brands fa-pinterest-p"></i>
-                </a>
-                <a href="#">
-                  <i className="fa-brands fa-twitter"></i>
-                </a>
+
+              <div className="d-flex gap-2">
+                <Socialicons wrapperClass="footer-social" />
               </div>
             </div>
 
