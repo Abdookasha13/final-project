@@ -1,0 +1,274 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+/* a{
+background-color: red
+} */
+
+@import url("https://fonts.googleapis.com/css2?family=Epilogue:wght@100..900&family=Josefin+Sans:wght@100..700&family=Montserrat:wght@100..900&family=Poppins:wght@100..900&family=Ubuntu:wght@300;400;500;700&display=swap");
+
+body {
+  font-family: "Epilogue", sans-serif;
+}
+
+.contactbox-container {
+  padding: 120px 0;
+}
+
+/* Contact Wrapper */
+.contact-wrapper {
+  background-color: #f2f2f2;
+  width: 100%;
+  padding: 85px 75px 70px;
+  min-height: 865px;
+  position: relative;
+  z-index: 1;
+}
+
+.contact-row {
+  width: 100%;
+  z-index: 4;
+  min-height: 710px;
+  background-color: transparent;
+}
+
+.contact-title {
+  font-size: 40px;
+  padding-bottom: 15px;
+  font-weight: 700;
+  color: #0e2a46;
+}
+
+.contact-desc {
+  width: 60%;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 32px;
+  color: #333931;
+  padding-bottom: 1rem;
+}
+
+/* Contact Box */
+.contact-box {
+  width: 85%;
+  min-height: 453px;
+  padding: 50px 38px;
+  background-color: #fff;
+  z-index: 5;
+}
+
+.contact-list {
+  list-style: none;
+}
+
+.contact-item {
+  width: 70%;
+  min-height: 96px;
+  background-color: #fff;
+}
+
+.contact-label {
+  font-size: 16px;
+  display: block;
+  color: #4d5756;
+}
+
+.contact-spaced {
+  padding: 25px 0;
+}
+
+.contact-box a {
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 32px;
+  color: #0e2a46;
+  text-decoration: none;
+  background-color: #fff;
+}
+
+.contact-box a + a {
+  display: block;
+}
+
+/* Icons */
+.iconspan {
+  font-size: 18px;
+  color: #0ab99d;
+  display: inline-block;
+  height: 54px;
+  width: 54px;
+  line-height: 54px;
+  text-align: center;
+  border-radius: 50%;
+  background-color: rgba(10, 185, 156, 0.1);
+}
+
+/* Triangle */
+.triangle,
+.triangle-wrapper {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: -1;
+}
+
+/* Form */
+.form-group {
+  padding: 14px 0;
+}
+
+.form-group label {
+  padding-bottom: 5px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.form-control-custom {
+  height: 58px;
+  font-size: 14px;
+}
+
+.form-btn {
+  background-color: #0ab99d;
+  color: #fff;
+  font-weight: 600;
+  padding: 0 25px;
+  height: 54px;
+  border-radius: 5px;
+  border: none;
+  width: 190px;
+}
+
+/* Customer Care */
+.customer-care {
+  width: 76%;
+  min-height: 35px;
+}
+
+.customer-link {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 400;
+  text-decoration: none;
+}
+.arrow-icon {
+  padding-right: 5px;
+  color: white;
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+  .contact-wrapper {
+    padding: 30px 10px;
+    min-height: 1800px;
+  }
+  .contact-row {
+    min-height: 1700px;
+
+    margin: 0px;
+  }
+  .leftsec {
+    height: 870px;
+  }
+
+  .contact-box {
+    width: 100%;
+    min-height: 453px;
+    padding: 30px 10px 40px;
+    
+
+  
+    z-index: 5;
+  }
+
+  .contact-desc {
+    width: 90%;
+  }
+
+  .contact-item {
+    width: 100%;
+    min-height: 200px;
+    padding: 30px 20px 0px ;
+   
+
+
+  }
+  .contact-spaced {
+    padding: 10px 0;
+  }
+  .triangle {
+    display: none;
+  }
+  .customer-care {
+    min-height: 70px;
+  }
+  .customer-link,
+  .arrow-icon {
+    color: #364d64;
+  }
+
+  .row {
+  margin-left: 0;
+  margin-right: 0;
+}
+.rightsec{
+  min-height: 990px;
+  padding-bottom: 20px;
+}
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .contact-wrapper {
+    padding: 75px 65px 70px;
+    min-height: 1600px;
+  }
+  .contact-row {
+    min-height: 1400px;
+    background-color: #f2f2f2;
+  }
+  .contact-desc {
+    width: 80%;
+  }
+  .contact-box {
+    width: 100%;
+    min-height: 500px;
+  }
+  .contact-item {
+    width: 60%;
+    min-height: 120px;
+  }
+
+  .contact-spaced {
+    padding: 20px 0;
+  }
+  .triangle {
+    display: none;
+  }
+  .customer-care {
+    width: 100%;
+    min-height: 70px;
+  }
+  .customer-link,
+  .arrow-icon {
+    color: #364d64;
+  }
+}
+@media (max-width: 1200px) {
+  .triangle {
+    display: none;
+  }
+  .customer-link,
+  .arrow-icon {
+    color: #364d64;
+  }
+  .customer-care {
+    width: 90%;
+    min-height: 70px;
+  }
+  .rightsec {
+    padding-left: 12px;
+  }
+}
