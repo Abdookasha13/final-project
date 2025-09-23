@@ -1,4 +1,4 @@
-import React from "react";
+
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../Contact/Contact.css";
@@ -15,7 +15,6 @@ import Socialicons from "../../Components/Socialicons/Socialicons";
 const Contact = () => {
   return (
     <>
-      <div>Contact</div>
       <div className="container contactbox-container ">
         <div className="contact-wrapper">
           {/* ///شايل 2 div //1-triangle div */}
