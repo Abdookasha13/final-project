@@ -34,10 +34,10 @@ The repo is organized so that each team member can contribute without conflicts.
 
 - **Never push directly to main.**
 - Each member works on their own branch:
-  - abd1-<feature> → Abdulrahman
+  - okasha-<feature> → Abdulrahman
   - ran-<feature> → Rania
   - ibr-<feature> → Ahmed
-  - abd2-<feature> → Abdulrahman
+  - elsayed-<feature> → Abdulrahman
   - roq-<feature> → Roqia
     Example:
     git checkout -b abd1-navbar
@@ -68,15 +68,6 @@ The repo is organized so that each team member can contribute without conflicts.
   - Example:
     - abd1: fixed login bug
     - ibr: added footer component
-
----
-
-## 🎨 CSS & JS Naming Rules
-
-- Use your _3-letter prefix_ for any variable, function, or CSS class.
-  - Example:
-    - CSS: .abd1-navbar, .ran-footer
-    - JS: abd1_handleLogin(), roq_isValid(), abd2AddCounter
 
 ---
 
