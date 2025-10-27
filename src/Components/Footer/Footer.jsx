@@ -13,7 +13,7 @@ function Footer() {
               <div className="footer-logo pb-4">
                 <img src="/Images/footer-logo.png" alt="" />
               </div>
-              <p className="pb-3">
+              <p className="pb-3 text-light">
                 Interdum velit laoreet id donec ultrices tincidunt arcu.
                 Tincidunt tortor aliquam nulla facilisi cras fermentum odio eu.
               </p>
