@@ -129,7 +129,7 @@ function Navbar() {
                           <NavLink to="/">Blog Sidebar</NavLink>
                         </li>
                         <li>
-                          <NavLink to="/">Blog Details</NavLink>
+                          <NavLink to="/blog-details">Blog Details</NavLink>
                         </li>
                       </div>
                     </ul>

@@ -3,7 +3,7 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 25px;
+  padding: 15px 30px;
   background-color: #0ab99d;
   color: #ffffff;
   font-size: 16px;
@@ -13,7 +13,7 @@
   cursor: pointer;
   overflow: hidden;
   transition: all 0.4s ease;
-  width: 150px;
+  width: fit-content;
 }
 
 .animated-button svg {
@@ -53,4 +53,3 @@
 .animated-button:hover .text {
   transform: translateX(10px);
 }
-
