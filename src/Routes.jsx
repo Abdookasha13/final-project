@@ -6,6 +6,7 @@ import Blog from "./Pages/Blog/Blog";
 import Contact from "./Pages/Contact/Contact";
 import Cart from "./Pages/Pages/Cart/Cart";
 import ServiceDetails from "./Pages/Services/ServiceDetails/ServiceDetails";
+import BlogDetails from "./Pages/Blog/BlogDetails/BlogDetails";
 
 function Routess() {
   return (
@@ -17,7 +18,8 @@ function Routess() {
         <Route path="/services/details" element={<ServiceDetails />} />
         <Route path="/pages" element={<Cart />} />
         <Route path="/blog" element={<Blog />} />
-        <Route path="/contact" element={<Contact/>} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/blog-details" element={<BlogDetails />} />
       </Routes>
     </>
   );
