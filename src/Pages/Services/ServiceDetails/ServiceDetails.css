@@ -24,7 +24,7 @@
   font-size: 45px;
   font-family: "Epilogue", sans-serif;
 }
-p {
+.paragraphs {
   font-family: "Sora", sans-serif;
   font-weight: 400;
   font-size: 17px;
@@ -32,6 +32,7 @@ p {
   color: #333931;
   display: block;
 }
+
 .text2 {
   margin-bottom: 50px;
 }
@@ -215,7 +216,7 @@ p {
   .image {
     margin-right: 0px;
   }
-  p {
+  .paragraphs {
     font-size: 14px;
   }
 
@@ -253,7 +254,7 @@ p {
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
-  p {
+  .paragraphs {
     font-size: 14px;
   }
   .title {

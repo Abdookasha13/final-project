@@ -21,14 +21,14 @@ function ServiceDetails() {
                   <div className="col-xl-6 col-lg-6 webdesign">
                     <div className="text">
                       <h4 className="title">WEB DESIGN</h4>
-                      <p>
+                      <p className="paragraphs">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                         sed do eiusmod tempor incididunt ut labore et dolore
                         magna aliqua. Ut enim ad minim veniam, quis nostrud
                         exercitation ullamco laboris nisi ut aliquip ex ea
                         commodo consequat aute irure dolor in reprehenderit.
                       </p>
-                      <p>
+                      <p className="paragraphs">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                         sed do eiusmod tempor incididunt ut labore et dolore
                         magna aliqua exercitation ullamco laboris.
@@ -41,14 +41,14 @@ function ServiceDetails() {
                 <div className="col-xl-12 servicedesc">
                   <div className="text2">
                     <h4 className="title">SERVICE DESCRIPTION</h4>
-                    <p>
+                    <p className="paragraphs">
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                       sed do eiusmod tempor incididunt ut labore et dolore magna
                       aliqua. Ut enim ad minim veniam, quis nostrud exercitation
                       ullamco laboris nisi ut aliquip ex ea commodo consequat
                       aute irure dolor in reprehenderit.
                     </p>
-                    <p>
+                    <p className="paragraphs">
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                       sed do eiusmod tempor incididunt ut labore et dolore magna
                       aliqua. Ut enim ad minim veniam, quis nostrud exercitation
@@ -68,7 +68,7 @@ function ServiceDetails() {
                       Requirements
                     </h5>
 
-                    <p>
+                    <p className="paragraphs">
                       Dui id ornare arcu odio ut sem nulla pharetra diam eget
                       aliquet nibh praesent tristique magna sit amet purus.
                       Aenean euismod elementum nisi quis eleifend quam
@@ -85,7 +85,7 @@ function ServiceDetails() {
                       Description
                     </h5>
 
-                    <p>
+                    <p className="paragraphs">
                       Dui id ornare arcu odio ut sem nulla pharetra diam eget
                       aliquet nibh praesent tristique magna sit amet purus.
                       Aenean euismod elementum nisi quis eleifend quam
@@ -98,7 +98,7 @@ function ServiceDetails() {
                 <div className="col-xl-12 whatlearn">
                   <div className="learnwhat">
                     <h4 className="title">WHAT YOU'LL LEARN</h4>
-                    <p className="mb-30">
+                    <p className="mb-30 paragraphs">
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                       sed do eiusmod tempor incididunt ut labore et dolore magna
                       aliqua. Ut enim ad minim veniam, quis nostrud exercitation
@@ -114,14 +114,14 @@ function ServiceDetails() {
                         <i className="fa-sharp fa-solid fa-play"></i>
                       </a>
                     </div>
-                    <p>
+                    <p className="paragraphs">
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                       sed do eiusmod tempor incididunt ut labore et dolore magna
                       aliqua. Ut enim ad minim veniam, quis nostrud exercitation
                       ullamco laboris nisi ut aliquip ex ea commodo consequat
                       aute irure dolor in reprehenderit.
                     </p>
-                    <p>
+                    <p className="paragraphs">
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                       sed do eiusmod tempor incididunt ut labore et dolore magna
                       aliqua. Ut enim ad minim veniam, quis nostrud exercitation
