@@ -1,0 +1,98 @@
+
+.service-card {
+  background-color: #ffffff;
+  text-align: center;
+  padding: 60px 15px;
+  position: relative;
+  width: 90%;
+  
+}
+
+.icon-wrapper {
+  position: relative;
+  width: 75px;
+  height: 75px;
+  background-color: #0ab99d;
+  border-radius: 50%;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+/* الدائرة المنقّطة حول الخضراء */
+.icon-wrapper::after {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  padding:10px;
+  width: 95px;
+  height: 95px;
+  border: 2px dotted #0ab99d;
+  border-radius: 50%;
+
+ 
+}
+
+.icon-wrapper img {
+  width: 50px;
+  height: 50px;
+}
+
+.service-card h3 {
+  font-family: "Epilogue", sans-serif;
+  color: #0e2a46;
+  font-size: 20px;
+  margin: 15px 0 10px;
+}
+
+.service-card p {
+  color: #333931;
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.service-card button {
+  background-color: #0ab99d;
+  border: none;
+  color: #ffffff;
+  padding: 10px;
+  border-radius: 5px;
+  text-transform: capitalize;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 15px;
+  position: absolute;
+
+  right: 50%;
+  transform: translateX(50%);
+  margin-bottom: 20px;
+  
+}
+svg {
+  margin-left: 10px;
+  display: inline-block;
+}
+button:hover svg {
+  animation: fowrward 250ms ease-in-out;
+}
+@keyframes fowrward {
+  0%,
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(5px);
+    opacity: 0;
+  }
+  75% {
+    transform: translateX(-5px);
+    opacity: 0.5;
+  }
+}
+
+
