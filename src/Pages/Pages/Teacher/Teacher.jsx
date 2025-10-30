@@ -5,7 +5,7 @@ function Teacher() {
   return (
     <>
 <div className="container py-5">
-        <div className="row">
+        <div className="row g-4">
       
     <TeacherCard />
     <TeacherCard 
