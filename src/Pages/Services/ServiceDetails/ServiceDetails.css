@@ -52,7 +52,7 @@ p {
 .title-sm span {
   padding-right: 20px;
 }
-.box p {
+.inbox p {
   color: #4d5756;
   font-size: 15px;
   font-weight: 400;
@@ -118,7 +118,7 @@ p {
   font-size: 18px;
   font-weight: 900;
 }
-.detailsSide {
+.detailsSide ,.sidewidget{
   padding-left: 45px;
 }
 .search {
