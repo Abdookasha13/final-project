@@ -15,6 +15,10 @@
   font-size: 18px;
 }
 
+.social-icon:hover .social-svg {
+  color: #ffffff;
+}
+
 .social-icon:hover {
   background-color: #0ab99d;
 }
