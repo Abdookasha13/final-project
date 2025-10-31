@@ -1,7 +1,6 @@
 import { FaCircleCheck } from "react-icons/fa6";
-import { GoSearch } from "react-icons/go";
-import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import "../ServiceDetails/ServiceDetails.css";
+import RightSideBlog from "../../../Components/RightSideBlog/RightSideBlog";
 
 function ServiceDetails() {
   return (
@@ -133,55 +132,8 @@ function ServiceDetails() {
               </div>
             </div>
             {/* right section */}
-            <div className="right col-xl-4 col-lg-4 ">
-              <div className="detailsSide ">
-                <div className="search">
-                  <input className="sinput" type="text" placeholder="search" />
-                  <button className="btn" type="submit">
-                    <GoSearch />
-                  </button>
-                </div>
-
-                <div className="sercat ">
-                  <h4 className="sidetitle">service category</h4>
-                  <div className="sidecat">
-                    Graphic Design
-                    <span>
-                      <MdOutlineKeyboardArrowRight />
-                    </span>
-                  </div>
-                  <div className="sidecat">
-                    Web Design
-                    <span>
-                      <MdOutlineKeyboardArrowRight />
-                    </span>
-                  </div>
-                  <div className="sidecat">
-                    It And Software
-                    <span>
-                      <MdOutlineKeyboardArrowRight />
-                    </span>
-                  </div>
-                  <div className="sidecat">
-                    Sales Marketing{" "}
-                    <span>
-                      <MdOutlineKeyboardArrowRight />
-                    </span>
-                  </div>
-                  <div className="sidecat">
-                    Art & Humanities{" "}
-                    <span>
-                      <MdOutlineKeyboardArrowRight />
-                    </span>
-                  </div>
-                  <div className="sidecat">
-                    Mobile Application
-                    <span>
-                      <MdOutlineKeyboardArrowRight />
-                    </span>
-                  </div>
-                </div>
-              </div>
+            <div className="right-side-blog-details col-lg-4 mt-5 mt-lg-0">
+              <RightSideBlog />
             </div>
           </div>
         </div>

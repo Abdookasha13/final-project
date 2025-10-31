@@ -118,9 +118,6 @@
   font-size: 18px;
   font-weight: 900;
 }
-.detailsSide ,.sidewidget{
-  padding-left: 45px;
-}
 .search {
   position: relative;
   margin-bottom: 55px;
@@ -153,13 +150,6 @@
 }
 .sercat {
   margin-bottom: 45px;
-}
-.sidetitle {
-  font-size: 23px;
-  font-weight: 700;
-  text-transform: uppercase;
-  color: #0e2a46;
-  margin-bottom: 30px;
 }
 .sidecat {
   width: 100%;
@@ -228,12 +218,6 @@
   .learnwhat {
     margin-bottom: 60px;
   }
-  .detailsSide {
-    padding-left: 0px;
-  }
-  .sidetitle {
-    padding-left: 0px;
-  }
   .image {
     margin-right: 0px;
   }
@@ -265,11 +249,5 @@
 
   .image img {
     width: 100%;
-  }
-  .detailsSide {
-    padding-left: 0px;
-  }
-  .sidetitle {
-    padding-left: 0px;
   }
 }

@@ -1,4 +1,5 @@
 import Button from "../../../Components/Button/Button";
+import RightSideBlog from "../../../Components/RightSideBlog/RightSideBlog";
 import "./BlogDetails.css";
 
 function BlogDetails() {
@@ -157,6 +158,9 @@ function BlogDetails() {
             </form>
             <Button>Send Message</Button>
           </div>
+        </div>
+        <div className="right-side-blog-details col-lg-4 mt-5 mt-lg-0">
+          <RightSideBlog />
         </div>
       </div>
     </>

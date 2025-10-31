@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Home from "./Pages/Home/Home";
 import AboutUs from "./Pages/AboutUs/AboutUs";
 import Services from "./Pages/Services/Services";
@@ -19,7 +19,7 @@ function Routess() {
         <Route path="/pages" element={<Cart />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/blog-details" element={<BlogDetails />} />
+        <Route path="/blog/details" element={<BlogDetails />} />
       </Routes>
     </>
   );

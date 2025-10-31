@@ -44,7 +44,9 @@ function Navbar() {
                           <NavLink to="/services">Services</NavLink>
                         </li>
                         <li>
-                          <NavLink to="/services/details">Services Details</NavLink>
+                          <NavLink to="/services/details">
+                            Services Details
+                          </NavLink>
                         </li>
                       </div>
                     </ul>
@@ -129,7 +131,7 @@ function Navbar() {
                           <NavLink to="/">Blog Sidebar</NavLink>
                         </li>
                         <li>
-                          <NavLink to="/blog-details">Blog Details</NavLink>
+                          <NavLink to="/blog/details">Blog Details</NavLink>
                         </li>
                       </div>
                     </ul>
