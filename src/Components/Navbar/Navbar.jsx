@@ -68,7 +68,9 @@ function Navbar() {
                           <NavLink to="/">Teacher</NavLink>
                         </li>
                         <li>
-                          <NavLink to="/">Teacher Details</NavLink>
+                          <NavLink to="/teacher/details">
+                            Teacher Details
+                          </NavLink>
                         </li>
                         <li>
                           <NavLink to="/">Event</NavLink>

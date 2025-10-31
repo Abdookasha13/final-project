@@ -1,0 +1,100 @@
+.container1 {
+  position: relative;
+  width: 100%;
+}
+
+.container1 .skill-box {
+  width: 100%;
+  margin: 25px 0;
+}
+
+.skill-box .title {
+  display: inline-block;
+  line-height: 1;
+  font-size: 17px;
+  font-weight: 600;
+  color: #0e2a46;
+}
+
+.skill-box .skill-bar {
+  position: relative;
+  height: 10px;
+  width: 100%;
+  border-radius: 6px;
+  margin-top: 6px;
+  background: rgba(137, 186, 180, 0.3);
+
+  /* 👇 الحل المهم */
+  overflow: visible;
+}
+
+.skill-bar .skill-per {
+  position: relative;
+  display: block;
+  height: 100%;
+  border-radius: 6px;
+  background: #116e63;
+  animation: progress 0.4s ease-in-out forwards;
+  opacity: 0;
+  /* allow tooltip to overflow outside the colored bar */
+  overflow: visible;
+}
+
+.skill-per.Lectures {
+  width: 90%;
+  animation-delay: 0.1s;
+}
+
+.skill-per.scss {
+  width: 82%;
+  animation-delay: 0.1s;
+}
+
+.skill-per.Consulting {
+  width: 65%;
+  animation-delay: 0.2s;
+}
+
+@keyframes progress {
+  0% {
+    width: 0;
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.skill-per .tooltip {
+  position: absolute;
+  right: 0;
+  top: -35px; /* 👈 رفعها أكثر */
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1;
+  color: #fff;
+  padding: 5px 7px;
+  border-radius: 3px;
+  background: #116e63;
+  z-index: 9999; /* ensure tooltip sits above other content */
+  visibility: visible;
+  display: inline-block;
+  pointer-events: auto;
+}
+
+.tooltip::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -4px;
+  height: 8px;
+  width: 8px;
+  background-color: #116e63;
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.tooltip {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
