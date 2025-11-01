@@ -128,7 +128,9 @@ const Form = () => {
               </small>
             )}
           </div>
-          <Button className={"form-btn"}>Send Message</Button>
+          <div className="d-flex justify-content-center">
+            <Button>Send Message</Button>
+          </div>
         </div>
       </form>
     </div>

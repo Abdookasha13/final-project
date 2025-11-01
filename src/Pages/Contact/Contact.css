@@ -130,17 +130,6 @@ body {
   font-size: 14px;
 }
 
-.form-btn {
-  background-color: #0ab99d;
-  color: #fff;
-  font-weight: 600;
-  padding: 0 25px;
-  height: 54px;
-  border-radius: 5px;
-  border: none;
-  width: 190px;
-}
-
 /* Customer Care */
 .customer-care {
   width: 76%;

@@ -5,7 +5,7 @@ import "./TeacherDetails.css";
 function TeacherDetails() {
   return (
     <>
-      <div className="teacher-details">
+      <div className="teacher-details p-lg-5 px-3 py-5">
         <div className="row">
           {/* ------------left side---------------- */}
           <div className="col-lg-3">
@@ -49,13 +49,13 @@ function TeacherDetails() {
                 </ul>
               </div>
               <div className="mt-5">
-                <Button>Contact Us Teacher</Button>
+                <Button>Contact Teacher</Button>
               </div>
             </div>
           </div>
           {/* ------------right side---------------- */}
           <div className="col-lg-9">
-            <div className="teacher-details-right">
+            <div className="teacher-details-right p-lg-5 p-4 ms-lg-5 mt-4 mt-lg-0">
               <div className="teacher-details-right-title mb-5">
                 <h4>Melvin Warner</h4>
                 <span>teacher</span>
