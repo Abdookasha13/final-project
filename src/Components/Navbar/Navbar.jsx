@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import "./Navbar.css";
 import Sidebar from "../Sidebar/Sidebar";
@@ -7,10 +7,24 @@ import { PiShoppingCartBold } from "react-icons/pi";
 
 function Navbar() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [isSticky, setIsSticky] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const header = document.querySelector(".header-section");
+      if (!header) return;
+      const headerBottom = header.getBoundingClientRect().bottom;
+      setIsSticky(headerBottom <= 0);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <>
-      <div className="navbar-main py-2 py-xl-0">
+      <div className={`navbar-main py-2 py-xl-0 ${isSticky ? "sticky" : ""}`}>
         <div className="container">
           <div className="row align-items-center">
             {/* ================logo================== */}
