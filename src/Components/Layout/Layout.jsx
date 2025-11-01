@@ -4,6 +4,7 @@ import Navbar from "../Navbar/Navbar";
 import HeaderSection from "../headerSection/headerSection";
 import Newsletter from "../Newsletter/Newsletter";
 import Footer from "../Footer/Footer";
+import ScrollTopButton from "../ScrollTopButton/ScrollTopButton";
 function Layout({ children }) {
   return (
     <div className="app-container">
@@ -13,6 +14,7 @@ function Layout({ children }) {
       <div className="main-content container">{children}</div>
       <Newsletter />
       <Footer />
+      <ScrollTopButton />
     </div>
   );
 }

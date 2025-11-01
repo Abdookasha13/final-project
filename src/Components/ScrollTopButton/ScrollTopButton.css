@@ -1,0 +1,34 @@
+.scroll-top {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 3.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: #0ab99d;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1400;
+  box-shadow: 0 8px 20px rgba(10, 185, 156, 0.18);
+  border: none;
+  outline: none;
+  transform: translateY(100%);
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+
+.scroll-top.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.scroll-top:hover {
+  transform: translateY(0) scale(1.05);
+}
+
+.scroll-top svg {
+  display: block;
+}
