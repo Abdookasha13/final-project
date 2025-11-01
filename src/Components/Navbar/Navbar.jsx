@@ -44,7 +44,9 @@ function Navbar() {
                           <NavLink to="/services">Services</NavLink>
                         </li>
                         <li>
-                          <NavLink to="/">Services Details</NavLink>
+                          <NavLink to="/services/details">
+                            Services Details
+                          </NavLink>
                         </li>
                       </div>
                     </ul>
@@ -57,7 +59,7 @@ function Navbar() {
                     <ul className="dropdwn-menu pages-menue">
                       <div>
                         <li>
-                          <NavLink to="/">Courses</NavLink>
+                          <NavLink to="/courses">Courses</NavLink>
                         </li>
                         <li>
                           <NavLink to="/">Course Details</NavLink>
@@ -66,7 +68,9 @@ function Navbar() {
                           <NavLink to="/teacher">Teacher</NavLink>
                         </li>
                         <li>
-                          <NavLink to="/">Teacher Details</NavLink>
+                          <NavLink to="/teacher/details">
+                            Teacher Details
+                          </NavLink>
                         </li>
                         <li>
                           <NavLink to="/">Event</NavLink>
@@ -129,7 +133,7 @@ function Navbar() {
                           <NavLink to="/">Blog Sidebar</NavLink>
                         </li>
                         <li>
-                          <NavLink to="/">Blog Details</NavLink>
+                          <NavLink to="/blog/details">Blog Details</NavLink>
                         </li>
                       </div>
                     </ul>

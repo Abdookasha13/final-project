@@ -106,22 +106,40 @@ function Footer() {
               <h4 className="footer-title">Gallery</h4>
               <div className="row g-2">
                 <div className="col-4">
-                  <img src="Images/footer-1.png" alt="" />
+                  <img
+                    src="https://ordainit.com/html/educate/assets/img/footer/thumb-1-1.png"
+                    alt=""
+                  />
                 </div>
                 <div className="col-4">
-                  <img src="Images/footer-2.png" alt="" />
+                  <img
+                    src="https://ordainit.com/html/educate/assets/img/footer/thumb-1-2.png"
+                    alt=""
+                  />
                 </div>
                 <div className="col-4">
-                  <img src="Images/footer-3.png" alt="" />
+                  <img
+                    src="https://ordainit.com/html/educate/assets/img/footer/thumb-1-3.png"
+                    alt=""
+                  />
                 </div>
                 <div className="col-4">
-                  <img src="Images/footer4.png" alt="" />
+                  <img
+                    src="https://ordainit.com/html/educate/assets/img/footer/thumb-1-4.png"
+                    alt=""
+                  />
                 </div>
                 <div className="col-4">
-                  <img src="Images/footer-5.png" alt="" />
+                  <img
+                    src="https://ordainit.com/html/educate/assets/img/footer/thumb-1-5.png"
+                    alt=""
+                  />
                 </div>
                 <div className="col-4">
-                  <img src="Images/footer-6.png" alt="" />
+                  <img
+                    src="https://ordainit.com/html/educate/assets/img/footer/thumb-1-6.png"
+                    alt=""
+                  />
                 </div>
               </div>
             </div>
