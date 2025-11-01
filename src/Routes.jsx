@@ -8,6 +8,7 @@ import Cart from "./Pages/Pages/Cart/Cart";
 import ServiceDetails from "./Pages/Services/ServiceDetails/ServiceDetails";
 import BlogDetails from "./Pages/Blog/BlogDetails/BlogDetails";
 import TeacherDetails from "./Pages/Pages/TeacherDetails/TeacherDetails";
+import Courses from "./Pages/Pages/Courses/Courses";
 
 function Routess() {
   return (
@@ -22,6 +23,7 @@ function Routess() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/blog/details" element={<BlogDetails />} />
         <Route path="/teacher/details" element={<TeacherDetails />} />
+        <Route path="/courses" element={<Courses />} />
       </Routes>
     </>
   );

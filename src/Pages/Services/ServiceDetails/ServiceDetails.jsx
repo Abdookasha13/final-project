@@ -9,25 +9,25 @@ function ServiceDetails() {
         <div className="container p-0 ">
           <div className="row ">
             {/* left section */}
-            <div className="left col-xl-8 col-lg-8 ">
-              <div className="sec1">
+            <div className="serviceDetails-left col-xl-8 col-lg-8 ">
+              <div className="serviceDetails-sec1">
                 <div className="row">
-                  <div className="col-xl-6 col-lg-6 sec1div">
-                    <div className="image">
+                  <div className="col-xl-6 col-lg-6 ">
+                    <div className="serviceDetails-image">
                       <img src="../public/images/girll.jpg" />
                     </div>
                   </div>
                   <div className="col-xl-6 col-lg-6 webdesign">
-                    <div className="text">
-                      <h4 className="title">WEB DESIGN</h4>
-                      <p>
+                    <div className="serviceDetails-text">
+                      <h4 className="serviceDetails-title">WEB DESIGN</h4>
+                      <p className="serviceDetails-paragraphs">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                         sed do eiusmod tempor incididunt ut labore et dolore
                         magna aliqua. Ut enim ad minim veniam, quis nostrud
                         exercitation ullamco laboris nisi ut aliquip ex ea
                         commodo consequat aute irure dolor in reprehenderit.
                       </p>
-                      <p>
+                      <p className="serviceDetails-paragraphs">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                         sed do eiusmod tempor incididunt ut labore et dolore
                         magna aliqua exercitation ullamco laboris.
@@ -36,18 +36,20 @@ function ServiceDetails() {
                   </div>
                 </div>
               </div>
-              <div className="sec2 row ">
+              <div className="serviceDetails-sec2 row ">
                 <div className="col-xl-12 servicedesc">
-                  <div className="text2">
-                    <h4 className="title">SERVICE DESCRIPTION</h4>
-                    <p>
+                  <div className="serviceDetails-text2">
+                    <h4 className="serviceDetails-title">
+                      SERVICE DESCRIPTION
+                    </h4>
+                    <p className="serviceDetails-paragraphs">
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                       sed do eiusmod tempor incididunt ut labore et dolore magna
                       aliqua. Ut enim ad minim veniam, quis nostrud exercitation
                       ullamco laboris nisi ut aliquip ex ea commodo consequat
                       aute irure dolor in reprehenderit.
                     </p>
-                    <p>
+                    <p className="serviceDetails-paragraphs">
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                       sed do eiusmod tempor incididunt ut labore et dolore magna
                       aliqua. Ut enim ad minim veniam, quis nostrud exercitation
@@ -57,17 +59,17 @@ function ServiceDetails() {
                   </div>
                 </div>
               </div>
-              <div className=" sec3 d-flex flex-column flex-lg-row mb-4  gap-lg-3">
+              <div className=" serviceDetails-sec3 d-flex flex-column flex-lg-row mb-4  gap-lg-3">
                 <div className="col-xl-6 col-lg-6  flex-fill  ">
-                  <div className="inbox">
-                    <h5 className="title-sm">
+                  <div className="serviceDetails-inbox">
+                    <h5 className="serviceDetails-title-sm">
                       <span>
                         <FaCircleCheck color="#f2a227" fontSize={"20px"} />
                       </span>
                       Requirements
                     </h5>
 
-                    <p>
+                    <p className="serviceDetails-paragraphs">
                       Dui id ornare arcu odio ut sem nulla pharetra diam eget
                       aliquet nibh praesent tristique magna sit amet purus.
                       Aenean euismod elementum nisi quis eleifend quam
@@ -76,15 +78,15 @@ function ServiceDetails() {
                   </div>
                 </div>
                 <div className="col-xl-6 col-lg-6 flex-fill">
-                  <div className="inbox">
-                    <h5 className="title-sm">
+                  <div className="serviceDetails-inbox">
+                    <h5 className="serviceDetails-title-sm">
                       <span>
                         <FaCircleCheck color="#f2a227" fontSize={"20px"} />
                       </span>
                       Description
                     </h5>
 
-                    <p>
+                    <p className="serviceDetails-paragraphs">
                       Dui id ornare arcu odio ut sem nulla pharetra diam eget
                       aliquet nibh praesent tristique magna sit amet purus.
                       Aenean euismod elementum nisi quis eleifend quam
@@ -93,18 +95,18 @@ function ServiceDetails() {
                   </div>
                 </div>
               </div>
-              <div className="sec4 row">
+              <div className="serviceDetails-sec4 row">
                 <div className="col-xl-12 whatlearn">
                   <div className="learnwhat">
-                    <h4 className="title">WHAT YOU'LL LEARN</h4>
-                    <p className="mb-30">
+                    <h4 className="serviceDetails-title">WHAT YOU'LL LEARN</h4>
+                    <p className="mb-30 serviceDetails-paragraphs">
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                       sed do eiusmod tempor incididunt ut labore et dolore magna
                       aliqua. Ut enim ad minim veniam, quis nostrud exercitation
                       ullamco laboris nisi ut aliquip ex ea commodo consequat
                       aute irure dolor in reprehenderit.
                     </p>
-                    <div className="imgvid ">
+                    <div className="serviceDetails-imgvid ">
                       <img
                         src="../public/images/vidimage.jpg"
                         className="img-fluid "
@@ -113,14 +115,14 @@ function ServiceDetails() {
                         <i className="fa-sharp fa-solid fa-play"></i>
                       </a>
                     </div>
-                    <p>
+                    <p className="serviceDetails-paragraphs">
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                       sed do eiusmod tempor incididunt ut labore et dolore magna
                       aliqua. Ut enim ad minim veniam, quis nostrud exercitation
                       ullamco laboris nisi ut aliquip ex ea commodo consequat
                       aute irure dolor in reprehenderit.
                     </p>
-                    <p>
+                    <p className="serviceDetails-paragraphs">
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                       sed do eiusmod tempor incididunt ut labore et dolore magna
                       aliqua. Ut enim ad minim veniam, quis nostrud exercitation

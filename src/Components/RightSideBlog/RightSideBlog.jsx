@@ -62,9 +62,9 @@ function RightSideBlog() {
       <div className="right-side-blog-top">
         <div className="detailsSide">
           {/* Search Section */}
-          <div className="search">
+          <div className="rightsec-search">
             <input className="sinput" type="text" placeholder="Search" />
-            <button className="btn" type="submit">
+            <button className="rightsec-btn" type="submit">
               <GoSearch />
             </button>
           </div>
