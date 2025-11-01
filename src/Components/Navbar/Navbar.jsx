@@ -59,7 +59,7 @@ function Navbar() {
                     <ul className="dropdwn-menu pages-menue">
                       <div>
                         <li>
-                          <NavLink to="/">Courses</NavLink>
+                          <NavLink to="/courses">Courses</NavLink>
                         </li>
                         <li>
                           <NavLink to="/">Course Details</NavLink>
