@@ -98,7 +98,7 @@ function Navbar() {
                           <NavLink to="/">Checkout</NavLink>
                         </li>
                         <li>
-                          <NavLink to="/">Testimonial</NavLink>
+                          <NavLink to="/testimonial">Testimonial</NavLink>
                         </li>
                         <li>
                           <NavLink to="/">Price</NavLink>
