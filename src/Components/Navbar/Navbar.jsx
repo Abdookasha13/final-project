@@ -92,7 +92,7 @@ function Navbar() {
                       </div>
                       <div>
                         <li>
-                          <NavLink to="/">Event Details</NavLink>
+                          <NavLink to="/event/details">Event Details</NavLink>
                         </li>
                         <li>
                           <NavLink to="/">Checkout</NavLink>

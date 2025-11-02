@@ -1,0 +1,75 @@
+.course-details-roka {
+  font-family: "Poppins", sans-serif;
+  color: #222;
+}
+
+/* الصورة */
+.course-image-roka img {
+  width: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+/* العنوان والتقييم */
+.course-title-roka h4 {
+  color: #0e2a46;
+  font-weight: 790;
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+.course-meta-roka .meta-item {
+  color: #0e2a46;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.course-meta-roka .meta-icon {
+  color: #0ab99d;
+  font-size: 16px;
+}
+
+.course-content-roka p {
+  color: #444;
+  font-size: 15px;
+  line-height: 1.8;
+}
+.course-content-roka h5 {
+  color: #0e2a46;
+  font-weight: 600;
+  margin-top: 25px;
+  margin-bottom: 10px;
+}
+
+/* الشريط الجانبي */
+.course-sidebar-roka {
+  background-color: #F2F2F2;
+  border: 1px solid #eee;
+}
+.course-sidebar-roka img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.list-unstyled-roka   {
+  font-size: 16px;
+  color: #444444;
+  margin-bottom:10 0 0 6px;
+  display: flex ;
+  flex-direction: column;
+  
+  gap: 10px;
+
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .course-details-roka {
+    padding: 0 15px;
+  }
+
+  .course-tabs-roka {
+    justify-content: center;
+  }
+}
