@@ -1,0 +1,133 @@
+.course-details-roka {
+  font-family: "Poppins", sans-serif;
+  color: #222;
+}
+
+/* الصورة */
+.course-image-roka img {
+  width: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+/* العنوان والتقييم */
+.course-title-roka h4 {
+  color: #0e2a46;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.course-rating-roka span {
+  color: #555;
+  font-size: 14px;
+  margin-left: 5px;
+}
+
+/* الأزرار (Tabs) */
+.course-tabs-roka {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.course-tabs-roka button {
+  background-color: transparent;
+  border: 1.5px solid #0ab99d;
+  color: #0ab99d;
+  padding: 8px 18px;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.course-tabs-roka button.active,
+.course-tabs-roka button:hover {
+  background-color: #0ab99d;
+  color: #fff;
+}
+
+/* النصوص */
+.course-content-roka h5 {
+  color: #0e2a46;
+  font-weight: 600;
+  margin-top: 25px;
+  margin-bottom: 10px;
+}
+
+/* الشريط الجانبي */
+.course-sidebar-roka {
+  background-color: #fff;
+  border: 1px solid #eee;
+}
+.course-sidebar-roka img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+}
+.course-info-roka {
+   display: flex;
+  justify-content: space-between; 
+  align-items: center;
+
+
+}
+.course-price-roka {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+    text-align: right;
+  margin-bottom: 6px;
+  
+}
+.course-label-roka{
+font-size: 18px;
+
+}
+.current-price-roka {
+  color: #292c2c;
+  font-size: 20px;
+  font-weight: 700;
+}
+.old-price-roka {
+  color: #353434;
+  font-size: 15px;
+  text-decoration: line-through;
+}
+
+ .guarantee-text-roka {
+  font-size: 14px;
+  font-weight: 550;
+} 
+
+/* القائمة */
+.course-sidebar-roka ul li {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  font-size: 14px;
+  margin-bottom: 6px;
+  color: #444;
+ gap: 40px; 
+}
+.course-sidebar-roka ul li strong {
+  font-weight: 600;
+}
+.Button-roka{
+    display:block;
+    width:100% !important;
+    background-color : red ;
+    text-align:center;
+    margin-top:15px;
+}
+/* Responsive */
+@media (max-width: 992px) {
+  .course-details-roka {
+    padding: 0 15px;
+  }
+
+  .course-tabs-roka {
+    justify-content: center;
+  }
+}
