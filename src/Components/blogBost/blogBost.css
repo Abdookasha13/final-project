@@ -1,0 +1,42 @@
+div h3 a {
+  color: #0e2a46 !important;
+}
+
+.galry-style {
+    margin-left: -100%;
+  transition: margin-left 0.5s ease; 
+}
+
+.galry-style.go-left-from-zero {
+    margin-left: 0%;
+}
+
+.galry-style.go-left-from-one {
+    margin-left: -100%;
+}
+
+.galry-style.go-right-from-zero {
+    margin-left: -200%;
+}
+
+.galry-style.go-right-from-minus-one {
+    margin-left: -100%;
+}
+
+
+.blog-arrow-left {
+    position: absolute;
+    top: 35%;
+    transform: translateY(-50%);
+    left: 10px;
+    background-color: white !important;
+    color: black !important;
+}
+.blog-arrow-right {
+    position: absolute;
+    top: 35%;
+    transform: translateY(-50%);
+    right: 10px;
+    background-color: white !important;
+    color: black !important;
+}

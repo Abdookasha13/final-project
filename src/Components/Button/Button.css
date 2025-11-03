@@ -44,6 +44,11 @@
   transform: translateX(0.1em);
 }
 
+
 .cssbuttons-io-button:active .icon {
   transform: scale(0.95);
+}
+
+.cssbuttons-io-button.not-text .icon svg {
+  transform: translateX(0.1em);
 }
