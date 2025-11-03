@@ -87,7 +87,7 @@ function Navbar() {
                           </NavLink>
                         </li>
                         <li>
-                          <NavLink to="/">Event</NavLink>
+                          <NavLink to="/events">Event</NavLink>
                         </li>
                       </div>
                       <div>
