@@ -1,17 +1,9 @@
-import React from "react";
-import "./ServiceCard.css";
-import { HiArrowLongRight } from "react-icons/hi2";
 
-const ServiceCard = ({ icon, title, description }) => {
+
+const ServiceCard = () => {
   return (
-    <div className="service-card">
-      <div className="icon-container">
-        {icon} 
-      </div>
-      <h3>{title}</h3>
-      <p>{description}</p>
-    </div>
-  );
-};
+    <div>ServiceCard</div>
+  )
+}
 
-export default ServiceCard;
+export default ServiceCard
