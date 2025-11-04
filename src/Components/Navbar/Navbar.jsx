@@ -76,7 +76,7 @@ function Navbar() {
                           <NavLink to="/courses">Courses</NavLink>
                         </li>
                         <li>
-                          <NavLink to="/">Course Details</NavLink>
+                          <NavLink to="/course/details">Course Details</NavLink>
                         </li>
                         <li>
                           <NavLink to="/teacher">Teacher</NavLink>
@@ -92,7 +92,7 @@ function Navbar() {
                       </div>
                       <div>
                         <li>
-                          <NavLink to="/">Event Details</NavLink>
+                          <NavLink to="/event/details">Event Details</NavLink>
                         </li>
                         <li>
                           <NavLink to="/">Checkout</NavLink>

@@ -13,7 +13,8 @@ import Courses from "./Pages/Pages/Courses/Courses";
 import Event from "./Pages/Pages/Event/Event";
 import FAQ from "./Pages/Pages/FAQ/FAQ";
 import Testimonial from "./Pages/Pages/Testimonial/Testimonial";
-
+import CourseDetails from "./Pages/Pages/CourseDetails/CourseDetails"
+import EventDetails from "./Pages/Pages/EventDetails/EventDetails"
 function Routess() {
   return (
     <>
@@ -32,6 +33,8 @@ function Routess() {
         <Route path="/events" element={<Event />} />
         <Route path="/faqs" element={<FAQ />} />
         <Route path="/testimonial" element={<Testimonial />} />
+        <Route path="/course/details" element={<CourseDetails />} />
+        <Route path="/event/details" element={<EventDetails />} />
       </Routes>
     </>
   );
