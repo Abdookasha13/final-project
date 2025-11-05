@@ -116,7 +116,9 @@ function Navbar() {
                           <NavLink to="/">Student Registration 02</NavLink>
                         </li>
                         <li>
-                          <NavLink to="/">Instructor Registration</NavLink>
+                          <NavLink to="/register">
+                            Instructor Registration
+                          </NavLink>
                         </li>
                         <li>
                           <NavLink to="/faqs">Faq</NavLink>
