@@ -1,9 +1,9 @@
 import "./Button.css";
 
-function Button({ children }) {
+function Button({ children, className }) {
   return (
     <>
-      <div className="cssbuttons-io-button">
+      <div className={`cssbuttons-io-button ${className || ""}`}>
         <span className="text-center">{children}</span>
         <div className="icon">
           <svg

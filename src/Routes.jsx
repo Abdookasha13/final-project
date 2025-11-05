@@ -14,9 +14,9 @@ import Event from "./Pages/Pages/Event/Event";
 import FAQ from "./Pages/Pages/FAQ/FAQ";
 import Testimonial from "./Pages/Pages/Testimonial/Testimonial";
 import InstructorRegistration from "./Pages/Pages/InstructorRegistration/InstructorRegistration";
+import CourseDetails from "./Pages/Pages/CourseDetails/CourseDetails";
+import EventDetails from "./Pages/Pages/EventDetails/EventDetails";
 
-import CourseDetails from "./Pages/Pages/CourseDetails/CourseDetails"
-import EventDetails from "./Pages/Pages/EventDetails/EventDetails"
 function Routess() {
   return (
     <>

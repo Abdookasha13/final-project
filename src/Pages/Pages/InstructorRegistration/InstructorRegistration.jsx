@@ -1,10 +1,15 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./InstructorRegistration.css";
-
 import { useForm } from "react-hook-form";
 import Button from "../../../Components/Button/Button";
+import { toast } from "react-toastify";
+import { useState } from "react";
 
 const InstructorRegistration = () => {
+  const [profileImageUrl, setProfileImageUrl] = useState("");
+  const [uploading, setUploading] = useState(false);
+  const [preview, setPreview] = useState(null);
+
   const {
     register,
     handleSubmit,
@@ -14,8 +19,66 @@ const InstructorRegistration = () => {
 
   const isInstructor = watch("isInstructor");
 
-  const onSubmit = (data) => {
-    console.log(data);
+  // -------------upload image to cloudinary --------------
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    setPreview(URL.createObjectURL(file));
+    setUploading(true);
+
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "unsigned_users_upload");
+    formData.append("folder", "user_profiles");
+
+    try {
+      const res = await fetch(
+        "https://api.cloudinary.com/v1_1/dy8q8wegg/image/upload",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      const data = await res.json();
+      console.log(data);
+      setProfileImageUrl(data.secure_url);
+      toast.success("Image uploaded successfully!");
+    } catch (error) {
+      console.error("Upload failed:", error);
+      toast.error("Failed to upload image");
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  // -------------form submit handler --------------
+  const onSubmit = async (data) => {
+    try {
+      if (data.isInstructor) data.role = "instructor";
+      else data.role = "student";
+
+      //-------------attach profile image url --------------
+      data.profileImage = profileImageUrl;
+
+      const response = await fetch("http://localhost:1911/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+      if (response.ok) {
+        toast.success("Registered successfully!");
+        console.log(result);
+      } else {
+        toast.error(result.message || "Registration failed");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Something went wrong!");
+    }
   };
 
   return (
@@ -38,19 +101,17 @@ const InstructorRegistration = () => {
                     message: "Must be at least 3 characters",
                   },
                 })}
-                className="form-control form-control-custom px-20 py-0"
+                className="form-control form-control-custom"
                 id="exampleInputName"
                 placeholder="Name"
               />
               {errors.name && (
-                <small className="form-text text-danger">
-                  {errors.name.message}
-                </small>
+                <small className="text-danger">{errors.name.message}</small>
               )}
             </div>
 
             {/* Email */}
-            <div className="form-group">
+            <div className="form-group mt-3">
               <label htmlFor="exampleInputEmail">Email address</label>
               <input
                 {...register("email", {
@@ -61,22 +122,44 @@ const InstructorRegistration = () => {
                   },
                 })}
                 type="email"
-                className="form-control form-control-custom px-20 py-0"
+                className="form-control form-control-custom"
                 id="exampleInputEmail"
                 placeholder="Email"
               />
               {errors.email && (
-                <small className="form-text text-danger">
-                  {errors.email.message}
-                </small>
+                <small className="text-danger">{errors.email.message}</small>
               )}
             </div>
 
-            {/* Password + Confirm */}
-            <div className="row">
-              <div className="col-12 col-md-6 mb-3">
+            {/* Profile Image */}
+            <div className="form-group mt-3">
+              <label>Profile Picture</label>
+              <div className="custom-file-upload">
+                <input
+                  type="file"
+                  accept="image/*"
+                  id="profileImage"
+                  {...register("profileImage")}
+                  onChange={handleImageUpload}
+                  disabled={uploading}
+                />
+                <label htmlFor="profileImage" className="upload-btn">
+                  {uploading ? "Uploading..." : "Upload Image"}
+                </label>
+              </div>
+
+              {preview && (
+                <div className="image-preview mt-2 text-center">
+                  <img src={preview} alt="Preview" />
+                </div>
+              )}
+            </div>
+
+            {/* Password */}
+            <div className="row mt-3">
+              <div className="col-md-6">
                 <div className="form-group">
-                  <label htmlFor="exampleInputPassword">Password</label>
+                  <label>Password</label>
                   <input
                     {...register("password", {
                       required: "This field is required",
@@ -86,21 +169,20 @@ const InstructorRegistration = () => {
                       },
                     })}
                     type="password"
-                    className="form-control form-control-custom px-20 py-0"
-                    id="exampleInputPassword"
+                    className="form-control form-control-custom"
                     placeholder="Password"
                   />
                   {errors.password && (
-                    <small className="form-text text-danger">
+                    <small className="text-danger">
                       {errors.password.message}
                     </small>
                   )}
                 </div>
               </div>
 
-              <div className="col-12 col-md-6">
+              <div className="col-md-6">
                 <div className="form-group">
-                  <label htmlFor="confirmPassword">Confirm Password</label>
+                  <label>Confirm Password</label>
                   <input
                     {...register("confirmPassword", {
                       required: "Please confirm your password",
@@ -108,12 +190,11 @@ const InstructorRegistration = () => {
                         value === watch("password") || "Passwords do not match",
                     })}
                     type="password"
-                    className="form-control form-control-custom px-20 py-0"
-                    id="confirmPassword"
+                    className="form-control form-control-custom"
                     placeholder="Confirm Password"
                   />
                   {errors.confirmPassword && (
-                    <small className="form-text text-danger">
+                    <small className="text-danger">
                       {errors.confirmPassword.message}
                     </small>
                   )}
@@ -121,40 +202,38 @@ const InstructorRegistration = () => {
               </div>
             </div>
 
-            {/* Instructor Extra Fields */}
+            {/* Instructor Fields */}
             {isInstructor && (
               <>
                 <div className="form-group mt-3">
-                  <label htmlFor="expertise">Area of Expertise</label>
+                  <label>Area of Expertise</label>
                   <input
                     {...register("expertise", {
                       required: "Please enter your area of expertise",
                     })}
                     type="text"
                     className="form-control form-control-custom"
-                    id="expertise"
-                    placeholder="e.g. Web Development, Design..."
+                    placeholder="e.g. Web Development"
                   />
                   {errors.expertise && (
-                    <small className="form-text text-danger">
+                    <small className="text-danger">
                       {errors.expertise.message}
                     </small>
                   )}
                 </div>
 
-                <div className="form-group mt-3 mb-3">
-                  <label htmlFor="experience">Years of Experience</label>
+                <div className="form-group mt-3">
+                  <label>Years of Experience</label>
                   <input
                     {...register("experience", {
                       required: "Please enter your experience",
                     })}
                     type="number"
                     className="form-control form-control-custom"
-                    id="experience"
                     placeholder="e.g. 3"
                   />
                   {errors.experience && (
-                    <small className="form-text text-danger">
+                    <small className="text-danger">
                       {errors.experience.message}
                     </small>
                   )}
@@ -176,7 +255,9 @@ const InstructorRegistration = () => {
             </div>
 
             {/* Submit */}
-            <Button>Sumbit Now</Button>
+            <button type="submit" className="border-0 bg-transparent p-0">
+              <Button disabled={uploading}>Submit Now</Button>
+            </button>
           </form>
         </div>
 
