@@ -43,7 +43,7 @@ const CourseCard = ({ imgSrc, title }) => {
             </span>
             <span>
               {" "}
-              <i class="fa-regular fa-user"></i> Students 20+
+              <i className="fa-regular fa-user"></i> Students 20+
             </span>
           </div>
           <div className="coursecard-teacherimg">

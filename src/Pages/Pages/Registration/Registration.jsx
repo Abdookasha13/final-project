@@ -1,14 +1,17 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./InstructorRegistration.css";
+import "./Registration.css";
 import { useForm } from "react-hook-form";
 import Button from "../../../Components/Button/Button";
-import { toast } from "react-toastify";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import handleImageUpload from "../../../utilities/handleImageUpload";
+import handleRegistrationSubmit from "../../../utilities/handleRegistrationSubmit";
 
-const InstructorRegistration = () => {
+const Registration = () => {
   const [profileImageUrl, setProfileImageUrl] = useState("");
   const [uploading, setUploading] = useState(false);
   const [preview, setPreview] = useState(null);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -19,67 +22,9 @@ const InstructorRegistration = () => {
 
   const isInstructor = watch("isInstructor");
 
-  // -------------upload image to cloudinary --------------
-  const handleImageUpload = async (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-
-    setPreview(URL.createObjectURL(file));
-    setUploading(true);
-
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("upload_preset", "unsigned_users_upload");
-    formData.append("folder", "user_profiles");
-
-    try {
-      const res = await fetch(
-        "https://api.cloudinary.com/v1_1/dy8q8wegg/image/upload",
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
-
-      const data = await res.json();
-      console.log(data);
-      setProfileImageUrl(data.secure_url);
-      toast.success("Image uploaded successfully!");
-    } catch (error) {
-      console.error("Upload failed:", error);
-      toast.error("Failed to upload image");
-    } finally {
-      setUploading(false);
-    }
-  };
-
   // -------------form submit handler --------------
-  const onSubmit = async (data) => {
-    try {
-      if (data.isInstructor) data.role = "instructor";
-      else data.role = "student";
-
-      //-------------attach profile image url --------------
-      data.profileImage = profileImageUrl;
-
-      const response = await fetch("http://localhost:1911/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-
-      const result = await response.json();
-      if (response.ok) {
-        toast.success("Registered successfully!");
-        console.log(result);
-      } else {
-        toast.error(result.message || "Registration failed");
-      }
-    } catch (error) {
-      console.error(error);
-      toast.error("Something went wrong!");
-    }
-  };
+  const onSubmit = (data) =>
+    handleRegistrationSubmit(data, profileImageUrl, navigate);
 
   return (
     <div className="container py-5">
@@ -134,25 +79,35 @@ const InstructorRegistration = () => {
             {/* Profile Image */}
             <div className="form-group mt-3">
               <label>Profile Picture</label>
-              <div className="custom-file-upload">
-                <input
-                  type="file"
-                  accept="image/*"
-                  id="profileImage"
-                  {...register("profileImage")}
-                  onChange={handleImageUpload}
-                  disabled={uploading}
-                />
-                <label htmlFor="profileImage" className="upload-btn">
-                  {uploading ? "Uploading..." : "Upload Image"}
-                </label>
-              </div>
-
-              {preview && (
-                <div className="image-preview mt-2 text-center">
-                  <img src={preview} alt="Preview" />
+              <div className="row align-items-center">
+                <div className="custom-file-upload col-md-6">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    id="profileImage"
+                    {...register("profileImage")}
+                    onChange={(e) =>
+                      handleImageUpload(
+                        e,
+                        setPreview,
+                        setUploading,
+                        setProfileImageUrl,
+                        "user_profiles"
+                      )
+                    }
+                    disabled={uploading}
+                  />
+                  <label htmlFor="profileImage" className="upload-btn">
+                    {uploading ? "Uploading..." : "Upload Image"}
+                  </label>
                 </div>
-              )}
+
+                {preview && (
+                  <div className="image-preview text-center col-md-6 mt-4 mt-md-0">
+                    <img src={preview} alt="Preview" />
+                  </div>
+                )}
+              </div>
             </div>
 
             {/* Password */}
@@ -273,4 +228,4 @@ const InstructorRegistration = () => {
   );
 };
 
-export default InstructorRegistration;
+export default Registration;

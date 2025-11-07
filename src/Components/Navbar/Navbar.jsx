@@ -106,18 +106,12 @@ function Navbar() {
                         <li>
                           <NavLink to="/">Cart</NavLink>
                         </li>
-                        <li>
-                          <NavLink to="/">Student Registration 01</NavLink>
-                        </li>
                       </div>
 
                       <div>
                         <li>
-                          <NavLink to="/">Student Registration 02</NavLink>
-                        </li>
-                        <li>
                           <NavLink to="/register">
-                            Instructor Registration
+                            Registration
                           </NavLink>
                         </li>
                         <li>
@@ -127,10 +121,12 @@ function Navbar() {
                           <NavLink to="/">Sign In</NavLink>
                         </li>
                         <li>
-                          <NavLink to="/">Sign Up</NavLink>
+                          <NavLink to="/">Error</NavLink>
                         </li>
                         <li>
-                          <NavLink to="/">Error</NavLink>
+                          <NavLink to="/instructor/dashboard">
+                            Instructor Dashboard
+                          </NavLink>
                         </li>
                       </div>
                     </ul>
