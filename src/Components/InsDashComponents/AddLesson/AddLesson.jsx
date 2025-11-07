@@ -1,5 +1,8 @@
 import { useForm, Controller } from "react-hook-form";
 import "bootstrap/dist/css/bootstrap.min.css";
+import handleAddLesson from "../../../utilities/handleAddLesson";
+import { useEffect, useState } from "react";
+import getCoursesByInsId from "../../../utilities/getCoursesByInsId";
 
 const AddLesson = () => {
   const {
@@ -9,21 +12,18 @@ const AddLesson = () => {
     control,
     reset,
     formState: { errors },
-  } = useForm({
-    defaultValues: {
-      courseId: "",
-      title: "",
-      type: "video",
-      videoUrl: "",
-      content: "",
-      duration: "",
-      isPreview: false,
-    },
-  });
+  } = useForm({ mode: "onChange" });
+
+  const [courses, setCourses] = useState([]);
 
   const lessonType = watch("type");
 
+  useEffect(() => {
+    getCoursesByInsId("690e0b32a817c5867a43c282", setCourses);
+  }, []);
+
   const onSubmit = (data) => {
+    handleAddLesson(data, reset);
     console.log("Form submitted:", data);
   };
 
@@ -41,7 +41,12 @@ const AddLesson = () => {
                   }`}
                   {...register("courseId", { required: "Course is required" })}
                 >
-                  <option value=""></option>
+                  <option value="">-- Select a course --</option>
+                  {courses.map((course) => (
+                    <option key={course._id} value={course._id}>
+                      {course.title}
+                    </option>
+                  ))}
                 </select>
                 {errors.courseId && (
                   <div className="invalid-feedback">
