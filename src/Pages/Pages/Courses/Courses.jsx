@@ -17,7 +17,7 @@ function Courses() {
           {courses.map((course) => (
             <div className="col-xl-4 col-lg-4 col-md-6" key={course._id}>
               <div className="bg-light rounded-3 h-100 p-2 ">
-                <CourseCard imgSrc={course.thumbnailUrl} title={course.title} />
+                <CourseCard imgSrc={course.thumbnailUrl} title={course.title} price={course.price} discountPrice={course.discountPrice} />
               </div>
             </div>
           ))}

@@ -3,6 +3,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
 import handleImageUpload from "../../../utilities/handleImageUpload";
 import handleAddCourse from "../../../utilities/handleAddCourse";
+import { useNavigate, useParams } from "react-router-dom";
+import handleUpdateCourse from "../../../utilities/handleUpdateCourse";
 
 const AddCourse = () => {
   const {
@@ -17,6 +19,53 @@ const AddCourse = () => {
   const [uploading, setUploading] = useState(false);
   const [preview, setPreview] = useState(null);
 
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const isEdit = Boolean(id);
+
+  useEffect(() => {
+    const fetchCourse = async () => {
+      if (!isEdit) return;
+
+      try {
+        const res = await fetch(`http://localhost:1911/courses/${id}`);
+        const data = await res.json();
+
+        reset({
+          title: data.title,
+          shortDescription: data.shortDescription,
+          description: data.description,
+          category: data.category?._id || "",
+          tags: data.tags?.join(", ") || "",
+          price: data.price,
+          discountPrice: data.discountPrice,
+          isFree: data.isFree,
+        });
+        setThumbnailUrl(data.thumbnail);
+        setPreview(data.thumbnail);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchCourse();
+  }, [id, isEdit, reset]);
+
+  const onSubmit = async (data) => {
+    if (isEdit) {
+      await handleUpdateCourse(id, data, thumbnailUrl);
+    } else {
+      await handleAddCourse(
+        data,
+        setUploading,
+        reset,
+        thumbnailUrl,
+        setPreview,
+        setThumbnailUrl
+      );
+    }
+    navigate("/instructor/courses");
+  };
+
   useEffect(() => {
     localStorage.setItem(
       "token",
@@ -30,15 +79,15 @@ const AddCourse = () => {
     );
   }, []);
 
-  const onSubmit = (data) =>
-    handleAddCourse(
-      data,
-      setUploading,
-      reset,
-      thumbnailUrl,
-      setPreview,
-      setThumbnailUrl
-    );
+  // const onSubmit = (data) =>
+  //   handleAddCourse(
+  //     data,
+  //     setUploading,
+  //     reset,
+  //     thumbnailUrl,
+  //     setPreview,
+  //     setThumbnailUrl
+  //   );
 
   return (
     <div className="container my-3">

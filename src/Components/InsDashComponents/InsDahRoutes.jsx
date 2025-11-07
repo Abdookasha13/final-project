@@ -17,6 +17,7 @@ const InsDahRoutes = () => {
         <Route path="add/lessons" element={<AddLesson />} />
         <Route path="profile" element={<InsProfile />} />
         <Route path="settings" element={<InsSettings />} />
+        <Route path="edit/course/:id" element={<AddCourse />} />
       </Route>
     </Routes>
   );
