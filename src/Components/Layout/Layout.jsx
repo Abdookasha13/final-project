@@ -7,12 +7,23 @@ import Footer from "../Footer/Footer";
 import ScrollTopButton from "../ScrollTopButton/ScrollTopButton";
 import { ToastContainer, Zoom } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-function Layout({ children }) {
+import { Outlet, useLocation } from "react-router-dom";
+
+function Layout() {
+  const location = useLocation();
+
+  // لو الصفحة الخاصة بالمدرس (instructor dashboard) ما نعرضش الـ Header
+  const hideHeader =
+    location.pathname.startsWith("/instructor");
+
   return (
     <div className="app-container">
       <HeadNavbar />
       <Navbar />
-      <HeaderSection />
+
+      {/* نعرض الـ HeaderSection بس في الصفحات العادية */}
+      {!hideHeader && <HeaderSection />}
+
       <ToastContainer
         position="bottom-right"
         autoClose={3000}
@@ -24,9 +35,15 @@ function Layout({ children }) {
         newestOnTop
         toastClassName="udemy-toast"
       />
-      <div className="main-content container">{children}</div>
-      <Newsletter />
-      <Footer />
+
+      {/* هنا بيتحمّل محتوى الصفحة اللي جوه الـ Route */}
+      <div className="main-content container">
+        <Outlet />
+      </div>
+
+      {!hideHeader && <Newsletter />}
+      {!hideHeader && <Footer />}
+
       <ScrollTopButton />
     </div>
   );

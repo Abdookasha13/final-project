@@ -1,0 +1,30 @@
+.sidebar {
+  min-height: 100vh;
+  width: 250px;
+  background: #fff;
+  border-right: 1px solid #ddd;
+}
+
+.sidebar .nav-link.active {
+  background-color: #19bda230;
+  color:#0ab99d;
+  font-weight: 600;
+}
+
+.sidebar .nav-link:hover {
+  background-color: #19bda212;
+}
+
+.course-card {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 1rem;
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.material-symbols-outlined {
+  vertical-align: middle;
+  margin-right: 8px;
+}
+

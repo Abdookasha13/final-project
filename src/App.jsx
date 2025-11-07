@@ -6,9 +6,8 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Layout>
+        
           <Routess />
-        </Layout>
       </BrowserRouter>
     </>
   );
