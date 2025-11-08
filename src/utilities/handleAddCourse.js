@@ -26,7 +26,7 @@ const handleAddCourse = async (
       isFree: !!data.isFree,
       tags: data.tags ? data.tags.split(",").map((t) => t.trim()) : [],
       thumbnailUrl,
-      lessons: [],
+      lessons: data.lessons,
     };
     console.log("Payload:", payload);
     const res = await axios.post("http://localhost:1911/courses", payload, {

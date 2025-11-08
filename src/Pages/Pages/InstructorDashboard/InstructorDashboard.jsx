@@ -17,12 +17,22 @@ const InstructorDashboard = () => {
     "/instructor/dashboard": "Dashboard",
     "/instructor/courses": "My Courses",
     "/instructor/add/course": "Add Course",
-    "/instructor/add/lessons": "Add Lessons",
+    "/instructor/add/lessons": "Add Lesson",
     "/instructor/profile": "Profile",
     "/instructor/settings": "Settings",
+    "/instructor/edit/course/:id": "Edit Course",
   };
 
-  const pageTitle = pageTitles[location.pathname] || "Dashboard";
+  const getPageTitle = () => {
+    const pathname = location.pathname;
+
+    if (/^\/instructor\/edit\/course\//.test(pathname)) {
+      return "Edit Course";
+    }
+
+    return pageTitles[location.pathname];
+  };
+  const pageTitle = getPageTitle();
 
   const showSearch = location.pathname.startsWith("/instructor/courses");
 
@@ -44,7 +54,7 @@ const InstructorDashboard = () => {
     },
     {
       to: "/instructor/add/lessons",
-      label: "Add Lessons",
+      label: "Add Lesson",
       icon: <MdOutlinePlayLesson fontSize="20px" className="me-3" />,
     },
     {
@@ -152,18 +162,18 @@ const InstructorDashboard = () => {
             </div>
           </div>
         </nav>
-       {/* //toast container */}
-       <ToastContainer
-        position="bottom-right"
-        autoClose={3000}
-        transition={Zoom}
-        hideProgressBar
-        closeOnClick
-        pauseOnHover
-        draggable
-        newestOnTop
-        toastClassName="udemy-toast"
-      />
+        {/* //toast container */}
+        <ToastContainer
+          position="bottom-right"
+          autoClose={3000}
+          transition={Zoom}
+          hideProgressBar
+          closeOnClick
+          pauseOnHover
+          draggable
+          newestOnTop
+          toastClassName="udemy-toast"
+        />
         <main className="p-4 bg-light flex-grow-1">
           <Outlet />
         </main>
