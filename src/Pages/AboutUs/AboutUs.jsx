@@ -1,16 +1,26 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./AboutUs.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "../../Components/Button/Button";
-import CourseCard from "../../Components/CourseCard/CourseCard";
+import CourseCard from "../../Components/coursecard/CourseCard";
 import TeacherCard from "../../Components/TeacherCard/TeacherCard";
 
 // countersData moved to module scope so it's stable and doesn't trigger useEffect linter warning
 const countersData = [
   { id: 1, icon: "fa-regular fa-user", end: 3, label: "Successfully Trained" },
-  { id: 2, icon: "fa-regular fa-handshake", end: 15, label: "Classes Completed" },
+  {
+    id: 2,
+    icon: "fa-regular fa-handshake",
+    end: 15,
+    label: "Classes Completed",
+  },
   { id: 3, icon: "fa-solid fa-users", end: 97, label: "Satisfaction Rate" },
-  { id: 4, icon: "fa-solid fa-user-graduate", end: 102, label: "Students Community" }
+  {
+    id: 4,
+    icon: "fa-solid fa-user-graduate",
+    end: 102,
+    label: "Students Community",
+  },
 ];
 
 // Testimonials Data
@@ -25,13 +35,15 @@ const testimonialsData = [
     name: "Jane Cooper",
     role: "happy customer",
     text: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-    avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpF-MVWfij8lBza-cO3AKmVjvxQBGkIwCKw3gSwhoO8m1fCbqO3mx3VvE&s",
+    avatar:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpF-MVWfij8lBza-cO3AKmVjvxQBGkIwCKw3gSwhoO8m1fCbqO3mx3VvE&s",
   },
   {
     name: "Esther Howard",
     role: "happy customer",
     text: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.",
-    avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTTqhXFatWikTblfvruvD8eMY9CGNW3sUWvQ&s",
+    avatar:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTTqhXFatWikTblfvruvD8eMY9CGNW3sUWvQ&s",
   },
 ];
 
@@ -127,8 +139,9 @@ function AboutUs() {
               </h2>
 
               <p className="it-about-desc">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam.
               </p>
             </div>
 
@@ -140,10 +153,13 @@ function AboutUs() {
                       <i className="fa-regular fa-keyboard"></i>
                     </div>
                     <div className="it-about-3-mv-item">
-                      <span className="it-about-3-mv-title">Sharing a Screen</span>
+                      <span className="it-about-3-mv-title">
+                        Sharing a Screen
+                      </span>
                       <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                        tempor incididunt ut labore et dolore magna aliqua.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                        sed do tempor incididunt ut labore et dolore magna
+                        aliqua.
                       </p>
                     </div>
                   </div>
@@ -155,10 +171,13 @@ function AboutUs() {
                       <i className="fa-regular fa-lightbulb"></i>
                     </div>
                     <div className="it-about-3-mv-item">
-                      <span className="it-about-3-mv-title">Presenter Control</span>
+                      <span className="it-about-3-mv-title">
+                        Presenter Control
+                      </span>
                       <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                        tempor incididunt ut labore et dolore magna aliqua.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                        sed do tempor incididunt ut labore et dolore magna
+                        aliqua.
                       </p>
                     </div>
                   </div>
@@ -186,7 +205,10 @@ function AboutUs() {
           <div className="it-funfact-bg-wrap theme-bg">
             <div className="row gx-0 justify-content-between">
               {countersData.map((item, index) => (
-                <div key={item.id} className="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                <div
+                  key={item.id}
+                  className="col-xl-3 col-lg-3 col-md-6 col-sm-6"
+                >
                   <div className="it-funfact-item d-flex align-items-center gap-3">
                     <div className="it-funfact-icon">
                       <i className={item.icon}></i>
@@ -203,14 +225,19 @@ function AboutUs() {
         </div>
       </div>
 
-    
       {/* ----------- Testimonial Section ----------- */}
       <div
         className="it-testimonial-area it-testimonial-ptb it-sub-bg-none it-testimonial-bg fix p-relative"
-        style={{ backgroundImage: 'url("https://ordainit.com/html/educate/assets/img/testimonial/testimonial-bg.jpg")' }}
+        style={{
+          backgroundImage:
+            'url("https://ordainit.com/html/educate/assets/img/testimonial/testimonial-bg.jpg")',
+        }}
       >
         <div className="it-testimonial-shape-1 d-none d-xl-block">
-          <img src="https://ordainit.com/html/educate/assets/img/testimonial/shape-2-1.png" alt="shape" />
+          <img
+            src="https://ordainit.com/html/educate/assets/img/testimonial/shape-2-1.png"
+            alt="shape"
+          />
         </div>
 
         <div className="container ">
@@ -219,13 +246,16 @@ function AboutUs() {
               <div className="col-xl-6 col-lg-8 col-md-9 col-sm-8 ">
                 <div className="it-testimonial-title-box mb-5">
                   <span className="it-section-subtitle">
-                    <img src="https://ordainit.com/html/educate/assets/img/category/inner.svg" alt="" />
+                    <img
+                      src="https://ordainit.com/html/educate/assets/img/category/inner.svg"
+                      alt=""
+                    />
                     testimonial
                   </span>
                   <h4 className="it-section-title">
-                    Creating A Community Of <br />Life Long Learners.
+                    Creating A Community Of <br />
+                    Life Long Learners.
                     <span className="p-relative z-index">
-                      
                       <svg
                         className="title-shape-3"
                         width="130"
@@ -248,10 +278,18 @@ function AboutUs() {
 
               <div className="col-xl-6 col-lg-4 col-md-3 col-sm-4">
                 <div className="it-testimonial-arrow text-end">
-                  <button onClick={prevSlide} type="button" className="slick-prev slick-arrow">
+                  <button
+                    onClick={prevSlide}
+                    type="button"
+                    className="slick-prev slick-arrow"
+                  >
                     <i className="fa-solid fa-arrow-left"></i>
                   </button>
-                  <button onClick={nextSlide} type="button" className="slick-next slick-arrow">
+                  <button
+                    onClick={nextSlide}
+                    type="button"
+                    className="slick-next slick-arrow"
+                  >
                     <i className="fa-solid fa-arrow-right"></i>
                   </button>
                 </div>
@@ -272,7 +310,9 @@ function AboutUs() {
                       {testimonialsData.map((item, index) => (
                         <div
                           key={index}
-                          className={`it-testimonial-nav-item ${index === current ? "active" : ""}`}
+                          className={`it-testimonial-nav-item ${
+                            index === current ? "active" : ""
+                          }`}
                         >
                           <div className="it-testimonial-nav-thumb">
                             <img src={item.avatar} alt={item.name} />
@@ -302,174 +342,152 @@ function AboutUs() {
         </div>
       </div>
 
-
-
-
       {/* ----------- Course Section ----------- */}
- <div className="it-course-area it-sub-bg-none p-relative grey-bg pt-120 pb-120">
-      {/* ----------- الخلفيات ----------- */}
-      <div className="it-course-shape-1 d-none d-xl-block">
-        <img
-          src="https://ordainit.com/html/educate/assets/img/course/shape-1-1.png"
-          alt=""
-        />
-      </div>
-      <div className="it-course-shape-2 d-none d-xl-block">
-        <img
-          src="https://ordainit.com/html/educate/assets/img/course/shape-1-2.png"
-          alt=""
-          className="animate-pencil"
-        />
-      </div>
-      <div className="it-course-shape-3 d-none d-xl-block">
-        <img
-          src="https://ordainit.com/html/educate/assets/img/course/shape-1-3.png"
-          alt=""
-          className="animate-hat"
-        />
-      </div>
-      <div className="it-course-shape-4 d-none d-xl-block">
-        <img
-          src="https://ordainit.com/html/educate/assets/img/course/shape-1-4.png"
-          alt=""
-          className="animate-star"
-        />
-      </div>
+      <div className="it-course-area it-sub-bg-none p-relative grey-bg pt-120 pb-120">
+        {/* ----------- الخلفيات ----------- */}
+        <div className="it-course-shape-1 d-none d-xl-block">
+          <img
+            src="https://ordainit.com/html/educate/assets/img/course/shape-1-1.png"
+            alt=""
+          />
+        </div>
+        <div className="it-course-shape-2 d-none d-xl-block">
+          <img
+            src="https://ordainit.com/html/educate/assets/img/course/shape-1-2.png"
+            alt=""
+            className="animate-pencil"
+          />
+        </div>
+        <div className="it-course-shape-3 d-none d-xl-block">
+          <img
+            src="https://ordainit.com/html/educate/assets/img/course/shape-1-3.png"
+            alt=""
+            className="animate-hat"
+          />
+        </div>
+        <div className="it-course-shape-4 d-none d-xl-block">
+          <img
+            src="https://ordainit.com/html/educate/assets/img/course/shape-1-4.png"
+            alt=""
+            className="animate-star"
+          />
+        </div>
 
-      {/* ----------- المحتوى ----------- */}
-      <div className="container">
-        <div className="row">
-          <div className="col-xl-12">
-            <div className="it-course-title-box text-center mb-70">
-              <span className="it-section-subtitle">
-                <img
-                  src="https://ordainit.com/html/educate/assets/img/category/inner.svg"
-                  alt=""
-                />
-                Top Popular Course
-                <img
-                  src="https://ordainit.com/html/educate/assets/img/category/inner.svg"
-                  alt=""
-                />
-              </span>
-              <h4 className="it-section-title">
-                Histudy Course{" "}
-                <span className=" z-index">
-                  student
-                  <svg
-                    className="title-shape-2"
-                    width="140"
-                    height="65"
-                    viewBox="0 0 168 65"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M73.3761 8.49147C78.4841 6.01353 82.5722 4.25154 88.8933 3.3035C94.2064 2.50664 99.6305 2.0701 104.981 1.94026C120.426 1.56549 135.132 4.90121 146.506 9.70405C158.628 14.8228 166.725 22.5638 166.074 31.6501C165.291 42.5779 151.346 51.7039 133.508 56.8189C110.253 63.4874 81.7065 63.8025 58.5605 60.8285C37.5033 58.123 11.6304 51.7165 3.58132 40.0216C-3.43085 29.8337 12.0728 18.1578 27.544 11.645C40.3656 6.24763 55.7082 2.98328 70.8043 4.08403C81.9391 4.89596 93.2164 6.87822 102.462 9.99561C112.874 13.5066 120.141 18.5932 127.862 23.6332"
-                      stroke="#0AB99D"
-                      strokeWidth="3"
-                      strokeLinecap="round"
-                    ></path>
-                  </svg>
-                </span>{" "}
-                can <br /> join with us.
-              </h4>
+        {/* ----------- المحتوى ----------- */}
+        <div className="container">
+          <div className="row">
+            <div className="col-xl-12">
+              <div className="it-course-title-box text-center mb-70">
+                <span className="it-section-subtitle">
+                  <img
+                    src="https://ordainit.com/html/educate/assets/img/category/inner.svg"
+                    alt=""
+                  />
+                  Top Popular Course
+                  <img
+                    src="https://ordainit.com/html/educate/assets/img/category/inner.svg"
+                    alt=""
+                  />
+                </span>
+                <h4 className="it-section-title">
+                  Histudy Course{" "}
+                  <span className=" z-index">
+                    student
+                    <svg
+                      className="title-shape-2"
+                      width="140"
+                      height="65"
+                      viewBox="0 0 168 65"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M73.3761 8.49147C78.4841 6.01353 82.5722 4.25154 88.8933 3.3035C94.2064 2.50664 99.6305 2.0701 104.981 1.94026C120.426 1.56549 135.132 4.90121 146.506 9.70405C158.628 14.8228 166.725 22.5638 166.074 31.6501C165.291 42.5779 151.346 51.7039 133.508 56.8189C110.253 63.4874 81.7065 63.8025 58.5605 60.8285C37.5033 58.123 11.6304 51.7165 3.58132 40.0216C-3.43085 29.8337 12.0728 18.1578 27.544 11.645C40.3656 6.24763 55.7082 2.98328 70.8043 4.08403C81.9391 4.89596 93.2164 6.87822 102.462 9.99561C112.874 13.5066 120.141 18.5932 127.862 23.6332"
+                        stroke="#0AB99D"
+                        strokeWidth="3"
+                        strokeLinecap="round"
+                      ></path>
+                    </svg>
+                  </span>{" "}
+                  can <br /> join with us.
+                </h4>
+              </div>
             </div>
-          </div>
 
-          {/* ----------- مكان الكروت ----------- */}
-          <div className="col-xl-12">
-            <div className="cards-placeholder row justify-content-center">
-              <div className="col-md-6 col-lg-3 ">
-                <CourseCard 
-               
-                imgSrc="https://ordainit.com/html/educate/assets/img/course/course-1-1.jpg"
-                />
+            {/* ----------- مكان الكروت ----------- */}
+            <div className="col-xl-12">
+              <div className="cards-placeholder row justify-content-center">
+                <div className="col-md-6 col-lg-3 ">
+                  <CourseCard imgSrc="https://ordainit.com/html/educate/assets/img/course/course-1-1.jpg" />
+                </div>
+                <div className="col-md-6 col-lg-3">
+                  <CourseCard imgSrc="https://ordainit.com/html/educate/assets/img/course/course-1-2.jpg" />
+                </div>
+                <div className="col-md-6 col-lg-3">
+                  <CourseCard imgSrc="https://ordainit.com/html/educate/assets/img/course/course-1-3.jpg" />
+                </div>
               </div>
-              <div className="col-md-6 col-lg-3">
-                <CourseCard
-                imgSrc="https://ordainit.com/html/educate/assets/img/course/course-1-2.jpg"
-                />
-              </div>
-              <div className="col-md-6 col-lg-3">
-                <CourseCard
-                imgSrc="https://ordainit.com/html/educate/assets/img/course/course-1-3.jpg"
-                />
-              </div>
-              
             </div>
-          </div>
 
-          {/* ----------- مكان الزر ----------- */}
-          <div className="col-xl-12">
-            <div className="it-course-button text-center pt-45">
-              <div className="btn-placeholder pt-5">
-                <Button>Learn More Course</Button>
+            {/* ----------- مكان الزر ----------- */}
+            <div className="col-xl-12">
+              <div className="it-course-button text-center pt-45">
+                <div className="btn-placeholder pt-5">
+                  <Button>Learn More Course</Button>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-      
 
+      <div className="it-team-3-area p-relative z-index pt-110 pb-90">
+        <div
+          className="it-team-3-bg"
+          style={{
+            backgroundImage:
+              "url('https://ordainit.com/html/educate/assets/img/team/bg-4.png')",
+          }}
+        ></div>
 
-<div className="it-team-3-area p-relative z-index pt-110 pb-90">
-  <div
-    className="it-team-3-bg"
-    style={{
-      backgroundImage:
-        "url('https://ordainit.com/html/educate/assets/img/team/bg-4.png')",
-    }}
-  ></div>
-
-  <div className="container">
-    <div className="row">
-      <div className="col-xl-12">
-        <div className="it-event-title-box text-center pb-40">
-          <span className="it-section-subtitle text-white">
-            <img
-              src="https://ordainit.com/html/educate/assets/img/team/bok.svg"
-              alt=""
-            />
-            Teacher
-            <img
-              src="https://ordainit.com/html/educate/assets/img/team/bok.svg"
-              alt=""
-            />
-          </span>
-          <h2 className="it-section-title-3 text-white">
-            Meet Our Expert Instructor
-          </h2>
+        <div className="container">
+          <div className="row">
+            <div className="col-xl-12">
+              <div className="text-center">
+                <span className="it-section-subtitle text-white">
+                  <img
+                    src="https://ordainit.com/html/educate/assets/img/team/bok.svg"
+                    alt=""
+                  />
+                  Teacher
+                  <img
+                    src="https://ordainit.com/html/educate/assets/img/team/bok.svg"
+                    alt=""
+                  />
+                </span>
+                <h2 className="it-section-title-3 text-white">
+                  Meet Our Expert Instructor
+                </h2>
+                {/* مكان الكروت */}
+                <div className="it-team-3-wrapper row justify-content-center">
+                  <div className="col-xl-3 col-lg-4 col-md-6 mb-30">
+                    <TeacherCard className="al-card-color" />
+                  </div>
+                  <div className="col-xl-3 col-lg-4 col-md-6 mb-30">
+                    <TeacherCard imgSrc="https://ordainit.com/html/educate/assets/img/team/team-3-2.jpg" />
+                  </div>
+                  <div className="col-xl-3 col-lg-4 col-md-6 mb-30">
+                    <TeacherCard imgSrc="https://ordainit.com/html/educate/assets/img/team/team-3-3.jpg" />
+                  </div>
+                  <div className="col-xl-3 col-lg-4 col-md-6 mb-30">
+                    <TeacherCard imgSrc="https://ordainit.com/html/educate/assets/img/team/team-3-4.jpg" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-
-    {/* مكان الكروت */}
-    <div className="it-team-3-wrapper row justify-content-center">
-      <div className="col-xl-3 col-lg-4 col-md-6 mb-30">
-        <TeacherCard  className="al-card-color"/>
-      </div>
-      <div className="col-xl-3 col-lg-4 col-md-6 mb-30">
-        <TeacherCard 
-        imgSrc="https://ordainit.com/html/educate/assets/img/team/team-3-2.jpg"
-        
-        />
-      </div>
-      <div className="col-xl-3 col-lg-4 col-md-6 mb-30">
-        <TeacherCard 
-        imgSrc="https://ordainit.com/html/educate/assets/img/team/team-3-3.jpg"
-        />
-      </div>
-      <div className="col-xl-3 col-lg-4 col-md-6 mb-30">
-        <TeacherCard 
-        imgSrc="https://ordainit.com/html/educate/assets/img/team/team-3-4.jpg"
-        />
-      </div>
-    </div>
-  </div>
-</div>
-
     </>
   );
 }

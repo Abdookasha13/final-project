@@ -15,7 +15,7 @@ export default function SignIN() {
   };
 
   return (
-    <div className="row align-items-stretch min-vh-100 d-flex  py-5 ">
+    <div className="row align-items-stretch min-vh-100 d-flex py-5">
       {/* Left side (form) */}
       <div className="col-12 col-lg-6 d-flex flex-column justify-content-center bg-light px-5">
         <h2 className="fw-bold mb-4 text-uppercase">Sign In</h2>
@@ -102,7 +102,11 @@ export default function SignIN() {
 
       {/* Right side (image) */}
       <div className="col-lg-6 d-none d-lg-block p-0 m-0 bg-light">
-        <img src="/Images/login.svg" alt="Login Illustration" style={{ width: "100%", height: "100%", objectFit: "cover" }}/>
+        <img
+          src="/Images/login.svg"
+          alt="Login Illustration"
+          style={{ width: "100%", height: "100%", objectFit: "cover" }}
+        />
       </div>
     </div>
   );
