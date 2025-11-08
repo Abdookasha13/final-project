@@ -3,6 +3,7 @@ import CourseCard from "../../../Components/coursecard/CourseCard";
 import "./Courses.css";
 import getAllCourses from "../../../utilities/getAllCourses";
 import formatTime from "../../../utilities/formatTime";
+import Loader from "../../../Components/Loader/Loader";
 
 function Courses() {
   const [courses, setCourses] = useState([]);
@@ -10,6 +11,10 @@ function Courses() {
   useEffect(() => {
     getAllCourses(setCourses);
   }, []);
+
+  if (courses.length === 0) {
+    return <Loader />;
+  }
 
   return (
     <div>
