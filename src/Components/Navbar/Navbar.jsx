@@ -118,7 +118,7 @@ function Navbar() {
                           <NavLink to="/faqs">Faq</NavLink>
                         </li>
                         <li>
-                          <NavLink to="/">Sign In</NavLink>
+                          <NavLink to="/signIn">Sign In</NavLink>
                         </li>
                         <li>
                           <NavLink to="/">Error</NavLink>
