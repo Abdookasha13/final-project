@@ -3,8 +3,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
 import handleImageUpload from "../../../utilities/handleImageUpload";
 import handleAddCourse from "../../../utilities/handleAddCourse";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import handleUpdateCourse from "../../../utilities/handleUpdateCourse";
+
 
 const AddCourse = () => {
   const {
@@ -303,9 +304,12 @@ const AddCourse = () => {
         </div>
 
         <div className="d-flex justify-content-end gap-2 mt-4 pt-3">
-          <button type="button" className="btn btn-outline-secondary">
+          <Link
+            className="btn btn-outline-secondary"
+            to={"/instructor/courses"}
+          >
             Cancel
-          </button>
+          </Link>
           <button
             type="submit"
             className="btn text-light"

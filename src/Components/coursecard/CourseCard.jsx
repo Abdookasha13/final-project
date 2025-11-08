@@ -1,9 +1,9 @@
-import React from "react";
 import "./CourseCard.css";
 
 import { BsCart3 } from "react-icons/bs";
-import { useNavigate } from "react-router-dom";
 import { FaEdit, FaTrash } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import handleDeleteCourse from "../../utilities/handleDeleteCourse";
 
 const CourseCard = ({
   imgSrc,
@@ -12,11 +12,21 @@ const CourseCard = ({
   showInstructorButtons = false,
   price,
   discountPrice,
+  lessonsCount,
+  timestamp,
+  studentsCount,
+  onDelete,
 }) => {
   const navigate = useNavigate();
 
   const handleEdit = () => {
     navigate(`/instructor/edit/course/${courseId}`);
+  };
+
+  const handleDelete = () => {
+    if (window.confirm("Are you sure you want to delete this course?")) {
+      handleDeleteCourse(courseId, onDelete);
+    }
   };
   return (
     <>
@@ -49,15 +59,15 @@ const CourseCard = ({
           >
             <span>
               {" "}
-              <i className="fa-regular fa-file-lines"></i>Lesson 10
+              <i className="fa-regular fa-file-lines"></i>Lesson {lessonsCount}
             </span>
             <span>
               {" "}
-              <i className="fa-sharp fa-regular fa-clock"></i> 19h 30m
+              <i className="fa-sharp fa-regular fa-clock"></i> {timestamp}
             </span>
             <span>
               {" "}
-              <i className="fa-regular fa-user"></i> Students 20+
+              <i className="fa-regular fa-user"></i> Students {studentsCount}
             </span>
           </div>
           <div className="coursecard-teacherimg">
@@ -80,7 +90,10 @@ const CourseCard = ({
               >
                 <FaEdit /> Edit
               </button>
-              <button className="btn btn-sm btn-outline-danger">
+              <button
+                className="btn btn-sm btn-outline-danger"
+                onClick={handleDelete}
+              >
                 <FaTrash /> Delete
               </button>
             </div>
