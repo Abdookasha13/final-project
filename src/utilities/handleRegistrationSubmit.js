@@ -18,7 +18,7 @@ const handleRegistrationSubmit = async (data, profileImageUrl, navigate) => {
     if (response.ok) {
       toast.success("Registered successfully!");
       console.log(result);
-      navigate("/login");
+      navigate("/sign/in");
     } else {
       toast.error(result.message || "Registration failed");
     }

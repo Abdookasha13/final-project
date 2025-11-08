@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
-import { ToastContainer, toast, Slide } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import handleLoginSubmit from "../../../utilities/handleLoginSubmit";
+import Button from "../../../Components/Button/Button";
+import { Link } from "react-router-dom";
 
 export default function SignIN() {
   const {
@@ -10,78 +11,11 @@ export default function SignIN() {
   } = useForm();
 
   const onSubmit = async (data) => {
-    try {
-      const res = await fetch("http://localhost:1911/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-
-      const result = await res.json();
-
-      if (!res.ok) {
-        throw new Error(result.message || "Login failed");
-      }
-
-      // ✅ للنجاح
-      toast.success("Login successful 🎉", {
-        position: "top-center",
-        autoClose: 2500,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-        style: {
-          background: "#4BB543",
-          color: "#fff",
-          fontWeight: "600",
-          fontSize: "16px",
-          borderRadius: "8px",
-          padding: "10px 20px",
-        },
-        transition: Slide,
-      });
-
-      // ❌ للخطأ
-
-
-      console.log("Token:", result.token);
-      localStorage.setItem("token", result.token);
-
-      // مثال: تحويل المستخدم بعد تسجيل الدخول بنجاح بعد 2 ثانية
-      setTimeout(() => {
-        window.location.href = "/dashboard";
-      }, 2000);
-    } catch (err) {
-      toast.error("Invalid email or password ❌", {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-        style: {
-          background: "#D32F2F",
-          color: "#fff",
-          fontWeight: "600",
-          fontSize: "16px",
-          borderRadius: "8px",
-          padding: "10px 20px",
-        },
-        transition: Slide,
-      });
-    }
+    handleLoginSubmit(data);
   };
 
   return (
-    <div className="container-fluid vh-100 d-flex p-0 my-5">
-      {/* Toast Container */}
-      <ToastContainer />
-
+    <div className="row align-items-stretch min-vh-100 d-flex  py-5 ">
       {/* Left side (form) */}
       <div className="col-12 col-lg-6 d-flex flex-column justify-content-center bg-light px-5">
         <h2 className="fw-bold mb-4 text-uppercase">Sign In</h2>
@@ -89,12 +23,14 @@ export default function SignIN() {
 
         <form onSubmit={handleSubmit(onSubmit)}>
           {/* Email */}
-          <div className="mb-3">
+          <div className="form-group">
             <label className="form-label fw-semibold">Email *</label>
             <input
               type="email"
               placeholder="Enter your email"
-              className={`form-control ${errors.email ? "is-invalid" : ""}`}
+              className={`form-control form-control-custom ${
+                errors.email ? "is-invalid" : ""
+              }`}
               {...register("email", {
                 required: "Email is required",
                 pattern: {
@@ -109,12 +45,14 @@ export default function SignIN() {
           </div>
 
           {/* Password */}
-          <div className="mb-3">
+          <div className="form-group mt-3">
             <label className="form-label fw-semibold">Password *</label>
             <input
               type="password"
               placeholder="Enter your password"
-              className={`form-control ${errors.password ? "is-invalid" : ""}`}
+              className={`form-control form-control-custom ${
+                errors.password ? "is-invalid" : ""
+              }`}
               {...register("password", {
                 required: "Password is required",
                 minLength: {
@@ -148,35 +86,24 @@ export default function SignIN() {
           </div>
 
           {/* Submit button */}
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="btn btn-success w-100 py-2 fw-semibold"
-          >
-            {isSubmitting ? "Signing In..." : "Sign In"}
+          <button type="submit" className="border-0 bg-transparent p-0">
+            <Button disabled={isSubmitting}>Sign In</Button>
           </button>
 
           {/* Footer link */}
           <p className="text-center text-muted mt-4">
             Don't have an account?{" "}
-            <a href="#" className="text-success fw-semibold text-decoration-none">
+            <Link to="/register" className="text-danger text-decoration-none">
               Sign Up
-            </a>
+            </Link>
           </p>
         </form>
       </div>
 
       {/* Right side (image) */}
-      <div
-        className="col-lg-6 bg-cover bg-center d-none d-lg-block"
-        style={{
-          backgroundImage:
-            "url('/Images/6679b55f-fbc5-4a8d-acaa-8b9b50aa05de.png')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          filter: "grayscale(40%) blur(2px)",
-        }}
-      ></div>
+      <div className="col-lg-6 d-none d-lg-block p-0 m-0 bg-light">
+        <img src="/Images/login.svg" alt="Login Illustration" style={{ width: "100%", height: "100%", objectFit: "cover" }}/>
+      </div>
     </div>
   );
 }

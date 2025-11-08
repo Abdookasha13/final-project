@@ -110,15 +110,13 @@ function Navbar() {
 
                       <div>
                         <li>
-                          <NavLink to="/register">
-                            Registration
-                          </NavLink>
+                          <NavLink to="/register">Registration</NavLink>
                         </li>
                         <li>
                           <NavLink to="/faqs">Faq</NavLink>
                         </li>
                         <li>
-                          <NavLink to="/signIn">Sign In</NavLink>
+                          <NavLink to="/sign/in">Sign In</NavLink>
                         </li>
                         <li>
                           <NavLink to="/">Error</NavLink>

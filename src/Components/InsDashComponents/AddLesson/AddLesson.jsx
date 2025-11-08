@@ -19,7 +19,8 @@ const AddLesson = () => {
   const lessonType = watch("type");
 
   useEffect(() => {
-    getCoursesByInsId("690e0b32a817c5867a43c282", setCourses);
+    const user = JSON.parse(localStorage.getItem("user"));
+    getCoursesByInsId(user._id, setCourses);
   }, []);
 
   const onSubmit = (data) => {

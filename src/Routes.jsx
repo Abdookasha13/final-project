@@ -39,7 +39,7 @@ function Routess() {
         <Route path="/register" element={<Registration />} />
         <Route path="/course/details" element={<CourseDetails />} />
         <Route path="/event/details" element={<EventDetails />} />
-        <Route path="/signIn" element={<SignIN />} />
+        <Route path="/sign/in" element={<SignIN />} />
       </Routes>
     </>
   );

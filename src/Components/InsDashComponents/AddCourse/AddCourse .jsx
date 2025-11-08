@@ -66,20 +66,6 @@ const AddCourse = () => {
     }
     navigate("/instructor/courses");
   };
-
-  useEffect(() => {
-    localStorage.setItem(
-      "token",
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MGUwYjMyYTgxN2M1ODY3YTQzYzI4MiIsImVtYWlsIjoiaW5zdHJ1Y3RvckBnbWFpbC5jb20iLCJyb2xlIjoiaW5zdHJ1Y3RvciIsImlhdCI6MTc2MjUyODA4OX0.UuRqsxnFRvC6q2bogFNioOAV0Uwu7ShSWcziGWrlFFQ"
-    );
-    localStorage.setItem(
-      "user",
-      JSON.stringify({
-        _id: "690e0b32a817c5867a43c282",
-      })
-    );
-  }, []);
-
   // const onSubmit = (data) =>
   //   handleAddCourse(
   //     data,
