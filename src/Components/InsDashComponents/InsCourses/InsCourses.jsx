@@ -31,6 +31,7 @@ const InsCourses = () => {
                   timestamp={formatTime(course.createdAt)}
                   studentsCount={course.studentsCount}
                   onDelete={handleDeleteSuccess}
+                  bgColor={"#ffff"}
                 />
               </div>
             </div>

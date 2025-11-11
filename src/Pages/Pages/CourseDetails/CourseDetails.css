@@ -1,91 +1,58 @@
+@import url("https://fonts.googleapis.com/css2?family=Epilogue:wght@100..900&family=Josefin+Sans:wght@100..700&family=Montserrat:wght@100..900&family=Poppins:wght@100..900&family=Ubuntu:wght@300;400;500;700&display=swap");
+
 .course-details-roka {
-  font-family: "Poppins", sans-serif;
-  color: #222;
+  font-family: "Epilogue", sans-serif;
 }
 
-/* الصورة */
 .course-image-roka img {
-  width: 100%;
-  border-radius: 10px;
-  object-fit: cover;
+  height: 500px;
 }
-.course-rating-roka i{
-color: #0ab99d;
-}
-/* العنوان والتقييم */
-.course-title-roka h4 {
+.course1-title-roka {
   color: #0e2a46;
-  font-weight: 600;
-  margin-bottom: 8px;
+  font-size: 47px;
+  line-height: 1.2;
+}
+
+.course-rating-roka i {
+  color: #0ab99d;
+}
+
+
+.meta-item span {
+  font-size: 16px;
+  color: #555;
 }
 
 .course-rating-roka span {
   color: #555;
-  font-size: 14px;
-  margin-left: 5px;
+  font-size: 18px;
 }
 
-/* الأزرار (Tabs) */
-.course-tabs-roka {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.course-tabs-roka button {
-  background-color: transparent;
-  border: 1.5px solid #0ab99d;
-  color: #0ab99d;
-  padding: 8px 18px;
-  border-radius: 10px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.course-tabs-roka button.active,
-.course-tabs-roka button:hover {
-  background-color: #0ab99d;
-  color: #fff;
-}
-
-/* النصوص */
-.course-content-roka h5 {
+.course1-content-roka h5 {
   color: #0e2a46;
-  font-weight: 600;
-  margin-top: 25px;
-  margin-bottom: 10px;
+
+  font-size: 20px;
+
+  text-transform: uppercase;
+  font-family: "Epilogue", sans-serif;
 }
 
-/* الشريط الجانبي */
-.course-sidebar-roka {
-  background-color: #fff;
-  border: 1px solid #eee;
+.course1-content-roka p {
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 32px;
+  color: #333931;
 }
-.course-sidebar-roka img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-  object-fit: cover;
-}
-.course-info-roka {
-   display: flex;
-  justify-content: space-between; 
-  align-items: center;
 
 
+.course-sidebar-roka p {
+  color: #0e2a46;
+  font-size: 16px;
 }
-.course-price-roka {
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-    text-align: right;
-  margin-bottom: 6px;
-  
-}
-.course-label-roka{
-font-size: 18px;
 
+
+.course-label-roka {
+  font-size: 18px;
 }
 .current-price-roka {
   color: #292c2c;
@@ -94,28 +61,28 @@ font-size: 18px;
 }
 .old-price-roka {
   color: #353434;
-  font-size: 15px;
+  font-size: 18px;
   text-decoration: line-through;
 }
 
- .guarantee-text-roka {
-  font-size: 14px;
-  font-weight: 550;
-} 
+.ticketbtn {
+  width: 100%;
 
-/* القائمة */
+  font-weight: 600;
+  text-transform: capitalize;
+  justify-content: center;
+}
+
 .course-sidebar-roka ul li {
   display: flex;
-  justify-content: space-between; 
+  justify-content: space-between;
   align-items: center;
-  font-size: 14px;
+  font-size: 16px;
   margin-bottom: 6px;
-  color: #444;
- gap: 40px; 
- padding-top: 20px;
-}
-.course-sidebar-roka ul li strong {
-  font-weight: 600;
+  color: #4d5756;
+  gap: 40px;
+  padding-top: 20px;
+  text-transform: capitalize;
 }
 
 /* Responsive */

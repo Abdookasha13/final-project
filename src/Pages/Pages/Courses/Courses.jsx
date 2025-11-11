@@ -32,6 +32,7 @@ function Courses() {
                 timestamp={formatTime(course.createdAt)}
                 studentsCount={course.studentsCount}
                 courseId={course._id}
+                bgColor={"#f8f9fa"}
               />
             </div>
           </Link>
