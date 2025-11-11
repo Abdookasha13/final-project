@@ -9,6 +9,7 @@
 .coursecard-img img {
   width: 100%;
   border-radius: 5px;
+  height: 250px;
   transition: transform 0.5s ease;
   object-fit: cover;
 }

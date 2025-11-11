@@ -1,9 +1,33 @@
-import React from "react";
 import "./CourseCard.css";
 
 import { BsCart3 } from "react-icons/bs";
+import { FaEdit, FaTrash } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import handleDeleteCourse from "../../utilities/handleDeleteCourse";
 
-const CourseCard = ({ imgSrc, title }) => {
+const CourseCard = ({
+  imgSrc,
+  title,
+  courseId,
+  showInstructorButtons = false,
+  price,
+  discountPrice,
+  lessonsCount,
+  timestamp,
+  studentsCount,
+  onDelete,
+}) => {
+  const navigate = useNavigate();
+
+  const handleEdit = () => {
+    navigate(`/instructor/edit/course/${courseId}`);
+  };
+
+  const handleDelete = () => {
+    if (window.confirm("Are you sure you want to delete this course?")) {
+      handleDeleteCourse(courseId, onDelete);
+    }
+  };
   return (
     <>
       <div className="coursecard-item px-2 py-3 bg-light ">
@@ -35,15 +59,15 @@ const CourseCard = ({ imgSrc, title }) => {
           >
             <span>
               {" "}
-              <i className="fa-regular fa-file-lines"></i>Lesson 10
+              <i className="fa-regular fa-file-lines"></i>Lesson {lessonsCount}
             </span>
             <span>
               {" "}
-              <i className="fa-sharp fa-regular fa-clock"></i> 19h 30m
+              <i className="fa-sharp fa-regular fa-clock"></i> {timestamp}
             </span>
             <span>
               {" "}
-              <i class="fa-regular fa-user"></i> Students 20+
+              <i className="fa-regular fa-user"></i> Students {studentsCount}
             </span>
           </div>
           <div className="coursecard-teacherimg">
@@ -52,12 +76,28 @@ const CourseCard = ({ imgSrc, title }) => {
           </div>
           <div className="coursecard-itemprice d-flex flex-row justify-content-between">
             <span>
-              <i>60$</i> 120{" "}
+              <i>{price}$</i> {discountPrice}
             </span>
             <a href="">
               <BsCart3 color="#0e2a46" fontSize={"20px"} /> Add to cart
             </a>
           </div>
+          {showInstructorButtons && (
+            <div className="d-flex justify-content-end gap-2 mt-3">
+              <button
+                className="btn btn-sm btn-outline-primary"
+                onClick={handleEdit}
+              >
+                <FaEdit /> Edit
+              </button>
+              <button
+                className="btn btn-sm btn-outline-danger"
+                onClick={handleDelete}
+              >
+                <FaTrash /> Delete
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </>

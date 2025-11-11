@@ -2,7 +2,10 @@ import { NavLink, useLocation } from "react-router-dom";
 import "./HeaderSection.css";
 export default function HeaderSection() {
   const { pathname } = useLocation();
-  const headTitle = pathname.slice(1).replaceAll("/", " ");
+  const parts = pathname.slice(1).split("/");
+
+  if (parts.length > 2) parts.pop();
+  const headTitle = parts.join(" ");
 
   return (
     <div className="header-section">

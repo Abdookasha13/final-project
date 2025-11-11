@@ -12,6 +12,13 @@ import BlogSidebar from "./Pages/Blog/BlogSidebar/BlogSidebar";
 
 import TeacherDetails from "./Pages/Pages/TeacherDetails/TeacherDetails";
 import Courses from "./Pages/Pages/Courses/Courses";
+import Event from "./Pages/Pages/Event/Event";
+import FAQ from "./Pages/Pages/FAQ/FAQ";
+import Testimonial from "./Pages/Pages/Testimonial/Testimonial";
+import Registration from "./Pages/Pages/Registration/Registration";
+import CourseDetails from "./Pages/Pages/CourseDetails/CourseDetails";
+import EventDetails from "./Pages/Pages/EventDetails/EventDetails";
+import SignIN from "./Pages/Pages/SignIN/SignIN"
 
 function Routess() {
   return (
@@ -29,7 +36,13 @@ function Routess() {
         <Route path="/blog/details" element={<BlogDetails />} />
         <Route path="/teacher/details" element={<TeacherDetails />} />
         <Route path="/courses" element={<Courses />} />
-
+        <Route path="/events" element={<Event />} />
+        <Route path="/faqs" element={<FAQ />} />
+        <Route path="/testimonial" element={<Testimonial />} />
+        <Route path="/register" element={<Registration />} />
+        <Route path="/course/details/:courseId" element={<CourseDetails />} />
+        <Route path="/event/details" element={<EventDetails />} />
+        <Route path="/sign/in" element={<SignIN />} />
       </Routes>
     </>
   );

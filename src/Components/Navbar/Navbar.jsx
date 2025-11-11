@@ -76,7 +76,7 @@ function Navbar() {
                           <NavLink to="/courses">Courses</NavLink>
                         </li>
                         <li>
-                          <NavLink to="/">Course Details</NavLink>
+                          <NavLink to="/course/details">Course Details</NavLink>
                         </li>
                         <li>
                           <NavLink to="/teacher">Teacher</NavLink>
@@ -87,18 +87,18 @@ function Navbar() {
                           </NavLink>
                         </li>
                         <li>
-                          <NavLink to="/">Event</NavLink>
+                          <NavLink to="/events">Event</NavLink>
                         </li>
                       </div>
                       <div>
                         <li>
-                          <NavLink to="/">Event Details</NavLink>
+                          <NavLink to="/event/details">Event Details</NavLink>
                         </li>
                         <li>
                           <NavLink to="/">Checkout</NavLink>
                         </li>
                         <li>
-                          <NavLink to="/">Testimonial</NavLink>
+                          <NavLink to="/testimonial">Testimonial</NavLink>
                         </li>
                         <li>
                           <NavLink to="/">Price</NavLink>
@@ -106,29 +106,25 @@ function Navbar() {
                         <li>
                           <NavLink to="/">Cart</NavLink>
                         </li>
-                        <li>
-                          <NavLink to="/">Student Registration 01</NavLink>
-                        </li>
                       </div>
 
                       <div>
                         <li>
-                          <NavLink to="/">Student Registration 02</NavLink>
+                          <NavLink to="/register">Registration</NavLink>
                         </li>
                         <li>
-                          <NavLink to="/">Instructor Registration</NavLink>
+                          <NavLink to="/faqs">Faq</NavLink>
                         </li>
                         <li>
-                          <NavLink to="/">Faq</NavLink>
-                        </li>
-                        <li>
-                          <NavLink to="/">Sign In</NavLink>
-                        </li>
-                        <li>
-                          <NavLink to="/">Sign Up</NavLink>
+                          <NavLink to="/sign/in">Sign In</NavLink>
                         </li>
                         <li>
                           <NavLink to="/">Error</NavLink>
+                        </li>
+                        <li>
+                          <NavLink to="/instructor/dashboard">
+                            Instructor Dashboard
+                          </NavLink>
                         </li>
                       </div>
                     </ul>

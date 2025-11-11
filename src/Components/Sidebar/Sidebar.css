@@ -9,7 +9,7 @@
   max-width: 450px;
   transform: translateX(100%);
   transition: transform 0.7s;
-  z-index: 1050;
+  z-index: 1999;
 }
 
 .top-sid-bar img {

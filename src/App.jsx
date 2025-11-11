@@ -1,16 +1,29 @@
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, useLocation } from "react-router-dom";
 import Layout from "./Components/Layout/Layout";
 import Routess from "./Routes";
+import InsDahRoutes from "./Components/InsDashComponents/InsDahRoutes";
 
-function App() {
+function AppContent() {
+  const { pathname } = useLocation();
+
   return (
     <>
-      <BrowserRouter>
+      {!pathname.startsWith("/instructor") ? (
         <Layout>
           <Routess />
         </Layout>
-      </BrowserRouter>
+      ) : (
+        <InsDahRoutes />
+      )}
     </>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <AppContent />
+    </BrowserRouter>
   );
 }
 
