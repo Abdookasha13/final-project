@@ -7,7 +7,9 @@ const ServiceCard = ({ icon, title, description }) => {
       <div className="icon-wrapper-roka mx-auto mb-3">{icon}</div>
       <h3 className="service-title-roka mb-2">{title}</h3>
       <p className="service-desc-roka mb-4">{description}</p>
-      <Button >View Details</Button>
+      <div className="mx-auto" style={{ width: "fit-content" }}>
+        <Button>View Details</Button>
+      </div>
     </div>
   );
 };

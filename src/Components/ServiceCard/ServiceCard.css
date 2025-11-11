@@ -4,8 +4,13 @@
 } */
 .service-card-roka {
   background-color: #f2f2f2;
-
-
+  border-radius: 10px;
+  padding: 40px 20px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
 }
 
 .service-title-roka {
@@ -20,3 +25,12 @@
   line-height: 1.6;
 }
 
+.service-card-roka {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card-roka:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
