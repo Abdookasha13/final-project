@@ -16,6 +16,7 @@ import Testimonial from "./Pages/Pages/Testimonial/Testimonial";
 import Registration from "./Pages/Pages/Registration/Registration";
 import CourseDetails from "./Pages/Pages/CourseDetails/CourseDetails";
 import EventDetails from "./Pages/Pages/EventDetails/EventDetails";
+import SignIN from "./Pages/Pages/SignIN/SignIN"
 
 function Routess() {
   return (
@@ -38,6 +39,7 @@ function Routess() {
         <Route path="/register" element={<Registration />} />
         <Route path="/course/details/:courseId" element={<CourseDetails />} />
         <Route path="/event/details" element={<EventDetails />} />
+        <Route path="/sign/in" element={<SignIN />} />
       </Routes>
     </>
   );

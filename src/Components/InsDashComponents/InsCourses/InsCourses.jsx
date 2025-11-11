@@ -7,7 +7,8 @@ const InsCourses = () => {
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {
-    getCoursesByInsId("690e0b32a817c5867a43c282", setCourses);
+    const user = JSON.parse(localStorage.getItem("user"));
+    getCoursesByInsId(user._id, setCourses);
   }, []);
   const handleDeleteSuccess = (courseId) => {
     setCourses(courses.filter((c) => c._id !== courseId));

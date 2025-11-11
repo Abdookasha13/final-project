@@ -219,9 +219,8 @@ const Registration = () => {
         {/* IMAGE SECTION */}
         <div
           className="col-lg-6 d-none d-lg-block p-0 m-0 bg-light"
-          style={{ overflow: "hidden" }}
         >
-          <img src="Images/girlll.svg" alt="" style={{ marginTop: "100px" }} />
+          <img src="Images/signup.svg" alt="" style={{ width: "100%", height: "100%", objectFit: "contain" }} />
         </div>
       </div>
     </div>
