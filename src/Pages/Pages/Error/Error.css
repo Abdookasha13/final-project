@@ -1,0 +1,17 @@
+/* لضبط المسافات وتوسيط المحتوى أكثر على الموبايل */
+@media (max-width: 768px) {
+  .container {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+  h1 {
+    font-size: 1.8rem;
+  }
+}
+
+/* تظليل الزر عند المرور عليه */
+.btn-success:hover {
+  box-shadow: 0 4px 15px rgba(0, 196, 140, 0.3);
+  transform: translateY(-2px);
+  transition: 0.2s ease-in-out;
+}
