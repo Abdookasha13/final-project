@@ -16,9 +16,10 @@ import Testimonial from "./Pages/Pages/Testimonial/Testimonial";
 import Registration from "./Pages/Pages/Registration/Registration";
 import CourseDetails from "./Pages/Pages/CourseDetails/CourseDetails";
 import EventDetails from "./Pages/Pages/EventDetails/EventDetails";
-import SignIN from "./Pages/Pages/SignIN/SignIN"
+import SignIN from "./Pages/Pages/SignIN/SignIN";
 import BlogSidebar from "./Pages/Blog/BlogSidebar/BlogSidebar";
-
+import Price from "./Pages/Pages/Price/Price";
+import ErrorPage from "./Pages/Pages/Error/Error";
 function Routess() {
   return (
     <>
@@ -42,6 +43,8 @@ function Routess() {
         <Route path="/course/details/:courseId" element={<CourseDetails />} />
         <Route path="/event/details" element={<EventDetails />} />
         <Route path="/sign/in" element={<SignIN />} />
+        <Route path="/price" element={<Price />} />
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
     </>
   );
