@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import CourseCard from "../../../Components/coursecard/CourseCard";
+import CourseCard from "../../../Components/CourseCard/CourseCard";
 import "./Courses.css";
 import getAllCourses from "../../../utilities/getAllCourses";
 import formatTime from "../../../utilities/formatTime";
@@ -27,7 +27,7 @@ function Courses() {
             to={`/course/details/${course._id}`}
             style={{ textDecoration: "none" }}
           >
-            <div className="bg-light rounded-3 h-100 p-2">
+          
               <CourseCard
                 imgSrc={course.thumbnailUrl}
                 title={course.title}
@@ -39,7 +39,7 @@ function Courses() {
                 courseId={course._id}
                 bgColor={"#f8f9fa"}
               />
-            </div>
+        
           </Link>
         </div>
       ))}
