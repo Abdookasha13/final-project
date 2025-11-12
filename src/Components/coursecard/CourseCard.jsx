@@ -16,6 +16,7 @@ const CourseCard = ({
   timestamp,
   studentsCount,
   onDelete,
+  bgColor
 }) => {
   const navigate = useNavigate();
 
@@ -30,7 +31,7 @@ const CourseCard = ({
   };
   return (
     <>
-      <div className="coursecard-item px-2 py-3 bg-light ">
+      <div className="coursecard-item px-2 py-3 "style={{backgroundColor:bgColor}}>
         <div className="coursecard-img ">
           <a href="#">
             {" "}
