@@ -9,9 +9,22 @@ import { IoSettingsOutline } from "react-icons/io5";
 import { SlLogout } from "react-icons/sl";
 import { RiLogoutCircleLine } from "react-icons/ri";
 import { ToastContainer, Zoom } from "react-toastify";
+import { useEffect, useState } from "react";
+import handleGetUserById from "../../../utilities/handleGetUserById";
 
 const InstructorDashboard = () => {
   const location = useLocation();
+    const [instructor, setInstructor] = useState(null);
+ useEffect(() => {
+ 
+      const user = JSON.parse(localStorage.getItem("user"));
+      const userId = user?._id;
+
+handleGetUserById(userId,setInstructor)
+  
+
+
+}, []);
 
   const pageTitles = {
     "/instructor/dashboard": "Dashboard",
@@ -153,7 +166,7 @@ const InstructorDashboard = () => {
               )}
 
               <img
-                src="https://media.istockphoto.com/id/1468138682/photo/happy-elementary-teacher-in-front-of-his-students-in-the-classroom.jpg?s=612x612&w=0&k=20&c=E6m0JNBcrQBkPl0dr5CcTrYZiUm6fwMmgaiQfR8uW7s="
+               src={instructor?.profileImage }
                 alt="Instructor"
                 className="rounded-circle"
                 width="40"
