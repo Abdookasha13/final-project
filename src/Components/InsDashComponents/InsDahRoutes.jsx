@@ -6,6 +6,7 @@ import AddCourse from "./AddCourse/AddCourse ";
 import AddLesson from "./AddLesson/AddLesson";
 import InsProfile from "./InsProfile/InsProfile";
 import InsSettings from "./InsSettings/InsSettings";
+import InsLessons from "./InsLessons/InsLessons";
 
 const InsDahRoutes = () => {
   return (
@@ -18,6 +19,8 @@ const InsDahRoutes = () => {
         <Route path="profile" element={<InsProfile />} />
         <Route path="settings" element={<InsSettings />} />
         <Route path="edit/course/:id" element={<AddCourse />} />
+        <Route path="lessons/:courseId" element={<InsLessons />} />
+        <Route path="edit/lesson/:lessonId" element={<AddLesson />} />
       </Route>
     </Routes>
   );

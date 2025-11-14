@@ -9,9 +9,22 @@ import { IoSettingsOutline } from "react-icons/io5";
 import { SlLogout } from "react-icons/sl";
 import { RiLogoutCircleLine } from "react-icons/ri";
 import { ToastContainer, Zoom } from "react-toastify";
+import { useEffect, useState } from "react";
+import handleGetUserById from "../../../utilities/handleGetUserById";
 
 const InstructorDashboard = () => {
   const location = useLocation();
+  const [instructor, setInstructor] = useState(null);
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const userId = user?._id;
+    const fetchUser = async () => {
+      const data = await handleGetUserById(userId);
+      setInstructor(data);
+    };
+
+    fetchUser();
+  }, []);
 
   const pageTitles = {
     "/instructor/dashboard": "Dashboard",
@@ -34,7 +47,9 @@ const InstructorDashboard = () => {
   };
   const pageTitle = getPageTitle();
 
-  const showSearch = location.pathname.startsWith("/instructor/courses");
+  const showSearch = location.pathname.startsWith("/instructor/courses") ||
+  location.pathname.startsWith("/instructor/lessons") ||
+  location.pathname.startsWith("/instructor/course/"); 
 
   const navLinks = [
     {
@@ -138,9 +153,13 @@ const InstructorDashboard = () => {
               {showSearch && (
                 <>
                   <Link
-                    to="/instructor/add/course"
-                    className="btn btn-sm btn-primary"
-                    style={{ width: "100px" }}
+                    to={
+      location.pathname.startsWith("/instructor/courses")
+        ? "/instructor/add/course"
+        : `/instructor/add/lessons` 
+    }
+                    className="btn btn-sm "
+                    style={{ width: "100px",backgroundColor:"#0ab99d",color:"white" }}
                   >
                     Add new
                   </Link>
@@ -153,7 +172,7 @@ const InstructorDashboard = () => {
               )}
 
               <img
-                src="https://media.istockphoto.com/id/1468138682/photo/happy-elementary-teacher-in-front-of-his-students-in-the-classroom.jpg?s=612x612&w=0&k=20&c=E6m0JNBcrQBkPl0dr5CcTrYZiUm6fwMmgaiQfR8uW7s="
+                src={instructor?.profileImage}
                 alt="Instructor"
                 className="rounded-circle"
                 width="40"

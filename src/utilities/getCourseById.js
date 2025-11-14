@@ -1,14 +1,16 @@
-import axios from 'axios'
-import React from 'react'
+import axios from "axios";
+import React from "react";
 
-const getCourseById = async(courseId,setCourse) => {
- try{
+const getCourseById = async (courseId) => {
+  try {
     console.log("Course ID:", courseId);
-    const res= await axios.get(`http://localhost:1911/courses/${courseId}`)
-    setCourse(res.data)
- }catch (err) {
-    console.error("Error fetching course:", err);
-    setCourse({})
-}}
+    const res = await axios.get(`http://localhost:1911/courses/${courseId}`);
 
-export default getCourseById
+    return res.data
+  } catch (err) {
+    console.error("Error fetching course:", err);
+    
+  }
+};
+
+export default getCourseById;

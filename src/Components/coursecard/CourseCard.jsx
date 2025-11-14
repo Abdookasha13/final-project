@@ -9,13 +9,19 @@ const CourseCard = ({
   imgSrc,
   title,
   courseId,
-  showInstructorButtons = false,
+  showInstructorActions = false,
   price,
   discountPrice,
   lessonsCount,
-  timestamp,
+  courseDuration,
   studentsCount,
   onDelete,
+  insImage,
+  insName,
+  bgColor,
+  category,
+  hideCartButton = false,
+  hideInstructorInfo = false,
   bgColor,
 }) => {
   const navigate = useNavigate();
@@ -29,6 +35,9 @@ const CourseCard = ({
       handleDeleteCourse(courseId, onDelete);
     }
   };
+  const showMyLessons = () => {
+    navigate(`/instructor/lessons/${courseId}`);
+  };
   return (
     <>
       <div
@@ -38,7 +47,7 @@ const CourseCard = ({
         <div className="coursecard-img ">
           <img src={imgSrc} alt="" />
           <div className="coursecard-imgtext">
-            <span>Development</span>
+            <span>{category}</span>
           </div>
         </div>
 
@@ -51,6 +60,56 @@ const CourseCard = ({
             <i className="fa-sharp fa-regular fa-star"></i>
             <span>(4.7)</span>
           </div>
+
+          <div></div>
+          <h4 className="coursecard-title">
+            <a href="#">{title}</a>
+          </h4>
+          <div
+            className="coursecard-iteminfo d-flex flex-row justify-content-between "
+            style={{ borderBottom: "1px dashed black" }}
+          >
+            <span
+              style={{
+                cursor: showInstructorActions ? "pointer" : "default",
+                padding: "5px 10px",
+                borderRadius: "4px",
+                transition: "background 0.2s",
+              }}
+              onClick={() => {
+                if (showInstructorActions) {
+                  showMyLessons();
+                }
+              }}
+            >
+              {" "}
+              <i className="fa-regular fa-file-lines"></i>Lesson {lessonsCount}
+            </span>
+            <span>
+              {" "}
+              <i className="fa-sharp fa-regular fa-clock"></i> {courseDuration}
+            </span>
+            <span>
+              {" "}
+              <i className="fa-regular fa-user"></i> Students {studentsCount}
+            </span>
+          </div>
+          {!hideInstructorInfo && (
+            <div className="coursecard-teacherimg">
+              <img src={insImage} alt="instructor image" />
+              <span>By {insName}</span>
+            </div>
+          )}
+
+          <div className="coursecard-itemprice d-flex flex-row justify-content-between">
+            <span>
+              <i>{price}$</i> {discountPrice}
+            </span>
+            {!hideCartButton && (
+              <a href="">
+                <BsCart3 color="#0e2a46" fontSize={"20px"} /> Add to cart
+              </a>
+            )}
           <h4 className="coursecard-title">{title}</h4>
           <div className="">
             <div
@@ -84,10 +143,10 @@ const CourseCard = ({
               </a>
             </div>
           </div>
-          {showInstructorButtons && (
+          {showInstructorActions && (
             <div className="d-flex justify-content-end gap-2 mt-3">
               <button
-                className="btn btn-sm btn-outline-primary"
+                className="btn btn-sm editbtnn"
                 onClick={handleEdit}
               >
                 <FaEdit /> Edit

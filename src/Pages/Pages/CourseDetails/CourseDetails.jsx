@@ -24,6 +24,7 @@ const CourseDetails = () => {
   useEffect(() => {
     getCourseById(courseId, setCourse, setLessons);
   }, [courseId]);
+  // console.log(lessons);
 
   if (!course) return <div className="text-center p-5">Loading...</div>;
 
@@ -37,6 +38,8 @@ const CourseDetails = () => {
     isPreview: lesson.isPreview,
     order: lesson.order,
   }));
+  // console.log(course.instructor.profileImage);
+  // console.log(lessons);
 
   const renderTabContent = {
     Overview: (
@@ -52,7 +55,22 @@ const CourseDetails = () => {
         <VideoPlayer videos={videoList} />
       </div>
     ),
-    Instructor: <div className="px-4 py-5">Instructor Info Here...</div>,
+    Instructor: (
+      <div className="border border-top-0 border-light-subtle px-4 py-5 d-flex gap-4">
+        <div className="insimage ">
+          <img
+            src={course.instructor.profileImage}
+            alt=""
+            style={{ width: "100px", height: "100px", borderRadius: "50%" }}
+          />
+        </div>
+        <div className="insinfo ">
+          <h4>{course.instructor.name}</h4>
+          <p>{course.instructor.expertise}</p>
+          <p>Experience:{course.instructor.experience} year</p>
+        </div>
+      </div>
+    ),
     Reviews: <div className="px-4 py-5">Reviews Here...</div>,
   };
 
@@ -80,7 +98,7 @@ const CourseDetails = () => {
             {tabs.map((tab) => {
               const Icon = tab.icon;
               return (
-                <li key={tab.name} className="nav-item w-25 fw-bold " >
+                <li key={tab.name} className="nav-item w-25 fw-bold ">
                   <button
                     className="nav-link bg-light w-100"
                     style={{
@@ -111,7 +129,9 @@ const CourseDetails = () => {
             <div className="course-info-roka d-flex justify-content-between ">
               <p className="course-label-roka">Course Fee</p>
               <div className="course-price-roka d-flex gap-2">
-                <span className="current-price-roka fw-bold">${course.price}</span>
+                <span className="current-price-roka fw-bold">
+                  ${course.price}
+                </span>
                 <span className="old-price-roka">${course.discountPrice}</span>
               </div>
             </div>

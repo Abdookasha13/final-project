@@ -1,0 +1,51 @@
+   
+        .lesson-card {
+          border: 1px solid #e9ecef;
+          border-radius: 10px;
+          transition: all 0.2s ease;
+          background-color: white;
+        }
+        .lesson-card:hover {
+          border-color: #0ab99d;
+          box-shadow: 0 4px 12px rgba(10, 185, 157, 0.15);
+        }
+        .lesson-number {
+          width: 35px;
+          height: 35px;
+          background: #0ab99d;
+          color: white;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: 700;
+        }
+        .action-btn {
+         
+          padding: 8px 14px;
+          border-radius: 8px;
+          transition: all 0.2s;
+          cursor: pointer;
+          font-weight: 500;
+        }
+        .edit-btn {
+         border: 1px solid  #0ab99d;
+         color: #0ab99d;
+         
+        }
+        .edit-btn:hover {
+          background: #099580;
+         
+          color: white;
+        }
+        .delete-btn {
+        border: 1px solid   #dc3545;
+          color:  #dc3545;
+         
+        }
+        .delete-btn:hover {
+          background: #dc3545;
+          color: white;
+        
+        }
+    
