@@ -101,10 +101,10 @@ function Navbar() {
                           <NavLink to="/testimonial">Testimonial</NavLink>
                         </li>
                         <li>
-                          <NavLink to="/">Price</NavLink>
+                          <NavLink to="/price">Price</NavLink>
                         </li>
                         <li>
-                          <NavLink to="/">Cart</NavLink>
+                          <NavLink to="/cart">Cart</NavLink>
                         </li>
                       </div>
 
@@ -119,7 +119,7 @@ function Navbar() {
                           <NavLink to="/sign/in">Sign In</NavLink>
                         </li>
                         <li>
-                          <NavLink to="/">Error</NavLink>
+                          <NavLink to="*">Error</NavLink>
                         </li>
                         <li>
                           <NavLink to="/instructor/dashboard">

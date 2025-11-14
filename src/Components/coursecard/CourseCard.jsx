@@ -22,6 +22,7 @@ const CourseCard = ({
   category,
   hideCartButton = false,
   hideInstructorInfo = false,
+  bgColor,
 }) => {
   const navigate = useNavigate();
 
@@ -44,10 +45,7 @@ const CourseCard = ({
         style={{ backgroundColor: bgColor }}
       >
         <div className="coursecard-img ">
-          <a href="#">
-            {" "}
-            <img src={imgSrc} alt="" />
-          </a>
+          <img src={imgSrc} alt="" />
           <div className="coursecard-imgtext">
             <span>{category}</span>
           </div>
@@ -62,6 +60,7 @@ const CourseCard = ({
             <i className="fa-sharp fa-regular fa-star"></i>
             <span>(4.7)</span>
           </div>
+
           <div></div>
           <h4 className="coursecard-title">
             <a href="#">{title}</a>
@@ -111,6 +110,38 @@ const CourseCard = ({
                 <BsCart3 color="#0e2a46" fontSize={"20px"} /> Add to cart
               </a>
             )}
+          <h4 className="coursecard-title">{title}</h4>
+          <div className="">
+            <div
+              className="coursecard-iteminfo d-flex flex-row justify-content-between "
+              style={{ borderBottom: "1px dashed black" }}
+            >
+              <span>
+                {" "}
+                <i className="fa-regular fa-file-lines"></i>Lesson{" "}
+                {lessonsCount}
+              </span>
+              <span>
+                {" "}
+                <i className="fa-sharp fa-regular fa-clock"></i> {timestamp}
+              </span>
+              <span>
+                {" "}
+                <i className="fa-regular fa-user"></i> Students {studentsCount}
+              </span>
+            </div>
+            <div className="coursecard-teacherimg">
+              <img src="/Images/avatar1.png" alt="" />
+              <span>By Angela in Development</span>
+            </div>
+            <div className="coursecard-itemprice d-flex flex-row justify-content-between">
+              <span>
+                <i>{price}$</i> {discountPrice}
+              </span>
+              <a href="">
+                <BsCart3 color="#0e2a46" fontSize={"20px"} /> Add to cart
+              </a>
+            </div>
           </div>
           {showInstructorActions && (
             <div className="d-flex justify-content-end gap-2 mt-3">

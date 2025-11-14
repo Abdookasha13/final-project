@@ -1,0 +1,108 @@
+/* ===== General Card Styles ===== */
+.card {
+  border: none;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ===== Header Sections ===== */
+.bg-first-header-plan {
+  background-color: #f8b400; /* orange header */
+  text-align: center;
+  padding: 12px 0;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.bg-second-header-plan {
+  background-color: #00c48c; /* teal header */
+  text-align: center;
+  padding: 12px 0;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* ===== Card Body Backgrounds ===== */
+.bg-first-plan {
+  background-color: #f6f8fa; /* light background */
+  min-height: 650px;
+  position: relative;
+}
+
+.bg-second-plan {
+  background-color: #012b45; /* dark navy */
+  color: white;
+  min-height: 550px;
+  position: relative;
+}
+
+/* ===== Circles ===== */
+.small-circle-inside-plan,
+.small-circle-inside-second-plan {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background-color: white;
+  border: 2px solid q #f8b400;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+.big-circle-inside-plan,
+.big-circle-inside-second-plan {
+  width: 400px;
+  height: 200px;
+  border-radius: 100% 100% 0 0;
+  position: absolute;
+  top: 0;
+  
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #00c48c;
+  z-index: 1;
+}
+
+/* ===== Top Offset Utility ===== */
+.top-60 {
+  top: 60%;
+}
+
+/* ===== Text Sizes ===== */
+.fs-65 {
+  font-size: 0.9rem;
+}
+
+/* ===== Buttons ===== */
+.bg-primary-Educate {
+  background-color: #00c48c !important;
+}
+
+.bg-primary-Educate:hover {
+  background-color: #00a877 !important;
+}
+
+.btn {
+  border-radius: 6px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* ===== Responsive Adjustments ===== */
+@media (max-width: 992px) {
+  .bg-first-plan,
+  .bg-second-plan {
+    min-height: 600px;
+  }
+
+  .small-circle-inside-plan,
+  .small-circle-inside-second-plan {
+    top: 80px;
+  }
+
+  .top-60 {
+    top: 63%;
+  }
+}
