@@ -22,7 +22,12 @@ const CourseDetails = () => {
   const [activeTab, setActiveTab] = useState("Overview");
 
   useEffect(() => {
-    getCourseById(courseId, setCourse, setLessons);
+    const fetchData = async () => {
+      const data = await getCourseById(courseId);
+      setCourse(data);
+      setLessons(data.lessons);
+    };
+    fetchData();
   }, [courseId]);
   // console.log(lessons);
 
