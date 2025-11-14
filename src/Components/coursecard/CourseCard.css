@@ -69,7 +69,7 @@
   font-weight: 500;
   color: #4d5756;
 }
-.coursecard-title {
+.coursecard-title a {
   padding-bottom: 5px;
   font-weight: 600;
   text-transform: capitalize;
@@ -79,7 +79,7 @@
   color: #0e2a46;
   height: 65px;
 }
-.coursecard-title:hover{
+.coursecard-title a:hover{
   color: #0ab99d;
 }
 
