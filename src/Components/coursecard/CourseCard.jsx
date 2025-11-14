@@ -9,17 +9,17 @@ const CourseCard = ({
   imgSrc,
   title,
   courseId,
-  showInstructorButtons = false,
+  showInstructorActions = false,
   price,
   discountPrice,
   lessonsCount,
-  timestamp,
+  courseDuration,
   studentsCount,
   onDelete,
   insImage,
+  insName,
   bgColor,
   category,
-  insName,
   hideCartButton = false,
   hideInstructorInfo = false,
 }) => {
@@ -34,7 +34,7 @@ const CourseCard = ({
       handleDeleteCourse(courseId, onDelete);
     }
   };
-  const showmylessonsmf = () => {
+  const showMyLessons = () => {
     navigate(`/instructor/lessons/${courseId}`);
   };
   return (
@@ -72,14 +72,14 @@ const CourseCard = ({
           >
             <span
               style={{
-                cursor: showInstructorButtons ? "pointer" : "default",
+                cursor: showInstructorActions ? "pointer" : "default",
                 padding: "5px 10px",
                 borderRadius: "4px",
                 transition: "background 0.2s",
               }}
               onClick={() => {
-                if (showInstructorButtons) {
-                  showmylessonsmf();
+                if (showInstructorActions) {
+                  showMyLessons();
                 }
               }}
             >
@@ -88,7 +88,7 @@ const CourseCard = ({
             </span>
             <span>
               {" "}
-              <i className="fa-sharp fa-regular fa-clock"></i> {timestamp}
+              <i className="fa-sharp fa-regular fa-clock"></i> {courseDuration}
             </span>
             <span>
               {" "}
@@ -97,7 +97,7 @@ const CourseCard = ({
           </div>
           {!hideInstructorInfo && (
             <div className="coursecard-teacherimg">
-              <img src={insImage} alt="" />
+              <img src={insImage} alt="instructor image" />
               <span>By {insName}</span>
             </div>
           )}
@@ -112,10 +112,10 @@ const CourseCard = ({
               </a>
             )}
           </div>
-          {showInstructorButtons && (
+          {showInstructorActions && (
             <div className="d-flex justify-content-end gap-2 mt-3">
               <button
-                className="btn btn-sm btn-outline-primary"
+                className="btn btn-sm editbtnn"
                 onClick={handleEdit}
               >
                 <FaEdit /> Edit

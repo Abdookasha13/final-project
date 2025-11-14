@@ -1,22 +1,21 @@
-import axios from 'axios'
-import React from 'react'
+import axios from "axios";
 
-const handleGetUserById = async (userId, setUser) => {
+const handleGetUserById = async (userId) => {
   try {
     const token = localStorage.getItem("token");
     const response = await axios.get(
       `http://localhost:1911/getUserById/${userId}`,
       {
         headers: {
-          Authorization: `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       }
     );
-    setUser(response.data);
+    return response.data;
   } catch (err) {
     console.error("Error fetching user:", err);
-    setUser({});
+    throw err;
   }
 };
 
-export default handleGetUserById
+export default handleGetUserById;

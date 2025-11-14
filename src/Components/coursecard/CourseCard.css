@@ -3,6 +3,14 @@
   padding: 0;
   box-sizing: border-box;
 }
+.editbtnn{
+  color: #0ab99d;
+  border: 1px solid #0ab99d;
+}
+.editbtnn:hover{
+  background-color: #0ab99d;
+  color: white;
+}
 /* body{
      background-color: #f2f2f2;
 } */

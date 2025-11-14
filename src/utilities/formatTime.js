@@ -4,7 +4,7 @@ const formatTime = (lessons) => {
   }
 
   const totalMinutes = lessons.reduce((sum, lesson) => {
-    const duration = parseInt(lesson.duration) || 0;
+    const duration = lesson.duration || 0;
     return sum + duration;
   }, 0);
 

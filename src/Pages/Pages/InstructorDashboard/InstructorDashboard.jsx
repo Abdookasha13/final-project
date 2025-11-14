@@ -14,17 +14,17 @@ import handleGetUserById from "../../../utilities/handleGetUserById";
 
 const InstructorDashboard = () => {
   const location = useLocation();
-    const [instructor, setInstructor] = useState(null);
- useEffect(() => {
- 
-      const user = JSON.parse(localStorage.getItem("user"));
-      const userId = user?._id;
+  const [instructor, setInstructor] = useState(null);
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const userId = user?._id;
+    const fetchUser = async () => {
+      const data = await handleGetUserById(userId);
+      setInstructor(data);
+    };
 
-handleGetUserById(userId,setInstructor)
-  
-
-
-}, []);
+    fetchUser();
+  }, []);
 
   const pageTitles = {
     "/instructor/dashboard": "Dashboard",
@@ -47,7 +47,9 @@ handleGetUserById(userId,setInstructor)
   };
   const pageTitle = getPageTitle();
 
-  const showSearch = location.pathname.startsWith("/instructor/courses");
+  const showSearch = location.pathname.startsWith("/instructor/courses") ||
+  location.pathname.startsWith("/instructor/lessons") ||
+  location.pathname.startsWith("/instructor/course/"); 
 
   const navLinks = [
     {
@@ -151,9 +153,13 @@ handleGetUserById(userId,setInstructor)
               {showSearch && (
                 <>
                   <Link
-                    to="/instructor/add/course"
-                    className="btn btn-sm btn-primary"
-                    style={{ width: "100px" }}
+                    to={
+      location.pathname.startsWith("/instructor/courses")
+        ? "/instructor/add/course"
+        : `/instructor/add/lessons` 
+    }
+                    className="btn btn-sm "
+                    style={{ width: "100px",backgroundColor:"#0ab99d",color:"white" }}
                   >
                     Add new
                   </Link>
@@ -166,7 +172,7 @@ handleGetUserById(userId,setInstructor)
               )}
 
               <img
-               src={instructor?.profileImage }
+                src={instructor?.profileImage}
                 alt="Instructor"
                 className="rounded-circle"
                 width="40"

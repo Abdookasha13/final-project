@@ -5,6 +5,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import getCoursesByInsId from "../../../utilities/getCoursesByInsId";
 import handleAddLesson from "../../../utilities/handleAddLesson";
 import handleUpdateLesson from "../../../utilities/handleUpdateLesson";
+import Loader from "../../Loader/Loader";
 
 const AddLesson = () => {
   const {
@@ -16,26 +17,24 @@ const AddLesson = () => {
     formState: { errors },
   } = useForm({ mode: "onChange" });
 
-  const { id } = useParams();
+  const { lessonId } = useParams();
 
   const navigate = useNavigate();
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(false);
-  const isEdit = Boolean(id);
+  const isEdit = Boolean(lessonId);
 
   const lessonType = watch("type");
 
-  // ✅ Fetch courses
   useEffect(() => {
-    const fetchcourses=async()=>{
- const user = JSON.parse(localStorage.getItem("user"));
-    if (user?._id) {
- const data= await getCoursesByInsId(user._id);
- setCourses(data)
-    }
-    
-    }
-   fetchcourses() 
+    const fetchcourses = async () => {
+      const user = JSON.parse(localStorage.getItem("user"));
+      if (user?._id) {
+        const data = await getCoursesByInsId(user._id);
+        setCourses(data);
+      }
+    };
+    fetchcourses();
   }, []);
 
   useEffect(() => {
@@ -43,7 +42,7 @@ const AddLesson = () => {
     const fetchLesson = async () => {
       setLoading(true);
       try {
-        const res = await fetch(`http://localhost:1911/getLesson/${id}`);
+        const res = await fetch(`http://localhost:1911/getLesson/${lessonId}`);
         const json = await res.json();
         const lesson = json.data;
         reset({
@@ -62,19 +61,18 @@ const AddLesson = () => {
       }
     };
     fetchLesson();
-  }, [id, isEdit, reset]);
+  }, [lessonId, isEdit, reset]);
 
-  // ✅ Submit handler
   const onSubmit = async (data) => {
     if (isEdit) {
-      await handleUpdateLesson(id, data);
+      await handleUpdateLesson(lessonId, data);
     } else {
       await handleAddLesson(data, reset);
     }
     navigate("/instructor/courses");
   };
 
-  if (loading) return <p className="text-center mt-5">Loading...</p>;
+  if (loading) return <Loader />;
 
   return (
     <div className="container my-3">

@@ -1,5 +1,5 @@
-import axios from 'axios';
-import React from 'react'
+import axios from "axios";
+import React from "react";
 
 const getLessonsByIns = async (instructorId) => {
   try {
@@ -11,9 +11,8 @@ const getLessonsByIns = async (instructorId) => {
     return response.data;
   } catch (error) {
     console.error("Error fetching lessons:", error);
-    return []; // بدل ما ترجع undefined
+    return [];
   }
 };
 
-
-export default getLessonsByIns
+export default getLessonsByIns;

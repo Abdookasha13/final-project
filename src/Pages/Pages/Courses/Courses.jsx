@@ -35,15 +35,13 @@ function Courses() {
                     price={course.price}
                     discountPrice={course.discountPrice}
                     lessonsCount={course.lessonsCount}
-                    timestamp={formatTime(course.lessons)}
+                    courseDuration={formatTime(course.lessons)}
                     studentsCount={course.studentsCount}
                     courseId={course._id}
                     category={course.category.name}
                     insImage={course.instructor.profileImage}
                     insName={course.instructor.name}
                     bgColor={"#f8f9fa"}
-                    hideInstructorInfo={false}
-                    hideCartButton={false}
                   />
                 </div>
               </Link>
