@@ -1,108 +1,161 @@
-/* ===== General Card Styles ===== */
-.card {
-  border: none;
-  border-radius: 10px;
-  overflow: hidden;
-  position: relative;
-}
-
-/* ===== Header Sections ===== */
-.bg-first-header-plan {
-  background-color: #f8b400; /* orange header */
-  text-align: center;
-  padding: 12px 0;
-  font-weight: bold;
-  letter-spacing: 1px;
-}
-
-.bg-second-header-plan {
-  background-color: #00c48c; /* teal header */
-  text-align: center;
-  padding: 12px 0;
-  font-weight: bold;
-  letter-spacing: 1px;
-}
-
-/* ===== Card Body Backgrounds ===== */
-.bg-first-plan {
-  background-color: #f6f8fa; /* light background */
-  min-height: 650px;
-  position: relative;
-}
-
-.bg-second-plan {
-  background-color: #012b45; /* dark navy */
-  color: white;
-  min-height: 550px;
-  position: relative;
-}
-
-/* ===== Circles ===== */
-.small-circle-inside-plan,
-.small-circle-inside-second-plan {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  background-color: white;
-  border: 2px solid q #f8b400;
-  top: 60px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 2;
-}
-
-.big-circle-inside-plan,
-.big-circle-inside-second-plan {
-  width: 400px;
-  height: 200px;
-  border-radius: 100% 100% 0 0;
-  position: absolute;
-  top: 0;
+ .card-basic, .card-standard, .card-premium {
+  max-width: 500px;
+  height: 730px;
+  margin: auto;
   
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #00c48c;
-  z-index: 1;
+ }
+
+  .card-header {
+  background-color: #f2a227;
+  color: white;
+  font-weight: bold;
+ }
+
+
+ .card-standard .card-header {
+  background-color: #0ab99d;
+  
+ }
+
+ .card-body {
+  padding: 0px !important;
+ }
+
+ .card-basic .card-body  ul, .card-standard .card-body  ul, .card-premium .card-body  ul {
+   border-top-right-radius: 50%;
+   border-top-left-radius: 50%;
+   margin-top: -110px !important;
+   z-index: 1;
+   width: 140%;
+   margin-left: -20% !important;
+   position: relative;
+   height: 90%;
+ }
+
+
+ .card-basic .card-body ul ul, .card-standard .card-body ul ul, .card-premium .card-body ul ul {
+  position: relative !important;
+  z-index: 4 !important;
+  width: 60% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  top: 25%;
+  font-size: 1.3em;
+  padding-left: 80px;
+  border-radius: 0% !important;
+  text-align: left;
+ }
+
+ 
+
+ .card-basic, .card-premium {
+  background-color: #0ab99d;
+ } 
+
+ .card-basic ul, .card-premium ul {
+  background-color: #f4f4f4;
+ }
+
+
+ .card-premium h1, .card-basic h1 {
+    border-radius: 50%;
+    height: 130px;
+    position: relative;
+    z-index: 2;
+    font-size: 2rem;
+    color: #f2a227;
+    border: #f2a227 2px solid ;
+    width: 130px;
+    background-color: white;
+    margin: auto;
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+ }
+
+ .card-standard h1 {
+  border-radius: 50%;
+    height: 130px;
+    position: relative;
+    z-index: 2;
+    font-size: 2rem;
+    color: #0ab99d;
+    border: #f2a227 2px solid ;
+    width: 130px;
+    background-color: white;
+    margin: auto;
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+ }
+
+ .card-standard h1 {
+  border-color: #0ab99d !important;
+ }
+
+
+
+
+.button-custimitation {
+  top: -127px;
+    width: 90%;
 }
 
-/* ===== Top Offset Utility ===== */
-.top-60 {
-  top: 60%;
+@media (min-width: 767px) {
+    .button-custimitation {
+      top: -100px;
 }
 
-/* ===== Text Sizes ===== */
-.fs-65 {
-  font-size: 0.9rem;
 }
 
-/* ===== Buttons ===== */
-.bg-primary-Educate {
-  background-color: #00c48c !important;
+
+.responsive-font {
+  font-size: 1.1em !important; /* شاشات صغيرة */
 }
 
-.bg-primary-Educate:hover {
-  background-color: #00a877 !important;
-}
-
-.btn {
-  border-radius: 6px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-}
-
-/* ===== Responsive Adjustments ===== */
-@media (max-width: 992px) {
-  .bg-first-plan,
-  .bg-second-plan {
-    min-height: 600px;
+@media (min-width: 767px) {
+  .responsive-font {
+    font-size: .85em !important; /* شاشات أكبر شوية */
   }
+}
 
-  .small-circle-inside-plan,
-  .small-circle-inside-second-plan {
-    top: 80px;
-  }
-
-  .top-60 {
-    top: 63%;
+@media (min-width: 991px) {
+  .responsive-font {
+    font-size: .7em !important; /* شاشات كبيرة */
   }
 }
+
+
+.card-basic .card-body h5,.card-standard .card-body h5,.card-premium .card-body h5 {
+  font-size: 1em !important;
+}
+
+@media (min-width: 767px) {
+  .card-basic .card-body h5,.card-standard .card-body h5,.card-premium .card-body h5 {
+    font-size: .8em !important;
+  }
+}
+
+@media (min-width: 991px) {
+  .card-basic .card-body h5,.card-standard .card-body h5,.card-premium .card-body h5 {
+    font-size: .7em !important;
+  }
+}
+
+
+.card-standard .card-body {
+  background-color: #f2a227;
+}
+
+.card-standard .button-custimitation {
+  background-color: #f2a227;
+}
+
+.card-standard .card-body ul  {
+  background-color: #0e2a46;
+  color: white;
+}
+
+
