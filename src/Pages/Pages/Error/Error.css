@@ -1,9 +1,5 @@
 /* لضبط المسافات وتوسيط المحتوى أكثر على الموبايل */
 @media (max-width: 768px) {
-  .container {
-    padding-top: 3rem;
-    padding-bottom: 3rem;
-  }
   h1 {
     font-size: 1.8rem;
   }
