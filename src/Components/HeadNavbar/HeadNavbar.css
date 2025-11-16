@@ -54,11 +54,11 @@ ul {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  gap: 20px;
+  gap: 10px;
 }
 
 .head-social a {
-  margin-left: 10px;
+  margin-left: 5px;
   transition: color 0.2s ease;
 }
 

@@ -1,3 +1,4 @@
+import ToggleLanguage from "../ToggleLanguage/ToggleLanguage";
 import "./HeadNavbar.css";
 
 function HeadNavbar() {
@@ -5,9 +6,9 @@ function HeadNavbar() {
     <>
       <div className="head-navbar">
         <div className="container">
-          <div className="row">
+          <div className="row align-items-center">
             {/* ================left head navbar================== */}
-            <div className="col-xl-7 col-lg-6 col-md-5 col-sm-7 ">
+            <div className="col-6 col-md-5 col-lg-5 col-xl-8">
               <div className="left-head-navbar">
                 <ul className="text-center text-sm-start">
                   <li className="d-none d-xl-inline-block">
@@ -38,9 +39,10 @@ function HeadNavbar() {
               </div>
             </div>
             {/* ================right head navbar================== */}
-            <div className="col-xl-5 col-lg-6 col-md-7 col-sm-5 d-none d-sm-block">
-              <div className="text-end">
-                <div className="right-head-navbar">
+            <div className="col-6 col-md-7 col-lg-7 col-xl-4">
+              <div className="text-end d-flex align-items-center justify-content-end gap-3">
+                      <ToggleLanguage />
+                <div className="right-head-navbar d-none d-sm-block">
                   <ul>
                     <li>
                       <div className="d-none d-md-block">
