@@ -1,5 +1,6 @@
 import "./HeadNavbar.css";
-
+import { FaGlobe } from "react-icons/fa";
+import LanguageSwitcher from "../../Components/LanguageSwitcher/LanguageSwitcher";
 function HeadNavbar() {
   return (
     <>
@@ -7,7 +8,7 @@ function HeadNavbar() {
         <div className="container">
           <div className="row">
             {/* ================left head navbar================== */}
-            <div className="col-xl-7 col-lg-6 col-md-5 col-sm-7 ">
+            <div className="col-xl-7 col-lg-6 col-md-4 col-sm-7 ">
               <div className="left-head-navbar">
                 <ul className="text-center text-sm-start">
                   <li className="d-none d-xl-inline-block">
@@ -38,10 +39,15 @@ function HeadNavbar() {
               </div>
             </div>
             {/* ================right head navbar================== */}
-            <div className="col-xl-5 col-lg-6 col-md-7 col-sm-5 d-none d-sm-block">
+            <div className="col-xl-5 col-lg-6 col-md-4 col-sm-5 d-none d-sm-block">
               <div className="text-end">
                 <div className="right-head-navbar">
                   <ul>
+                    <li>
+                      <div className="d-none d-md-block">
+                        <LanguageSwitcher />
+                      </div>
+                    </li>
                     <li>
                       <div className="d-none d-md-block">
                         <a href="#">Help / </a>

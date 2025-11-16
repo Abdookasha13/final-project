@@ -31,9 +31,9 @@ ul {
 
 .left-head-navbar ul li {
   display: inline-block;
-  padding-right: 20px;
+  padding-right: 10px;
   border-right: 1px solid #41576d;
-  margin-right: 20px;
+  margin-right: 10px;
 }
 
 .left-head-navbar ul li:last-child {

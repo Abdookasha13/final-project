@@ -41,6 +41,7 @@ function Routess() {
         <Route path="/testimonial" element={<Testimonial />} />
         <Route path="/register" element={<Registration />} />
         <Route path="/course/details/:courseId" element={<CourseDetails />} />
+        {/* <Route path="/event/details/:eventId" element={<EventDetails />} /> */}
         <Route path="/event/details" element={<EventDetails />} />
         <Route path="/sign/in" element={<SignIN />} />
         <Route path="/price" element={<Price />} />

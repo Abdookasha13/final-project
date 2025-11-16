@@ -1,0 +1,40 @@
+{
+  "courseDetails": {
+    "rating": "(4.5)",
+    "title": "Web Development Fully Complete Guideline",
+    "lesson": "Lesson 10",
+    "time": "9.00AM-01.00PM",
+    "address": "3783 Columbia Mine Road",
+
+    "tabs": {
+      "overview": "Overview",
+      "curriculum": "Curriculum",
+      "instructor": "Instructor",
+      "reviews": "Reviews"
+    },
+
+    "descriptionTitle": "Course Description",
+    "descriptionText": "Learn JavaScript, HTML, and CSS from scratch. Gain real-world experience through projects and exercises designed to help you master web development step by step. This course is ideal for beginners and intermediate learners.",
+
+    "learnTitle": "What Will I Learn From This Course?",
+    "learnText": "You’ll learn modern JavaScript, responsive design, and advanced HTML/CSS. By the end, you’ll be able to build interactive websites, handle dynamic content, and apply industry-standard practices in web development.",
+
+    "feeLabel": "Course Fee",
+    "currentPrice": "$60",
+    "oldPrice": "$120",
+    "guarantee": "29-Day Money-Back Guarantee",
+    "button": "Buy Ticket",
+
+    "details": {
+      "startDate": "start date",
+      "enrolled": "enrolled:",
+      "lectures": "lectures:",
+      "skillLevel": "Skill Level:",
+      "classDay": "Class Day:",
+      "language": "Language:",
+      "beginner": "Beginner",
+      "mondayFriday": "Monday - Friday",
+      "english": "English"
+    }
+  }
+}
