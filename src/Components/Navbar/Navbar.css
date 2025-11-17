@@ -34,13 +34,13 @@
   color: #17c9aa;
 }
 
-.cart-icon {
+.cart-icon , .search-icon {
   cursor: pointer;
   color: #333;
   transition: 0.3s;
 }
 
-.cart-icon:hover {
+.cart-icon:hover , .search-icon:hover {
   color: #17c9aa;
 }
 

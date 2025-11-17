@@ -4,10 +4,13 @@ import "./Navbar.css";
 import Sidebar from "../Sidebar/Sidebar";
 import Button from "../Button/Button";
 import { PiShoppingCartBold } from "react-icons/pi";
+import { FaSearch } from "react-icons/fa";
+import SearchInput from "../SearchInput/SearchInput";
 
 function Navbar() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
+  const [isSearch, setIsSearch] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -158,10 +161,20 @@ function Navbar() {
 
             <div className="col-6 col-xl-3">
               <div className="right-navbar d-flex align-items-center justify-content-end gap-3">
-                <PiShoppingCartBold size={28} className="cart-icon" />
-                <div className="d-none d-md-block">
+                <FaSearch
+                  size={22}
+                  className="search-icon"
+                  onClick={() => {
+                    setIsSearch(!isSearch);
+                  }}
+                />
+                {!isSearch && <SearchInput />}
+                {isSearch && (
+                  <PiShoppingCartBold size={28} className="cart-icon" />
+                )}
+                {isSearch && <div className="d-none d-md-block">
                   <Button>Contact Us</Button>
-                </div>
+                </div>}
                 <div className="d-xl-none">
                   <button
                     className="btn-hamborgar"

@@ -7,12 +7,14 @@ import Footer from "../Footer/Footer";
 import ScrollTopButton from "../ScrollTopButton/ScrollTopButton";
 import { ToastContainer, Zoom } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useLocation } from "react-router-dom";
 function Layout({ children }) {
+  const {pathname}=useLocation()
   return (
     <div className="app-container">
       <HeadNavbar />
       <Navbar />
-      <HeaderSection />
+      {!pathname.startsWith("/search") && <HeaderSection />}
       <ToastContainer
         position="bottom-right"
         autoClose={3000}
@@ -25,7 +27,7 @@ function Layout({ children }) {
         toastClassName="udemy-toast"
       />
       <div className="main-content container">{children}</div>
-      <Newsletter />
+      {!pathname.startsWith("/search") && <Newsletter />}
       <Footer />
       <ScrollTopButton />
     </div>
