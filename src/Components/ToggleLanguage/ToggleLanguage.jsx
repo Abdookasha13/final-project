@@ -1,9 +1,14 @@
 import { useState } from "react";
 import "./ToggleLanguage.css";
+import { changeLanguage } from "../../utils/i18n/i18n";
+import { useEffect } from "react";
 
 const ToggleLanguage = () => {
   const [isChecked, setIsChecked] = useState(false);
-
+  useEffect(() => {
+    const newLang = isChecked ? "ar" : "en";
+    changeLanguage(newLang);
+  },[isChecked]);
   return (
     <div className="flipswitch">
       <input
