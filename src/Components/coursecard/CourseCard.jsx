@@ -3,6 +3,8 @@ import { BsCart3 } from "react-icons/bs";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import handleDeleteCourse from "../../utilities/handleDeleteCourse";
+import { useDispatch } from "react-redux";
+import { addCourseToCart } from "../../Store/Slices/cartSlice";
 
 const CourseCard = ({
   imgSrc,
@@ -21,9 +23,10 @@ const CourseCard = ({
   category,
   hideCartButton = false,
   hideInstructorInfo = false,
+  course
 }) => {
   const navigate = useNavigate();
-
+const dispatch=useDispatch();
   const handleEdit = () => {
     navigate(`/instructor/edit/course/${courseId}`);
   };
@@ -38,6 +41,19 @@ const CourseCard = ({
     navigate(`/instructor/lessons/${courseId}`);
   };
 
+  const handleAdd=()=>{
+
+    dispatch(addCourseToCart({courseId: course._id,
+  title: course.title,
+  price: course.price,
+  discountPrice: course.discountPrice,
+  thumbnailUrl: course.thumbnailUrl,
+  insName: course.instructor.name,
+  lessonsCount: course.lessons?.length || 0,
+    }
+
+    ))
+  }
   return (
     <div
       className="coursecard-item px-2 py-3"
@@ -105,7 +121,12 @@ const CourseCard = ({
           </span>
 
           {!hideCartButton && (
-            <a href="">
+            <a href="" onClick={(e)=>{
+              e.preventDefault();
+ 
+              e.stopPropagation()
+              handleAdd()
+            }}>
               <BsCart3 color="#0e2a46" fontSize={"20px"} /> Add to cart
             </a>
           )}

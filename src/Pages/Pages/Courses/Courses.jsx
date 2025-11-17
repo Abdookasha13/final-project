@@ -40,6 +40,7 @@ function Courses() {
                     insImage={course.instructor.profileImage}
                     insName={course.instructor.name}
                     bgColor={"#f8f9fa"}
+                    course={course}
                   />
             </Link>
           </div>

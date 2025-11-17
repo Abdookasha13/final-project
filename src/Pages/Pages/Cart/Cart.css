@@ -1,0 +1,39 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.cartcard{
+    width: 95%;
+    height: 200px;
+    border: 1px solid #d1d2e0;
+    border-right: 0;
+    border-left: 0;
+}
+.cartcard-rating i{
+    font-size: 10px;
+    color: rgb(245, 204, 68);
+}
+.ratespan{
+    font-size: 14px;
+}
+.course-meta {
+    list-style-type: circle;
+ list-style: circle;
+ color: rgb(56, 56, 56);
+ font-size: 12px;
+
+}
+
+.course-author{
+    font-size: 12px;
+}
+.line{
+    text-decoration: line-through;
+    color: gray;
+}
+.btn{
+    color: #0fbb9e;
+   
+}
