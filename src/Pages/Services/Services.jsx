@@ -1,57 +1,23 @@
 import "../Services/Services.css";
+import ServiceCard from "./../../Components/ServiceCard/ServiceCard";
+import { useEffect, useState } from "react";
+import getAllServices from "../../utilities/getAllServices";
 
-import { LiaChalkboardTeacherSolid } from "react-icons/lia";
-import { IoMdBook } from "react-icons/io";
-import { PiVideoBold } from "react-icons/pi";
-import { FaChalkboardTeacher } from "react-icons/fa";
-import { FaPersonChalkboard } from "react-icons/fa6";
-import ServiceCard from './../../Components/ServiceCard/ServiceCard';
-
-const services = [
-  {
-    icon: <FaChalkboardTeacher fontSize={"40px"} color="white" className="icon-roka" />,
-    title: "Best Coaching",
-    description: " Our coaching sessions focus on personalized guidance to help you achieve your goals.",
-  },
-  {
-    icon: <LiaChalkboardTeacherSolid fontSize={"40px"} color="white" className="icon-roka"/>,
-    title: "Convenient Practice",
-    description: "Practice anytime with flexible online sessions  to help you achieve your goals.",
-  },
-  {
-    icon: <IoMdBook fontSize={"40px"} color="white" className="icon-roka" />,
-    title: "Creative Minds",
-    description: "Inspire your creativity with modern learning tools  to help you achieve your goals.",
-  },
-
-  {
-    icon: <FaPersonChalkboard fontSize={"40px"} color="white" className="icon-roka" />,
-    title: "Convenient Practice",
-    description: "Practice anytime with flexible online sessions  to help you achieve your goals.",
-  },
-  {
-    icon: <PiVideoBold fontSize={"40px"} color="white" className="icon-roka" />,
-    title: "Best Coaching",
-    description: "Learn from expert mentors and improve your skills  to help you achieve your goals.",
-  },
-  {
-    icon: <FaChalkboardTeacher fontSize={"40px"} color="white" className="icon-roka" />,
-    title: "Best Coaching",
-    description: "Learn from expert mentors and improve your skills  to help you achieve your goals.",
-  },
-];
 function Services() {
+  const [services, setServices] = useState([]);
+
+  useEffect(() => {
+    getAllServices(setServices);
+  }, []);
+
   return (
-     <section className="services-section py-5">
+    <section className="services-section py-5">
       <div className="container">
-        <div className="row">
+        <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
           {services.map((service, index) => (
-            <div className="col-lg-4 col-md-6 mb-5" key={index}>
+            <div className="col" key={service._id || index}>
               <ServiceCard
-                icon={service.icon}
-                title={service.title}
-                description={service.description}
-              
+                service={service}
               />
             </div>
           ))}
@@ -62,4 +28,3 @@ function Services() {
 }
 
 export default Services;
-

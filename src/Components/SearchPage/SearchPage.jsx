@@ -1,19 +1,24 @@
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useMemo } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./SearchPage.css";
 import Loader from "../Loader/Loader";
 import CourseCard from "../coursecard/CourseCard";
 import formatTime from "../../utilities/formatTime";
+import { coursesFetched } from "../../Store/Slices/getAllCoursecSlice";
 
 const SearchPage = () => {
   const { searchTerm } = useParams();
+  const dispatch = useDispatch();
   const courses = useSelector((state) => state.getAllCourses.data);
   const isLoading = useSelector((state) => state.getAllCourses.isLoading);
 
   useEffect(() => {
     document.title = `Search results for "${searchTerm}"`;
-  }, [searchTerm]);
+    if(!courses.length){
+      dispatch(coursesFetched());
+    }
+  }, [searchTerm, courses.length, dispatch]);
 
   const filteredCourses = useMemo(() => {
     return courses.filter((course) =>

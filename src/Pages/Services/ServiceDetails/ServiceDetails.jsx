@@ -1,25 +1,35 @@
 import { FaCircleCheck } from "react-icons/fa6";
 import "../ServiceDetails/ServiceDetails.css";
 import RightSideBlog from "../../../Components/RightSideBlog/RightSideBlog";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import getServiceById from "../../../utilities/getServiceById";
 
 function ServiceDetails() {
+  const { id } = useParams();
+  const [service, setService] = useState(null);
+
+  useEffect(() => {
+    getServiceById(id, setService);
+  }, [id]);
+
   return (
     <>
       <div className="serviceDetails-container  ">
         <div className="container p-0 ">
-          <div className="row ">
+          <div className="row">
             {/* left section */}
             <div className="serviceDetails-left col-xl-8 col-lg-8 ">
               <div className="serviceDetails-sec1">
                 <div className="row">
                   <div className="col-xl-6 col-lg-6 ">
                     <div className="serviceDetails-image">
-                      <img src="../public/images/girll.jpg" />
+                      <img src={service?.icon} />
                     </div>
                   </div>
                   <div className="col-xl-6 col-lg-6 webdesign">
                     <div className="serviceDetails-text">
-                      <h4 className="serviceDetails-title">WEB DESIGN</h4>
+                      <h4 className="serviceDetails-title">{service?.title}</h4>
                       <p className="serviceDetails-paragraphs">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                         sed do eiusmod tempor incididunt ut labore et dolore
@@ -43,11 +53,7 @@ function ServiceDetails() {
                       SERVICE DESCRIPTION
                     </h4>
                     <p className="serviceDetails-paragraphs">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                      ullamco laboris nisi ut aliquip ex ea commodo consequat
-                      aute irure dolor in reprehenderit.
+                      {service?.description}
                     </p>
                     <p className="serviceDetails-paragraphs">
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit,
@@ -108,7 +114,7 @@ function ServiceDetails() {
                     </p>
                     <div className="serviceDetails-imgvid ">
                       <img
-                        src="../public/images/vidimage.jpg"
+                        src="https://ordainit.com/html/educate/assets/img/service/sv-2.jpg"
                         className="img-fluid "
                       />
                       <a className="pulse " href="">

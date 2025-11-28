@@ -11,8 +11,8 @@ const SearchInput = () => {
   }
 
   const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      navigate("/search/" + searchTerm);
+    if (e.key === "Enter" && searchTerm.trim() !== "") {
+      navigate("/search/" + searchTerm.trim());
     }
     if (e.target.value.trim() === "") {
       navigate(lastPage.current);

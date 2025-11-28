@@ -1,18 +1,29 @@
 import "./EventDetails.css";
 import Button from "./../../../Components/Button/Button";
 import { FaBookOpen, FaClock, FaMapMarkerAlt } from "react-icons/fa";
+import { useParams } from "react-router-dom";
+import { useState } from "react";
+import getEventById from "../../../utilities/getEventById";
 const EventDetails = () => {
+  const {id}=useParams();
+  const [event, setEvent]= useState(null);
+
+  useState(() => {
+    getEventById(id, setEvent);
+    document.title = "Event Details";
+  }, [id]);
+
   return (
     <section className="course-details-roka container mt-5 mb-5">
       <div className="row g-4">
         <div className="col-lg-8">
           <div className="course-image-roka mb-4">
-            <img src="https://ordainit.com/html/educate/assets/img/event/details-1.jpg"   className="img-fluid rounded-3" />
+            <img src={event?.eventImage}   className="img-fluid rounded-3" />
           </div>
 
           <div className="course-title-roka">
             <h4>
-              These are Designed to Provide Hands Training and Skill-Building.
+              {event?.title}
             </h4>
 
             <div className="course-meta-roka d-flex flex-wrap align-items-center gap-4 mt-3">
@@ -22,11 +33,11 @@ const EventDetails = () => {
               </div>
               <div className="meta-item d-flex align-items-center gap-2">
                 <FaClock className="meta-icon" />
-                <span>9.00AM-01.00PM</span>
+                <span>{event?.time}</span>
               </div>
               <div className="meta-item d-flex align-items-center gap-2">
                 <FaMapMarkerAlt className="meta-icon" />
-                <span>3783 Columbia Mine Road</span>
+                <span>{event?.location}</span>
               </div>
             </div>
           </div>
@@ -42,10 +53,7 @@ const EventDetails = () => {
 
             <h5>Event Description</h5>
             <p>
-              You’ll learn modern JavaScript, responsive design, and advanced
-              HTML/CSS. By the end, you’ll be able to build interactive
-              websites, handle dynamic content, and apply industry-standard
-              practices in web development.
+              {event?.description}
             </p>
           </div>
         </div>

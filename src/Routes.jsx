@@ -28,7 +28,7 @@ function Routess() {
         <Route path="/home" element={<Home />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/services" element={<Services />} />
-        <Route path="/services/details" element={<ServiceDetails />} />
+        <Route path="/service/details/:id" element={<ServiceDetails />} />
         <Route path="/pages" element={<Cart />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/sidebar" element={<BlogSidebar />} />
@@ -42,7 +42,7 @@ function Routess() {
         <Route path="/testimonial" element={<Testimonial />} />
         <Route path="/register" element={<Registration />} />
         <Route path="/course/details/:courseId" element={<CourseDetails />} />
-        <Route path="/event/details" element={<EventDetails />} />
+        <Route path="/event/details/:id" element={<EventDetails />} />
         <Route path="/sign/in" element={<SignIN />} />
         <Route path="/price" element={<Price />} />
         <Route path="/search/:searchTerm" element={<SearchPage />} />

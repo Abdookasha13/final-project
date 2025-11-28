@@ -1,14 +1,15 @@
 import "./ServiceCard.css";
 import Button from "./../Button/Button";
-
-const ServiceCard = ({ icon, title, description }) => {
+import { useNavigate } from "react-router-dom";
+const ServiceCard = ({ service }) => {
+  const navigate=useNavigate();
   return (
     <div className="service-card-roka text-center p-5">
-      <div className="icon-wrapper-roka mx-auto mb-3">{icon}</div>
-      <h3 className="service-title-roka mb-2">{title}</h3>
-      <p className="service-desc-roka mb-4">{description}</p>
-      <div className="mx-auto" style={{ width: "fit-content" }}>
-        <Button>View Details</Button>
+      <div className="icon-wrapper-roka mx-auto mb-4"><img src={service.icon} alt={service.title} /></div>
+      <h3 className="service-title-roka my-2">{service.title}</h3>
+      <p className="service-desc-roka mb-4">{service.description}</p>
+      <div className="mx-auto" style={{ width: "fit-content" }} onClick={() => navigate(`/service/details/${service._id}`)}>
+        <Button >View Details</Button>
       </div>
     </div>
   );

@@ -39,17 +39,6 @@ const BlogCard = ({ imgSrc, date, comments, title }) => {
           </div>
         </div>
       </div>
-
-      {/* Bootstrap CSS */}
-      <link
-        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css"
-        rel="stylesheet"
-      />
-      {/* FontAwesome */}
-      <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-      />
     </>
   );
 };
