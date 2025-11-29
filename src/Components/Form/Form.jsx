@@ -2,17 +2,17 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../../Pages/Contact/Contact.css";
 import { useForm } from "react-hook-form";
 import Button from "../Button/Button";
+import sendMessage from "../../utilities/sendMessage";
 
 const Form = () => {
   const {
-    register,
+    register,              
     handleSubmit,
     formState: { errors },
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
-    alert("Form submitted!");
+    sendMessage(data);
   };
 
   return (
@@ -128,9 +128,9 @@ const Form = () => {
               </small>
             )}
           </div>
-          <div className="d-flex justify-content-center">
+          <button type="submit" className="border-0 bg-transparent p-0">
             <Button>Send Message</Button>
-          </div>
+          </button>
         </div>
       </form>
     </div>

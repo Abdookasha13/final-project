@@ -157,7 +157,9 @@ function Navbar() {
                 )}
                 {!isSearch && (
                   <div className="d-none d-md-block">
-                    <Button>Contact Us</Button>
+                    <NavLink to="/contact">
+                      <Button>Contact Us</Button>
+                    </NavLink>
                   </div>
                 )}
                 <div className="d-xl-none">

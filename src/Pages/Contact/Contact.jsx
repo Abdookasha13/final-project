@@ -19,7 +19,7 @@ const Contact = () => {
         <div className="contact-wrapper">
           {/* ///شايل 2 div //1-triangle div */}
           <div>
-            <img className="triangle" src="../public/images/shape-2-1.png" />
+            <img className="triangle" src="Images/shape-2-1.png" />
           </div>
 
           {/* //2-row div---contains 2 divs left/right */}
