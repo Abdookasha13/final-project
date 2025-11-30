@@ -28,8 +28,11 @@ function Routess() {
         <Route path="/home" element={<Home />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/services" element={<Services />} />
+
+        <Route path="/cart" element={<Cart />} />
+
         <Route path="/service/details/:id" element={<ServiceDetails />} />
-        <Route path="/pages" element={<Cart />} />
+
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/sidebar" element={<BlogSidebar />} />
         <Route path="/teacher" element={<Teacher />} />

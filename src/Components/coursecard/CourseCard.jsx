@@ -3,6 +3,9 @@ import { BsCart3 } from "react-icons/bs";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import handleDeleteCourse from "../../utilities/handleDeleteCourse";
+import { useDispatch } from "react-redux";
+import { addCourseToCart } from "../../Store/Slices/cartSlice";
+import { toast } from "react-toastify";
 
 const CourseCard = ({
   imgSrc,
@@ -21,9 +24,10 @@ const CourseCard = ({
   category,
   hideCartButton = false,
   hideInstructorInfo = false,
+  course,
 }) => {
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const handleEdit = () => {
     navigate(`/instructor/edit/course/${courseId}`);
   };
@@ -36,6 +40,14 @@ const CourseCard = ({
 
   const showMyLessons = () => {
     navigate(`/instructor/lessons/${courseId}`);
+  };
+
+  const handleAdd = () => {
+    console.log(course._id);
+    
+    dispatch(addCourseToCart(course._id));
+
+    toast.success("Course added to cart!");
   };
 
   return (
@@ -51,7 +63,6 @@ const CourseCard = ({
       </div>
 
       <div className="coursecard-itemcontent">
-
         <div className="coursecard-rating d-flex gap-1">
           <i className="fa-sharp fa-solid fa-star"></i>
           <i className="fa-sharp fa-solid fa-star"></i>
@@ -101,11 +112,19 @@ const CourseCard = ({
 
         <div className="coursecard-itemprice d-flex flex-row justify-content-between">
           <span>
-            <i>{price}$</i> {discountPrice}
+            <i>{discountPrice}$ </i>
+            {price}
           </span>
 
           {!hideCartButton && (
-            <a href="">
+            <a
+              href=""
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                handleAdd();
+              }}
+            >
               <BsCart3 color="#0e2a46" fontSize={"20px"} /> Add to cart
             </a>
           )}
@@ -116,12 +135,14 @@ const CourseCard = ({
             <button className="btn btn-sm editbtnn" onClick={handleEdit}>
               <FaEdit /> Edit
             </button>
-            <button className="btn btn-sm btn-outline-danger" onClick={handleDelete}>
+            <button
+              className="btn btn-sm btn-outline-danger"
+              onClick={handleDelete}
+            >
               <FaTrash /> Delete
             </button>
           </div>
         )}
-
       </div>
     </div>
   );
