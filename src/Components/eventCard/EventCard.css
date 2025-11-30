@@ -6,8 +6,8 @@
 
 .eventcard-img img {
   width: 100%;
-
   object-fit: cover;
+  height: 250px;
   transition: transform 0.9s ease;
 }
 
@@ -24,11 +24,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* padding: 4px 10px; */
   width: 80px;
   height: 80px;
   border: 1px solid white;
-
   border-radius: 5px;
   color: white;
   background-color: #f2a227;

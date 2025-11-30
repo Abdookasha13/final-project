@@ -5,10 +5,13 @@ import Sidebar from "../Sidebar/Sidebar";
 import Button from "../Button/Button";
 import { PiShoppingCartBold } from "react-icons/pi";
 import { useSelector } from "react-redux";
+import { FaSearch } from "react-icons/fa";
+import SearchInput from "../SearchInput/SearchInput";
 
 function Navbar() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
+  const [isSearch, setIsSearch] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -50,22 +53,8 @@ function Navbar() {
                     <NavLink to="/about">About Us</NavLink>
                   </li>
                   {/* ============services========================== */}
-                  <li className="dropdwn">
-                    <NavLink to="/services" className="dropdwn-toggle">
-                      Services <i className="fa-solid fa-chevron-down"></i>
-                    </NavLink>
-                    <ul className="dropdwn-menu services-menue">
-                      <div>
-                        <li>
-                          <NavLink to="/services">Services</NavLink>
-                        </li>
-                        <li>
-                          <NavLink to="/services/details">
-                            Services Details
-                          </NavLink>
-                        </li>
-                      </div>
-                    </ul>
+                  <li>
+                    <NavLink to="/services">Services</NavLink>
                   </li>
                   {/* ============pages========================== */}
                   <li className="dropdwn">
@@ -93,9 +82,6 @@ function Navbar() {
                         </li>
                       </div>
                       <div>
-                        <li>
-                          <NavLink to="/event/details">Event Details</NavLink>
-                        </li>
                         <li>
                           <NavLink to="/">Checkout</NavLink>
                         </li>
@@ -170,6 +156,24 @@ function Navbar() {
                 <div className="d-none d-md-block">
                   <Button>Contact Us</Button>
                 </div>
+                <FaSearch
+                  size={22}
+                  className="search-icon"
+                  onClick={() => {
+                    setIsSearch(!isSearch);
+                  }}
+                />
+                {isSearch && <SearchInput />}
+                {!isSearch && (
+                  <PiShoppingCartBold size={28} className="cart-icon" />
+                )}
+                {!isSearch && (
+                  <div className="d-none d-md-block">
+                    <NavLink to="/contact">
+                      <Button>Contact Us</Button>
+                    </NavLink>
+                  </div>
+                )}
                 <div className="d-xl-none">
                   <button
                     className="btn-hamborgar"

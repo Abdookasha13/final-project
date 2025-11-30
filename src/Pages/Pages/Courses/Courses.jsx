@@ -1,20 +1,24 @@
-import { useEffect, useState } from "react";
-
+import { useEffect } from "react";
 import "./Courses.css";
-import getAllCourses from "../../../utilities/getAllCourses";
 import formatTime from "../../../utilities/formatTime";
 import { Link } from "react-router-dom";
 import Loader from "../../../Components/Loader/Loader";
 import CourseCard from "../../../Components/coursecard/CourseCard";
+import { useDispatch, useSelector } from "react-redux";
+import { coursesFetched } from "../../../Store/Slices/getAllCoursecSlice";
 
 function Courses() {
-  const [courses, setCourses] = useState([]);
+  const dispatch = useDispatch();
+  const courses = useSelector((state) => state.getAllCourses.data);
+  const isLoading = useSelector((state) => state.getAllCourses.isLoading);
 
   useEffect(() => {
-    getAllCourses(setCourses);
-  }, []);
+    if(!courses.length){
+      dispatch(coursesFetched());
+    }
+  }, [courses.length, dispatch]);
 
-  if (courses.length === 0) {
+  if (isLoading) {
     return <Loader />;
   }
 
