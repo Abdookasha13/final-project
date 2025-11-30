@@ -4,21 +4,22 @@ import Routess from "./Routes";
 import InsDahRoutes from "./Components/InsDashComponents/InsDahRoutes";
 import { Provider } from "react-redux";
 import store from "./Store/store";
+import StdProfileRoutes from "./Components/StudentProfileComponnent/StdProfileRoutes";
 
 function AppContent() {
   const { pathname } = useLocation();
 
-  return (
-    <>
-      {!pathname.startsWith("/instructor") ? (
-        <Layout>
-          <Routess />
-        </Layout>
-      ) : (
-        <InsDahRoutes />
-      )}
-    </>
-  );
+ if (pathname.startsWith("/instructor")) {
+    return <InsDahRoutes />;
+  } else if (pathname.startsWith("/stdprofile")) {
+    return <Layout><StdProfileRoutes /></Layout>;
+  } else {
+    return (
+      <Layout>
+        <Routess />
+      </Layout>
+    );
+  }
 }
 
 function App() {

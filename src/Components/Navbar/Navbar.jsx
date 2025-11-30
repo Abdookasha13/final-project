@@ -78,6 +78,11 @@ function Navbar() {
                           </NavLink>
                         </li>
                         <li>
+                          <NavLink to="stdprofile">
+                           Student Profile
+                          </NavLink>
+                        </li>
+                        <li>
                           <NavLink to="/events">Event</NavLink>
                         </li>
                       </div>
@@ -151,10 +156,6 @@ function Navbar() {
                     <PiShoppingCartBold size={28} className="cart-icon" />
                     <span className="cart-counter">{cartItems}</span>
                   </Link>
-                </div>
-
-                <div className="d-none d-md-block">
-                  <Button>Contact Us</Button>
                 </div>
                 <FaSearch
                   size={22}
