@@ -146,16 +146,6 @@ function Navbar() {
 
             <div className="col-6 col-xl-3">
               <div className="right-navbar d-flex align-items-center justify-content-end gap-3">
-                <div className="cart-wrapper">
-                  <Link to="/cart">
-                    <PiShoppingCartBold size={28} className="cart-icon" />
-                    <span className="cart-counter">{cartItems}</span>
-                  </Link>
-                </div>
-
-                <div className="d-none d-md-block">
-                  <Button>Contact Us</Button>
-                </div>
                 <FaSearch
                   size={22}
                   className="search-icon"
@@ -163,10 +153,21 @@ function Navbar() {
                     setIsSearch(!isSearch);
                   }}
                 />
+                {!isSearch && <div className="cart-wrapper">
+                  <Link to="/cart">
+                    <PiShoppingCartBold size={28} className="cart-icon" />
+                    <span className="cart-counter">{cartItems}</span>
+                  </Link>
+                </div>}
+
+                {/* <div className="d-none d-md-block">
+                  <Button>Contact Us</Button>
+                </div> */}
+                
                 {isSearch && <SearchInput />}
-                {!isSearch && (
+                {/* {!isSearch && (
                   <PiShoppingCartBold size={28} className="cart-icon" />
-                )}
+                )} */}
                 {!isSearch && (
                   <div className="d-none d-md-block">
                     <NavLink to="/contact">
