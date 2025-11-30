@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "./Navbar.css";
 import Sidebar from "../Sidebar/Sidebar";
 import Button from "../Button/Button";
 import { PiShoppingCartBold } from "react-icons/pi";
+import { useSelector } from "react-redux";
 
 function Navbar() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -22,6 +23,7 @@ function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const cartItems = useSelector((state) => state.cart.cartItems.length);
   return (
     <>
       <div className={`navbar-main py-2 py-xl-0 ${isSticky ? "sticky" : ""}`}>
@@ -158,7 +160,13 @@ function Navbar() {
 
             <div className="col-6 col-xl-3">
               <div className="right-navbar d-flex align-items-center justify-content-end gap-3">
-                <PiShoppingCartBold size={28} className="cart-icon" />
+                <div className="cart-wrapper">
+                  <Link to="/cart">
+                    <PiShoppingCartBold size={28} className="cart-icon" />
+                    <span className="cart-counter">{cartItems}</span>
+                  </Link>
+                </div>
+
                 <div className="d-none d-md-block">
                   <Button>Contact Us</Button>
                 </div>

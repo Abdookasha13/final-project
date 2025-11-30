@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import handleDeleteCourse from "../../utilities/handleDeleteCourse";
 import { useDispatch } from "react-redux";
 import { addCourseToCart } from "../../Store/Slices/cartSlice";
+import { toast } from "react-toastify";
 
 const CourseCard = ({
   imgSrc,
@@ -23,10 +24,10 @@ const CourseCard = ({
   category,
   hideCartButton = false,
   hideInstructorInfo = false,
-  course
+  course,
 }) => {
   const navigate = useNavigate();
-const dispatch=useDispatch();
+  const dispatch = useDispatch();
   const handleEdit = () => {
     navigate(`/instructor/edit/course/${courseId}`);
   };
@@ -41,19 +42,14 @@ const dispatch=useDispatch();
     navigate(`/instructor/lessons/${courseId}`);
   };
 
-  const handleAdd=()=>{
+  const handleAdd = () => {
+    console.log(course._id);
+    
+    dispatch(addCourseToCart(course._id));
 
-    dispatch(addCourseToCart({courseId: course._id,
-  title: course.title,
-  price: course.price,
-  discountPrice: course.discountPrice,
-  thumbnailUrl: course.thumbnailUrl,
-  insName: course.instructor.name,
-  lessonsCount: course.lessons?.length || 0,
-    }
+    toast.success("Course added to cart!");
+  };
 
-    ))
-  }
   return (
     <div
       className="coursecard-item px-2 py-3"
@@ -67,7 +63,6 @@ const dispatch=useDispatch();
       </div>
 
       <div className="coursecard-itemcontent">
-
         <div className="coursecard-rating d-flex gap-1">
           <i className="fa-sharp fa-solid fa-star"></i>
           <i className="fa-sharp fa-solid fa-star"></i>
@@ -117,16 +112,19 @@ const dispatch=useDispatch();
 
         <div className="coursecard-itemprice d-flex flex-row justify-content-between">
           <span>
-            <i>{price}$</i> {discountPrice}
+            <i>{discountPrice}$ </i>
+            {price}
           </span>
 
           {!hideCartButton && (
-            <a href="" onClick={(e)=>{
-              e.preventDefault();
- 
-              e.stopPropagation()
-              handleAdd()
-            }}>
+            <a
+              href=""
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                handleAdd();
+              }}
+            >
               <BsCart3 color="#0e2a46" fontSize={"20px"} /> Add to cart
             </a>
           )}
@@ -137,12 +135,14 @@ const dispatch=useDispatch();
             <button className="btn btn-sm editbtnn" onClick={handleEdit}>
               <FaEdit /> Edit
             </button>
-            <button className="btn btn-sm btn-outline-danger" onClick={handleDelete}>
+            <button
+              className="btn btn-sm btn-outline-danger"
+              onClick={handleDelete}
+            >
               <FaTrash /> Delete
             </button>
           </div>
         )}
-
       </div>
     </div>
   );

@@ -1,170 +1,158 @@
-// import { useEffect } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import Button from "../../../Components/Button/Button";
-// import {
-//   fetchCart,
-//   removeCourseFromCart,
-// } from "../../../Store/Slices/cartSlice";
-
-// import "./Cart.css";
-// import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchCart,
+  removeCourseFromCart,
+} from "../../../Store/Slices/cartSlice";
+import "./Cart.css";
 
 function Cart() {
-  // const dispatch = useDispatch();
-  // const cartItems = useSelector((state) => state.cart.cartItems);
+  const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cart.cartItems);
 
-  // useEffect(() => {
+  useEffect(() => {
+    dispatch(fetchCart());
+  }, [dispatch]);
 
-  //   dispatch(fetchCart());
+  const handleRemove = (courseId) => {
+    dispatch(removeCourseFromCart(courseId));
+  };
 
-  // }, [dispatch]);
-  //  console.log(cartItems);
+  const calculateTotal = () => {
+    return cartItems
+      .reduce(
+        (total, course) => total + (course.discountPrice ?? course.price ?? 0),
+        0
+      )
+      .toFixed(2);
+  };
 
-  // const handleRemove = (courseId) => {
-  //   dispatch(removeCourseFromCart(courseId));
-  // };
-  // if (!Array.isArray(cartItems) || cartItems.length === 0) {
-  //   return <div>No items in cart</div>;
-  // }
-  return (
-    // <>
-    //   <div className="p-5">
-    //     <h2 style={{ fontSize: "45px" }}>Shopping Cart</h2>
-
-    //     <div className="d-flex flex-sm-column  flex-md-column flex-lg-row gap-5 mt-4">
-    //       <div style={{ flex: 3 }}>
-    //         <h6 style={{ fontSize: "15px" }}>
-    //           {cartItems.length} Courses in Cart
-    //         </h6>
-
-    //         {cartItems.map((course) => (
-    //           <div className="cartcard p-3 d-flex gap-4 align-items-start">
-    //             <div className="courseimg flex-shrink-0">
-    //               <img
-    //                 src={course?.thumbnailUrl}
-    //                 alt={course.title}
-    //                 width="150"
-    //                height="90"
-    //               />
-    //             </div>
-
-    //             <div className="coursedetails flex-grow-1 d-flex flex-column gap-2">
-    //               <h5 className="course-title m-0">{course.title}</h5>
-
-    //               <p
-    //                 style={{ fontSize: "14px", color: "#333" }}
-    //                 className="course-author m-0"
-    //               >
-    //                 By {course.insName || "Unknown Instructor"}
-    //               </p>
-
-    //               {/* Rating */}
-    //               <div className="cartcard-rating d-flex align-items-center gap-1">
-    //                 {course.isBestSeller && (
-    //                   <span className="badge bg-light text-dark p-2">
-    //                     Bestseller
-    //                   </span>
-    //                 )}
-
-    //                 {/* Stars */}
-    //                 {Array.from({ length: 5 }).map((_, i) => (
-    //                   <i
-    //                     key={i}
-    //                     className={
-    //                       i < Math.round(course.rating)
-    //                         ? "fa-solid fa-star"
-    //                         : "fa-regular fa-star"
-    //                     }
-    //                   ></i>
-    //                 ))}
-
-    //                 <span className="ratespan">({course.rating})</span>
-    //               </div>
-
-    //               <ul className="course-meta d-flex gap-3 m-0 p-0 list-unstyled">
-    //                 <li>{course.courseDuration} total hours</li>
-    //                 <li>{course.lessonsCount} lessons</li>
-    //                 <li>{course.level}</li>
-    //               </ul>
-    //             </div>
-
-    //             <div className="course-actions d-flex align-items-start gap-12">
-    //               <div className="action-buttons d-flex flex-column">
-    //                 <button
-    //                   className="btn btn-sm "
-    //                   onClick={() => handleRemove(course.courseId)}
-    //                 >
-    //                   Remove
-    //                 </button>
-    //                 <button className="btn btn-sm ">Save for Later</button>
-    //                 <button className="btn btn-sm ">Move to Wishlist</button>
-    //               </div>
-
-    //               <div className="course-price text-end">
-    //                 <h5>${course.discountPrice}</h5>
-    //                 {course.price && (
-    //                   <h6 className="line text-muted text-light text-decoration-line-through">
-    //                     ${course.price}
-    //                   </h6>
-    //                 )}
-    //               </div>
-    //             </div>
-    //           </div>
-    //         ))}
-    //       </div>
-
-    //       <div style={{ flex: 1 }}>
-    //         <h6>Total:</h6>
-    //         <h2>
-    //           $
-    //           {cartItems
-    //             .reduce((total, course) => total + (course.discountPrice??course.price), 0)
-    //             .toFixed(2)}
-    //         </h2>
-
-    //         <Button>Proceed to Checkout</Button>
-
-    //         <p style={{ fontSize: "12px" }}>You won't be charged yet.</p>
-    //         <hr />
-
-    //         <Button>Apply Coupon</Button>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </>
-    <>
-      <div className="container bg-info ">
-        <div className="row">
-          <div className="col-12 col-lg-9 bg-danger">
-            <div className="cartcard row">
-              <div className="courseimg col-2">
-                <img
-                  src="Images/courseimg1.jpg"
-                  alt=""
-                  width="150"
-                  height="90"
-                />
-              </div>
-              <div className="contentcourse col-10">ijijio</div>
-            </div>
-          </div>
-          <div className="col-12 col-lg-3 bg-secondary">
-            <h6>Total:</h6>
-            <h2>
-              $ 120
-              {/* {cartItems
-                .reduce((total, course) => total + (course.discountPrice??course.price), 0)
-                 .toFixed(2)} */}
-            </h2>
-
-            <Button>Proceed to Checkout</Button>
-
-            <p style={{ fontSize: "12px" }}>You won't be charged yet.</p>
-            <hr />
-            <Button>Apply Coupon</Button>
-          </div>
+  // ---------- Empty Cart ----------
+  if (!Array.isArray(cartItems) || cartItems.length === 0) {
+    return (
+      <div className="container shopping-container mt-5 py-5">
+        <h2 style={{ fontSize: "45px" }}>Shopping Cart</h2>
+        <p style={{ fontSize: "15px" }} className="p-0 m-0 pt-3">
+          0 Courses in Cart
+        </p>
+        <div className="empty-cart d-flex flex-column align-items-center justify-content-center text-center py-5 border border-1">
+          <img
+            src="Images/undraw_empty-cart_574u (1).svg"
+            alt="Empty Cart"
+            style={{ maxWidth: "300px", marginBottom: "20px" }}
+          />
+          <p style={{ fontSize: "18px", marginBottom: "20px" }}>
+            Your cart is empty. Keep shopping to find a course!
+          </p>
+          <Link to="/courses">
+            <Button>Keep Shopping</Button>
+          </Link>
         </div>
       </div>
-    </>
+    );
+  }
+
+  // ---------- Cart with Items ----------
+  return (
+    <div className="container shopping-container mt-5">
+      <h2 className="d-none d-xl-block" style={{ fontSize: "45px" }}>
+        Shopping Cart
+      </h2>
+      <p style={{ fontSize: "15px" }} className="p-0 m-0 pt-3">
+        {cartItems.length} Courses in Cart
+      </p>
+
+      <div className="d-flex flex-column flex-lg-row gap-5 ">
+        {/* Left Section */}
+        <div className="col-12 col-lg-9 ">
+          {cartItems.map((course) => (
+            <div
+              className="cartcard row border-container"
+              key={course.courseId}
+            >
+              <div className="courseimg col-2 p-0">
+                <img src={course.thumbnailUrl} alt={course.title} />
+              </div>
+
+              <div className="contentcourse col-10 px-lg-3 ">
+                <div className="d-flex flex-column flex-lg-row justify-content-between">
+                  <div className="coursedetails">
+                    <div className="d-flex justify-content-between">
+                      <h5 className="course-title m-0">{course.title}</h5>
+                      <div className="course-price2 text-end d-xl-none">
+                        <h5>${course.discountPrice}</h5>
+                        {course.price && (
+                          <h6 className="line text-muted text-decoration-line-through">
+                            ${course.price}
+                          </h6>
+                        )}
+                      </div>
+                    </div>
+
+                    <p
+                      style={{ fontSize: "14px", color: "#333" }}
+                      className="course-author m-0 pt-2"
+                    >
+                      By {course.insName}
+                    </p>
+                    {console.log(course.courseDuration)}
+                    <ul className="course-meta d-flex gap-3 m-0 p-0 list-unstyled">
+                      <p>{course.courseDuration}</p>
+                      <li>{course.lessonsCount} lessons</li>
+                      <li>All Levels</li>
+                    </ul>
+                  </div>
+
+                  <div className="d-flex gap-2">
+                    <div className="action-buttons d-flex flex-lg-column flex-sm-row ">
+                      <button
+                        className="btn btn-sm text-danger m-0 p-0"
+                        onClick={() => handleRemove(course.courseId)}
+                      >
+                        Remove
+                      </button>
+                      <button
+                        className="btn btn-sm "
+                        style={{ color: "#0ab99d" }}
+                      >
+                        Save for Later
+                      </button>
+                      <button
+                        className="btn btn-sm "
+                        style={{ color: "#0ab99d" }}
+                      >
+                        Move to Wishlist
+                      </button>
+                    </div>
+
+                    <div className="course-price text-end">
+                      <h5>${course.discountPrice}</h5>
+                      {course.price && (
+                        <h6 className="line text-muted text-decoration-line-through">
+                          ${course.price}
+                        </h6>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Right Section */}
+        <div className="col-12 col-lg-3">
+          <h5>Total:</h5>
+          <h2>${calculateTotal()}</h2>
+          <Button>Proceed to Checkout</Button>
+          <p style={{ fontSize: "12px" }}>You won't be charged yet.</p>
+          <hr />
+          <Button>Apply Coupon</Button>
+        </div>
+      </div>
+    </div>
   );
 }
 

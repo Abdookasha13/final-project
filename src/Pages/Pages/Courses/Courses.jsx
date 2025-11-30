@@ -23,25 +23,25 @@ function Courses() {
       <div className="row g-4">
         {courses.map((course) => (
           <div className="col-xl-4 col-lg-4 col-md-6" key={course._id}>
-            <Link 
+            <Link
               to={`/course/details/${course._id}`}
               style={{ textDecoration: "none" }}
             >
-           <CourseCard
-                    imgSrc={course.thumbnailUrl}
-                    title={course.title}
-                    price={course.price}
-                    discountPrice={course.discountPrice}
-                    lessonsCount={course.lessonsCount}
-                    courseDuration={formatTime(course.lessons)}
-                    studentsCount={course.studentsCount}
-                    courseId={course._id}
-                    category={course.category.name}
-                    insImage={course.instructor.profileImage}
-                    insName={course.instructor.name}
-                    bgColor={"#f8f9fa"}
-                    course={course}
-                  />
+              <CourseCard
+                imgSrc={course.thumbnailUrl}
+                title={course.title}
+                price={course.price}
+                discountPrice={course.discountPrice}
+                lessonsCount={course.lessonsCount}
+                courseDuration={formatTime(course.lessons)}
+                studentsCount={course.studentsCount}
+                courseId={course._id}
+                category={course.category?.name}
+                insImage={course.instructor?.profileImage}
+                insName={course.instructor?.name}
+                bgColor={"#f8f9fa"}
+                course={course}
+              />
             </Link>
           </div>
         ))}
