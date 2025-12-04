@@ -78,7 +78,7 @@ function Navbar() {
                           </NavLink>
                         </li>
                         <li>
-                          <NavLink to="stdprofile">
+                          <NavLink to="stdprofile/mycourses">
                            Student Profile
                           </NavLink>
                         </li>

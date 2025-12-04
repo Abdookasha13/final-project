@@ -10,9 +10,10 @@ const getCoursesByInsId = async (instructorId) => {
       }
     );
     // console.log(" courses:", response.data);
-    return response.data;
+  return Array.isArray(response.data) ? response.data : [];
   } catch (error) {
     console.error("Error fetching courses:", error);
+    return []
     ;
   }
 };

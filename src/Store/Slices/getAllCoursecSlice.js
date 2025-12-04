@@ -5,7 +5,7 @@ const fetchAllCourses = async () => {
   try {
     const res = await axios.get("http://localhost:1911/courses");
     console.log("Fetched Courses:", res.data);
-    return res.data;
+    return res.data?res.data:[];
   } catch (err) {
     console.error("Error fetching courses:", err);
     return [];

@@ -2,11 +2,11 @@ import "./CourseDetails.css";
 import Button from "../../../Components/Button/Button";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import getCourseById from "../../../utilities/GetCourseById";
 import VideoPlayer from "../../../Components/VideoPlayer/VideoPlayer";
 import { GoBookmark, GoCommentDiscussion } from "react-icons/go";
 import { LuMenu } from "react-icons/lu";
 import { AiOutlineUser } from "react-icons/ai";
+import getCoursesByInsId from "../../../utilities/getCoursesByInsId";
 
 const tabs = [
   { name: "Overview", icon: GoBookmark },
@@ -23,7 +23,7 @@ const CourseDetails = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getCourseById(courseId);
+      const data = await getCoursesByInsId(courseId);
       setCourse(data);
       setLessons(data.lessons);
     };

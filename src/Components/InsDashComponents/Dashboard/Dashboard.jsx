@@ -15,7 +15,7 @@ import {
 
 const StatCard = ({ title, value, subtitle, iconClass }) => (
   <div className="col-md-4 mb-3">
-    <div className="card shadow-sm">
+    <div className="card shadow-sm py-4">
       <div className=" card-body d-flex align-items-center">
         <div className="me-3">
           <i className={`${iconClass} fs-2`}></i>
@@ -42,23 +42,21 @@ const InstructorDashboard = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
- 
     const loadDashboardData = async () => {
       try {
         const localUser = JSON.parse(localStorage.getItem("user"));
         const userId = localUser?._id;
-        
+
         if (!userId) {
           setError("User not found. Please login.");
           setLoading(false);
           return;
         }
 
-      
         const [instructorData, coursesData, lessonsData] = await Promise.all([
           handleGetUserById(userId),
           getCoursesByInsId(userId),
-          getLessonsByIns(userId)
+          getLessonsByIns(userId),
         ]);
 
         const totalStudents = Array.isArray(coursesData)
@@ -68,7 +66,6 @@ const InstructorDashboard = () => {
             )
           : 0;
 
-       
         setInstructor(instructorData);
         setCourses(coursesData);
         setCounts({
@@ -76,7 +73,6 @@ const InstructorDashboard = () => {
           lessons: Array.isArray(lessonsData) ? lessonsData.length : 0,
           students: totalStudents,
         });
-
       } catch (err) {
         console.error("Error loading dashboard:", err);
         setError("Failed to load dashboard data.");
@@ -87,7 +83,7 @@ const InstructorDashboard = () => {
     };
 
     loadDashboardData();
-  }, []); 
+  }, []);
 
   if (loading) return <Loader />;
   if (error) return <div className="alert alert-danger">{error}</div>;
@@ -134,14 +130,21 @@ const InstructorDashboard = () => {
               <XAxis dataKey="title" />
               <YAxis />
               <Tooltip />
-            <Bar 
-  dataKey="studentsCount" 
-  fill="#0ab99d" 
-  radius={[10, 10, 0, 0]} 
-  barSize={courses.length <= 4 ? 500: courses.length <= 8 ? 40 : 30}
->
-  <LabelList dataKey="studentsCount" position="top" fill="#333" fontSize={12} />
-</Bar>
+              <Bar
+                dataKey="studentsCount"
+                fill="#0ab99d"
+                radius={[10, 10, 0, 0]}
+                barSize={
+                  courses.length <= 4 ? 500 : courses.length <= 8 ? 40 : 30
+                }
+              >
+                <LabelList
+                  dataKey="studentsCount"
+                  position="top"
+                  fill="#333"
+                  fontSize={12}
+                />
+              </Bar>
             </BarChart>
           </ResponsiveContainer>
         </div>

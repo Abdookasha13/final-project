@@ -21,7 +21,7 @@ const InsCourses = () => {
         }
 
         const data = await getCoursesByInsId(user._id);
-        setCourses(data || []); 
+        setCourses(data || []);
       } catch (err) {
         console.error("Error fetching courses:", err);
         setError("Failed to load courses.");
@@ -37,10 +37,8 @@ const InsCourses = () => {
     setCourses(courses.filter((c) => c._id !== courseId));
   };
 
-  // ✅ حالة التحميل
   if (loading) return <Loader />;
 
-  // ✅ حالة الخطأ
   if (error) {
     return (
       <div className="container px-0 mx-0">
@@ -82,7 +80,7 @@ const InsCourses = () => {
                 lessonsCount={course.lessonsCount}
                 courseDuration={formatTime(course.lessons)}
                 studentsCount={course.studentsCount}
-                category={course.category.name}
+                category={course.category?.name}
                 onDelete={handleDeleteSuccess}
                 bgColor={"#ffff"}
                 hideInstructorInfo={true}
