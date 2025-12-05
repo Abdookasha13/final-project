@@ -24,7 +24,7 @@ function ServiceDetails() {
                 <div className="row">
                   <div className="col-xl-6 col-lg-6 ">
                     <div className="serviceDetails-image">
-                      <img src={service?.icon} />
+                      <img src="https://ordainit.com/html/educate/assets/img/service/sv-1.jpg" />
                     </div>
                   </div>
                   <div className="col-xl-6 col-lg-6 webdesign">
