@@ -7,6 +7,8 @@ import {
   removeCourseFromCart,
 } from "../../../Store/Slices/cartSlice";
 import "./Cart.css";
+import handleAddToWish from "../../../utilities/handleAddToWish";
+import { toast } from "react-toastify";
 
 function Cart() {
   const dispatch = useDispatch();
@@ -20,6 +22,7 @@ function Cart() {
     dispatch(removeCourseFromCart(courseId));
   };
 
+
   const calculateTotal = () => {
     return cartItems
       .reduce(
@@ -28,6 +31,15 @@ function Cart() {
       )
       .toFixed(2);
   };
+const handleMoveToWishlist = async (courseId) => {
+  const success = await handleAddToWish(courseId);
+
+  if (success) {
+    handleRemove(courseId);
+  } else {
+    toast.error("Failed to move to wishlist");
+  }
+};
 
   // ---------- Empty Cart ----------
   if (!Array.isArray(cartItems) || cartItems.length === 0) {
@@ -122,6 +134,7 @@ function Cart() {
                       <button
                         className="btn btn-sm "
                         style={{ color: "#0ab99d" }}
+                         onClick={() =>  handleMoveToWishlist(course.courseId)}
                       >
                         Move to Wishlist
                       </button>

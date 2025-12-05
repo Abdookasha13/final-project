@@ -13,14 +13,16 @@ import { useEffect, useState } from "react";
 import handleGetUserById from "../../../utilities/handleGetUserById";
 
 const InstructorDashboard = () => {
+  const [profileImage, setProfileImage] = useState("");
   const location = useLocation();
-  const [instructor, setInstructor] = useState(null);
+  const [_, setInstructor] = useState(null);
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
     const userId = user?._id;
     const fetchUser = async () => {
       const data = await handleGetUserById(userId);
       setInstructor(data);
+      setProfileImage(data.profileImage);
     };
 
     fetchUser();
@@ -42,14 +44,18 @@ const InstructorDashboard = () => {
     if (/^\/instructor\/edit\/course\//.test(pathname)) {
       return "Edit Course";
     }
+    if (/^\/instructor\/edit\/lesson\//.test(pathname)) {
+      return "Edit Lesson";
+    }
 
     return pageTitles[location.pathname];
   };
   const pageTitle = getPageTitle();
 
-  const showSearch = location.pathname.startsWith("/instructor/courses") ||
-  location.pathname.startsWith("/instructor/lessons") ||
-  location.pathname.startsWith("/instructor/course/"); 
+  const showSearch =
+    location.pathname.startsWith("/instructor/courses") ||
+    location.pathname.startsWith("/instructor/lessons") ||
+    location.pathname.startsWith("/instructor/course/");
 
   const navLinks = [
     {
@@ -84,10 +90,7 @@ const InstructorDashboard = () => {
       {/* Sidebar */}
       <aside className="instructor-dash-sidebar bg-white border-end p-3 d-flex flex-column">
         <div className="d-flex align-items-center mb-4">
-          <img
-            src="https://ordainit.com/html/educate/assets/img/logo/logo-black.png"
-            alt="logo"
-          />
+          <img src="/Images/logo-nav.png" alt="logo" />
         </div>
 
         <ul className="nav flex-column mb-auto">
@@ -145,7 +148,7 @@ const InstructorDashboard = () => {
 
       {/* Main Area */}
       <div className="flex-grow-1 d-flex flex-column">
-        <nav className="navbar navbar-light bg-white border-bottom px-4 py-3">
+        <nav className="navbar navbar-light bg-white border-bottom px-4 py-1">
           <div className="container-fluid">
             <h5 className="fw-bold mb-0">{pageTitle}</h5>
 
@@ -154,12 +157,16 @@ const InstructorDashboard = () => {
                 <>
                   <Link
                     to={
-      location.pathname.startsWith("/instructor/courses")
-        ? "/instructor/add/course"
-        : `/instructor/add/lessons` 
-    }
+                      location.pathname.startsWith("/instructor/courses")
+                        ? "/instructor/add/course"
+                        : `/instructor/add/lessons`
+                    }
                     className="btn btn-sm "
-                    style={{ width: "100px",backgroundColor:"#0ab99d",color:"white" }}
+                    style={{
+                      width: "100px",
+                      backgroundColor: "#0ab99d",
+                      color: "white",
+                    }}
                   >
                     Add new
                   </Link>
@@ -172,11 +179,11 @@ const InstructorDashboard = () => {
               )}
 
               <img
-                src={instructor?.profileImage}
+                src={profileImage}
                 alt="Instructor"
                 className="rounded-circle"
-                width="40"
-                height="40"
+                width="70"
+                height="70"
               />
             </div>
           </div>
@@ -194,7 +201,7 @@ const InstructorDashboard = () => {
           toastClassName="udemy-toast"
         />
         <main className="p-4 bg-light flex-grow-1">
-          <Outlet />
+          <Outlet context={{ setProfileImage }} />
         </main>
       </div>
     </div>

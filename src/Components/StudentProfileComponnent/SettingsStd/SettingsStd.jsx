@@ -1,5 +1,4 @@
-import React from 'react'
-import  { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { jwtDecode } from 'jwt-decode'
@@ -7,14 +6,15 @@ import { toast } from "react-toastify";
 import handleImageUpload from "../../../utilities/handleImageUpload";
 import { useOutletContext } from "react-router-dom";
 
-const InsProfile = () => {
-  const { profileImage, setProfileImage } = useOutletContext() 
+
+const SettingsStd = () => {
+  const { profileImage, setProfileImage } = useOutletContext() // state مشتركة مع الأب
   const { register, handleSubmit, reset } = useForm()
   const [studentId, setStudentId] = useState(null)
   const [uploading, setUploading] = useState(false)
   const [imageUrl, setImageUrl] = useState("")
 
- 
+  // جلب بيانات الطالب
   useEffect(() => {
     const token = localStorage.getItem("token")
     if (!token) return
@@ -29,7 +29,7 @@ const InsProfile = () => {
         })
         .then((res) => {
           reset(res.data)
-          setProfileImage(res.data.profileImage) 
+          setProfileImage(res.data.profileImage) // يظهر الصورة في الأب
         })
         .catch((err) => console.error(err))
     } catch (err) {
@@ -56,12 +56,12 @@ const InsProfile = () => {
 
 const handleImageChange = async (e) => {
   const url = await handleImageUpload(e, null, setUploading, setImageUrl, "user_profiles");
-  if (url) setProfileImage(url); 
+  if (url) setProfileImage(url); // تحديث الصورة في البروفايل مباشرة بعد رفعها
 };
 
   return (
     <div className="container ">
-   
+      <h3 className="mb-4">My Profile</h3>
 
       <form onSubmit={handleSubmit(onSubmit)} className="row g-3">
 
@@ -74,17 +74,6 @@ const handleImageChange = async (e) => {
           <label className="form-label">Email</label>
           <input type="email" className="form-control" {...register("email")} />
         </div>
-
-         <div className="col-md-6">
-          <label className="form-label">Expertise</label>
-          <input type="text" className="form-control" {...register("expertise")} />
-        </div>
-
-            <div className="col-md-6">
-          <label className="form-label">Experience</label>
-          <input type="number" className="form-control" {...register("experience")} />
-        </div>
-
 
         <div className="col-md-6">
           <label className="form-label">Profile Image</label>
@@ -112,4 +101,4 @@ const handleImageChange = async (e) => {
   )
 }
 
-export default InsProfile
+export default SettingsStd

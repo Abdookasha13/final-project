@@ -76,9 +76,8 @@ const AddLesson = () => {
 
   return (
     <div className="container my-3">
-      <div className="card shadow-sm">
+      <div className="card shadow-sm p-4">
         <div className="card-body">
-          <h4 className="mb-4">{isEdit ? "Edit Lesson" : "Add New Lesson"}</h4>
           <form onSubmit={handleSubmit(onSubmit)}>
             {/* Select Course */}
             <div className="mb-3">

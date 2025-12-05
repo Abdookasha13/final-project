@@ -1,0 +1,18 @@
+/* لون الموقع الرئيسي */
+.bg-site-color {
+  background-color: #0ab99d !important;
+}
+
+/* Hover effect على الروابط */
+.sideBarr .nav-link:hover {
+  background-color: #d7eeea;
+ 
+  transition: 0.2s;
+}
+
+/* نص الروابط */
+.sideBarr .nav-link {
+  font-weight: 500;
+  color: #333;
+  text-decoration: none;
+}

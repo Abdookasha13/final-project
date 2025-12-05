@@ -9,7 +9,7 @@ import { coursesFetched } from "../../../Store/Slices/getAllCoursecSlice";
 
 function Courses() {
   const dispatch = useDispatch();
-  const courses = useSelector((state) => state.getAllCourses.data);
+  const courses = useSelector((state) => state.getAllCourses.data||[]);
   const isLoading = useSelector((state) => state.getAllCourses.isLoading);
 
   useEffect(() => {
@@ -20,6 +20,9 @@ function Courses() {
 
   if (isLoading) {
     return <Loader />;
+  }
+  if(!courses.length){
+    return <div>no courses hereee</div>
   }
 
   return (
