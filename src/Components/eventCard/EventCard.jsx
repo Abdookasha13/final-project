@@ -35,7 +35,7 @@ function EventCard({ event }) {
         <div className="eventcard-iteminfo justify-content-between d-flex flex-col flex-xl-row  gap-y-3">
           <span>
             <i className="fa-sharp fa-regular fa-clock"></i>
-            {t("event.time")}: {event.startTime[lang]} - {event.endTime[lang]}{" "}
+            {t("event.time")}: {event.startTime?.[lang] || ""} - {event.endTime?.[lang] || ""}{" "}
           </span>
 
           <span>
