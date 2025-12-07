@@ -6,7 +6,8 @@ import VideoPlayer from "../../../Components/VideoPlayer/VideoPlayer";
 import { GoBookmark, GoCommentDiscussion } from "react-icons/go";
 import { LuMenu } from "react-icons/lu";
 import { AiOutlineUser } from "react-icons/ai";
-import getCoursesByInsId from "../../../utilities/getCoursesByInsId";
+import getCourseById from "../../../utilities/getCourseById";
+import Loader from "../../../Components/Loader/Loader";
 
 const tabs = [
   { name: "Overview", icon: GoBookmark },
@@ -23,15 +24,22 @@ const CourseDetails = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getCoursesByInsId(courseId);
-      setCourse(data);
-      setLessons(data.lessons);
+      try {
+        const courseData = await getCourseById(courseId);
+        console.log("Course Data:", courseData);
+        setCourse(courseData);
+        setLessons(courseData.lessons || []);
+      } catch (error) {
+        console.error("Error fetching course details:", error);
+      }
     };
     fetchData();
   }, [courseId]);
-  // console.log(lessons);
 
-  if (!course) return <div className="text-center p-5">Loading...</div>;
+
+  if (!course) {
+    return <Loader></Loader>;
+  }
 
   const videoList = lessons.map((lesson) => ({
     id: lesson._id,
@@ -43,8 +51,6 @@ const CourseDetails = () => {
     isPreview: lesson.isPreview,
     order: lesson.order,
   }));
-  // console.log(course.instructor.profileImage);
-  // console.log(lessons);
 
   const renderTabContent = {
     Overview: (
