@@ -1,0 +1,44 @@
+/*=====================  funfact =======================*/
+.it-funfact-area {
+    background-image: url("https://ordainit.com/html/educate/assets/img/testimonial/testimonial-bg.jpg");
+  }
+  .theme-bg {
+    background: linear-gradient(90deg, #00b58b, #00b58b);
+  }
+  .it-funfact-bg-wrap {
+    padding: 40px 50px;
+  }
+  .it-funfact-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    color: #0a1b2b;
+    gap: 15px;
+  }
+  .it-funfact-icon {
+    background: #fff;
+    width: 70px;
+    height: 70px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .it-funfact-icon i {
+    font-size: 30px;
+  }
+  .it-funfact-content h6 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #0a1b2b;
+  }
+  .it-funfact-content span {
+    font-size: 15px;
+    color: #0a1b2b;
+  }
+  @media (max-width: 768px) {
+    .it-funfact-item {
+      margin-bottom: 20px;
+    }
+  }

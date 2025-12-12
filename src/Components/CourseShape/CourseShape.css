@@ -1,0 +1,126 @@
+/*==================== course =========================*/
+.it-course-area {
+    position: relative;
+    background-color: #f8f9fb;
+    overflow: hidden;
+    font-family: "Inter", sans-serif;
+  }
+  .pt-120 {
+    padding-top: 120px;
+  }
+  .pb-120 {
+    padding-bottom: 120px;
+  }
+  .mb-70 {
+    margin-bottom: 70px;
+  }
+  /* ====== الأشكال الجانبية ====== */
+  .it-course-shape-1,
+  .it-course-shape-2,
+  .it-course-shape-3,
+  .it-course-shape-4 {
+    position: absolute;
+    z-index: 1;
+  }
+  .it-course-shape-1 {
+    top: 0px;
+    right: 0px;
+  }
+  .it-course-shape-2 {
+    top: 220px;
+    right: 300px;
+  }
+  .it-course-shape-3 {
+    top: 180px;
+    left: 20px;
+  }
+  .it-course-shape-4 {
+    bottom: 60px;
+    right: 50px;
+  }
+  /* ====== عنوان القسم ====== */
+  .it-section-subtitle {
+    font-weight: 600;
+    font-size: 16px;
+    display: inline-flex;
+    gap: 8px;
+  }
+  .it-section-subtitle img {
+    height: 16px;
+  }
+  .it-section-title span {
+    position: relative;
+  }
+  .title-shape-2 {
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    z-index: -1;
+  }
+  
+  /* ====== Placeholder للزر ====== */
+  .btn-placeholder {
+    width: 250px;
+    height: 60px;
+    border-radius: 8px;
+    margin: 0 auto;
+  }
+  /* ====== الأنيميشن ====== */
+  /* حركة القلم */
+  @keyframes pencil-rotate {
+    0% {
+      transform: rotate(0deg);
+      transform-origin: bottom center;
+    }
+    50% {
+      transform: rotate(30deg);
+      transform-origin: bottom center;
+    }
+    100% {
+      transform: rotate(0deg);
+      transform-origin: bottom center;
+    }
+  }
+  .animate-pencil {
+    animation: pencil-rotate 4s ease-in-out infinite;
+  }
+  /* حركة القبعة */
+  @keyframes hat-bounce {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+  .animate-hat {
+    animation: hat-bounce 3s ease-in-out infinite;
+  }
+  /* دوران النجمة */
+  @keyframes star-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  .animate-star {
+    animation: star-spin 6s linear infinite;
+  }
+  /* ====== تجاوب الشاشات ====== */
+  @media (max-width: 992px) {
+    .it-section-title {
+      font-size: 32px;
+    }
+    .pt-120 {
+      padding-top: 80px;
+    }
+    .pb-120 {
+      padding-bottom: 80px;
+    }
+    .mb-70 {
+      margin-bottom: 50px;
+    }
+  }

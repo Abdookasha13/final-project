@@ -1,0 +1,121 @@
+/*================== testimonial ==========================*/
+.it-testimonial-area {
+    position: relative;
+    background-size: cover;
+    padding: 80px 0 120px 0; 
+    }
+    .it-testimonial-shape-1 img {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 320px;
+    }
+    /* ====== العنوان ====== */
+    .it-section-subtitle {
+    color: #0ab99d;
+    }
+    .it-section-title {
+    font-size: 38px;
+    font-weight: 700;
+    color: #0c2239;
+    position: relative;
+    z-index: 2;
+    }
+    .it-section-title .p-relative svg {
+    position: absolute;
+    bottom: -15px;
+    right: 0px;
+    z-index: -1;
+    }
+    /* ====== الأسهم ====== */
+    .it-testimonial-arrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 40px;
+    margin-left: 380px;
+    }
+    .it-testimonial-arrow button {
+    background: #0ab99d;
+    color: #fff;
+    border: none;
+    width: 45px;
+    height: 45px;
+    font-size: 18px;
+    cursor: pointer;
+    }
+    .it-testimonial-arrow button:hover {
+    background: #089b84;
+    }
+    /* ====== صندوق التستيموني ====== */
+    .it-testimonial-slide-wrap {
+    background: #0c2239;
+    padding: 40px 30px;
+    position: relative;
+    z-index: 2;
+    max-width: 1000px;
+    margin: 0 auto; /* لتوسيط الصندوق */
+    }
+    /* ====== الصور الجانبية ====== */
+    .it-testimonial-slide-nav-active {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    }
+    .it-testimonial-nav-item {
+    cursor: pointer;
+    opacity: 0.6;
+    transition: all 0.3s ease;
+    }
+    .it-testimonial-nav-item.active {
+    opacity: 1;
+    transform: scale(1.3);
+    }
+    .it-testimonial-nav-thumb img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 3px solid #0ab99d;
+    }
+    /* ====== النص داخل الصندوق ====== */
+    .it-testimonial-slide-info {
+    color: #fff;
+    padding: 0 20px;
+    }
+    .it-testimonial-user-name {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    }
+    .it-testimonial-slide-info span {
+    color: #0ab99d;
+    text-transform: uppercase;
+    font-size: 13px;
+    display: block;
+    margin-bottom: 15px;
+    }
+    /* ====== استجابة للموبايل ====== */
+    @media (max-width: 768px) {
+    .it-section-title {
+    font-size: 28px;
+    }
+    .it-testimonial-slide-wrap {
+    padding: 30px 20px;
+    }
+    .it-testimonial-slide-quote {
+    font-size: 35px;
+    }
+    .it-testimonial-nav-thumb img {
+    width: 55px;
+    height: 55px;
+    }
+    .it-section-title .p-relative svg {
+    bottom: -15px;
+    right: 0px;
+    }
+    .it-testimonial-arrow{
+    margin-left: 250px;
+    margin-bottom: 40px;
+    }
+    }
