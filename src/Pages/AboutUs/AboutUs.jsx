@@ -4,6 +4,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "../../Components/Button/Button";
 import CourseCard from "../../Components/coursecard/CourseCard";
 import TeacherCard from "../../Components/TeacherCard/TeacherCard";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCourses } from "../../Store/Slices/getAllCoursecSlice";
+import { Loader } from "lucide-react";
+import formatTime from "../../utilities/formatTime";
 
 // countersData moved to module scope so it's stable and doesn't trigger useEffect linter warning
 const countersData = [
@@ -50,8 +54,28 @@ const testimonialsData = [
 function AboutUs() {
   // -------------------- START COUNTER LOGIC --------------------
   const [counts, setCounts] = useState(countersData.map(() => 0));
+   const dispatch = useDispatch();
+  const courses = useSelector((state) => state.getAllCourses.data||[]);
+  const isLoading = useSelector((state) => state.getAllCourses.isLoading);
+
+  // useEffect(() => {
+  //   if(!courses.length){
+  //     dispatch(fetchCourses());
+     
+      
+  //   }
+  // }, [courses.length, dispatch]);
+  //  console.log(courses);
+
+
+
 
   useEffect(() => {
+    if(!courses.length){
+      dispatch(fetchCourses());
+     
+      
+    }
     const timers = countersData.map((counter, index) => {
       let start = 0;
       const end = counter.end;
@@ -76,7 +100,7 @@ function AboutUs() {
     });
 
     return () => timers.forEach((t) => clearInterval(t));
-  }, []);
+  }, [courses.length, dispatch]);
   // -------------------- END COUNTER LOGIC --------------------
 
   // -------------------- START TESTIMONIAL LOGIC --------------------
@@ -91,6 +115,12 @@ function AboutUs() {
     setCurrent(current === 0 ? length - 1 : current - 1);
   };
   // -------------------- END TESTIMONIAL LOGIC --------------------
+    if (isLoading) {
+    return <Loader />;
+  }
+  if(!courses.length){
+    return <div>no courses hereee</div>
+  }
 
   return (
     <>
@@ -415,7 +445,7 @@ function AboutUs() {
             </div>
 
             {/* ----------- مكان الكروت ----------- */}
-            <div className="col-xl-12">
+            {/* <div className="col-xl-12">
               <div className="cards-placeholder row justify-content-center">
                 <div className="col-md-6 col-lg-3 ">
                   <CourseCard imgSrc="https://ordainit.com/html/educate/assets/img/course/course-1-1.jpg" />
@@ -426,6 +456,30 @@ function AboutUs() {
                 <div className="col-md-6 col-lg-3">
                   <CourseCard imgSrc="https://ordainit.com/html/educate/assets/img/course/course-1-3.jpg" />
                 </div>
+              </div>
+            </div> */}
+                        <div className="col-xl-12">
+              <div className="cards-placeholder row ">
+                 <div className="col-md-6 col-lg-4 ">
+                {courses.map((course)=>
+  <CourseCard
+                imgSrc={course.thumbnailUrl}
+                title={course.title}
+                price={course.price}
+                discountPrice={course.discountPrice}
+                lessonsCount={course.lessonsCount}
+                courseDuration={formatTime(course.lessons)}
+                studentsCount={course.studentsCount}
+                courseId={course._id}
+                category={course.category?.name}
+                insImage={course.instructor?.profileImage}
+                insName={course.instructor?.name}
+                bgColor={"#f8f9fa"}
+                course={course}
+              />
+                ).slice(0,3)}
+               </div>
+                
               </div>
             </div>
 

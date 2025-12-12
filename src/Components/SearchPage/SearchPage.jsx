@@ -5,7 +5,9 @@ import "./SearchPage.css";
 import Loader from "../Loader/Loader";
 import CourseCard from "../coursecard/CourseCard";
 import formatTime from "../../utilities/formatTime";
-import { coursesFetched } from "../../Store/Slices/getAllCoursecSlice";
+import { fetchCourses } from "../../Store/Slices/getAllCoursecSlice";
+
+
 
 const SearchPage = () => {
   const { searchTerm } = useParams();
@@ -16,7 +18,7 @@ const SearchPage = () => {
   useEffect(() => {
     document.title = `Search results for "${searchTerm}"`;
     if(!courses.length){
-      dispatch(coursesFetched());
+      dispatch(fetchCourses());
     }
   }, [searchTerm, courses.length, dispatch]);
 

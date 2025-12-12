@@ -5,7 +5,9 @@ import { Link } from "react-router-dom";
 import Loader from "../../../Components/Loader/Loader";
 import CourseCard from "../../../Components/coursecard/CourseCard";
 import { useDispatch, useSelector } from "react-redux";
-import { coursesFetched } from "../../../Store/Slices/getAllCoursecSlice";
+import { fetchCourses } from "../../../Store/Slices/getAllCoursecSlice";
+
+
 
 function Courses() {
   const dispatch = useDispatch();
@@ -14,9 +16,12 @@ function Courses() {
 
   useEffect(() => {
     if(!courses.length){
-      dispatch(coursesFetched());
+      dispatch(fetchCourses());
+     
+      
     }
   }, [courses.length, dispatch]);
+   console.log(courses);
 
   if (isLoading) {
     return <Loader />;
