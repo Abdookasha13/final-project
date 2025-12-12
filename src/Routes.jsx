@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./Pages/Home/Home";
 import AboutUs from "./Pages/AboutUs/AboutUs";
 import Services from "./Pages/Services/Services";
@@ -26,6 +26,7 @@ function Routess() {
   return (
     <>
       <Routes>
+        <Route path="/" element={<Navigate to="/home" replace />} />
         <Route path="/home" element={<Home />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/services" element={<Services />} />
