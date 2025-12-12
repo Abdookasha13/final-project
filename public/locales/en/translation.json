@@ -1,0 +1,239 @@
+{
+  "navbar": {
+    "home": "Home",
+    "aboutUs": "About Us",
+    "services": "Services",
+    "pages": "Pages",
+    "blog": "Blog",
+    "contact": "Contact",
+    "contactUs": "Contact Us",
+    "courses": "Courses",
+    "courseDetails": "Course Details",
+    "teacher": "Teacher",
+    "teacherDetails": "Teacher Details",
+    "studentProfile": "Student Profile",
+    "event": "Event",
+    "checkout": "Checkout",
+    "testimonial": "Testimonial",
+    "price": "Price",
+    "cart": "Cart",
+    "registration": "Registration",
+    "faq": "FAQ",
+    "signIn": "Sign In",
+    "error": "Error",
+    "instructorDashboard": "Instructor Dashboard",
+    "blogSidebar": "Blog Sidebar",
+    "blogDetails": "Blog Details"
+  },
+  "header": {
+    "help": "Help",
+    "support": "Support",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Develop Your skills with online courses From A Pro",
+    "subtitle": "Get the best learning experience with our specialized courses",
+    "description": "Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "exploreAllCourses": "Explore All Courses",
+    "watchNow": "Watch Now",
+    "totalStudent": "Total Student",
+    "studentCount": "30k+"
+  },
+  "categories": {
+    "title": "CATEGORIES",
+    "subtitle": "Browse By Categories",
+    "allCategories": "All Categories",
+    "webDesign": "Web Design",
+    "graphicDesign": "Graphic Design",
+    "materialUI": "Material UI",
+    "itAndSoftware": "IT And Software",
+    "salesMarketing": "Sales Marketing",
+    "artHumanities": "Art & Humanities",
+    "mobileApp": "Mobile App",
+    "finance": "Finance",
+    "coursesCount": "25 Courses"
+  },
+  "about": {
+    "title": "About Us",
+    "subtitle": "Learn & Grow your skills From anywhere",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "flexibleClasses": "Flexible Classes",
+    "flexibleDescription": "Suspendisse ultrice gravida dictum fusce placerat ultricies integer quis auctor elit sed vulputate mi sit.",
+    "sharingScreen": "Sharing a Screen",
+    "presenterControl": "Presenter Control",
+    "moreAboutUs": "More About Us",
+    "weAreAlwaysEnsure": "We Are Always Ensure Best Course For Your Learning",
+    "admissionOpen": "Admission Open"
+  },
+  "video": {
+    "joinSession": "Join Our New Session",
+    "callToEnroll": "Call To Enroll Your Child",
+    "joinWithUs": "Join With US",
+    "watchNow": "watch now"
+  },
+  "whyChooseUs": {
+    "title": "WHY CHOOSE US",
+    "subtitle": "Creating A Community Of Life Long Learners.",
+    "worldClassTrainers": "World Class Trainers",
+    "easyLearning": "Easy Learning",
+    "flexible": "Flexible",
+    "affordablePrice": "Affordable Price",
+    "featureDescription": "Gravida dictum fusce placerat ultricies integer"
+  },
+  "instructor": {
+    "title": "OUR INSTRUCTOR",
+    "subtitle": "Meet Our Expert Instructor",
+    "juniorInstructor": "Junior Instructor",
+    "contactUs": "Contact Us",
+    "exploreCourse": "Explore Course",
+    "contactTeacher": "Contact Teacher"
+  },
+  "career": {
+    "title": "Choose your career",
+    "subtitle": "Discover your Gain",
+    "startFromToday": "Start from today",
+    "joinTrainingCourses": "Join our training courses & Build your skill.",
+    "joinNow": "Join now →"
+  },
+  "blog": {
+    "title": "BLOG POST",
+    "subtitle": "Post Popular Post.",
+    "allBlogPost": "All Blog Post"
+  },
+  "newsletter": {
+    "title": "Join Our Newsletter",
+    "description": "Subscribe our newsletter to get our latest update & news.",
+    "placeholder": "Enter your email:",
+    "subscribeNow": "Subscribe Now"
+  },
+  "footer": {
+    "description": "Interdum velit laoreet id donec ultrices tincidunt arcu. Tincidunt tortor aliquam nulla facilisi cras fermentum odio eu.",
+    "ourServices": "Our Services:",
+    "webDevelopment": "Web development",
+    "uiUxDesign": "UI/UX Design",
+    "management": "Management",
+    "digitalMarketing": "Digital Marketing",
+    "blogNews": "Blog News",
+    "quickLinks": "Quick Links:",
+    "templates": "templates",
+    "blogAndArticle": "blog and article",
+    "integrations": "integrations",
+    "webinars": "webinars",
+    "privacyPolicy": "privacy &policy",
+    "gallery": "Gallery",
+    "copyright": "Copyright © 2023 Educate || All Rights Reserved"
+  },
+  "contact": {
+    "getInTouch": "Get in Touch",
+    "description": "Suspendisse ultrice gravida dictum fusce placerat ultricies integer",
+    "ourAddress": "Our Address",
+    "address": "1564 Goosetown Drive Matthews, NC 28105",
+    "hoursOfOperation": "Hours of Operation",
+    "workingHours": "Mon - Fri: 9.00am to 5.00pm",
+    "holiday": "[2nd sat Holiday]",
+    "contact": "Contact",
+    "phone": "+99-35895-4565",
+    "email": "supportyou@info.com",
+    "customerCare": "Customer Care"
+  },
+  "form": {
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "subject": "Subject",
+    "message": "Message",
+    "sendMessage": "Send Message",
+    "required": "This field is required",
+    "minLength": "Must be at least 3 characters",
+    "invalidEmail": "Invalid email address",
+    "phoneLength": "Must be 11 digits",
+    "messageMinLength": "Must be at least 10 characters"
+  },
+  "registration": {
+    "signUp": "Sign Up",
+    "name": "Name",
+    "email": "Email",
+    "emailAddress": "Email address",
+    "profilePicture": "Profile Picture",
+    "uploadImage": "Upload Image",
+    "uploading": "Uploading...",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "minPasswordLength": "Must be at least 6 characters",
+    "confirmPasswordPlaceholder": "Please confirm your password",
+    "passwordsDoNotMatch": "Passwords do not match",
+    "areaOfExpertise": "Area of Expertise",
+    "yearsOfExperience": "Years of Experience",
+    "enterExpertise": "Please enter your area of expertise",
+    "enterExperience": "Please enter your experience",
+    "expertisePlaceholder": "e.g. Web Development",
+    "experiencePlaceholder": "e.g. 3",
+    "becomeInstructor": "Want to become an Instructor",
+    "submitNow": "Submit Now",
+    "required": "This field is required",
+    "minLength": "Must be at least 3 characters"
+  },
+  "signIn": {
+    "signIn": "Sign In",
+    "email": "Email *",
+    "password": "Password *",
+    "enterEmail": "Enter your email",
+    "enterPassword": "Enter your password",
+    "emailRequired": "Email is required",
+    "passwordRequired": "Password is required",
+    "invalidEmailFormat": "Invalid email format",
+    "passwordMinLength": "Password must be at least 6 characters",
+    "forgotPassword": "Forgot Password?",
+    "rememberMe": "Remember me",
+    "dontHaveAccount": "Don't have an account?",
+    "signUp": "Sign Up"
+  },
+  "error": {
+    "title": "SORRY, PAGE NOT FOUND!",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "backToHome": "Back To Home"
+  },
+  "sidebar": {
+    "description": "Suspendisse interdum consectetur libero id. Fermentum leo vel orci porta non. Euismod viverra nibh cras pulvinar suspen.",
+    "getInTouch": "Get In Touch",
+    "email": "Email",
+    "emailValue": "hello@gmail.com",
+    "phone": "Phone",
+    "phoneValue": "(00) 456 1122 7890",
+    "location": "Location",
+    "locationValue": "Riverside 255, San Francisco, USA"
+  },
+  "studentProfile": {
+    "logout": "Logout",
+    "enrolledCourses": "Enrolled Courses",
+    "inProgressCourses": "In Progress Courses",
+    "finishedCourses": "Finished Courses"
+  },
+  "instructorDashboard": {
+    "welcomeBack": "Welcome back",
+    "overviewText": "Here's a quick overview of your courses and activity."
+  },
+  "faq": {
+    "question1": "Why do students prefer online learning?",
+    "question2": "Where should I study abroad?",
+    "question3": "How can I contact a school directly?",
+    "question4": "How do I find a school where I want to study?",
+    "question5": "How does it create content?"
+  },
+  "common": {
+    "button": {
+      "contactUs": "Contact Us",
+      "exploreCourses": "Explore Courses",
+      "joinNow": "Join Now",
+      "learnMore": "Learn More",
+      "getStarted": "Get Started",
+      "submit": "Submit",
+      "cancel": "Cancel",
+      "save": "Save",
+      "delete": "Delete",
+      "edit": "Edit",
+      "close": "Close"
+    }
+  },
+  "Get in Touch": "Get in Touch"
+}

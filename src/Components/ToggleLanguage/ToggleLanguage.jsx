@@ -1,8 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./ToggleLanguage.css";
+import { useTranslation } from "react-i18next";
 
 const ToggleLanguage = () => {
   const [isChecked, setIsChecked] = useState(false);
+  const { i18n } = useTranslation();
+
+  useEffect(() => {
+    if (isChecked) {
+      i18n.changeLanguage("ar");
+    } else {
+      i18n.changeLanguage("en");
+    }
+  }, [isChecked, i18n]);
 
   return (
     <div className="flipswitch">

@@ -1,18 +1,16 @@
-
-
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../Contact/Contact.css";
 import "../../Components/Socialicons/Socialicons.css";
-
 import Contactbox from "../../Components/Contactbox/Contactbox";
 import { FaArrowDown, FaLocationDot } from "react-icons/fa6";
 import { TbClockHour5Filled } from "react-icons/tb";
 import { BsFillTelephoneFill } from "react-icons/bs";
-
 import Form from "../../Components/Form/Form";
 import Socialicons from "../../Components/Socialicons/Socialicons";
+import { useTranslation } from "react-i18next";
 
 const Contact = () => {
+  const { t } = useTranslation();
   return (
     <>
       <div className="container contactbox-container ">
@@ -27,34 +25,39 @@ const Contact = () => {
             {/* 1-leftone */}
             <div className="col-xl-7  rightsec">
               <div className="texts">
-                <h4 className="contact-title">Get in Touch</h4>
+                <h4 className="contact-title">{t("contact.getInTouch")}</h4>
                 <div className="contact-desc">
-                  <p>
-                    Suspendisse ultrice gravida dictum fusce placerat ultricies
-                    integer
-                  </p>
+                  <p>{t("contact.description")}</p>
                 </div>
               </div>
               <div className="contact-box">
                 <ul className="contact-list">
                   <li>
-                    <Contactbox Icon={FaLocationDot} label="Our Address">
-                      <a href="#">1564 Goosetown Drive Matthews, NC 28105</a>
+                    <Contactbox
+                      Icon={FaLocationDot}
+                      label={t("contact.ourAddress")}
+                    >
+                      <a href="#">{t("contact.address")}</a>
                     </Contactbox>
                   </li>
 
                   <li className="contact-spaced">
                     <Contactbox
                       Icon={TbClockHour5Filled}
-                      label="Hours of Operation"
+                      label={t("contact.hoursOfOperation")}
                     >
-                      <a href="#">Mon - Fri: 9.00am to 5.00pm</a>
-                      <span className="contact-label">[2nd sat Holiday]</span>
+                      <a href="#">{t("contact.workingHours")}</a>
+                      <span className="contact-label">
+                        {t("contact.holiday")}
+                      </span>
                     </Contactbox>
                   </li>
 
                   <li>
-                    <Contactbox Icon={BsFillTelephoneFill} label="Contact">
+                    <Contactbox
+                      Icon={BsFillTelephoneFill}
+                      label={t("contact.contact")}
+                    >
                       <a href="#">+99-35895-4565</a>
                       <a href="#">supportyou@info.com</a>
                     </Contactbox>
@@ -66,7 +69,7 @@ const Contact = () => {
                 <div className="linktitle">
                   <a href="#" className="customer-link">
                     <FaArrowDown className="arrow-icon" />
-                    Customer Care
+                    {t("contact.customerCare")}
                   </a>
                 </div>
                 <div className=" d-flex gap-2">

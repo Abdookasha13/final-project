@@ -6,8 +6,10 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import handleImageUpload from "../../../utilities/handleImageUpload";
 import handleRegistrationSubmit from "../../../utilities/handleRegistrationSubmit";
+import { useTranslation } from "react-i18next";
 
 const Registration = () => {
+  const { t } = useTranslation();
   const [profileImageUrl, setProfileImageUrl] = useState("");
   const [uploading, setUploading] = useState(false);
   const [preview, setPreview] = useState(null);
@@ -31,24 +33,26 @@ const Registration = () => {
       <div className="row align-items-stretch min-vh-100 d-flex">
         {/* FORM SECTION */}
         <div className="col-lg-6 col-md-12 p-5 bg-light rounded-start shadow-sm d-flex flex-column justify-content-center">
-          <h2 className="pb-4 fw-bold text-uppercase">Sign Up</h2>
+          <h2 className="pb-4 fw-bold text-uppercase">
+            {t("registration.signUp")}
+          </h2>
 
           <form onSubmit={handleSubmit(onSubmit)}>
             {/* Name */}
             <div className="form-group">
-              <label htmlFor="exampleInputName">Name</label>
+              <label htmlFor="exampleInputName">{t("registration.name")}</label>
               <input
                 type="text"
                 {...register("name", {
-                  required: "This field is required",
+                  required: t("registration.required"),
                   minLength: {
                     value: 3,
-                    message: "Must be at least 3 characters",
+                    message: t("registration.minLength"),
                   },
                 })}
                 className="form-control form-control-custom"
                 id="exampleInputName"
-                placeholder="Name"
+                placeholder={t("registration.name")}
               />
               {errors.name && (
                 <small className="text-danger">{errors.name.message}</small>
@@ -57,19 +61,21 @@ const Registration = () => {
 
             {/* Email */}
             <div className="form-group mt-3">
-              <label htmlFor="exampleInputEmail">Email address</label>
+              <label htmlFor="exampleInputEmail">
+                {t("registration.emailAddress")}
+              </label>
               <input
                 {...register("email", {
-                  required: "This field is required",
+                  required: t("registration.required"),
                   pattern: {
                     value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                    message: "Invalid email address",
+                    message: t("form.invalidEmail"),
                   },
                 })}
                 type="email"
                 className="form-control form-control-custom"
                 id="exampleInputEmail"
-                placeholder="Email"
+                placeholder={t("registration.email")}
               />
               {errors.email && (
                 <small className="text-danger">{errors.email.message}</small>
@@ -78,7 +84,7 @@ const Registration = () => {
 
             {/* Profile Image */}
             <div className="form-group mt-3">
-              <label>Profile Picture</label>
+              <label>{t("registration.profilePicture")}</label>
               <div className="row align-items-center">
                 <div className="custom-file-upload col-md-6">
                   <input
@@ -98,7 +104,9 @@ const Registration = () => {
                     disabled={uploading}
                   />
                   <label htmlFor="profileImage" className="upload-btn">
-                    {uploading ? "Uploading..." : "Upload Image"}
+                    {uploading
+                      ? t("registration.uploading")
+                      : t("registration.uploadImage")}
                   </label>
                 </div>
 
@@ -114,18 +122,18 @@ const Registration = () => {
             <div className="row mt-3">
               <div className="col-md-6">
                 <div className="form-group">
-                  <label>Password</label>
+                  <label>{t("registration.password")}</label>
                   <input
                     {...register("password", {
-                      required: "This field is required",
+                      required: t("registration.required"),
                       minLength: {
                         value: 6,
-                        message: "Must be at least 6 characters",
+                        message: t("registration.minPasswordLength"),
                       },
                     })}
                     type="password"
                     className="form-control form-control-custom"
-                    placeholder="Password"
+                    placeholder={t("registration.password")}
                   />
                   {errors.password && (
                     <small className="text-danger">
@@ -137,16 +145,17 @@ const Registration = () => {
 
               <div className="col-md-6">
                 <div className="form-group">
-                  <label>Confirm Password</label>
+                  <label>{t("registration.confirmPassword")}</label>
                   <input
                     {...register("confirmPassword", {
-                      required: "Please confirm your password",
+                      required: t("registration.confirmPasswordPlaceholder"),
                       validate: (value) =>
-                        value === watch("password") || "Passwords do not match",
+                        value === watch("password") ||
+                        t("registration.passwordsDoNotMatch"),
                     })}
                     type="password"
                     className="form-control form-control-custom"
-                    placeholder="Confirm Password"
+                    placeholder={t("registration.confirmPassword")}
                   />
                   {errors.confirmPassword && (
                     <small className="text-danger">
@@ -161,14 +170,14 @@ const Registration = () => {
             {isInstructor && (
               <>
                 <div className="form-group mt-3">
-                  <label>Area of Expertise</label>
+                  <label>{t("registration.areaOfExpertise")}</label>
                   <input
                     {...register("expertise", {
-                      required: "Please enter your area of expertise",
+                      required: t("registration.enterExpertise"),
                     })}
                     type="text"
                     className="form-control form-control-custom"
-                    placeholder="e.g. Web Development"
+                    placeholder={t("registration.expertisePlaceholder")}
                   />
                   {errors.expertise && (
                     <small className="text-danger">
@@ -178,14 +187,14 @@ const Registration = () => {
                 </div>
 
                 <div className="form-group mt-3">
-                  <label>Years of Experience</label>
+                  <label>{t("registration.yearsOfExperience")}</label>
                   <input
                     {...register("experience", {
-                      required: "Please enter your experience",
+                      required: t("registration.enterExperience"),
                     })}
                     type="number"
                     className="form-control form-control-custom"
-                    placeholder="e.g. 3"
+                    placeholder={t("registration.experiencePlaceholder")}
                   />
                   {errors.experience && (
                     <small className="text-danger">
@@ -205,22 +214,26 @@ const Registration = () => {
                 {...register("isInstructor")}
               />
               <label className="form-check-label" htmlFor="becomeInstructor">
-                Want to become an Instructor
+                {t("registration.becomeInstructor")}
               </label>
             </div>
 
             {/* Submit */}
             <button type="submit" className="border-0 bg-transparent p-0">
-              <Button disabled={uploading}>Submit Now</Button>
+              <Button disabled={uploading}>
+                {t("registration.submitNow")}
+              </Button>
             </button>
           </form>
         </div>
 
         {/* IMAGE SECTION */}
-        <div
-          className="col-lg-6 d-none d-lg-block p-0 m-0 bg-light"
-        >
-          <img src="Images/signup.svg" alt="" style={{ width: "100%", height: "100%", objectFit: "contain" }} />
+        <div className="col-lg-6 d-none d-lg-block p-0 m-0 bg-light">
+          <img
+            src="Images/signup.svg"
+            alt=""
+            style={{ width: "100%", height: "100%", objectFit: "contain" }}
+          />
         </div>
       </div>
     </div>

@@ -5,11 +5,10 @@ import TeacherCard from "../../Components/TeacherCard/TeacherCard";
 import Testimonials from "../../Components/Testimonials/Testimonials.jsx";
 import Funfact from "../../Components/Funfact/Funfact.jsx";
 import CourseShape from "../../Components/CourseShape/CourseShape.jsx";
-
+import { useTranslation } from "react-i18next";
 
 function AboutUs() {
-  
- 
+  const { t } = useTranslation();
 
   return (
     <>
@@ -50,18 +49,17 @@ function AboutUs() {
                   alt="icon"
                   className="subtitle-icon"
                 />
-                About Us
+                {t("about.title")}
               </span>
 
               <h2 className="it-section-title-3 pb-3">
-                We Are Always Ensure Best Course For Your <span>Learning</span>
+                {t("about.weAreAlwaysEnsure").split("Learning")[0]}{" "}
+                <span>
+                  {t("about.weAreAlwaysEnsure").split(" ").slice(-1)[0]}
+                </span>
               </h2>
 
-              <p className="it-about-desc">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam.
-              </p>
+              <p className="it-about-desc">{t("about.description")}</p>
             </div>
 
             <div className="it-about-3-mv-box mt-4">
@@ -73,13 +71,9 @@ function AboutUs() {
                     </div>
                     <div className="it-about-3-mv-item">
                       <span className="it-about-3-mv-title">
-                        Sharing a Screen
+                        {t("about.sharingScreen")}
                       </span>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do tempor incididunt ut labore et dolore magna
-                        aliqua.
-                      </p>
+                      <p>{t("about.description")}</p>
                     </div>
                   </div>
                 </div>
@@ -91,13 +85,9 @@ function AboutUs() {
                     </div>
                     <div className="it-about-3-mv-item">
                       <span className="it-about-3-mv-title">
-                        Presenter Control
+                        {t("about.presenterControl")}
                       </span>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do tempor incididunt ut labore et dolore magna
-                        aliqua.
-                      </p>
+                      <p>{t("about.description")}</p>
                     </div>
                   </div>
                 </div>
@@ -106,7 +96,7 @@ function AboutUs() {
 
             {/* Button */}
             <div className="it-about-3-btn-box position-relative mt-4">
-              <Button>Admission Open</Button>
+              <Button>{t("about.admissionOpen")}</Button>
               <div className="it-about-3-left-shape-3 d-none d-xl-block">
                 <img
                   src="https://ordainit.com/html/educate/assets/img/about/about-3-shap-3.png"
@@ -119,13 +109,13 @@ function AboutUs() {
       </div>
 
       {/* ----------- Fun Fact Section ----------- */}
-      <Funfact/>
+      <Funfact />
 
       {/* ----------- Testimonial Section ----------- */}
-      <Testimonials/>
+      <Testimonials />
 
       {/* ----------- Course Section ----------- */}
-      <CourseShape/>
+      <CourseShape />
 
       {/* ----------- Teacher Section ----------- */}
       <div className="it-team-3-area p-relative z-index pt-110 pb-90">
@@ -146,14 +136,14 @@ function AboutUs() {
                     src="https://ordainit.com/html/educate/assets/img/team/bok.svg"
                     alt=""
                   />
-                  Teacher
+                  {t("instructor.title").split(" ")[1]}
                   <img
                     src="https://ordainit.com/html/educate/assets/img/team/bok.svg"
                     alt=""
                   />
                 </span>
                 <h2 className="it-section-title-3 text-white">
-                  Meet Our Expert Instructor
+                  {t("instructor.subtitle")}
                 </h2>
                 {/* مكان الكروت */}
                 <div className="it-team-3-wrapper row justify-content-center">

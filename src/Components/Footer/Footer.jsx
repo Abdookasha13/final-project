@@ -1,8 +1,9 @@
 import Socialicons from "../Socialicons/Socialicons";
-
+import { useTranslation } from "react-i18next";
 import "./Footer.css";
 
 function Footer() {
+  const { t } = useTranslation();
   return (
     <>
       <div className="footer">
@@ -13,10 +14,7 @@ function Footer() {
               <div className="footer-logo pb-4">
                 <img src="/Images/footer-logo.png" alt="" />
               </div>
-              <p className="pb-3">
-                Interdum velit laoreet id donec ultrices tincidunt arcu.
-                Tincidunt tortor aliquam nulla facilisi cras fermentum odio eu.
-              </p>
+              <p className="pb-3">{t("footer.description")}</p>
 
               <div className="d-flex gap-2">
                 <Socialicons wrapperClass="footer-social" />
@@ -26,37 +24,37 @@ function Footer() {
             {/* ===== Center Footer ===== */}
 
             <div className="left-center-footer col-sm-6 col-lg-4 col-xl-3">
-              <h4 className="footer-title">Our Services:</h4>
+              <h4 className="footer-title">{t("footer.ourServices")}</h4>
               <div className="footer-list">
                 <ul>
                   <li>
                     <a href="#">
                       <i className="fa-solid fa-angle-right"></i>
-                      <span>Web development</span>
+                      <span>{t("footer.webDevelopment")}</span>
                     </a>
                   </li>
                   <li>
                     <a href="#">
                       <i className="fa-solid fa-angle-right"></i>
-                      <span>UI/UX Design</span>
+                      <span>{t("footer.uiUxDesign")}</span>
                     </a>
                   </li>
                   <li>
                     <a href="#">
                       <i className="fa-solid fa-angle-right"></i>
-                      <span>Management</span>
+                      <span>{t("footer.management")}</span>
                     </a>
                   </li>
                   <li>
                     <a href="#">
                       <i className="fa-solid fa-angle-right"></i>
-                      <span>Digital Marketing</span>
+                      <span>{t("footer.digitalMarketing")}</span>
                     </a>
                   </li>
                   <li>
                     <a href="#">
                       <i className="fa-solid fa-angle-right"></i>
-                      <span>Blog News</span>
+                      <span>{t("footer.blogNews")}</span>
                     </a>
                   </li>
                 </ul>
@@ -64,37 +62,37 @@ function Footer() {
             </div>
 
             <div className="right-center-footer col-sm-6 col-lg-4 col-xl-2">
-              <h4 className="footer-title">Quick Links:</h4>
+              <h4 className="footer-title">{t("footer.quickLinks")}</h4>
               <div className="footer-list">
                 <ul>
                   <li>
                     <a href="#">
                       <i className="fa-solid fa-angle-right"></i>
-                      <span>templates</span>
+                      <span>{t("footer.templates")}</span>
                     </a>
                   </li>
                   <li>
                     <a href="#">
                       <i className="fa-solid fa-angle-right"></i>
-                      <span>blog and article</span>
+                      <span>{t("footer.blogAndArticle")}</span>
                     </a>
                   </li>
                   <li>
                     <a href="#">
                       <i className="fa-solid fa-angle-right"></i>
-                      <span>integrations</span>
+                      <span>{t("footer.integrations")}</span>
                     </a>
                   </li>
                   <li>
                     <a href="#">
                       <i className="fa-solid fa-angle-right"></i>
-                      <span>webinars</span>
+                      <span>{t("footer.webinars")}</span>
                     </a>
                   </li>
                   <li>
                     <a href="#">
                       <i className="fa-solid fa-angle-right"></i>
-                      <span>privacy &amp;policy</span>
+                      <span>{t("footer.privacyPolicy")}</span>
                     </a>
                   </li>
                 </ul>
@@ -103,7 +101,7 @@ function Footer() {
 
             {/* ===== Right Footer ===== */}
             <div className="col-sm-6 col-lg-4 col-xl-3 mb-5 right-footer">
-              <h4 className="footer-title">Gallery</h4>
+              <h4 className="footer-title">{t("footer.gallery")}</h4>
               <div className="row g-2">
                 <div className="col-4">
                   <img
@@ -151,10 +149,7 @@ function Footer() {
           <div className="row">
             <div className="col-12 itfadeUp">
               <div className="copyright-text text-center">
-                <p>
-                  Copyright © 2023 <a href="#">Educate </a> || All Rights
-                  Reserved
-                </p>
+                <p>{t("footer.copyright")}</p>
               </div>
             </div>
           </div>

@@ -7,8 +7,10 @@ import { PiShoppingCartBold } from "react-icons/pi";
 import { useSelector } from "react-redux";
 import { FaSearch } from "react-icons/fa";
 import SearchInput from "../SearchInput/SearchInput";
+import { useTranslation } from "react-i18next";
 
 function Navbar() {
+  const { t } = useTranslation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
   const [isSearch, setIsSearch] = useState(false);
@@ -46,77 +48,84 @@ function Navbar() {
                 <ul>
                   {/* ===========home================= */}
                   <li>
-                    <NavLink to="/home">Home</NavLink>
+                    <NavLink to="/home">{t("navbar.home")}</NavLink>
                   </li>
                   {/* ============about us========================== */}
                   <li>
-                    <NavLink to="/about">About Us</NavLink>
+                    <NavLink to="/about">{t("navbar.aboutUs")}</NavLink>
                   </li>
                   {/* ============services========================== */}
                   <li>
-                    <NavLink to="/services">Services</NavLink>
+                    <NavLink to="/services">{t("navbar.services")}</NavLink>
                   </li>
                   {/* ============pages========================== */}
                   <li className="dropdwn">
                     <NavLink to="/pages" className="dropdwn-toggle">
-                      Pages <i className="fa-solid fa-chevron-down"></i>
+                      {t("navbar.pages")}{" "}
+                      <i className="fa-solid fa-chevron-down"></i>
                     </NavLink>
                     <ul className="dropdwn-menu pages-menue">
                       <div>
                         <li>
-                          <NavLink to="/courses">Courses</NavLink>
+                          <NavLink to="/courses">{t("navbar.courses")}</NavLink>
                         </li>
                         <li>
-                          <NavLink to="/course/details">Course Details</NavLink>
+                          <NavLink to="/course/details">
+                            {t("navbar.courseDetails")}
+                          </NavLink>
                         </li>
                         <li>
-                          <NavLink to="/teacher">Teacher</NavLink>
+                          <NavLink to="/teacher">{t("navbar.teacher")}</NavLink>
                         </li>
                         <li>
                           <NavLink to="/teacher/details">
-                            Teacher Details
+                            {t("navbar.teacherDetails")}
                           </NavLink>
                         </li>
                         <li>
                           <NavLink to="stdprofile/mycourses">
-                           Student Profile
+                            {t("navbar.studentProfile")}
                           </NavLink>
                         </li>
                         <li>
-                          <NavLink to="/events">Event</NavLink>
+                          <NavLink to="/events">{t("navbar.event")}</NavLink>
                         </li>
                       </div>
                       <div>
                         <li>
-                          <NavLink to="/">Checkout</NavLink>
+                          <NavLink to="/">{t("navbar.checkout")}</NavLink>
                         </li>
                         <li>
-                          <NavLink to="/testimonial">Testimonial</NavLink>
+                          <NavLink to="/testimonial">
+                            {t("navbar.testimonial")}
+                          </NavLink>
                         </li>
                         <li>
-                          <NavLink to="/price">Price</NavLink>
+                          <NavLink to="/price">{t("navbar.price")}</NavLink>
                         </li>
                         <li>
-                          <NavLink to="/cart">Cart</NavLink>
+                          <NavLink to="/cart">{t("navbar.cart")}</NavLink>
                         </li>
                       </div>
 
                       <div>
                         <li>
-                          <NavLink to="/register">Registration</NavLink>
+                          <NavLink to="/register">
+                            {t("navbar.registration")}
+                          </NavLink>
                         </li>
                         <li>
-                          <NavLink to="/faqs">Faq</NavLink>
+                          <NavLink to="/faqs">{t("navbar.faq")}</NavLink>
                         </li>
                         <li>
-                          <NavLink to="/sign/in">Sign In</NavLink>
+                          <NavLink to="/sign/in">{t("navbar.signIn")}</NavLink>
                         </li>
                         <li>
-                          <NavLink to="*">Error</NavLink>
+                          <NavLink to="*">{t("navbar.error")}</NavLink>
                         </li>
                         <li>
                           <NavLink to="/instructor/dashboard">
-                            Instructor Dashboard
+                            {t("navbar.instructorDashboard")}
                           </NavLink>
                         </li>
                       </div>
@@ -125,25 +134,30 @@ function Navbar() {
                   {/* ============blog========================== */}
                   <li className="dropdwn">
                     <NavLink to="/blog" className="dropdwn-toggle">
-                      Blog <i className="fa-solid fa-chevron-down"></i>
+                      {t("navbar.blog")}{" "}
+                      <i className="fa-solid fa-chevron-down"></i>
                     </NavLink>
                     <ul className="dropdwn-menu blog-menue">
                       <div>
                         <li>
-                          <NavLink to="/blog">Blog</NavLink>
+                          <NavLink to="/blog">{t("navbar.blog")}</NavLink>
                         </li>
                         <li>
-                          <NavLink to="/blog/sidebar">Blog Sidebar</NavLink>
+                          <NavLink to="/blog/sidebar">
+                            {t("navbar.blogSidebar")}
+                          </NavLink>
                         </li>
                         <li>
-                          <NavLink to="/blog/details">Blog Details</NavLink>
+                          <NavLink to="/blog/details">
+                            {t("navbar.blogDetails")}
+                          </NavLink>
                         </li>
                       </div>
                     </ul>
                   </li>
                   {/* ============contact========================== */}
                   <li>
-                    <NavLink to="/contact">Contact</NavLink>
+                    <NavLink to="/contact">{t("navbar.contact")}</NavLink>
                   </li>
                 </ul>
               </nav>
@@ -158,17 +172,19 @@ function Navbar() {
                     setIsSearch(!isSearch);
                   }}
                 />
-                {!isSearch && <div className="cart-wrapper">
-                  <Link to="/cart">
-                    <PiShoppingCartBold size={28} className="cart-icon" />
-                    <span className="cart-counter">{cartItems}</span>
-                  </Link>
-                </div>}
+                {!isSearch && (
+                  <div className="cart-wrapper">
+                    <Link to="/cart">
+                      <PiShoppingCartBold size={28} className="cart-icon" />
+                      <span className="cart-counter">{cartItems}</span>
+                    </Link>
+                  </div>
+                )}
 
                 {/* <div className="d-none d-md-block">
                   <Button>Contact Us</Button>
                 </div> */}
-                
+
                 {isSearch && <SearchInput />}
                 {/* {!isSearch && (
                   <PiShoppingCartBold size={28} className="cart-icon" />
@@ -176,7 +192,7 @@ function Navbar() {
                 {!isSearch && (
                   <div className="d-none d-md-block">
                     <NavLink to="/contact">
-                      <Button>Contact Us</Button>
+                      <Button>{t("navbar.contactUs")}</Button>
                     </NavLink>
                   </div>
                 )}

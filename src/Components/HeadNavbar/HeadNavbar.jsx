@@ -1,7 +1,9 @@
 import ToggleLanguage from "../ToggleLanguage/ToggleLanguage";
 import "./HeadNavbar.css";
+import { useTranslation } from "react-i18next";
 
 function HeadNavbar() {
+  const { t } = useTranslation();
   return (
     <>
       <div className="head-navbar">
@@ -41,14 +43,14 @@ function HeadNavbar() {
             {/* ================right head navbar================== */}
             <div className="col-6 col-md-7 col-lg-7 col-xl-4">
               <div className="text-end d-flex align-items-center justify-content-end gap-3">
-                      <ToggleLanguage />
+                <ToggleLanguage />
                 <div className="right-head-navbar d-none d-sm-block">
                   <ul>
                     <li>
                       <div className="d-none d-md-block">
-                        <a href="#">Help / </a>
-                        <a href="#">support</a>
-                        <a href="#"> / contact</a>
+                        <a href="#">{t("header.help")} / </a>
+                        <a href="#">{t("header.support")}</a>
+                        <a href="#"> / {t("header.contact")}</a>
                       </div>
                     </li>
                     <li>

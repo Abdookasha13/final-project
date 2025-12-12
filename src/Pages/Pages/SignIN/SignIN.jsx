@@ -2,8 +2,10 @@ import { useForm } from "react-hook-form";
 import handleLoginSubmit from "../../../utilities/handleLoginSubmit";
 import Button from "../../../Components/Button/Button";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export default function SignIN() {
+  const { t } = useTranslation();
   const {
     register,
     handleSubmit,
@@ -18,24 +20,26 @@ export default function SignIN() {
     <div className="row align-items-stretch min-vh-100 d-flex py-5">
       {/* Left side (form) */}
       <div className="col-12 col-lg-6 d-flex flex-column justify-content-center bg-light px-5">
-        <h2 className="fw-bold mb-4 text-uppercase">Sign In</h2>
+        <h2 className="fw-bold mb-4 text-uppercase">{t("signIn.signIn")}</h2>
         <hr className="mb-4" />
 
         <form onSubmit={handleSubmit(onSubmit)}>
           {/* Email */}
           <div className="form-group">
-            <label className="form-label fw-semibold">Email *</label>
+            <label className="form-label fw-semibold">
+              {t("signIn.email")}
+            </label>
             <input
               type="email"
-              placeholder="Enter your email"
+              placeholder={t("signIn.enterEmail")}
               className={`form-control form-control-custom ${
                 errors.email ? "is-invalid" : ""
               }`}
               {...register("email", {
-                required: "Email is required",
+                required: t("signIn.emailRequired"),
                 pattern: {
                   value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                  message: "Invalid email format",
+                  message: t("signIn.invalidEmailFormat"),
                 },
               })}
             />
@@ -46,18 +50,20 @@ export default function SignIN() {
 
           {/* Password */}
           <div className="form-group mt-3">
-            <label className="form-label fw-semibold">Password *</label>
+            <label className="form-label fw-semibold">
+              {t("signIn.password")}
+            </label>
             <input
               type="password"
-              placeholder="Enter your password"
+              placeholder={t("signIn.enterPassword")}
               className={`form-control form-control-custom ${
                 errors.password ? "is-invalid" : ""
               }`}
               {...register("password", {
-                required: "Password is required",
+                required: t("signIn.passwordRequired"),
                 minLength: {
                   value: 6,
-                  message: "Password must be at least 6 characters",
+                  message: t("signIn.passwordMinLength"),
                 },
               })}
             />
@@ -69,7 +75,7 @@ export default function SignIN() {
           {/* Forgot password + Remember me */}
           <div className="d-flex justify-content-between align-items-center mb-4">
             <a href="#" className="text-danger text-decoration-none">
-              Forgot Password?
+              {t("signIn.forgotPassword")}
             </a>
 
             <div className="form-check">
@@ -80,21 +86,21 @@ export default function SignIN() {
                 {...register("rememberMe")}
               />
               <label htmlFor="rememberMe" className="form-check-label">
-                Remember me
+                {t("signIn.rememberMe")}
               </label>
             </div>
           </div>
 
           {/* Submit button */}
           <button type="submit" className="border-0 bg-transparent p-0">
-            <Button disabled={isSubmitting}>Sign In</Button>
+            <Button disabled={isSubmitting}>{t("signIn.signIn")}</Button>
           </button>
 
           {/* Footer link */}
           <p className="text-center text-muted mt-4">
-            Don't have an account?{" "}
+            {t("signIn.dontHaveAccount")}{" "}
             <Link to="/register" className="text-danger text-decoration-none">
-              Sign Up
+              {t("signIn.signUp")}
             </Link>
           </p>
         </form>

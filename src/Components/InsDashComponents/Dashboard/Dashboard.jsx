@@ -3,6 +3,7 @@ import getCoursesByInsId from "../../../utilities/getCoursesByInsId";
 import handleGetUserById from "../../../utilities/handleGetUserById";
 import getLessonsByIns from "../../../utilities/getLessonsByIns";
 import Loader from "../../Loader/Loader";
+import { useTranslation } from "react-i18next";
 import {
   BarChart,
   Bar,
@@ -31,6 +32,7 @@ const StatCard = ({ title, value, subtitle, iconClass }) => (
 );
 
 const InstructorDashboard = () => {
+  const { t } = useTranslation();
   const [instructor, setInstructor] = useState(null);
   const [courses, setCourses] = useState([]);
   const [counts, setCounts] = useState({
@@ -91,10 +93,11 @@ const InstructorDashboard = () => {
   return (
     <div>
       <div className="mb-4">
-        <h2>Welcome back, {instructor?.name ?? "Instructor"}!</h2>
-        <p className="text-muted">
-          Here's a quick overview of your courses and activity.
-        </p>
+        <h2>
+          {t("instructorDashboard.welcomeBack")},{" "}
+          {instructor?.name ?? "Instructor"}!
+        </h2>
+        <p className="text-muted">{t("instructorDashboard.overviewText")}</p>
       </div>
 
       <div className="row">
