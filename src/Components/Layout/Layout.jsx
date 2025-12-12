@@ -14,7 +14,10 @@ function Layout({ children }) {
     <div className="app-container">
       <HeadNavbar />
       <Navbar />
-      {!pathname.startsWith("/search") && <HeaderSection />}
+      {!(pathname.startsWith("/search") || pathname.startsWith("/home")) && <HeaderSection />}
+      
+  
+
       <ToastContainer
         position="bottom-right"
         autoClose={3000}
