@@ -10,14 +10,12 @@ import "react-toastify/dist/ReactToastify.css";
 import { useLocation } from "react-router-dom";
 function Layout({ children }) {
   const {pathname}=useLocation()
+  const noNegativeMarginPaths = [pathname.startsWith("/about"), pathname.startsWith("/home")];
   return (
     <div className="app-container">
       <HeadNavbar />
       <Navbar />
       {!(pathname.startsWith("/search") || pathname.startsWith("/home")) && <HeaderSection />}
-      
-  
-
       <ToastContainer
         position="bottom-right"
         autoClose={3000}
@@ -29,7 +27,7 @@ function Layout({ children }) {
         newestOnTop
         toastClassName="udemy-toast"
       />
-      <div className="main-content container">{children}</div>
+      <div className={`main-content ${noNegativeMarginPaths.some(Boolean) ? "" : "container"}`}>{children}</div>
       {!pathname.startsWith("/search") && <Newsletter />}
       <Footer />
       <ScrollTopButton />
