@@ -22,6 +22,7 @@ import Price from "./Pages/Pages/Price/Price";
 import ErrorPage from "./Pages/Pages/Error/Error";
 import SearchPage from "./Components/SearchPage/SearchPage";
 import StudentProfile from "./Pages/StudentProfile/StudentProfile";
+import Checkout from "./Components/Checkout/Checkout";
 function Routess() {
   return (
     <>
@@ -52,6 +53,7 @@ function Routess() {
         <Route path="/price" element={<Price />} />
         <Route path="/search/:searchTerm" element={<SearchPage />} />
         <Route path="/stdprofile" element={<StudentProfile />} />
+        <Route path="/checkout" element={<Checkout />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </>
