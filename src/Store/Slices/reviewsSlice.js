@@ -1,17 +1,15 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// ✅ Fetch review stats for a specific course
 export const fetchReviewStats = createAsyncThunk(
   "reviewStats/fetchReviewStats",
   async (courseId, { rejectWithValue }) => {
     try {
-      const response = await axios.get(
-        `http://localhost:1911/reviews/course/${courseId}`
-      );
+      const response = await axios.get(`http://localhost:1911/reviews/stats/${courseId}`);
+
       return {
         courseId,
-        stats: response.data.stats,
+        stats: response.data.data,
       };
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || error.message);
@@ -19,20 +17,19 @@ export const fetchReviewStats = createAsyncThunk(
   }
 );
 
-// ✅ Fetch stats for multiple courses
 export const fetchMultipleReviewStats = createAsyncThunk(
   "reviewStats/fetchMultipleReviewStats",
   async (courseIds, { rejectWithValue }) => {
     try {
       const responses = await Promise.all(
         courseIds.map((courseId) =>
-          axios.get(`http://localhost:1911/reviews/course/${courseId}`)
+       axios.get(`http://localhost:1911/reviews/stats/${courseId}`)
         )
       );
 
       const statsMap = {};
       responses.forEach((response, index) => {
-        statsMap[courseIds[index]] = response.data.stats;
+        statsMap[courseIds[index]] = response.data.data;
       });
 
       return statsMap;
@@ -43,7 +40,7 @@ export const fetchMultipleReviewStats = createAsyncThunk(
 );
 
 const initialState = {
-  stats: {}, // { courseId: stats }
+  stats: {},
   isLoading: false,
   error: null,
 };
@@ -57,7 +54,6 @@ const reviewStatsSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    // Single course stats
     builder
       .addCase(fetchReviewStats.pending, (state) => {
         state.isLoading = true;
@@ -72,7 +68,6 @@ const reviewStatsSlice = createSlice({
         state.error = action.payload;
       });
 
-    // Multiple courses stats
     builder
       .addCase(fetchMultipleReviewStats.pending, (state) => {
         state.isLoading = true;
