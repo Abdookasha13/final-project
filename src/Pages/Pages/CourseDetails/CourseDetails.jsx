@@ -14,15 +14,12 @@ import { PiStudent } from "react-icons/pi";
 import { TfiBarChartAlt } from "react-icons/tfi";
 import { MdOutlinePlayLesson } from "react-icons/md";
 import { GrLanguage } from "react-icons/gr";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addCourseToCart } from "../../../Store/Slices/cartSlice";
+import { fetchReviewStats } from "../../../Store/Slices/reviewsSlice";
 import { toast } from "react-toastify";
 import handleAddToWish from "../../../utilities/handleAddToWish";
-import StarRatingDemo from "../../../Components/StarRating/starRating";
 import ReviewStats from "../../../Components/StarRating/starRating";
-import ReviewForm from "../../../Components/ReviewForm/reviewForm";
-import ReviewList from "../../../Components/ListReviews/listReviews";
-import axios from "axios";
 
 const tabs = [
   { name: "Overview", icon: GoBookmark },
@@ -32,78 +29,24 @@ const tabs = [
 ];
 
 const CourseDetails = () => {
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
   const { courseId } = useParams();
   const [course, setCourse] = useState(null);
   const [lessons, setLessons] = useState([]);
-  const [currentUserId, setCurrentUserId] = useState(null);
   const [activeTab, setActiveTab] = useState("Overview");
-   const handleAdd = () => {
-      console.log(course._id);
-      
-      dispatch(addCourseToCart(course._id));
-  
-      toast.success("Course added to cart!");
-    };
-//   
-  const [stats, setStats] = useState(null);
-const [reviews, setReviews] = useState([]);
-const [reviewLoading, setReviewLoading] = useState(false);
-const [reviewsLoading, setReviewsLoading] = useState(false);
-const token = localStorage.getItem('token'); // أو من Redux
 
-const handleSubmitReview = async (reviewData) => {
-  setReviewLoading(true);
-  try {
-    const response = await axios.post(
-      'http://localhost:1911/addReview', 
-      reviewData,
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
-    setReviews([response.data.data, ...reviews]);
-    toast.success("Review submitted successfully!");
-  } catch (error) {
-    console.error(error);
-    toast.error(error.response?.data?.message || "Failed to submit review");
-  } finally {
-    setReviewLoading(false);
-  }
-};
+  // من Redux - الـ stats
+  const reviewStats = useSelector((state) => state.reviewStats.stats);
+  const stats = reviewStats[courseId];
 
-const handleDeleteReview = async (reviewId) => {
-  try {
-    await axios.delete(`http://localhost:1911/deleteReview/${reviewId}`);
-    setReviews(reviews.filter(r => r._id !== reviewId)); // ✅ شيلي الـ review من الـ list
-  } catch (error) {
-    console.error(error);
-    toast.error("Failed to delete review");
-  }
-};
-
-
-  useEffect(() => {
-
-       const user = JSON.parse(localStorage.getItem("user"));
-    const userId = user?._id;
-setCurrentUserId(userId)
-
- const fetchReviews = async () => {
-    setReviewsLoading(true);
-    try {
-      const response = await axios.get(`http://localhost:1911/reviews/course/${courseId}`);
-      setReviews(response.data.data);
-      setStats(response.data.stats);
-    } catch (error) {
-      console.error("Error fetching reviews:", error);
-    } finally {
-      setReviewsLoading(false);
-    }
+  const handleAdd = () => {
+    console.log(course._id);
+    dispatch(addCourseToCart(course._id));
+    toast.success("Course added to cart!");
   };
 
-  if (courseId) {
-    fetchReviews();
-  }
-    
+  // جيب الـ course data
+  useEffect(() => {
     const fetchData = async () => {
       try {
         const courseData = await getCourseById(courseId);
@@ -117,8 +60,15 @@ setCurrentUserId(userId)
     fetchData();
   }, [courseId]);
 
+  // جيب الـ review stats من Redux
+  useEffect(() => {
+    if (courseId) {
+      dispatch(fetchReviewStats(courseId));
+    }
+  }, [courseId, dispatch]);
+
   if (!course) {
-    return <Loader></Loader>;
+    return <Loader />;
   }
 
   const videoList = lessons.map((lesson) => ({
@@ -162,13 +112,11 @@ setCurrentUserId(userId)
         </div>
       </div>
     ),
-   Reviews: (
-  <div className="border border-top-0 border-light-subtle px-4 py-5">
-    <ReviewStats stats={stats} />
-    <ReviewForm courseId={courseId} onSubmit={handleSubmitReview} loading={reviewLoading} />
-    <ReviewList reviews={reviews} loading={reviewsLoading} onDelete={handleDeleteReview} currentUserId={currentUserId} />
-  </div>
-),
+    Reviews: (
+      <div className="border border-top-0 border-light-subtle px-4 py-5">
+        <ReviewStats stats={stats} />
+      </div>
+    ),
   };
 
   return (
@@ -180,12 +128,22 @@ setCurrentUserId(userId)
             <img src={course.thumbnailUrl} className="rounded-3" />
           </div>
 
-          <div className="course-rating-roka mb-2 ">
-            {Array.from({ length: 4 }).map((_, i) => (
-              <i key={i} className="fa-solid fa-star me-1"></i>
+          <div className="course-rating-roka mb-2 d-flex align-items-center">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <i
+                key={i}
+                className={
+                  i < Math.round(stats?.averageRating || 0)
+                    ? "fa-solid fa-star me-1"
+                    : "fa-regular fa-star me-1"
+                }
+                style={{ color: "#0ab99d" }}
+              ></i>
             ))}
-            <i className="fa-regular fa-star me-1"></i>
-            <span>(4.5)</span>
+
+            <span className="ms-1">
+              ({stats?.averageRating ? stats.averageRating.toFixed(1) : "0.0"})
+            </span>
           </div>
 
           <h4 className="course1-title-roka fw-bold mb-4 ">{course.title}</h4>
@@ -224,7 +182,9 @@ setCurrentUserId(userId)
               className="img-fluid rounded mb-3"
             />
 
-            <Button onClick={ handleAdd}  className="ticketbtn">Add To Cart</Button>
+            <Button onClick={handleAdd} className="ticketbtn">
+              Add To Cart
+            </Button>
 
             <ul className="list-unstyled m-0 mt-3 ">
               <li className=" border-bottom py-3">
@@ -297,10 +257,14 @@ setCurrentUserId(userId)
               </li>
             </ul>
             <div
-        
-              onClick={() =>  handleAddToWish(course._id)}
+              onClick={() => handleAddToWish(course._id)}
               className="mt-4  "
-              style={{ fontSize: "15px", fontWeight: "500", color: "#333",cursor:"pointer" }}
+              style={{
+                fontSize: "15px",
+                fontWeight: "500",
+                color: "#333",
+                cursor: "pointer",
+              }}
             >
               <FaRegHeart color="#0ab99d" size={"18px"} /> Add To Wishlist
             </div>

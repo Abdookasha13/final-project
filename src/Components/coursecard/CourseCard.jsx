@@ -6,6 +6,7 @@ import handleDeleteCourse from "../../utilities/handleDeleteCourse";
 import { useDispatch } from "react-redux";
 import { addCourseToCart } from "../../Store/Slices/cartSlice";
 import { toast } from "react-toastify";
+import HalfStarRating from "../HalfStar/HalfStarRating";
 
 const CourseCard = ({
   imgSrc,
@@ -25,9 +26,14 @@ const CourseCard = ({
   hideCartButton = false,
   hideInstructorInfo = false,
   course,
+  stats,
 }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const averageRating = stats?.averageRating || 0;
+  // const totalReviews = stats?.totalReviews || 0;
+
   const handleEdit = () => {
     navigate(`/instructor/edit/course/${courseId}`);
   };
@@ -50,6 +56,15 @@ const CourseCard = ({
     toast.success("Course added to cart!");
   };
 
+  // const renderStars = () => {
+  //   return Array.from({ length: 5 }).map((_, i) => (
+  //     <i
+  //       key={i}
+  //       className={i < Math.round(averageRating) ? "fa-sharp fa-solid fa-star" : "fa-sharp fa-regular fa-star"}
+  //     ></i>
+  //   ));
+  // };
+
   return (
     <div
       className="coursecard-item px-2 py-3"
@@ -64,12 +79,8 @@ const CourseCard = ({
 
       <div className="coursecard-itemcontent">
         <div className="coursecard-rating d-flex gap-1">
-          <i className="fa-sharp fa-solid fa-star"></i>
-          <i className="fa-sharp fa-solid fa-star"></i>
-          <i className="fa-sharp fa-solid fa-star"></i>
-          <i className="fa-sharp fa-solid fa-star"></i>
-          <i className="fa-sharp fa-regular fa-star"></i>
-          <span>(4.7)</span>
+           <HalfStarRating rating={averageRating} />
+          <span>({averageRating.toFixed(1)})</span>
         </div>
 
         <h4 className="coursecard-title">

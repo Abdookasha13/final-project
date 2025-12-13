@@ -1,5 +1,7 @@
-import React from 'react';
-
+import React from "react";
+import { FaStar } from "react-icons/fa";
+import HalfStarRating from "../HalfStar/HalfStarRating";
+// ✅ استورد الـ component
 
 const ReviewStats = ({ stats }) => {
   if (!stats || stats.totalReviews === 0) {
@@ -13,46 +15,62 @@ const ReviewStats = ({ stats }) => {
   const { averageRating, totalReviews, distribution } = stats;
 
   return (
-    <div className="review-stats mb-4 p-4 bg-light rounded">
-      <div className="row">
-        <div className="col-md-4 text-center">
-          <h3 className="mb-2">
-            <span style={{ fontSize: '36px', fontWeight: 'bold' }}>
-              {averageRating}
-            </span>
-            <span style={{ fontSize: '18px', color: '#666' }}>/5</span>
-          </h3>
-          {/* <StarRating 
-            rating={Math.round(averageRating)} 
-            setRating={() => {}} 
-            readOnly 
-            size="md" 
-          /> */}
-          <p className="text-muted mt-2">
-            Based on {totalReviews} review{totalReviews !== 1 ? 's' : ''}
+    <div className="review-stats ">
+      <div className="row text-center">
+        {/* الجزء اليسار */}
+        <div className="col-md-3 ">
+          <h2 style={{ fontSize: "80px", fontWeight: "bold" }}>
+            {averageRating.toFixed(1)}
+          </h2>
+
+          {/* ✅ نجوم مع نص نجمة */}
+          <div className="mb-2" style={{ display: "flex", justifyContent: "center" }}>
+            <HalfStarRating rating={averageRating} />
+          </div>
+
+          {/* عدد الريفيوز */}
+          <p className="text-muted mx-4" style={{ fontSize: "14px" }}>
+            {totalReviews} rating{totalReviews !== 1 ? "s" : ""}
           </p>
         </div>
 
+        {/* الجزء اليمين */}
         <div className="col-md-8">
           {[5, 4, 3, 2, 1].map((stars) => {
             const count = distribution[stars] || 0;
-            const percentage = totalReviews > 0 ? (count / totalReviews) * 100 : 0;
+            const percentage =
+              totalReviews > 0 ? (count / totalReviews) * 100 : 0;
 
             return (
-              <div key={stars} className="mb-2 d-flex align-items-center">
-                <span style={{ minWidth: '30px', textAlign: 'right' }}>
-                  {stars}★
-                </span>
-                <div 
-                  className="progress mx-2" 
-                  style={{ flex: 1, height: '8px' }}
+              <div key={stars} className="d-flex align-items-center mb-2">
+                {/* الرقم والنجمة */}
+                <span
+                  className="d-flex align-items-center gap-1"
+                  style={{
+                    minWidth: "30px",
+                    fontSize: "15px",
+                    color: "#d3cccc",
+                  }}
                 >
-                  <div 
-                    className="progress-bar bg-warning" 
-                    style={{ width: `${percentage}%` }}
+                  {stars} <FaStar size={15} color="#0ab99d" />
+                </span>
+
+                {/* الـ Progress */}
+                <div
+                  className="progress mx-2 rounded-1"
+                  style={{ height: "15px", flex: 1 }}
+                >
+                  <div
+                    className="progress-bar"
+                    style={{
+                      width: `${percentage}%`,
+                      backgroundColor: "#0ab99d",
+                    }}
                   ></div>
                 </div>
-                <span style={{ minWidth: '40px', textAlign: 'right' }}>
+
+                {/* العدد */}
+                <span style={{ minWidth: "30px", textAlign: "right" }}>
                   {count}
                 </span>
               </div>
@@ -63,4 +81,5 @@ const ReviewStats = ({ stats }) => {
     </div>
   );
 };
+
 export default ReviewStats;

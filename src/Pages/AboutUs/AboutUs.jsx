@@ -6,10 +6,10 @@ import CourseCard from "../../Components/coursecard/CourseCard";
 import TeacherCard from "../../Components/TeacherCard/TeacherCard";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCourses } from "../../Store/Slices/getAllCoursecSlice";
+import { fetchMultipleReviewStats } from "../../Store/Slices/reviewsSlice";
 import { Loader } from "lucide-react";
 import formatTime from "../../utilities/formatTime";
 
-// countersData moved to module scope so it's stable and doesn't trigger useEffect linter warning
 const countersData = [
   { id: 1, icon: "fa-regular fa-user", end: 3, label: "Successfully Trained" },
   {
@@ -27,7 +27,6 @@ const countersData = [
   },
 ];
 
-// Testimonials Data
 const testimonialsData = [
   {
     name: "Courtney Henry",
@@ -52,30 +51,34 @@ const testimonialsData = [
 ];
 
 function AboutUs() {
-  // -------------------- START COUNTER LOGIC --------------------
   const [counts, setCounts] = useState(countersData.map(() => 0));
-   const dispatch = useDispatch();
-  const courses = useSelector((state) => state.getAllCourses.data||[]);
+  const dispatch = useDispatch();
+
+  // من Redux - الـ courses
+  const courses = useSelector((state) => state.getAllCourses.data || []);
   const isLoading = useSelector((state) => state.getAllCourses.isLoading);
 
-  // useEffect(() => {
-  //   if(!courses.length){
-  //     dispatch(fetchCourses());
-     
-      
-  //   }
-  // }, [courses.length, dispatch]);
-  //  console.log(courses);
+  // من Redux - الـ stats
+  const reviewStats = useSelector((state) => state.reviewStats.stats);
+  const statsLoading = useSelector((state) => state.reviewStats.isLoading);
 
-
-
-
+  // جيب الـ courses
   useEffect(() => {
-    if(!courses.length){
+    if (!courses.length) {
       dispatch(fetchCourses());
-     
-      
     }
+  }, [courses.length, dispatch]);
+
+  // جيب الـ stats لكل الـ courses
+  useEffect(() => {
+    if (courses.length > 0) {
+      const courseIds = courses.map((c) => c._id);
+      dispatch(fetchMultipleReviewStats(courseIds));
+    }
+  }, [courses, dispatch]);
+
+  // Counter Logic
+  useEffect(() => {
     const timers = countersData.map((counter, index) => {
       let start = 0;
       const end = counter.end;
@@ -100,10 +103,9 @@ function AboutUs() {
     });
 
     return () => timers.forEach((t) => clearInterval(t));
-  }, [courses.length, dispatch]);
-  // -------------------- END COUNTER LOGIC --------------------
+  }, []);
 
-  // -------------------- START TESTIMONIAL LOGIC --------------------
+  // Testimonial Logic
   const [current, setCurrent] = useState(0);
   const length = testimonialsData.length;
 
@@ -114,12 +116,13 @@ function AboutUs() {
   const prevSlide = () => {
     setCurrent(current === 0 ? length - 1 : current - 1);
   };
-  // -------------------- END TESTIMONIAL LOGIC --------------------
-    if (isLoading) {
+
+  if (isLoading || statsLoading) {
     return <Loader />;
   }
-  if(!courses.length){
-    return <div>no courses hereee</div>
+
+  if (!courses.length) {
+    return <div>no courses hereee</div>;
   }
 
   return (
@@ -374,7 +377,6 @@ function AboutUs() {
 
       {/* ----------- Course Section ----------- */}
       <div className="it-course-area it-sub-bg-none p-relative grey-bg pt-120 pb-120">
-        {/* ----------- الخلفيات ----------- */}
         <div className="it-course-shape-1 d-none d-xl-block">
           <img
             src="https://ordainit.com/html/educate/assets/img/course/shape-1-1.png"
@@ -403,7 +405,6 @@ function AboutUs() {
           />
         </div>
 
-        {/* ----------- المحتوى ----------- */}
         <div className="container">
           <div className="row">
             <div className="col-xl-12">
@@ -444,46 +445,32 @@ function AboutUs() {
               </div>
             </div>
 
-            {/* ----------- مكان الكروت ----------- */}
-            {/* <div className="col-xl-12">
-              <div className="cards-placeholder row justify-content-center">
-                <div className="col-md-6 col-lg-3 ">
-                  <CourseCard imgSrc="https://ordainit.com/html/educate/assets/img/course/course-1-1.jpg" />
-                </div>
-                <div className="col-md-6 col-lg-3">
-                  <CourseCard imgSrc="https://ordainit.com/html/educate/assets/img/course/course-1-2.jpg" />
-                </div>
-                <div className="col-md-6 col-lg-3">
-                  <CourseCard imgSrc="https://ordainit.com/html/educate/assets/img/course/course-1-3.jpg" />
-                </div>
-              </div>
-            </div> */}
-                        <div className="col-xl-12">
+            <div className="col-xl-12">
               <div className="cards-placeholder row ">
-                 <div className="col-md-6 col-lg-4 ">
-                {courses.map((course)=>
-  <CourseCard
-                imgSrc={course.thumbnailUrl}
-                title={course.title}
-                price={course.price}
-                discountPrice={course.discountPrice}
-                lessonsCount={course.lessonsCount}
-                courseDuration={formatTime(course.lessons)}
-                studentsCount={course.studentsCount}
-                courseId={course._id}
-                category={course.category?.name}
-                insImage={course.instructor?.profileImage}
-                insName={course.instructor?.name}
-                bgColor={"#f8f9fa"}
-                course={course}
-              />
-                ).slice(0,3)}
-               </div>
-                
+                <div className="col-md-6 col-lg-4 ">
+                  {courses.slice(0, 3).map((course) => (
+                    <CourseCard
+                      key={course._id}
+                      imgSrc={course.thumbnailUrl}
+                      title={course.title}
+                      price={course.price}
+                      discountPrice={course.discountPrice}
+                      lessonsCount={course.lessonsCount}
+                      courseDuration={formatTime(course.lessons)}
+                      studentsCount={course.studentsCount}
+                      courseId={course._id}
+                      category={course.category?.name}
+                      insImage={course.instructor?.profileImage}
+                      insName={course.instructor?.name}
+                      bgColor={"#f8f9fa"}
+                      course={course}
+                      stats={reviewStats[course._id]}
+                    />
+                  ))}
+                </div>
               </div>
             </div>
 
-            {/* ----------- مكان الزر ----------- */}
             <div className="col-xl-12">
               <div className="it-course-button text-center pt-45">
                 <div className="btn-placeholder pt-5">
@@ -522,7 +509,6 @@ function AboutUs() {
                 <h2 className="it-section-title-3 text-white">
                   Meet Our Expert Instructor
                 </h2>
-                {/* مكان الكروت */}
                 <div className="it-team-3-wrapper row justify-content-center">
                   <div className="col-xl-3 col-lg-4 col-md-6 mb-30">
                     <TeacherCard className="al-card-color" />
