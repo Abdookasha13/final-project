@@ -3,10 +3,12 @@ import "../../Pages/Contact/Contact.css";
 import { useForm } from "react-hook-form";
 import Button from "../Button/Button";
 import sendMessage from "../../utilities/sendMessage";
+import { useTranslation } from "react-i18next";
 
 const Form = () => {
+  const { t } = useTranslation();
   const {
-    register,              
+    register,
     handleSubmit,
     formState: { errors },
   } = useForm();
@@ -21,19 +23,19 @@ const Form = () => {
         <div className="row">
           {/* Name */}
           <div className="form-group col-12 mb-25">
-            <label htmlFor="exampleInputName">Name</label>
+            <label htmlFor="exampleInputName">{t("form.name")}</label>
             <input
               type="text"
               {...register("name", {
-                required: "This field is required",
+                required: t("form.required"),
                 minLength: {
                   value: 3,
-                  message: "Must be at least 3 characters",
+                  message: t("form.minLength"),
                 },
               })}
               className="form-control form-control-custom "
               id="exampleInputName"
-              placeholder="Name"
+              placeholder={t("form.name")}
               // style={{ height: "58px", fontSize: "14px",width:"440px" }}
             />
             {errors.name && (
@@ -45,19 +47,19 @@ const Form = () => {
 
           {/* Email */}
           <div className="form-group col-12 ">
-            <label htmlFor="exampleInputEmail">Email address</label>
+            <label htmlFor="exampleInputEmail">{t("form.email")}</label>
             <input
               {...register("email", {
-                required: "This field is required",
+                required: t("form.required"),
                 pattern: {
                   value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                  message: "Invalid email address",
+                  message: t("form.invalidEmail"),
                 },
               })}
               type="email"
               className="form-control form-control-custom  "
               id="exampleInputEmail"
-              placeholder="Email"
+              placeholder={t("form.email")}
             />
             {errors.email && (
               <small className="form-text text-danger">
@@ -68,16 +70,16 @@ const Form = () => {
 
           {/* Phone */}
           <div className="form-group col-12 ">
-            <label htmlFor="exampleInputPhone">Phone</label>
+            <label htmlFor="exampleInputPhone">{t("form.phone")}</label>
             <input
               {...register("phone", {
-                required: "This field is required",
-                minLength: { value: 11, message: "Must be 11 digits" },
+                required: t("form.required"),
+                minLength: { value: 11, message: t("form.phoneLength") },
               })}
               type="tel"
               className="form-control form-control-custom "
               id="exampleInputPhone"
-              placeholder="Phone"
+              placeholder={t("form.phone")}
             />
             {errors.phone && (
               <small className="form-text text-danger">
@@ -88,15 +90,15 @@ const Form = () => {
 
           {/* Subject */}
           <div className="form-group col-12 ">
-            <label htmlFor="exampleInputSubject">Subject</label>
+            <label htmlFor="exampleInputSubject">{t("form.subject")}</label>
             <input
               {...register("subject", {
-                required: "This field is required",
+                required: t("form.required"),
               })}
               type="text"
               className="form-control form-control-custom "
               id="exampleInputSubject"
-              placeholder="Subject"
+              placeholder={t("form.subject")}
             />
             {errors.subject && (
               <small className="form-text text-danger">
@@ -107,19 +109,21 @@ const Form = () => {
 
           {/* Message */}
           <div className="form-group col-12 ">
-            <label htmlFor="exampleFormControlTextarea">Message</label>
+            <label htmlFor="exampleFormControlTextarea">
+              {t("form.message")}
+            </label>
             <textarea
               {...register("message", {
-                required: "This field is required",
+                required: t("form.required"),
                 minLength: {
                   value: 10,
-                  message: "Must be at least 10 characters",
+                  message: t("form.messageMinLength"),
                 },
               })}
               className="form-control mb-3  "
               id="exampleFormControlTextarea"
               rows="4"
-              placeholder="Message"
+              placeholder={t("form.message")}
               style={{ resize: "none" }}
             ></textarea>
             {errors.message && (
@@ -129,7 +133,7 @@ const Form = () => {
             )}
           </div>
           <button type="submit" className="border-0 bg-transparent p-0">
-            <Button>Send Message</Button>
+            <Button>{t("form.sendMessage")}</Button>
           </button>
         </div>
       </form>

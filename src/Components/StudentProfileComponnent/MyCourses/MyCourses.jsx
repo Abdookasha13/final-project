@@ -4,12 +4,14 @@ import Loader from "../../Loader/Loader";
 import { IoBookOutline } from "react-icons/io5";
 import { RiProgress2Line } from "react-icons/ri";
 import { GrCompliance } from "react-icons/gr";
+import { useTranslation } from "react-i18next";
 
 const MyCourses = () => {
+  const { t } = useTranslation();
   const [enrollments, setEnrollments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-   const [activeTab, setActiveTab] = useState("enrolled");
+  const [activeTab, setActiveTab] = useState("enrolled");
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -45,7 +47,10 @@ const MyCourses = () => {
     (e) => e.progress && e.progress.some((p) => !p.completed)
   );
   const finishedCourses = enrollments.filter(
-    (e) => e.progress && e.progress.length > 0 && e.progress.every((p) => p.completed)
+    (e) =>
+      e.progress &&
+      e.progress.length > 0 &&
+      e.progress.every((p) => p.completed)
   );
 
   const cardStyle = (bgColor) => ({
@@ -78,7 +83,7 @@ const MyCourses = () => {
               <IoBookOutline color="#0ab99d" fontSize="32px" />
             </div>
             <div>
-              <h6>Enrolled Courses</h6>
+              <h6>{t("studentProfile.enrolledCourses")}</h6>
               <p className="display-6">{enrolledCourses.length}</p>
             </div>
           </div>
@@ -91,7 +96,7 @@ const MyCourses = () => {
               <RiProgress2Line color="#f08a24" fontSize="32px" />
             </div>
             <div>
-              <h6>In Progress Courses</h6>
+              <h6>{t("studentProfile.inProgressCourses")}</h6>
               <p className="display-6">{inProgressCourses.length}</p>
             </div>
           </div>
@@ -111,45 +116,45 @@ const MyCourses = () => {
         </div>
       </div>
 
-<ul className="nav nav-tabs mb-3 mt-5 border border-0">
-  <li className="nav-item">
-    <button
-      className={`nav-link ${activeTab === "enrolled" ? "active" : ""}`}
-      onClick={() => setActiveTab("enrolled")}
-      style={{
-        color: activeTab === "enrolled" ? "#0ab99d" : "#333", 
-        borderColor: activeTab === "enrolled" ? "#0ab99d" : "#ddd", 
-      }}
-    >
-      Enrolled
-    </button>
-  </li>
-  <li className="nav-item">
-    <button
-      className={`nav-link ${activeTab === "inprogress" ? "active" : ""}`}
-      onClick={() => setActiveTab("inprogress")}
-      style={{
-        color: activeTab === "inprogress" ? "#0ab99d" : "#333",
-        borderColor: activeTab === "inprogress" ? "#0ab99d" : "#ddd",
-      }}
-    >
-      In Progress
-    </button>
-  </li>
-  <li className="nav-item">
-    <button
-      className={`nav-link ${activeTab === "finished" ? "active" : ""}`}
-      onClick={() => setActiveTab("finished")}
-      style={{
-        color: activeTab === "finished" ? "#0ab99d" : "#333",
-        borderColor: activeTab === "finished" ? "#0ab99d" : "#ddd",
-      }}
-    >
-      Finished
-    </button>
-  </li>
-</ul>
-{/* Tab Content */}
+      <ul className="nav nav-tabs mb-3 mt-5 border border-0">
+        <li className="nav-item">
+          <button
+            className={`nav-link ${activeTab === "enrolled" ? "active" : ""}`}
+            onClick={() => setActiveTab("enrolled")}
+            style={{
+              color: activeTab === "enrolled" ? "#0ab99d" : "#333",
+              borderColor: activeTab === "enrolled" ? "#0ab99d" : "#ddd",
+            }}
+          >
+            Enrolled
+          </button>
+        </li>
+        <li className="nav-item">
+          <button
+            className={`nav-link ${activeTab === "inprogress" ? "active" : ""}`}
+            onClick={() => setActiveTab("inprogress")}
+            style={{
+              color: activeTab === "inprogress" ? "#0ab99d" : "#333",
+              borderColor: activeTab === "inprogress" ? "#0ab99d" : "#ddd",
+            }}
+          >
+            In Progress
+          </button>
+        </li>
+        <li className="nav-item">
+          <button
+            className={`nav-link ${activeTab === "finished" ? "active" : ""}`}
+            onClick={() => setActiveTab("finished")}
+            style={{
+              color: activeTab === "finished" ? "#0ab99d" : "#333",
+              borderColor: activeTab === "finished" ? "#0ab99d" : "#ddd",
+            }}
+          >
+            Finished
+          </button>
+        </li>
+      </ul>
+      {/* Tab Content */}
       <div>
         {activeTab === "enrolled" &&
           (enrolledCourses.length > 0 ? (
@@ -184,8 +189,6 @@ const MyCourses = () => {
             <p>No finished courses</p>
           ))}
       </div>
-
-      
     </div>
   );
 };

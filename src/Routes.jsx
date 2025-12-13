@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./Pages/Home/Home";
 import AboutUs from "./Pages/AboutUs/AboutUs";
 import Services from "./Pages/Services/Services";
@@ -22,10 +22,12 @@ import Price from "./Pages/Pages/Price/Price";
 import ErrorPage from "./Pages/Pages/Error/Error";
 import SearchPage from "./Components/SearchPage/SearchPage";
 import StudentProfile from "./Pages/StudentProfile/StudentProfile";
+import Checkout from "./Components/Checkout/Checkout";
 function Routess() {
   return (
     <>
       <Routes>
+        <Route path="/" element={<Navigate to="/home" replace />} />
         <Route path="/home" element={<Home />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/services" element={<Services />} />
@@ -51,6 +53,7 @@ function Routess() {
         <Route path="/price" element={<Price />} />
         <Route path="/search/:searchTerm" element={<SearchPage />} />
         <Route path="/stdprofile" element={<StudentProfile />} />
+        <Route path="/checkout" element={<Checkout />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </>

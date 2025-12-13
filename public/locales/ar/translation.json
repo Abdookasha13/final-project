@@ -1,0 +1,239 @@
+{
+  "navbar": {
+    "home": "الرئيسية",
+    "aboutUs": "من نحن",
+    "services": "الخدمات",
+    "pages": "الصفحات",
+    "blog": "المدونة",
+    "contact": "اتصل بنا",
+    "contactUs": "تواصل معنا",
+    "courses": "الدورات",
+    "courseDetails": "تفاصيل الدورة",
+    "teacher": "المعلمون",
+    "teacherDetails": "تفاصيل المعلم",
+    "studentProfile": "الملف الشخصي للطالب",
+    "event": "الفعاليات",
+    "checkout": "الدفع",
+    "testimonial": "الشهادات",
+    "price": "الأسعار",
+    "cart": "السلة",
+    "registration": "التسجيل",
+    "faq": "الأسئلة الشائعة",
+    "signIn": "تسجيل الدخول",
+    "error": "خطأ",
+    "instructorDashboard": "لوحة تحكم المدرب",
+    "blogSidebar": "المدونة - الشريط الجانبي",
+    "blogDetails": "تفاصيل المدونة"
+  },
+  "header": {
+    "help": "مساعدة",
+    "support": "الدعم",
+    "contact": "اتصل"
+  },
+  "hero": {
+    "title": "طور مهاراتك مع الدورات التدريبية عبر الإنترنت من محترف",
+    "subtitle": "احصل على أفضل تجربة تعليمية مع دوراتنا المتخصصة",
+    "description": "لوريم إيبسوم دولور سيت أميت، كونسيكتيتور إليت، سيد دو إيوسمود تيمبور إنسيديدونت أوت لابور إت دولور ماجنا أليكوا.",
+    "exploreAllCourses": "استكشف جميع الدورات",
+    "watchNow": "شاهد الآن",
+    "totalStudent": "إجمالي الطلاب",
+    "studentCount": "30 ألف+"
+  },
+  "categories": {
+    "title": "التصنيفات",
+    "subtitle": "تصفح حسب التصنيفات",
+    "allCategories": "جميع التصنيفات",
+    "webDesign": "تصميم الويب",
+    "graphicDesign": "التصميم الجرافيكي",
+    "materialUI": "واجهة المواد",
+    "itAndSoftware": "تكنولوجيا المعلومات والبرمجيات",
+    "salesMarketing": "التسويق والمبيعات",
+    "artHumanities": "الفنون والعلوم الإنسانية",
+    "mobileApp": "تطبيقات الموبايل",
+    "finance": "المالية",
+    "coursesCount": "25 دورة"
+  },
+  "about": {
+    "title": "من نحن",
+    "subtitle": "تعلم وطور مهاراتك من أي مكان",
+    "description": "لوريم إيبسوم دولور سيت أميت، كونسيكتيتور أديبيسينج إليت، سيد دو إيوسمود تيمبور إنسيديدونت أوت لابور إت دولور ماجنا أليكوا.",
+    "flexibleClasses": "فصول مرنة",
+    "flexibleDescription": "سوسبينديس أولتريس جرافيدا ديكتوم فوسي بلاسيرات أولتريسيس إنتيجر كويس أوكتور إليت سيد فولبيوتاتي مي سيت.",
+    "sharingScreen": "مشاركة الشاشة",
+    "presenterControl": "التحكم في العرض",
+    "moreAboutUs": "المزيد عنا",
+    "weAreAlwaysEnsure": "نحن نضمن دائماً أفضل دورة لتعلمك",
+    "admissionOpen": "القبول مفتوح"
+  },
+  "video": {
+    "joinSession": "انضم لجلستنا الجديدة",
+    "callToEnroll": "اتصل لتسجيل طفلك",
+    "joinWithUs": "انضم إلينا",
+    "watchNow": "شاهد الآن"
+  },
+  "whyChooseUs": {
+    "title": "لماذا تختارنا",
+    "subtitle": "إنشاء مجتمع من المتعلمين مدى الحياة",
+    "worldClassTrainers": "مدربون عالميون",
+    "easyLearning": "تعلم سهل",
+    "flexible": "مرن",
+    "affordablePrice": "سعر مناسب",
+    "featureDescription": "جرافيدا ديكتوم فوسي بلاسيرات أولتريسيس إنتيجر"
+  },
+  "instructor": {
+    "title": "المدربون",
+    "subtitle": "تعرف على المدربين الخبراء لدينا",
+    "juniorInstructor": "مدرب مبتدئ",
+    "contactUs": "اتصل بنا",
+    "exploreCourse": "استكشف الدورات",
+    "contactTeacher": "تواصل مع المعلم"
+  },
+  "career": {
+    "title": "اختر مسارك المهني",
+    "subtitle": "اكتشف مكاسبك",
+    "startFromToday": "ابدأ من اليوم",
+    "joinTrainingCourses": "انضم لدوراتنا التدريبية وطور مهاراتك",
+    "joinNow": "انضم الآن →"
+  },
+  "blog": {
+    "title": "منشورات المدونة",
+    "subtitle": "المنشورات الشائعة",
+    "allBlogPost": "جميع منشورات المدونة"
+  },
+  "newsletter": {
+    "title": "انضم إلى نشرتنا الإخبارية",
+    "description": "اشترك في نشرتنا الإخبارية للحصول على آخر التحديثات والأخبار",
+    "placeholder": "أدخل بريدك الإلكتروني:",
+    "subscribeNow": "اشترك الآن"
+  },
+  "footer": {
+    "description": "إنتيردوم فيليت لاوريت إيد دونيك أولتريسيس تينسيدونت أركو. تينسيدونت تورتور أليكوام نولا فاسيليسي كراس فيرمينتوم أوديو إيو.",
+    "ourServices": "خدماتنا:",
+    "webDevelopment": "تطوير الويب",
+    "uiUxDesign": "تصميم واجهة المستخدم",
+    "management": "الإدارة",
+    "digitalMarketing": "التسويق الرقمي",
+    "blogNews": "أخبار المدونة",
+    "quickLinks": "روابط سريعة:",
+    "templates": "القوالب",
+    "blogAndArticle": "المدونة والمقالات",
+    "integrations": "التكاملات",
+    "webinars": "الندوات عبر الإنترنت",
+    "privacyPolicy": "سياسة الخصوصية",
+    "gallery": "المعرض",
+    "copyright": "حقوق النشر © 2023 Educate || جميع الحقوق محفوظة"
+  },
+  "contact": {
+    "getInTouch": "تواصل معنا",
+    "description": "سوسبينديس أولتريس جرافيدا ديكتوم فوسي بلاسيرات أولتريسيس إنتيجر",
+    "ourAddress": "عنواننا",
+    "address": "1564 Goosetown Drive Matthews, NC 28105",
+    "hoursOfOperation": "ساعات العمل",
+    "workingHours": "الإثنين - الجمعة: 9:00 صباحاً إلى 5:00 مساءً",
+    "holiday": "[عطلة السبت الثاني]",
+    "contact": "اتصل",
+    "phone": "+99-35895-4565",
+    "email": "supportyou@info.com",
+    "customerCare": "خدمة العملاء"
+  },
+  "form": {
+    "name": "الاسم",
+    "email": "البريد الإلكتروني",
+    "phone": "الهاتف",
+    "subject": "الموضوع",
+    "message": "الرسالة",
+    "sendMessage": "إرسال الرسالة",
+    "required": "هذا الحقل مطلوب",
+    "minLength": "يجب أن يكون على الأقل 3 أحرف",
+    "invalidEmail": "عنوان بريد إلكتروني غير صالح",
+    "phoneLength": "يجب أن يكون 11 رقماً",
+    "messageMinLength": "يجب أن يكون على الأقل 10 أحرف"
+  },
+  "registration": {
+    "signUp": "التسجيل",
+    "name": "الاسم",
+    "email": "البريد الإلكتروني",
+    "emailAddress": "عنوان البريد الإلكتروني",
+    "profilePicture": "صورة الملف الشخصي",
+    "uploadImage": "تحميل الصورة",
+    "uploading": "جاري التحميل...",
+    "password": "كلمة المرور",
+    "confirmPassword": "تأكيد كلمة المرور",
+    "minPasswordLength": "يجب أن تكون على الأقل 6 أحرف",
+    "confirmPasswordPlaceholder": "يرجى تأكيد كلمة المرور",
+    "passwordsDoNotMatch": "كلمات المرور غير متطابقة",
+    "areaOfExpertise": "مجال الخبرة",
+    "yearsOfExperience": "سنوات الخبرة",
+    "enterExpertise": "يرجى إدخال مجال خبرتك",
+    "enterExperience": "يرجى إدخال خبرتك",
+    "expertisePlaceholder": "مثل: تطوير الويب",
+    "experiencePlaceholder": "مثل: 3",
+    "becomeInstructor": "هل تريد أن تصبح مدرباً",
+    "submitNow": "إرسال الآن",
+    "required": "هذا الحقل مطلوب",
+    "minLength": "يجب أن يكون على الأقل 3 أحرف"
+  },
+  "signIn": {
+    "signIn": "تسجيل الدخول",
+    "email": "البريد الإلكتروني *",
+    "password": "كلمة المرور *",
+    "enterEmail": "أدخل بريدك الإلكتروني",
+    "enterPassword": "أدخل كلمة المرور",
+    "emailRequired": "البريد الإلكتروني مطلوب",
+    "passwordRequired": "كلمة المرور مطلوبة",
+    "invalidEmailFormat": "تنسيق بريد إلكتروني غير صالح",
+    "passwordMinLength": "يجب أن تكون كلمة المرور 6 أحرف على الأقل",
+    "forgotPassword": "هل نسيت كلمة المرور؟",
+    "rememberMe": "تذكرني",
+    "dontHaveAccount": "ليس لديك حساب؟",
+    "signUp": "سجل الآن"
+  },
+  "error": {
+    "title": "عذراً، الصفحة غير موجودة!",
+    "description": "لوريم إيبسوم دولور سيت أميت، كونسيكتيتور أديبيسينج إليت، سيد إيوسمود تيمبور إنسيديدونت أوت لابور إت دولور ماجنا أليكوا.",
+    "backToHome": "العودة للرئيسية"
+  },
+  "sidebar": {
+    "description": "سوسبينديس إنتيردوم كونسيكتيتور ليبيرو إيد. فيرمينتوم ليو فيل أورسي بورتا نون. إيوسمود فيفيرا نيبه كراس بولفينار سوسبين.",
+    "getInTouch": "تواصل معنا",
+    "email": "البريد الإلكتروني",
+    "emailValue": "hello@gmail.com",
+    "phone": "الهاتف",
+    "phoneValue": "(00) 456 1122 7890",
+    "location": "الموقع",
+    "locationValue": "Riverside 255, San Francisco, USA"
+  },
+  "studentProfile": {
+    "logout": "تسجيل الخروج",
+    "enrolledCourses": "الدورات المسجلة",
+    "inProgressCourses": "الدورات قيد التقدم",
+    "finishedCourses": "الدورات المنتهية"
+  },
+  "instructorDashboard": {
+    "welcomeBack": "مرحباً بعودتك",
+    "overviewText": "إليك نظرة سريعة على دوراتك ونشاطك."
+  },
+  "faq": {
+    "question1": "لماذا يفضل الطلاب التعلم عبر الإنترنت؟",
+    "question2": "أين يجب أن أدرس في الخارج؟",
+    "question3": "كيف يمكنني التواصل مع المدرسة مباشرة؟",
+    "question4": "كيف أجد مدرسة حيث أريد الدراسة؟",
+    "question5": "كيف يتم إنشاء المحتوى؟"
+  },
+  "common": {
+    "button": {
+      "contactUs": "اتصل بنا",
+      "exploreCourses": "استكشف الدورات",
+      "joinNow": "انضم الآن",
+      "learnMore": "اعرف المزيد",
+      "getStarted": "ابدأ الآن",
+      "submit": "إرسال",
+      "cancel": "إلغاء",
+      "save": "حفظ",
+      "delete": "حذف",
+      "edit": "تعديل",
+      "close": "إغلاق"
+    }
+  },
+  "Get in Touch": "تواصل معنا"
+}

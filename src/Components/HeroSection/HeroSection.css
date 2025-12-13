@@ -1,0 +1,279 @@
+/* ======================================================
+   RESET & BASE
+====================================================== */
+.it-hero-2-area {
+    position: relative;
+    padding: 40px 0;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+  }
+  
+  /* ======================================================
+     SECTION SHAPES
+  ====================================================== */
+  .it-hero-2-shape-4,
+  .it-hero-2-shape-5,
+  .it-hero-2-shape-6,
+  .it-hero-2-shape-7 {
+    position: absolute;
+  }
+  
+  /* Shape 4 */
+  .it-hero-2-shape-4 {
+    bottom: 0;
+    right: 0;
+  }
+  
+  /* Shape 5 – Floating Arrow */
+  .it-hero-2-shape-5 {
+    bottom: 50px;
+    left: 300px;
+    transform-origin: 5% 50%;
+    animation: arrowPivot 2.4s ease-in-out infinite;
+  }
+  
+  @keyframes arrowPivot {
+    0%   { transform: rotate(0deg); }
+    50%  { transform: rotate(-15deg); }
+    100% { transform: rotate(0deg); }
+  }
+  
+  /* Shape 6 – Full Rotation */
+  .it-hero-2-shape-6 {
+    bottom: 20px;
+    left: 0;
+    z-index: 10;
+    animation: rotate360 4s linear infinite;
+  }
+  
+  @keyframes rotate360 {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+  
+  /* Shape 7 – Full Rotation */
+  .it-hero-2-shape-7 {
+    top: 80px;
+    left: 40px;
+    animation: rotate360 4s linear infinite;
+  }
+  
+  /* ======================================================
+     FUNFACT (30K STUDENTS)
+  ====================================================== */
+  .it-hero-2-funfact {
+    position: absolute;
+    left: 50%;
+    bottom: 15%;
+    transform: translateX(-50%);
+    padding: 25px 30px;
+    width: 180px;
+    background: #fff;
+    z-index: 50;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    animation: funfactFloat 3s ease-out infinite;
+  }
+  
+  @keyframes funfactFloat {
+    0%   { transform: translate(-50%, 0); }
+    50%  { transform: translate(-50%, -12px); }
+    100% { transform: translate(-50%, 0); }
+  }
+  
+  .it-hero-2-funfact span.theme {
+    font-size: 28px;
+    font-weight: 600;
+    color: #0ab99d;
+    display: block;
+    margin-bottom: 6px;
+  }
+  
+  .it-hero-2-funfact span {
+    font-size: 14px;
+    color: #0b2546;
+    font-weight: 400;
+  }
+  
+  .it-hero-2-funfact img {
+    width: 100px;
+    margin-top: 10px;
+  }
+  
+  /* ======================================================
+     LEFT CONTENT
+  ====================================================== */
+  .it-hero-2-content {
+    position: relative;
+    bottom: 100px;
+    z-index: 3;
+  }
+  
+  .it-hero-2-title {
+    font-size: 40px;
+    font-weight: 700;
+    color: #062a4d;
+  }
+  
+  .it-hero-2-title .title-shape svg {
+    position: absolute;
+    left: 170px;
+    top: -10px;
+    width: 110px;
+  }
+  
+  .it-hero-2-text p {
+    margin-top: 20px;
+    font-size: 12px;
+  }
+  
+  /* ======================================================
+     PLAY BUTTON + HALO
+  ====================================================== */
+  .it-hero-2-play {
+    display: flex;
+    align-items: center;
+    margin-left: 25px;
+  }
+  
+  .it-hero-2-play a {
+    width: 45px;
+    height: 45px;
+    background: #0d243e;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 17px;
+    position: relative;
+    overflow: visible;
+  }
+  
+  /* Halo Animation */
+  .it-hero-2-play a::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: rgba(13,36,62,0.35);
+    animation: halo 1.8s linear infinite;
+  }
+  
+  @keyframes halo {
+    0%   { transform: scale(1);   opacity: 1; }
+    80%  { transform: scale(2.2); opacity: 0; }
+    100% { transform: scale(2.2); opacity: 0; }
+  }
+  
+  .it-hero-2-play span {
+    margin-left: 12px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #0d243e;
+  }
+  
+  /* ======================================================
+     RIGHT SIDE (THUMB + SHAPES)
+  ====================================================== */
+  .it-hero-2-thumb-box {
+    position: relative;
+  }
+  
+  .it-hero-2-thumb img {
+    width: 450px;
+    position: relative;
+    z-index: 5;
+  }
+  
+  /* Extra Shapes */
+  .it-hero-2-shape-1,
+  .it-hero-2-shape-2,
+  .it-hero-2-shape-3 {
+    position: absolute;
+    z-index: 1;
+  }
+  
+  .it-hero-2-shape-1 { top: 20px;   right: -80px; }
+  .it-hero-2-shape-2 { top: 280px;  right: 340px; }
+  
+  .it-hero-2-shape-3 {
+    top: 30px;
+    left: 400px;
+    transform-origin: center;
+    animation: flipLeftRight 2s ease-in-out infinite;
+  }
+  
+  @keyframes flipLeftRight {
+    0%   { transform: scaleX(1); }
+    50%  { transform: scaleX(-1); }
+    100% { transform: scaleX(1); }
+  }
+  
+  @media (max-width: 990px) {
+  
+    /* نخلي السكشن كله عمودي والكلام فوق والصورة تحت */
+    .it-hero-2-area .row {
+      flex-direction: column;   /* مش column-reverse */
+      text-align: center;
+    }
+  
+   
+  
+    /* النص */
+    .it-hero-2-content {
+      bottom: 0 !important;
+      margin-top: 20px;
+      text-align: center !important;
+      margin-bottom: 50px;
+    }
+  
+    /* الصورة */
+    .it-hero-2-thumb img.BigHero {
+      width: 320px !important;
+      height: auto !important;
+      margin: 0 auto !important;
+      display: block;
+      bottom: 0 !important;
+    }
+  
+    /* إخفاء كل الـ shapes */
+    .it-hero-2-shape-1,
+    .it-hero-2-shape-3,
+    .it-hero-2-shape-5,
+    .it-hero-2-shape-6,
+    .it-hero-2-funfact {
+      display: none !important;
+    }
+  
+    /* العنوان */
+    .it-hero-2-title {
+      font-size: 30px !important;
+      line-height: 1.4;
+    }
+   
+  
+    /* الشكل اللي تحت كلمة Your */
+    .it-hero-2-title .title-shape svg {
+      left: 51% !important;
+      transform: translateX(-30%);
+      width: 90px !important;
+    }
+  
+    /* Text */
+    .it-hero-2-text p {
+      font-size: 14px !important;
+      line-height: 1.6;
+    }
+  
+    /* زرار + Watch Now */
+    .it-hero-2-btn-box {
+      justify-content: center !important;
+    }
+  
+    .it-hero-2-play {
+      margin-left: 15px !important;
+    }
+  }
+  
+  

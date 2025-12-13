@@ -22,7 +22,6 @@ function Cart() {
     dispatch(removeCourseFromCart(courseId));
   };
 
-
   const calculateTotal = () => {
     return cartItems
       .reduce(
@@ -31,15 +30,15 @@ function Cart() {
       )
       .toFixed(2);
   };
-const handleMoveToWishlist = async (courseId) => {
-  const success = await handleAddToWish(courseId);
+  const handleMoveToWishlist = async (courseId) => {
+    const success = await handleAddToWish(courseId);
 
-  if (success) {
-    handleRemove(courseId);
-  } else {
-    toast.error("Failed to move to wishlist");
-  }
-};
+    if (success) {
+      handleRemove(courseId);
+    } else {
+      toast.error("Failed to move to wishlist");
+    }
+  };
 
   // ---------- Empty Cart ----------
   if (!Array.isArray(cartItems) || cartItems.length === 0) {
@@ -134,7 +133,7 @@ const handleMoveToWishlist = async (courseId) => {
                       <button
                         className="btn btn-sm "
                         style={{ color: "#0ab99d" }}
-                         onClick={() =>  handleMoveToWishlist(course.courseId)}
+                        onClick={() => handleMoveToWishlist(course.courseId)}
                       >
                         Move to Wishlist
                       </button>
@@ -159,7 +158,9 @@ const handleMoveToWishlist = async (courseId) => {
         <div className="col-12 col-lg-3">
           <h5>Total:</h5>
           <h2>${calculateTotal()}</h2>
-          <Button>Proceed to Checkout</Button>
+          <Link to="/checkout">
+            <Button>Proceed to Checkout</Button>
+          </Link>
           <p style={{ fontSize: "12px" }}>You won't be charged yet.</p>
           <hr />
           <Button>Apply Coupon</Button>
