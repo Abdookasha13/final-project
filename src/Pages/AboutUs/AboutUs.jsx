@@ -145,7 +145,6 @@ function AboutUs() {
                 <h2 className="it-section-title-3 text-white">
                   {t("instructor.subtitle")}
                 </h2>
-                {/* مكان الكروت */}
                 <div className="it-team-3-wrapper row justify-content-center">
                   <div className="col-xl-3 col-lg-4 col-md-6 mb-30">
                     <TeacherCard className="al-card-color" />

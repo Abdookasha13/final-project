@@ -8,6 +8,18 @@ import { LuMenu } from "react-icons/lu";
 import { AiOutlineUser } from "react-icons/ai";
 import getCourseById from "../../../utilities/getCourseById";
 import Loader from "../../../Components/Loader/Loader";
+import { FaRegHeart } from "react-icons/fa";
+import { BiDollar } from "react-icons/bi";
+import { PiStudent } from "react-icons/pi";
+import { TfiBarChartAlt } from "react-icons/tfi";
+import { MdOutlinePlayLesson } from "react-icons/md";
+import { GrLanguage } from "react-icons/gr";
+import { useDispatch, useSelector } from "react-redux";
+import { addCourseToCart } from "../../../Store/Slices/cartSlice";
+import { fetchReviewStats } from "../../../Store/Slices/reviewsSlice";
+import { toast } from "react-toastify";
+import handleAddToWish from "../../../utilities/handleAddToWish";
+import ReviewStats from "../../../Components/StarRating/starRating";
 
 const tabs = [
   { name: "Overview", icon: GoBookmark },
@@ -17,11 +29,23 @@ const tabs = [
 ];
 
 const CourseDetails = () => {
+  const dispatch = useDispatch();
   const { courseId } = useParams();
   const [course, setCourse] = useState(null);
   const [lessons, setLessons] = useState([]);
   const [activeTab, setActiveTab] = useState("Overview");
 
+  // من Redux - الـ stats
+  const reviewStats = useSelector((state) => state.reviewStats.stats);
+  const stats = reviewStats[courseId];
+
+  const handleAdd = () => {
+    console.log(course._id);
+    dispatch(addCourseToCart(course._id));
+    toast.success("Course added to cart!");
+  };
+
+  // جيب الـ course data
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -36,9 +60,15 @@ const CourseDetails = () => {
     fetchData();
   }, [courseId]);
 
+  // جيب الـ review stats من Redux
+  useEffect(() => {
+    if (courseId) {
+      dispatch(fetchReviewStats(courseId));
+    }
+  }, [courseId, dispatch]);
 
   if (!course) {
-    return <Loader></Loader>;
+    return <Loader />;
   }
 
   const videoList = lessons.map((lesson) => ({
@@ -82,7 +112,11 @@ const CourseDetails = () => {
         </div>
       </div>
     ),
-    Reviews: <div className="px-4 py-5">Reviews Here...</div>,
+    Reviews: (
+      <div className="border border-top-0 border-light-subtle px-4 py-5">
+        <ReviewStats stats={stats} />
+      </div>
+    ),
   };
 
   return (
@@ -94,12 +128,22 @@ const CourseDetails = () => {
             <img src={course.thumbnailUrl} className="rounded-3" />
           </div>
 
-          <div className="course-rating-roka mb-2 ">
-            {Array.from({ length: 4 }).map((_, i) => (
-              <i key={i} className="fa-solid fa-star me-1"></i>
+          <div className="course-rating-roka mb-2 d-flex align-items-center">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <i
+                key={i}
+                className={
+                  i < Math.round(stats?.averageRating || 0)
+                    ? "fa-solid fa-star me-1"
+                    : "fa-regular fa-star me-1"
+                }
+                style={{ color: "#0ab99d" }}
+              ></i>
             ))}
-            <i className="fa-regular fa-star me-1"></i>
-            <span>(4.5)</span>
+
+            <span className="ms-1">
+              ({stats?.averageRating ? stats.averageRating.toFixed(1) : "0.0"})
+            </span>
           </div>
 
           <h4 className="course1-title-roka fw-bold mb-4 ">{course.title}</h4>
@@ -137,40 +181,93 @@ const CourseDetails = () => {
               alt="instructor"
               className="img-fluid rounded mb-3"
             />
-            <div className="course-info-roka d-flex justify-content-between ">
-              <p className="course-label-roka">Course Fee</p>
-              <div className="course-price-roka d-flex gap-2">
-                <span className="current-price-roka fw-bold">
-                  ${course.price}
-                </span>
-                <span className="old-price-roka">${course.discountPrice}</span>
-              </div>
-            </div>
-            <p className="guarantee-text-roka pb-2">
-              29-Day Money-Back Guarantee
-            </p>
-            <Button className="ticketbtn">Buy Ticket</Button>
+
+            <Button onClick={handleAdd} className="ticketbtn">
+              Add To Cart
+            </Button>
 
             <ul className="list-unstyled m-0 mt-3 ">
-              <li>
-                <span>4:00 pm - 6:00 pm</span> <span>start date</span>
+              <li className=" border-bottom py-3">
+                <span>
+                  {" "}
+                  <BiDollar
+                    size={"20px"}
+                    color="#0ab99d"
+                    style={{ marginRight: "7px" }}
+                  />
+                  Price
+                </span>{" "}
+                <div className="course-price-roka d-flex gap-2">
+                  <span className="current-price-roka fw-bold">
+                    ${course.price}
+                  </span>
+                  <span className="old-price-roka">
+                    ${course.discountPrice}
+                  </span>
+                </div>
               </li>
-              <li>
-                <span>enrolled</span> <span>100</span>
+
+              <li className=" border-bottom py-3">
+                <span>
+                  {" "}
+                  <PiStudent
+                    size={"20px"}
+                    color="#0ab99d"
+                    style={{ marginRight: "7px" }}
+                  />
+                  Enrolled
+                </span>{" "}
+                <span className="fw-bold">100</span>
               </li>
-              <li>
-                <span>lectures</span> <span>80</span>
+              <li className=" border-bottom py-3">
+                <span>
+                  <MdOutlinePlayLesson
+                    size={"20px"}
+                    color="#0ab99d"
+                    style={{ marginRight: "7px" }}
+                  />
+                  Lessons
+                </span>{" "}
+                <span className="fw-bold">80</span>
               </li>
-              <li>
-                <span>Skill Level</span> <span>Beginner</span>
+              <li className=" border-bottom py-3">
+                <span>
+                  {" "}
+                  <TfiBarChartAlt
+                    size={"20px"}
+                    color="#0ab99d"
+                    style={{ marginRight: "7px" }}
+                  />
+                  Skill Level
+                </span>{" "}
+                <span className="fw-bold">Beginner</span>
               </li>
-              <li>
-                <span>Class Day</span> <span>Monday - Friday</span>
-              </li>
-              <li>
-                <span>Language</span> <span>English</span>
+
+              <li className=" border-bottom py-3">
+                <span>
+                  {" "}
+                  <GrLanguage
+                    size={"18px"}
+                    color="#0ab99d"
+                    style={{ marginRight: "7px" }}
+                  />
+                  Language
+                </span>{" "}
+                <span className="fw-bold">English</span>
               </li>
             </ul>
+            <div
+              onClick={() => handleAddToWish(course._id)}
+              className="mt-4  "
+              style={{
+                fontSize: "15px",
+                fontWeight: "500",
+                color: "#333",
+                cursor: "pointer",
+              }}
+            >
+              <FaRegHeart color="#0ab99d" size={"18px"} /> Add To Wishlist
+            </div>
           </div>
         </div>
       </div>
