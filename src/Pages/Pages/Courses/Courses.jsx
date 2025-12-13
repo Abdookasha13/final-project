@@ -5,24 +5,41 @@ import { Link } from "react-router-dom";
 import Loader from "../../../Components/Loader/Loader";
 import CourseCard from "../../../Components/coursecard/CourseCard";
 import { useDispatch, useSelector } from "react-redux";
-import { coursesFetched } from "../../../Store/Slices/getAllCoursecSlice";
+import { fetchCourses } from "../../../Store/Slices/getAllCoursecSlice";
+import { fetchMultipleReviewStats } from "../../../Store/Slices/reviewsSlice";
 
 function Courses() {
   const dispatch = useDispatch();
-  const courses = useSelector((state) => state.getAllCourses.data||[]);
+  
+  // من Redux - الـ courses
+  const courses = useSelector((state) => state.getAllCourses.data || []);
   const isLoading = useSelector((state) => state.getAllCourses.isLoading);
+  
+  // من Redux - الـ stats
+  const reviewStats = useSelector((state) => state.reviewStats.stats);
+  const statsLoading = useSelector((state) => state.reviewStats.isLoading);
 
+  // جيب الـ courses
   useEffect(() => {
-    if(!courses.length){
-      dispatch(coursesFetched());
+    if (!courses.length) {
+      dispatch(fetchCourses());
     }
   }, [courses.length, dispatch]);
 
-  if (isLoading) {
+  // جيب الـ stats لكل الـ courses
+  useEffect(() => {
+    if (courses.length > 0) {
+      const courseIds = courses.map((c) => c._id);
+      dispatch(fetchMultipleReviewStats(courseIds));
+    }
+  }, [courses, dispatch]);
+
+  if (isLoading || statsLoading) {
     return <Loader />;
   }
-  if(!courses.length){
-    return <div>no courses hereee</div>
+
+  if (!courses.length) {
+    return <div>no courses hereee</div>;
   }
 
   return (
@@ -48,6 +65,7 @@ function Courses() {
                 insName={course.instructor?.name}
                 bgColor={"#f8f9fa"}
                 course={course}
+                stats={reviewStats[course._id]} // ✅ من Redux
               />
             </Link>
           </div>

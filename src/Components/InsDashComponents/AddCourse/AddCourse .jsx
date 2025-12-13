@@ -6,7 +6,6 @@ import handleAddCourse from "../../../utilities/handleAddCourse";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import handleUpdateCourse from "../../../utilities/handleUpdateCourse";
 
-
 const AddCourse = () => {
   const {
     register,
@@ -19,12 +18,22 @@ const AddCourse = () => {
   const [thumbnailUrl, setThumbnailUrl] = useState("");
   const [uploading, setUploading] = useState(false);
   const [preview, setPreview] = useState(null);
+  const [category, setCategory] = useState([]);
 
   const { id } = useParams();
   const navigate = useNavigate();
   const isEdit = Boolean(id);
 
   useEffect(() => {
+    const fetchCategory = async () => {
+      try {
+        const res = await fetch(`http://localhost:1911/category`);
+        const data = await res.json();
+        setCategory(data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
     const fetchCourse = async () => {
       if (!isEdit) return;
 
@@ -48,6 +57,7 @@ const AddCourse = () => {
         console.error(err);
       }
     };
+    fetchCategory();
     fetchCourse();
   }, [id, isEdit, reset]);
 
@@ -151,13 +161,13 @@ const AddCourse = () => {
               <div className="row">
                 <div className="col-md-6 mb-3">
                   <label className="form-label fw-semibold">Category</label>
+
                   <select className="form-select" {...register("category")}>
-                    <option value="68dea80bd8dc443cfda47922">
-                      Web Development
-                    </option>
-                    <option>UI/UX Design</option>
-                    <option>Data Science</option>
-                    <option>Marketing</option>
+                    {category.map((cat) => (
+                      <option key={cat._id} value={cat._id}>
+                        {cat.name}
+                      </option>
+                    ))}
                   </select>
                 </div>
 
