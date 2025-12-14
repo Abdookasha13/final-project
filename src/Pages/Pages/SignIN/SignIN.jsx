@@ -1,11 +1,15 @@
+import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import handleLoginSubmit from "../../../utilities/handleLoginSubmit";
 import Button from "../../../Components/Button/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 export default function SignIN() {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -13,7 +17,10 @@ export default function SignIN() {
   } = useForm();
 
   const onSubmit = async (data) => {
-    handleLoginSubmit(data);
+    const result = await handleLoginSubmit(data, dispatch);
+    if (result?.success) {
+      navigate("/home");
+    }
   };
 
   return (
@@ -61,10 +68,7 @@ export default function SignIN() {
               }`}
               {...register("password", {
                 required: t("signIn.passwordRequired"),
-                minLength: {
-                  value: 6,
-                  message: t("signIn.passwordMinLength"),
-                },
+                minLength: { value: 6, message: t("signIn.passwordMinLength") },
               })}
             />
             {errors.password && (
@@ -72,12 +76,11 @@ export default function SignIN() {
             )}
           </div>
 
-          {/* Forgot password + Remember me */}
+          {/* Remember me / Forgot password */}
           <div className="d-flex justify-content-between align-items-center mb-4">
             <a href="#" className="text-danger text-decoration-none">
               {t("signIn.forgotPassword")}
             </a>
-
             <div className="form-check">
               <input
                 type="checkbox"
@@ -91,12 +94,15 @@ export default function SignIN() {
             </div>
           </div>
 
-          {/* Submit button */}
-          <button type="submit" className="border-0 bg-transparent p-0">
-            <Button disabled={isSubmitting}>{t("signIn.signIn")}</Button>
+          {/* Submit */}
+          <button
+            type="submit"
+            className="border-0 bg-transparent p-0"
+            disabled={isSubmitting}
+          >
+            <Button>{t("signIn.signIn")}</Button>
           </button>
 
-          {/* Footer link */}
           <p className="text-center text-muted mt-4">
             {t("signIn.dontHaveAccount")}{" "}
             <Link to="/register" className="text-danger text-decoration-none">

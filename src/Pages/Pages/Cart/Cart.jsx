@@ -124,12 +124,7 @@ function Cart() {
                       >
                         Remove
                       </button>
-                      <button
-                        className="btn btn-sm "
-                        style={{ color: "#0ab99d" }}
-                      >
-                        Save for Later
-                      </button>
+
                       <button
                         className="btn btn-sm "
                         style={{ color: "#0ab99d" }}

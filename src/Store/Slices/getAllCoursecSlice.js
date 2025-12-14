@@ -5,11 +5,27 @@ export const fetchCourses = createAsyncThunk(
   "courses/fetchAll",
   async (_, { rejectWithValue }) => {
     try {
-      const res = await axios.get("http://localhost:1911/courses");
+      const token = localStorage.getItem("token");
+
+      const headers = {
+        "Content-Type": "application/json",
+      };
+
+      if (token) {
+        headers["Authorization"] = `Bearer ${token}`;
+      }
+
+      const res = await axios.get("http://localhost:1911/courses", {
+        headers,
+      });
+
       console.log("Fetched Courses:", res.data);
       return res.data;
     } catch (err) {
-      console.error("Error fetching courses:", err);
+      console.error(
+        "Error fetching courses:",
+        err.response?.data || err.message
+      );
       return rejectWithValue(err.response?.data || "Error fetching courses");
     }
   }

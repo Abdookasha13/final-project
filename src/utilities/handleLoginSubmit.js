@@ -1,26 +1,34 @@
 import { toast } from "react-toastify";
+import axios from "axios";
+import { loginSuccess } from "../Store/Slices/authSlice";
+import { fetchCart } from "../Store/Slices/cartSlice";
 
-const handleLoginSubmit = async (data) => {
+const handleLoginSubmit = async (data, dispatch) => {
   try {
-    const res = await fetch("http://localhost:1911/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
+    const res = await axios.post("http://localhost:1911/login", data);
 
-    const result = await res.json();
+    if (res.status === 200) {
+      dispatch(
+        loginSuccess({
+          user: res.data.user,
+          token: res.data.token,
+        })
+      );
 
-    if (res.ok) {
-      console.log("Token:", result.token);
-      localStorage.setItem("token", result.token);
-      localStorage.setItem("user", JSON.stringify(result.user));
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+
+      dispatch(fetchCart());
+
       toast.success("Login successful");
-    } else {
-      toast.error(result.message || "Login failed");
+      return { success: true };
     }
   } catch (error) {
-    console.error(error);
-    toast.error("Invalid email or password");
+    console.error("Login error:", error);
+    const errorMessage =
+      error.response?.data?.message || "Invalid email or password";
+    toast.error(errorMessage);
+    return { success: false, message: errorMessage };
   }
 };
 
