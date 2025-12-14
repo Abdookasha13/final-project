@@ -10,23 +10,19 @@ import { fetchMultipleReviewStats } from "../../../Store/Slices/reviewsSlice";
 
 function Courses() {
   const dispatch = useDispatch();
-  
-  // من Redux - الـ courses
+
   const courses = useSelector((state) => state.getAllCourses.data || []);
   const isLoading = useSelector((state) => state.getAllCourses.isLoading);
-  
-  // من Redux - الـ stats
+
   const reviewStats = useSelector((state) => state.reviewStats.stats);
   const statsLoading = useSelector((state) => state.reviewStats.isLoading);
 
-  // جيب الـ courses
   useEffect(() => {
     if (!courses.length) {
       dispatch(fetchCourses());
     }
   }, [courses.length, dispatch]);
 
-  // جيب الـ stats لكل الـ courses
   useEffect(() => {
     if (courses.length > 0) {
       const courseIds = courses.map((c) => c._id);
@@ -65,7 +61,7 @@ function Courses() {
                 insName={course.instructor?.name}
                 bgColor={"#f8f9fa"}
                 course={course}
-                stats={reviewStats[course._id]} // ✅ من Redux
+                stats={reviewStats[course._id]}
               />
             </Link>
           </div>
