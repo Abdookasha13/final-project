@@ -153,7 +153,7 @@ function Checkout() {
                         }
                       );
 
-                      console.log("💳 Order ID:", res.data.id);
+                      console.log("Order ID:", res.data.id);
                       setIsProcessing(false);
                       return res.data.id;
                     } catch (error) {
@@ -169,7 +169,7 @@ function Checkout() {
                   onApprove={async (data) => {
                     try {
                       setIsProcessing(true);
-                      console.log("💳 Capturing order ID:", data.orderID);
+                      console.log("Capturing order ID:", data.orderID);
 
                       const res = await axios.post(
                         "http://localhost:1911/capture-order",
@@ -178,7 +178,7 @@ function Checkout() {
                         }
                       );
 
-                      console.log("✅ Payment successful:", res.data);
+                      console.log("Payment successful:", res.data);
                       setIsProcessing(false);
                       toast.success(
                         "Payment successful! Welcome to your courses!"

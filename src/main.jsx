@@ -10,7 +10,7 @@ createRoot(document.getElementById("root")).render(
     <Provider store={store}>
       <PayPalScriptProvider
         options={{
-          "client-id": "AbCI-uO0hFpXFir1xfnuNhRmfYOzwg2RlX9exPIgEwNv9amd9hrHJUdaikv01mJG73QrW88GQqQTCsN5",
+          "client-id": "AXn-fTaL_Gv8l8NQinzaRvcKlpwpHG31z2UvrdMLoettU2q6RvVZEgRizlS1hiItSjm3kX7EEVHPIE8x",
           currency: "USD",
         }}
       >
