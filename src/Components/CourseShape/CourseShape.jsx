@@ -1,15 +1,47 @@
-import React from 'react'
+import React, { useEffect } from "react";
 import Button from "../../Components/Button/Button";
 import CourseCard from "../coursecard/CourseCard";
 import "./CourseShape.css";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCourses } from "../../Store/Slices/getAllCoursecSlice";
+import formatTime from "../../utilities/formatTime";
+import { fetchMultipleReviewStats } from "../../Store/Slices/reviewsSlice";
+import { Loader } from "lucide-react";
 
 function CourseShape() {
+  const dispatch = useDispatch();
+
+  const courses = useSelector((state) => state.getAllCourses.data || []);
+  const isLoading = useSelector((state) => state.getAllCourses.isLoading);
+
+  const reviewStats = useSelector((state) => state.reviewStats.stats);
+  const statsLoading = useSelector((state) => state.reviewStats.isLoading);
+
+  useEffect(() => {
+    if (!courses.length) {
+      dispatch(fetchCourses());
+    }
+  }, [courses.length, dispatch]);
+
+  useEffect(() => {
+    if (courses.length > 0) {
+      const courseIds = courses.map((c) => c._id);
+      dispatch(fetchMultipleReviewStats(courseIds));
+    }
+  }, [courses, dispatch]);
+
+  if (isLoading || statsLoading) {
+    return <Loader />;
+  }
+
+  if (!courses.length) {
+    return <div>no courses hereee</div>;
+  }
   return (
     <>
-    
       {/* ----------- Course Section ----------- */}
       <div className="it-course-area it-sub-bg-none p-relative grey-bg pt-120 pb-120">
-    {/* ----------- الخلفيات ----------- */}
+        {/* ----------- الخلفيات ----------- */}
         <div className="it-course-shape-1 d-none d-xl-block">
           <img
             src="https://ordainit.com/html/educate/assets/img/course/shape-1-1.png"
@@ -81,17 +113,28 @@ function CourseShape() {
 
             {/* ----------- مكان الكروت ----------- */}
             <div className="col-xl-12">
-              <div className="cards-placeholder row justify-content-center">
-                <div className="col-md-6 col-lg-3 ">
-                  <CourseCard imgSrc="https://ordainit.com/html/educate/assets/img/course/course-1-1.jpg" />
-                </div>
-                <div className="col-md-6 col-lg-3">
-                  <CourseCard imgSrc="https://ordainit.com/html/educate/assets/img/course/course-1-2.jpg" />
-                </div>
-                <div className="col-md-6 col-lg-3">
-                  <CourseCard imgSrc="https://ordainit.com/html/educate/assets/img/course/course-1-3.jpg" />
-                </div>
-              </div>
+              {courses
+                .map((course) => (
+                  <div className="col-md-6 col-lg-3">
+                    <CourseCard
+                      imgSrc={course.thumbnailUrl}
+                      title={course.title}
+                      price={course.price}
+                      discountPrice={course.discountPrice}
+                      lessonsCount={course.lessonsCount}
+                      courseDuration={formatTime(course.lessons)}
+                      studentsCount={course.studentsCount}
+                      courseId={course._id}
+                      category={course.category?.name}
+                      insImage={course.instructor?.profileImage}
+                      insName={course.instructor?.name}
+                      bgColor={"#f8f9fa"}
+                      course={course}
+                      stats={reviewStats[course._id]}
+                    />
+                  </div>
+                ))
+                .slice(0, 3)}
             </div>
 
             {/* ----------- مكان الزر ----------- */}
@@ -105,10 +148,8 @@ function CourseShape() {
           </div>
         </div>
       </div>
-
-     
     </>
-  )
+  );
 }
 
-export default CourseShape
+export default CourseShape;
