@@ -6,6 +6,10 @@
 .editbtnn {
   color: #0ab99d;
   border: 1px solid #0ab99d;
+  padding: 5px 15px;
+  background-color: white;
+  border-radius: 6px;
+  font-size: 15px;
 }
 .editbtnn:hover {
   background-color: #0ab99d;

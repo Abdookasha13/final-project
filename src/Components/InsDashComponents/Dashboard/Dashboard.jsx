@@ -16,12 +16,12 @@ import {
 
 const StatCard = ({ title, value, subtitle, iconClass }) => (
   <div className="col-md-4 mb-3">
-    <div className="card shadow-sm py-4">
+    <div className="card shadow-sm p-4 ">
       <div className=" card-body d-flex align-items-center">
         <div className="me-3">
-          <i className={`${iconClass} fs-2`}></i>
+          <i style={{color:"#0ab99d"}} className={`${iconClass} fs-2`}></i>
         </div>
-        <div>
+        <div className="text-center">
           <h6 className="card-title mb-1">{title}</h6>
           <h3 className="mb-0">{value ?? "-"}</h3>
           {subtitle && <small className="text-muted">{subtitle}</small>}
@@ -105,13 +105,14 @@ const InstructorDashboard = () => {
           title="Total Courses"
           value={counts.courses}
           subtitle="Active / Published"
-          iconClass="bi bi-journal-bookmark"
+           iconClass="bi bi-book"
         />
         <StatCard
           title="Total Lessons"
           value={counts.lessons}
           subtitle="Video / Text lessons"
-          iconClass="bi bi-book"
+        
+           iconClass="bi bi-journal-bookmark"
         />
         <StatCard
           title="Total Students"

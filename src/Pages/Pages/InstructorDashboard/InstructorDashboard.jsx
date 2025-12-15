@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import handleGetUserById from "../../../utilities/handleGetUserById";
 
 const InstructorDashboard = () => {
+  const [searchTerm, setSearchTerm] = useState("");
   const [profileImage, setProfileImage] = useState("");
   const location = useLocation();
   const [_, setInstructor] = useState(null);
@@ -174,6 +175,8 @@ const InstructorDashboard = () => {
                     type="text"
                     className="form-control w-75"
                     placeholder="Search..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
                   />
                 </>
               )}
@@ -201,7 +204,7 @@ const InstructorDashboard = () => {
           toastClassName="udemy-toast"
         />
         <main className="p-4 bg-light flex-grow-1">
-          <Outlet context={{ setProfileImage }} />
+          <Outlet context={{ setProfileImage,searchTerm }} />
         </main>
       </div>
     </div>

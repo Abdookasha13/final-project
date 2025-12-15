@@ -3,11 +3,17 @@ import getCoursesByInsId from "../../../utilities/getCoursesByInsId";
 import CourseCard from "../../coursecard/CourseCard";
 import formatTime from "../../../utilities/formatTime";
 import Loader from "../../Loader/Loader";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchMultipleReviewStats } from "../../../Store/Slices/reviewsSlice";
+import { useOutletContext } from "react-router-dom";
 
 const InsCourses = () => {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
+  const reviewStats = useSelector((state) => state.reviewStats.stats);
   const [error, setError] = useState(null);
+  const dispatch=useDispatch()
+  const { searchTerm } = useOutletContext();
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -32,6 +38,16 @@ const InsCourses = () => {
 
     fetchCourses();
   }, []);
+  const filteredCourses = courses.filter((course) =>
+  course.title.toLowerCase().includes(searchTerm.toLowerCase())
+);
+    useEffect(() => {
+    if (filteredCourses.length > 0) {
+      const courseIds = filteredCourses.map((c) => c._id);
+      dispatch(fetchMultipleReviewStats(courseIds));
+    }
+  }, [filteredCourses, dispatch]);
+
 
   const handleDeleteSuccess = (courseId) => {
     setCourses(courses.filter((c) => c._id !== courseId));
@@ -67,7 +83,7 @@ const InsCourses = () => {
   return (
     <div className="container px-0 mx-0">
       <div className="row g-4">
-        {courses.map((course) => (
+        {filteredCourses.map((course) => (
           <div className="col-xl-4 col-lg-4 col-md-6" key={course._id}>
             <div className="bg-light rounded-3 h-100 p-2">
               <CourseCard
@@ -85,6 +101,7 @@ const InsCourses = () => {
                 bgColor={"#ffff"}
                 hideInstructorInfo={true}
                 hideCartButton={true}
+                 stats={reviewStats[course._id]}
               />
             </div>
           </div>

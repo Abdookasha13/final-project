@@ -20,6 +20,8 @@ function Courses() {
   useEffect(() => {
     if (!courses.length) {
       dispatch(fetchCourses());
+   
+      
     }
   }, [courses.length, dispatch]);
 
@@ -30,6 +32,8 @@ function Courses() {
     }
   }, [courses, dispatch]);
 
+
+
   if (isLoading || statsLoading) {
     return <Loader />;
   }
@@ -37,7 +41,7 @@ function Courses() {
   if (!courses.length) {
     return <div>no courses hereee</div>;
   }
-
+console.log("COURSES FROM API:", courses);
   return (
     <div className="container coursecardcontainer px-0 mx-0">
       <div className="row g-4">

@@ -184,7 +184,7 @@ const CourseCard = ({
 
         {showInstructorActions && (
           <div className="d-flex justify-content-end gap-2 mt-3">
-            <button className="btn btn-sm editbtnn" onClick={handleEdit}>
+            <button className="editbtnn  " onClick={handleEdit}>
               <FaEdit /> Edit
             </button>
             <button
