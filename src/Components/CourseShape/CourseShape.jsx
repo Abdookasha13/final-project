@@ -112,10 +112,10 @@ function CourseShape() {
             </div>
 
             {/* ----------- مكان الكروت ----------- */}
-            <div className="col-xl-12">
+            <div className="row">
               {courses
                 .map((course) => (
-                  <div className="col-md-6 col-lg-3">
+                  <div className="col-md-6 col-lg-4">
                     <CourseCard
                       imgSrc={course.thumbnailUrl}
                       title={course.title}
