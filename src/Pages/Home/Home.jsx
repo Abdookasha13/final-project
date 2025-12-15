@@ -7,59 +7,16 @@ import BlogCard from "../../Components/BlogCard/BlogCard";
 import ServiceCard from "../../Components/ServiceCard/ServiceCard";
 import "./Home.css";
 import { useTranslation } from "react-i18next";
+import getAllServices from "../../utilities/getAllServices";
+import { useEffect, useState } from "react";
 
 function Home() {
   const { t } = useTranslation();
-  const services = [
-    {
-      _id: 1,
-      icon: "fa-solid fa-laptop-code",
-      title: "Web Design",
-      description: "25 Courses",
-    },
-    {
-      _id: 2,
-      icon: "fa-solid fa-palette",
-      title: "Graphic Design",
-      description: "25 Courses",
-    },
-    {
-      _id: 3,
-      icon: "fa-solid fa-user-graduate",
-      title: "Material UI",
-      description: "25 Courses",
-    },
-    {
-      _id: 4,
-      icon: "fa-solid fa-microchip",
-      title: "IT And Software",
-      description: "25 Courses",
-    },
-    {
-      _id: 5,
-      icon: "fa-solid fa-bullhorn",
-      title: "Sales Marketing",
-      description: "25 Courses",
-    },
-    {
-      _id: 6,
-      icon: "fa-solid fa-landmark",
-      title: "Art & Humanities",
-      description: "25 Courses",
-    },
-    {
-      _id: 7,
-      icon: "fa-solid fa-mobile-screen-button",
-      title: "Mobile App",
-      description: "25 Courses",
-    },
-    {
-      _id: 8,
-      icon: "fa-solid fa-chart-column",
-      title: "Finance",
-      description: "25 Courses",
-    },
-  ];
+  const [services, setServices] = useState([]);
+
+  useEffect(() => {
+    getAllServices(setServices);
+  }, []);
 
   return (
     <>
@@ -67,48 +24,50 @@ function Home() {
       <HeroSection />
 
       {/* =================== Category Section =================== */}
-      <div className="it-category-title-wrap p-relative mt-5">
-        <div className="it-category-shape d-none d-xl-block">
-          <img
-            src="https://ordainit.com/html/educate/assets/img/category/shape-1.png"
-            alt=""
-            width="140px"
-            height="50px"
-          />
-        </div>
-
-        <div className="row align-items-end">
-          <div className="col-xl-8 col-lg-8">
-            <div className="it-category-title-box">
-              <span className="it-section-subtitle">
-                {t("categories.title")}
-              </span>
-              <h4 className="it-section-title">
-                {t("categories.subtitle")}{" "}
-                <span className="p-relative">
-                  <svg
-                    className="title-shape-2"
-                    width="168"
-                    height="65"
-                    viewBox="0 0 168 65"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M73.3761 8.49147C78.4841 6.01353 82.5722 4.25154 88.8933 3.3035C94.2064 2.50664 99.6305 2.0701 104.981 1.94026C120.426 1.56549 135.132 4.90121 146.506 9.70405C158.628 14.8228 166.725 22.5638 166.074 31.6501C165.291 42.5779 151.346 51.7039 133.508 56.8189C110.253 63.4874 81.7065 63.8025 58.5605 60.8285C37.5033 58.123 11.6304 51.7165 3.58132 40.0216C-3.43085 29.8337 12.0728 18.1578 27.544 11.645C40.3656 6.24763 55.7082 2.98328 70.8043 4.08403C81.9391 4.89596 93.2164 6.87822 102.462 9.99561C112.874 13.5066 120.141 18.5932 127.862 23.6332"
-                      stroke="#0AB99D"
-                      strokeWidth="3"
-                      strokeLinecap="round"
-                    />
-                  </svg>
-                </span>
-              </h4>
-            </div>
+      <div className="container">
+        <div className="it-category-title-wrap p-relative mt-5 ">
+          <div className="it-category-shape d-none d-xl-block">
+            <img
+              src="https://ordainit.com/html/educate/assets/img/category/shape-1.png"
+              alt=""
+              width="140px"
+              height="50px"
+            />
           </div>
 
-          <div className="col-xl-4 col-lg-4">
-            <div className="it-category-button text-start text-md-end">
-              <Button>{t("categories.allCategories")}</Button>
+          <div className="d-flex align-items-end">
+            <div className="col-xl-8 col-lg-8">
+              <div className="it-category-title-box">
+                <span className="it-section-subtitle">
+                  {t("categories.title")}
+                </span>
+                <h4 className="it-section-title">
+                  {t("categories.subtitle")}{" "}
+                  <span className="p-relative">
+                    <svg
+                      className="title-shape-2"
+                      width="168"
+                      height="65"
+                      viewBox="0 0 168 65"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M73.3761 8.49147C78.4841 6.01353 82.5722 4.25154 88.8933 3.3035C94.2064 2.50664 99.6305 2.0701 104.981 1.94026C120.426 1.56549 135.132 4.90121 146.506 9.70405C158.628 14.8228 166.725 22.5638 166.074 31.6501C165.291 42.5779 151.346 51.7039 133.508 56.8189C110.253 63.4874 81.7065 63.8025 58.5605 60.8285C37.5033 58.123 11.6304 51.7165 3.58132 40.0216C-3.43085 29.8337 12.0728 18.1578 27.544 11.645C40.3656 6.24763 55.7082 2.98328 70.8043 4.08403C81.9391 4.89596 93.2164 6.87822 102.462 9.99561C112.874 13.5066 120.141 18.5932 127.862 23.6332"
+                        stroke="#0AB99D"
+                        strokeWidth="3"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                  </span>
+                </h4>
+              </div>
+            </div>
+
+            <div className="col-xl-4 col-lg-4">
+              <div className="it-category-button text-start text-md-end">
+                <Button>{t("categories.allCategories")}</Button>
+              </div>
             </div>
           </div>
         </div>
@@ -687,44 +646,46 @@ function Home() {
       </div>
 
       {/* =================== Blog Section =================== */}
+      <div className="container">
+        <div className="it-category-title-wrap p-relative mt-5">
+          <div className="d-flex align-items-end ">
+            <div className="col-xl-8 col-lg-8">
+              <div className="it-category-title-box">
+                <span className="it-section-subtitle">{t("blog.title")}</span>
 
-      <div className="it-category-title-wrap p-relative mt-5">
-        <div className="row align-items-end">
-          <div className="col-xl-8 col-lg-8">
-            <div className="it-category-title-box">
-              <span className="it-section-subtitle">{t("blog.title")}</span>
-
-              <h4 className="it-section-title">
-                {t("blog.subtitle").split(".")[0]}{" "}
-                <span className="p-relative">
-                  <svg
-                    className="title-shape-2"
-                    width="168"
-                    height="65"
-                    viewBox="0 0 220 65"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M73.3761 8.49147C78.4841 6.01353 82.5722 4.25154 88.8933 3.3035C94.2064 2.50664 99.6305 2.0701 104.981 1.94026C120.426 1.56549 135.132 4.90121 146.506 9.70405C158.628 14.8228 166.725 22.5638 166.074 31.6501C165.291 42.5779 151.346 51.7039 133.508 56.8189C110.253 63.4874 81.7065 63.8025 58.5605 60.8285C37.5033 58.123 11.6304 51.7165 3.58132 40.0216C-3.43085 29.8337 12.0728 18.1578 27.544 11.645C40.3656 6.24763 55.7082 2.98328 70.8043 4.08403C81.9391 4.89596 93.2164 6.87822 102.462 9.99561C112.874 13.5066 120.141 18.5932 127.862 23.6332"
-                      stroke="#0AB99D"
-                      strokeWidth="3"
-                      strokeLinecap="round"
-                    />
-                  </svg>
-                </span>
-              </h4>
+                <h4 className="it-section-title">
+                  {t("blog.subtitle").split(".")[0]}{" "}
+                  <span className="p-relative">
+                    <svg
+                      className="title-shape-2"
+                      width="168"
+                      height="65"
+                      viewBox="0 0 220 65"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M73.3761 8.49147C78.4841 6.01353 82.5722 4.25154 88.8933 3.3035C94.2064 2.50664 99.6305 2.0701 104.981 1.94026C120.426 1.56549 135.132 4.90121 146.506 9.70405C158.628 14.8228 166.725 22.5638 166.074 31.6501C165.291 42.5779 151.346 51.7039 133.508 56.8189C110.253 63.4874 81.7065 63.8025 58.5605 60.8285C37.5033 58.123 11.6304 51.7165 3.58132 40.0216C-3.43085 29.8337 12.0728 18.1578 27.544 11.645C40.3656 6.24763 55.7082 2.98328 70.8043 4.08403C81.9391 4.89596 93.2164 6.87822 102.462 9.99561C112.874 13.5066 120.141 18.5932 127.862 23.6332"
+                        stroke="#0AB99D"
+                        strokeWidth="3"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                  </span>
+                </h4>
+              </div>
             </div>
-          </div>
 
-          {/* ========== مكان الزرار ========== */}
-          <div className="col-xl-4 col-lg-4">
-            <div className="it-category-button text-start text-md-end">
-              <Button>{t("blog.allBlogPost")}</Button>
+            {/* ========== مكان الزرار ========== */}
+            <div className="col-xl-4 col-lg-4">
+              <div className="it-category-button text-start text-md-end">
+                <Button>{t("blog.allBlogPost")}</Button>
+              </div>
             </div>
           </div>
         </div>
       </div>
+
       <div className="container mb-5">
         <div className="row g-4 justify-content-center">
           <BlogCard />

@@ -5,13 +5,62 @@ import { IoBookOutline } from "react-icons/io5";
 import { RiProgress2Line } from "react-icons/ri";
 import { GrCompliance } from "react-icons/gr";
 import { useTranslation } from "react-i18next";
+import CourseCard from "../../../Components/coursecard/CourseCard";
+import ReviewForm from "../../../Components/ReviewForm/reviewForm";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const MyCourses = () => {
+  const [showReview, setShowReview] = useState(false);
+  const [selectedCourseId, setSelectedCourseId] = useState(null);
+  const [ratingLoading, setRatingLoading] = useState(false);
   const { t } = useTranslation();
   const [enrollments, setEnrollments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [activeTab, setActiveTab] = useState("enrolled");
+  // تخزين التقييمات للكورسات
+  const [userRatings, setUserRatings] = useState({});
+
+  const openReviewModal = (courseId) => {
+    setSelectedCourseId(courseId);
+    setShowReview(true);
+  };
+
+  const submitRating = async ({ course, rating }) => {
+    const token = localStorage.getItem("token");
+    setRatingLoading(true);
+    try {
+      const res = await axios.post(
+        "http://localhost:1911/addReview",
+        { course, rating },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (res.data.success) {
+        toast.success(res.data.message || "Rating submitted successfully!");
+        // تحديث التقييمات المحلية
+        setUserRatings((prev) => ({
+          ...prev,
+          [course]: rating,
+        }));
+      } else {
+        toast.error(res.data.message || "Failed to submit rating");
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error(
+        err.response?.data?.message || err.message || "Error submitting rating"
+      );
+    } finally {
+      setRatingLoading(false);
+    }
+  };
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -24,7 +73,17 @@ const MyCourses = () => {
         }
 
         const data = await getStdEnrollments(user._id);
-        setEnrollments(Array.isArray(data) ? data : []);
+        const enrollmentsArray = Array.isArray(data) ? data : [];
+        setEnrollments(enrollmentsArray);
+
+        const ratingsMap = {};
+        enrollmentsArray.forEach((enrollment) => {
+          if (enrollment.rating) {
+            const courseId = enrollment.course?._id || enrollment.course;
+            ratingsMap[courseId] = enrollment.rating;
+          }
+        });
+        setUserRatings(ratingsMap);
       } catch (err) {
         console.error("Error fetching courses:", err);
         setError("Failed to load courses.");
@@ -74,7 +133,7 @@ const MyCourses = () => {
   });
 
   return (
-    <div className="container">
+    <div className="container ">
       <div className="row g-3 text-center">
         {/* Enrolled */}
         <div className="col-md-4">
@@ -85,19 +144,6 @@ const MyCourses = () => {
             <div>
               <h6>{t("studentProfile.enrolledCourses")}</h6>
               <p className="display-6">{enrolledCourses.length}</p>
-            </div>
-          </div>
-        </div>
-
-        {/* In Progress */}
-        <div className="col-md-4">
-          <div style={cardStyle("#fbfbfbff")}>
-            <div style={iconCircleStyle("rgba(242, 230, 217, 1)")}>
-              <RiProgress2Line color="#f08a24" fontSize="32px" />
-            </div>
-            <div>
-              <h6>{t("studentProfile.inProgressCourses")}</h6>
-              <p className="display-6">{inProgressCourses.length}</p>
             </div>
           </div>
         </div>
@@ -155,14 +201,24 @@ const MyCourses = () => {
         </li>
       </ul>
       {/* Tab Content */}
-      <div>
+      <div className="pb-5">
         {activeTab === "enrolled" &&
           (enrolledCourses.length > 0 ? (
-            enrolledCourses.map((course) => (
-              <div key={course._id} className="card mb-2 p-3 shadow-sm">
-                {course.course?.title || "No Title"}
-              </div>
-            ))
+            <div className="row g-3">
+              {enrolledCourses.map((item) => (
+                <div key={item._id} className="col-md-4">
+                  <CourseCard
+                    imgSrc={item.course.thumbnailUrl}
+                    title={item.course.title}
+                    insName={item.course.instructor.name}
+                    insImage={item.course.instructor?.profileImage}
+                    isEnrollment={true}
+                    userRating={userRatings[item.course._id] || 0}
+                    onLeaveRating={() => openReviewModal(item.course._id)}
+                  />
+                </div>
+              ))}
+            </div>
           ) : (
             <p>No enrolled courses</p>
           ))}
@@ -180,15 +236,34 @@ const MyCourses = () => {
 
         {activeTab === "finished" &&
           (finishedCourses.length > 0 ? (
-            finishedCourses.map((course) => (
-              <div key={course._id} className="card mb-2 p-3 shadow-sm">
-                {course.course?.title || "No Title"}
-              </div>
-            ))
+            <div className="row g-3">
+              {finishedCourses.map((item) => (
+                <div key={item._id} className="col-md-4">
+                  <CourseCard
+                    imgSrc={item.course.thumbnailUrl}
+                    title={item.course.title}
+                    insName={item.course.instructor.name}
+                    insImage={item.course.instructor?.profileImage}
+                    isEnrollment={true}
+                    userRating={userRatings[item.course._id] || 0}
+                    onLeaveRating={() => openReviewModal(item.course._id)}
+                  />
+                </div>
+              ))}
+            </div>
           ) : (
             <p>No finished courses</p>
           ))}
       </div>
+      {showReview && (
+        <ReviewForm
+          show={showReview}
+          onClose={() => setShowReview(false)}
+          courseId={selectedCourseId}
+          onSubmit={submitRating}
+          loading={ratingLoading}
+        />
+      )}
     </div>
   );
 };
