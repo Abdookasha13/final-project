@@ -1,42 +1,39 @@
 import React, { useEffect, useRef, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { ChevronDown } from "lucide-react";
-import "./VideoPlayer.css"
+import { Play } from "lucide-react";
 
 const getYouTubeId = (url) => {
-  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+  if (!url) return "";
+  const regExp =
+    /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
   const match = url.match(regExp);
-  return match && match[2].length === 11 ? match[2] : "";
+  return match && match[2].length === 11 ? match[2] : url;
 };
 
-export default function VideoPlayer({ videos = [] }) {
-  const [expandedLesson, setExpandedLesson] = useState(null);
-  const [currentVideoId, setCurrentVideoId] = useState(null);
+export default function VideoPlayer({ lessons = [] }) {
+  const [currentLesson, setCurrentLesson] = useState(null);
   const playerRef = useRef(null);
 
+  // تعيين أول درس تلقائيًا بعد تحميل الدروس
   useEffect(() => {
-    if (!currentVideoId || !videos.length) return;
+    if (lessons.length > 0 && !currentLesson) {
+      setCurrentLesson(lessons[0]);
+    }
+  }, [lessons, currentLesson]);
 
-    const video = videos.find((v) => v.id === currentVideoId);
-    if (!video) return;
+  // إنشاء/تحديث مشغل YouTube عند تغيير الدرس
+  useEffect(() => {
+    if (!currentLesson || !currentLesson.videoUrl) return;
 
-    const id = getYouTubeId(video.youtubeId) || video.youtubeId;
-    const containerId = `youtube-player-${currentVideoId}`;
+    const id = getYouTubeId(currentLesson.videoUrl);
+    const containerId = "youtube-player";
 
     const createPlayer = () => {
       if (playerRef.current) playerRef.current.destroy();
       playerRef.current = new window.YT.Player(containerId, {
-        height: "100%",
-        width: "100%",
         videoId: id,
-        playerVars: {
-          autoplay: 0,
-          controls: 1,
-          rel: 0,
-          modestbranding: 1,
-          playsinline: 1,
-          fs: 1,
-        },
+        width: "100%",
+        height: "100%",
       });
     };
 
@@ -45,106 +42,54 @@ export default function VideoPlayer({ videos = [] }) {
     } else {
       const s = document.createElement("script");
       s.src = "https://www.youtube.com/iframe_api";
-      s.async = true;
-      document.head.appendChild(s);
+      document.body.appendChild(s);
       window.onYouTubeIframeAPIReady = createPlayer;
     }
-
-    return () => {
-      if (playerRef.current) playerRef.current.destroy();
-    };
-  }, [currentVideoId, videos]);
-
-  if (!videos || videos.length === 0) {
-    return (
-      <div style={{ padding: 20, color: "#343434" }}>
-        <p>No videos available</p>
-      </div>
-    );
-  }
-
-  const toggleLesson = (lessonId) => {
-    setExpandedLesson((prev) => (prev === lessonId ? null : lessonId));
-    setCurrentVideoId((prev) => (prev === lessonId ? null : lessonId));
-  };
+  }, [currentLesson]);
 
   return (
-    <div className="container-fluid p-4 h-auto">
-      <div className="d-flex flex-column">
-        {videos.map((video, idx) => {
-          const isExpanded = expandedLesson === video.id;
-          return (
-            <div
-              key={video.id}
-              style={{
-                borderBottom:
-                  idx === videos.length - 1 ? "none" : "1px solid #ddd",
-                transition: "all 0.3s ease",
-              }}
-            >
-              {/* Lesson Header */}
-              <button
-                onClick={() => toggleLesson(video.id)}
-                className="btn w-100 text-start d-flex justify-content-between align-items-center py-3 px-2 border-0"
+    <div className="container-fluid">
+      <div className="row pb-4">
+        {/* Sidebar */}
+
+
+        {/* Main Content */}
+        <div className="col-md-8 col-lg-9 p-4">
+          {currentLesson && (
+            <>
+              <h4 className="pb-2">{currentLesson?.course?.title || "Course"}</h4>
+              {/* <h6 className="mb-3">{currentLesson.title}</h6> */}
+
+              <div
+                className="mb-4 rounded overflow-hidden"
+                style={{ aspectRatio: "16/9", background: "#000" }}
               >
-                <div className="d-flex align-items-start gap-3">
-                  <ChevronDown
-                    size={18}
-                    color="#0ab99d"
-                    style={{
-                      transform: isExpanded ? "rotate(180deg)" : "rotate(0deg)",
-                      transition: "transform 0.3s",
-                      marginTop: "3px",
-                    }}
-                  />
-                  <div>
-                    <h6 className="fw-bold mb-1 text-uppercase fs-6 text-dark">
-                      {video.title}
-                    </h6>
-                  </div>
-                </div>
+                <div id="youtube-player" />
+              </div>
 
-                {video.duration && (
-                  <span
-                    className="fw-semibold "
-                    style={{ color: "#0ab99d", fontSize: "14px" }}
-                  >
-                    {video.duration}
-                  </span>
-                )}
-              </button>
-
-              {/* Expanded Content */}
-              {isExpanded && (
-                <div
-                  className="px-4 pb-4 pt-2r"
-                  style={{
-                    animation: "fadeIn 0.3s ease",
-                  }}
-                >
-                  {video.type === "video" && (
-                    <div className="mb-3 rounded-3 overflow-hidden ">
-                      <div
-                        id={`youtube-player-${video.id}`}
-                        style={{
-                          width: "100%",
-                          aspectRatio: "16/9",
-                          background: "#000",
-                        }}
-                      />
-                    </div>
-                  )}
-
-                  {video.content && (
-                    <p className="text-muted" style={{ fontSize: "14px" }}>
-                      {video.content}
-                    </p>
-                  )}
-                </div>
-              )}
-            </div>
-          );
-        })}
+              <p className="text-muted">{currentLesson.content}</p>
+            </>
+          )}
+        </div>
+                <div className="col-md-4 col-lg-3 border-end p-0 bg-light">
+          <div className="p-3 fw-bold border-bottom">Curriculum</div>
+          {lessons.map((lesson) => (
+            <button
+              key={lesson._id}
+              onClick={() => setCurrentLesson(lesson)}
+              className={`w-100 text-start px-3 py-3 border-0 bg-transparent d-flex justify-content-between align-items-center
+                ${
+                  currentLesson?._id === lesson._id ? "bg-white fw-bold" : ""
+                }`}
+            >
+              <div className="d-flex gap-2 align-items-center">
+                <Play size={16} color="#0ab99d" />
+                {lesson.title}
+              </div>
+              <small className="text-muted">{lesson.duration}</small>
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );

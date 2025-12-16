@@ -31,6 +31,7 @@ const CourseCard = ({
   isEnrollment = false,
   onLeaveRating,
   userRating = 0,
+    onClick,
 }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -72,6 +73,7 @@ const CourseCard = ({
 
   return (
     <div
+    onClick={onClick}
       className="coursecard-item px-2 py-3"
       style={{ backgroundColor: bgColor }}
     >

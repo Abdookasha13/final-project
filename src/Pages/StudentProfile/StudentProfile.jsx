@@ -25,8 +25,8 @@ const StudentProfile = () => {
 
   return (
     <>
-      {/* Student Info */}
-      <div className="stInfo d-flex gap-3 align-items-center mt-5">
+    <div className="container">
+              <div className="stInfo d-flex gap-3 align-items-center mt-5 ">
         <img
           src={profileImage || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkAJEkJQ1WumU0hXNpXdgBt9NUKc0QDVIiaw&s"}
           width="100px"
@@ -37,20 +37,20 @@ const StudentProfile = () => {
       </div>
 
       {/* Main Area */}
-      <div className="mainArea d-flex mt-5 gap-4">
+      <div className="mainArea d-flex mt-5 gap-4 flex-wrap flex-lg-nowrap">
         {/* Sidebar */}
-        <div className="sideBarr col-2">
-          <ul className="nav flex-column mb-auto gap-2">
+        <div className="sideBarr col-12 col-lg-2">
+          <ul className="nav flex-row flex-lg-column mb-auto gap-2">
             <li className="nav-item">
               <NavLink to="myCourses" className={({ isActive }) => `nav-link d-flex align-items-center p-2 rounded ${isActive ? "bg-site-color text-white" : "text-dark"}`}>
                 <IoBookOutline className="me-2" fontSize="22px" /> My Courses
               </NavLink>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <NavLink to="quizzes" className={({ isActive }) => `nav-link d-flex align-items-center p-2 rounded ${isActive ? "bg-site-color text-white" : "text-dark"}`}>
                 <MdOutlineQuiz className="me-2" fontSize="22px" /> Quizzes
               </NavLink>
-            </li>
+            </li> */}
             <li className="nav-item">
               <NavLink to="wishlist" className={({ isActive }) => `nav-link d-flex align-items-center p-2 rounded ${isActive ? "bg-site-color text-white" : "text-dark"}`}>
                 <FaRegHeart className="me-2" fontSize="22px" /> Wishlist
@@ -61,19 +61,22 @@ const StudentProfile = () => {
                 <IoSettingsOutline className="me-2" fontSize="22px" /> Settings
               </NavLink>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <NavLink to="logout" className={({ isActive }) => `nav-link d-flex align-items-center p-2 rounded ${isActive ? "bg-site-color text-white" : "text-dark"}`}>
                 <TbLogout className="me-2" fontSize="22px" /> Logout
               </NavLink>
-            </li>
+            </li> */}
           </ul>
         </div>
 
         {/* Main Content */}
-        <div className="changableOne col-10">
-          <Outlet context={{ setProfileImage }} /> {/* تمرير setter للفورم */}
+        <div className="changableOne col-12 col-lg-10">
+          <Outlet context={{ setProfileImage }} /> 
         </div>
       </div>
+    </div>
+      {/* Student Info */}
+     
     </>
   )
 }

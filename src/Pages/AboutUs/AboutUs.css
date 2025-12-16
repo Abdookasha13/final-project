@@ -141,4 +141,26 @@ max-width: 270px;
 .it-team-3-wrapper .col-md-6 > * {
   max-width: 300px;
 }
+.it-about-4-thumb-wrap {
+  margin-right:0px;
+}
+
+.it-about-4-thumb-double img,
+.it-about-4-thumb-single img {
+width: 88px;
+height: 300px;
+object-fit: cover;
+border-radius: 120px; 
+}
+/* Top/Bottom image size adjustments */
+.it-about-4-thumb-double img:first-child ,
+.it-about-4-thumb-double img:last-child{
+width: 140px;
+height: 200px;
+}
+/* Center main big image */
+.it-about-4-thumb-single img {
+width: 200px;
+height: 350px;
+}
 }

@@ -9,8 +9,14 @@ import CourseCard from "../../../Components/coursecard/CourseCard";
 import ReviewForm from "../../../Components/ReviewForm/reviewForm";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const MyCourses = () => {
+  const navigate = useNavigate();
+
+const openCourse = (courseId) => {
+ navigate(`/stdprofile/course/${courseId}`);
+};
   const [showReview, setShowReview] = useState(false);
   const [selectedCourseId, setSelectedCourseId] = useState(null);
   const [ratingLoading, setRatingLoading] = useState(false);
@@ -215,6 +221,7 @@ const MyCourses = () => {
                     isEnrollment={true}
                     userRating={userRatings[item.course._id] || 0}
                     onLeaveRating={() => openReviewModal(item.course._id)}
+                     onClick={() => openCourse(item.course._id)}
                   />
                 </div>
               ))}
