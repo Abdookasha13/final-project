@@ -59,9 +59,15 @@ const CourseCard = ({
   };
 
   const handleAdd = () => {
-    console.log(course._id);
-    dispatch(addCourseToCart(course._id));
-    toast.success("Course added to cart!");
+    const token = localStorage.getItem("token");
+    if (!token) {
+      toast.error("Please login to continue");
+      navigate("/sign/in");
+    } else {
+      console.log(course._id);
+      dispatch(addCourseToCart(course._id));
+      toast.success("Course added to cart!");
+    }
   };
 
   const handleRatingClick = (e) => {

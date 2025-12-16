@@ -5,9 +5,12 @@ import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { clearCart } from "../../Store/Slices/cartSlice";
 
 function Checkout() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
   const [isProcessing, setIsProcessing] = useState(false);
   const [userInfo, setUserInfo] = useState({
@@ -135,7 +138,7 @@ function Checkout() {
                 <PayPalButtons
                   createOrder={async () => {
                     try {
-                      setIsProcessing(true);
+                      // setIsProcessing(true);
 
                       if (!userInfo.fullName || !userInfo.email) {
                         toast.error("Please fill in all required fields");
@@ -168,22 +171,24 @@ function Checkout() {
                   }}
                   onApprove={async (data) => {
                     try {
-                      setIsProcessing(true);
+                      // setIsProcessing(true);
                       console.log("Capturing order ID:", data.orderID);
-
+                      const token = localStorage.getItem("token");
                       const res = await axios.post(
                         "http://localhost:1911/capture-order",
                         {
                           orderId: data.orderID,
+                        },
+                        {
+                          headers: { Authorization: `Bearer ${token}` },
                         }
                       );
 
                       console.log("Payment successful:", res.data);
+                      dispatch(clearCart());
                       setIsProcessing(false);
-                      toast.success(
-                        "Payment successful! Welcome to your courses!"
-                      );
-                      setTimeout(() => navigate("/courses"), 2000);
+                      toast.success("Payment successful");
+                      setTimeout(() => navigate("/cart"), 2000);
                     } catch (err) {
                       console.error(
                         "CAPTURE FRONTEND ERROR:",

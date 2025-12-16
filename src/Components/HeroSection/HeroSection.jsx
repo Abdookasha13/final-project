@@ -6,7 +6,7 @@ const HeroSection = () => {
   const { t } = useTranslation();
   return (
     <div
-      className="it-hero-2-area it-hero-2-bg fix p-relative"
+      className="it-hero-2-area it-hero-2-bg fix"
       style={{
         backgroundImage: `url("https://ordainit.com/html/educate/assets/img/hero/hero-bg-1.jpg")`,
       }}
@@ -66,7 +66,7 @@ const HeroSection = () => {
             <div className="it-hero-2-content">
               <h2 className="it-hero-2-title">
                 {t("hero.title").split(" ").slice(0, 1).join(" ")}{" "}
-                <span className="p-relative">
+                <span>
                   {t("hero.title").split(" ").slice(1, 2).join(" ")}
                   <span className="title-shape">
                     <svg
@@ -109,9 +109,9 @@ const HeroSection = () => {
             </div>
           </div>
 
-          <div className="col-xl-4 col-lg-4 ">
-            <div className="it-hero-2-thumb-box p-relative">
-              <div className="it-hero-2-thumb p-relative">
+          <div className="col-xl-6 col-lg-6 ">
+            <div className="it-hero-2-thumb-box">
+              <div className="it-hero-2-thumb text-center">
                 <img
                   src="https://ordainit.com/html/educate/assets/img/hero/hero-2.png"
                   className="BigHero"
