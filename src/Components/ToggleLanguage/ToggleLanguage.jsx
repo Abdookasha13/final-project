@@ -9,10 +9,10 @@ const ToggleLanguage = () => {
   useEffect(() => {
     if (isChecked) {
       i18n.changeLanguage("ar");
-      // document.documentElement.setAttribute("dir", "rtl");
+      document.documentElement.setAttribute("dir", "rtl");
     } else {
       i18n.changeLanguage("en");
-      // document.documentElement.setAttribute("dir", "ltr");
+      document.documentElement.setAttribute("dir", "ltr");
     }
   }, [isChecked, i18n]);
 

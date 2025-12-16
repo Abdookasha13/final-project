@@ -1,6 +1,6 @@
 import "./CourseCard.css";
 import { BsCart3 } from "react-icons/bs";
-import { FaEdit, FaRegStar, FaStar, FaTrash } from "react-icons/fa";
+import { FaEdit, FaRegStar, FaStar, FaTrash, FaCheck } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import handleDeleteCourse from "../../utilities/handleDeleteCourse";
 import { useDispatch } from "react-redux";
@@ -36,6 +36,7 @@ const CourseCard = ({
   const dispatch = useDispatch();
   const [currentRating, setCurrentRating] = useState(userRating);
   const [hoverRating, setHoverRating] = useState(0);
+  const [isAdded, setIsAdded] = useState(false);
 
   const averageRating = stats?.averageRating || 0;
 
@@ -66,6 +67,7 @@ const CourseCard = ({
     } else {
       console.log(course._id);
       dispatch(addCourseToCart(course._id));
+      setIsAdded(true);
       toast.success("Course added to cart!");
     }
   };
@@ -99,7 +101,7 @@ const CourseCard = ({
         )}
 
         <h4 className="coursecard-title">
-          <a href="#">{title}</a>
+          <p>{title}</p>
         </h4>
         {!isEnrollment && (
           <div
@@ -138,23 +140,31 @@ const CourseCard = ({
 
         {!isEnrollment ? (
           <div className="coursecard-itemprice d-flex flex-row justify-content-between">
-            <span>
-              <i>{discountPrice}$ </i>
-              {price}
-            </span>
+            <div className="d-flex align-items-center gap-2">
+              <span className="discount">{discountPrice}$</span>
+              <span className="price">{price}</span>
+            </div>
 
-            {!hideCartButton && (
-              <a
-                href=""
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  handleAdd();
-                }}
-              >
-                <BsCart3 color="#0e2a46" fontSize={"20px"} /> Add to cart
-              </a>
-            )}
+            {!hideCartButton &&
+              (isAdded ? (
+                <div className="coursecard-added-success">
+                  <div className="added-checkmark">
+                    <FaCheck />
+                  </div>
+                  <span>Added to Cart</span>
+                </div>
+              ) : (
+                <a
+                  href=""
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    handleAdd();
+                  }}
+                >
+                  <BsCart3 color="#0e2a46" fontSize={"20px"} /> Add to cart
+                </a>
+              ))}
           </div>
         ) : (
           <div

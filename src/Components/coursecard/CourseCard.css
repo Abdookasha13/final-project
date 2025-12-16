@@ -76,34 +76,24 @@
   align-items: center;
   gap: 2px;
 }
-.coursecard-rating i {
-  font-size: 15px;
-  color: #fbbf24;
-  transition: transform 0.2s ease;
-}
-.coursecard-item:hover .coursecard-rating i {
-  transform: scale(1.1);
-}
 .coursecard-rating span {
   font-size: 14px;
   font-weight: 600;
   color: #64748b;
   margin-left: 6px;
 }
-.coursecard-title a {
+.coursecard-title p {
   line-clamp: 2;
   overflow: hidden;
-  padding-bottom: 8px;
   font-weight: 700;
   text-transform: capitalize;
   line-height: 1.4;
   font-size: 20px;
   transition: all 0.3s ease;
   color: #1e293b;
-  height: 65px;
-  text-decoration: none;
+  min-height: 50px;
 }
-.coursecard-title a:hover {
+.coursecard-title p:hover {
   color: #0ab99d;
   transform: translateX(2px);
 }
@@ -168,17 +158,14 @@
 .coursecard-teacherimg:hover > span {
   color: #0ab99d;
 }
-.coursecard-itemprice span {
+.coursecard-itemprice .price {
   font-weight: 800;
   text-transform: capitalize;
   color: #94a3b8;
   font-size: 18px;
-  text-decoration: line-through;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  text-decoration: line-through !important;
 }
-.coursecard-itemprice span i {
+.coursecard-itemprice .discount {
   font-style: normal;
   color: #0ab99d;
   font-size: 28px;
@@ -205,6 +192,61 @@
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(10, 185, 157, 0.3);
 }
+
+.coursecard-added-success {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: linear-gradient(
+    135deg,
+    rgba(10, 185, 157, 0.15),
+    rgba(10, 185, 157, 0.05)
+  );
+  border: 2px solid #0ab99d;
+  color: #0ab99d;
+  font-weight: 600;
+  font-size: 14px;
+  animation: slideInSuccess 0.4s ease-out;
+}
+
+.added-checkmark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #0ab99d;
+  color: white;
+  font-size: 14px;
+  animation: checkMarkBounce 0.5s ease-out 0.1s both;
+}
+
+@keyframes slideInSuccess {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes checkMarkBounce {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 .coursecard-item {
   border-radius: 16px;
   overflow: hidden;

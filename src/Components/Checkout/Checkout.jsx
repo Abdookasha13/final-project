@@ -12,7 +12,6 @@ function Checkout() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
-  const [isProcessing, setIsProcessing] = useState(false);
   const [userInfo, setUserInfo] = useState({
     fullName: "",
     email: "",
@@ -129,20 +128,11 @@ function Checkout() {
               </div>
 
               <div className="payment-wrapper">
-                {isProcessing && (
-                  <div className="processing-overlay">
-                    <div className="spinner"></div>
-                    <p>Processing your payment...</p>
-                  </div>
-                )}
                 <PayPalButtons
                   createOrder={async () => {
                     try {
-                      // setIsProcessing(true);
-
                       if (!userInfo.fullName || !userInfo.email) {
                         toast.error("Please fill in all required fields");
-                        setIsProcessing(false);
                         throw new Error("Missing required fields");
                       }
 
@@ -157,10 +147,8 @@ function Checkout() {
                       );
 
                       console.log("Order ID:", res.data.id);
-                      setIsProcessing(false);
                       return res.data.id;
                     } catch (error) {
-                      setIsProcessing(false);
                       console.error(
                         "CREATE ORDER FRONTEND ERROR:",
                         error.response?.data || error
@@ -171,7 +159,6 @@ function Checkout() {
                   }}
                   onApprove={async (data) => {
                     try {
-                      // setIsProcessing(true);
                       console.log("Capturing order ID:", data.orderID);
                       const token = localStorage.getItem("token");
                       const res = await axios.post(
@@ -186,7 +173,6 @@ function Checkout() {
 
                       console.log("Payment successful:", res.data);
                       dispatch(clearCart());
-                      setIsProcessing(false);
                       toast.success("Payment successful");
                       setTimeout(() => navigate("/cart"), 2000);
                     } catch (err) {
@@ -194,17 +180,14 @@ function Checkout() {
                         "CAPTURE FRONTEND ERROR:",
                         err.response?.data || err
                       );
-                      setIsProcessing(false);
                       toast.error("Payment failed. Please try again.");
                     }
                   }}
                   onError={(err) => {
-                    setIsProcessing(false);
                     toast.error("Payment error occurred");
                     console.error(err);
                   }}
                   onCancel={() => {
-                    setIsProcessing(false);
                     toast.info("Payment cancelled");
                   }}
                   style={{
