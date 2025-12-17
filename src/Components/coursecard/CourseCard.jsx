@@ -31,7 +31,7 @@ const CourseCard = ({
   isEnrollment = false,
   onLeaveRating,
   userRating = 0,
-    onClick,
+  onClick,
 }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -40,7 +40,6 @@ const CourseCard = ({
 
   const averageRating = stats?.averageRating || 0;
 
-  // تحديث التقييم الحالي لما التقييم يتغير من المكون الأب
   useEffect(() => {
     setCurrentRating(userRating);
   }, [userRating]);
@@ -66,14 +65,15 @@ const CourseCard = ({
   };
 
   const handleRatingClick = (e) => {
-    e.preventDefault?.();
+    e.preventDefault();
+    e.stopPropagation();
 
     onLeaveRating();
   };
 
   return (
     <div
-    onClick={onClick}
+      onClick={onClick}
       className="coursecard-item px-2 py-3"
       style={{ backgroundColor: bgColor }}
     >

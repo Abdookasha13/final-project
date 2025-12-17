@@ -11,12 +11,16 @@ const InsLessons = () => {
   const { searchTerm } = useOutletContext();
 
   useEffect(() => {
-    getLessonsByCId(courseId, setLessons);
+    const fetchLessons = async () => {
+      const data = await getLessonsByCId(courseId);
+      setLessons(data);
+    };
+
+    fetchLessons();
   }, [courseId]);
- 
-const filteredlessons = lessons.filter((lesson) =>
-  lesson.title.toLowerCase().includes(searchTerm.toLowerCase())
-);
+  const filteredlessons = lessons.filter((lesson) =>
+    lesson.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
   const handleEdit = (lessonId) => {
     navigate(`/instructor/edit/lesson/${lessonId}`);
   };
@@ -42,7 +46,7 @@ const filteredlessons = lessons.filter((lesson) =>
       <h3 className="mb-4">Course Lessons</h3>
 
       <div className="row g-3">
-        { filteredlessons.map((lesson, index) => (
+        {filteredlessons.map((lesson, index) => (
           <div className="col-12" key={lesson._id}>
             <div className="lesson-card p-3">
               <div className="d-flex align-items-center gap-3">
@@ -92,7 +96,7 @@ const filteredlessons = lessons.filter((lesson) =>
         ))}
       </div>
 
-      {lessons.length === 0 && (
+      {filteredlessons.length === 0 && (
         <div className="text-center py-5 text-muted">
           <i className="bi bi-inbox" style={{ fontSize: "3rem" }}></i>
           <p className="mt-2">No lessons yet</p>

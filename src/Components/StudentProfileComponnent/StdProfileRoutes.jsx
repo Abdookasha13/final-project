@@ -5,7 +5,6 @@ import MyCourses from "./MyCourses/MyCourses";
 import Quizzes from "./Quizzes/Quizzes";
 import SettingsStd from "./SettingsStd/SettingsStd";
 import Wishlist from "./Wishlist/Wishlist";
-import CoursePlayer from "./CoursePlayer/CoursePlayer";
 
 const StdProfileRoutes = () => {
   return (
@@ -16,7 +15,6 @@ const StdProfileRoutes = () => {
         <Route path="wishlist" element={<Wishlist />} />
         <Route path="settings" element={<SettingsStd />} />
         <Route path="logout" element={<LogoutStd />} />
-          <Route path="course/:courseId" element={<CoursePlayer />} />
       </Route>
     </Routes>
   );

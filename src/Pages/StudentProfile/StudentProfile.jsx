@@ -61,11 +61,11 @@ const StudentProfile = () => {
                 <IoSettingsOutline className="me-2" fontSize="22px" /> Settings
               </NavLink>
             </li>
-            {/* <li className="nav-item">
+            <li className="nav-item">
               <NavLink to="logout" className={({ isActive }) => `nav-link d-flex align-items-center p-2 rounded ${isActive ? "bg-site-color text-white" : "text-dark"}`}>
                 <TbLogout className="me-2" fontSize="22px" /> Logout
               </NavLink>
-            </li> */}
+            </li>
           </ul>
         </div>
 

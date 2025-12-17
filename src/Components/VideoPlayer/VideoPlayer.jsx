@@ -4,8 +4,7 @@ import { Play } from "lucide-react";
 
 const getYouTubeId = (url) => {
   if (!url) return "";
-  const regExp =
-    /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
   const match = url.match(regExp);
   return match && match[2].length === 11 ? match[2] : url;
 };
@@ -14,14 +13,12 @@ export default function VideoPlayer({ lessons = [] }) {
   const [currentLesson, setCurrentLesson] = useState(null);
   const playerRef = useRef(null);
 
-  // تعيين أول درس تلقائيًا بعد تحميل الدروس
   useEffect(() => {
     if (lessons.length > 0 && !currentLesson) {
       setCurrentLesson(lessons[0]);
     }
   }, [lessons, currentLesson]);
 
-  // إنشاء/تحديث مشغل YouTube عند تغيير الدرس
   useEffect(() => {
     if (!currentLesson || !currentLesson.videoUrl) return;
 
@@ -48,49 +45,67 @@ export default function VideoPlayer({ lessons = [] }) {
   }, [currentLesson]);
 
   return (
-    <div className="container-fluid">
-      <div className="row pb-4">
-        {/* Sidebar */}
+    <>
+      <div
+        className="w-100  d-flex align-items-center gap-4 position-fixed px-2 border "
+        style={{ height: "70px", left: "0", backgroundColor: "#f8f9fa" }}
+      >
+        <img className="" src="/Images/logo-nav.png" alt="" />
+        {/* <h6 className="pt-2 text-white" >{currentLesson?.course.title}</h6> */}
+      </div>
+      <div className="">
+        <div className="row pb-4">
+          {/* Sidebar */}
 
-
-        {/* Main Content */}
-        <div className="col-md-8 col-lg-9 p-4">
-          {currentLesson && (
-            <>
-              <h4 className="pb-2">{currentLesson?.course?.title || "Course"}</h4>
-              {/* <h6 className="mb-3">{currentLesson.title}</h6> */}
-
-              <div
-                className="mb-4 rounded overflow-hidden"
-                style={{ aspectRatio: "16/9", background: "#000" }}
+          <div
+            className="col-md-4 col-lg-3 border-end p-0 bg-light position-fixed vh-100 "
+            style={{ top: "70px" }}
+          >
+            {/* <div className="p-3 fw-bold border-bottom  ">Curriculum</div> */}
+            {lessons.map((lesson) => (
+              <button
+                key={lesson._id}
+                onClick={() => setCurrentLesson(lesson)}
+                className={` border-bottom w-100 text-start px-3 py-3 border-0 bg-transparent d-flex justify-content-between align-items-center
+                ${currentLesson?._id === lesson._id ? "bg-white fw-bold" : ""}`}
               >
-                <div id="youtube-player" />
-              </div>
+                <div className="d-flex gap-2 align-items-center ">
+                  <Play size={16} color="#0ab99d" />
+                  {lesson.title}
+                </div>
+                <small className="text-muted">{lesson.duration}m</small>
+              </button>
+            ))}
+          </div>
+          {/* Main Content */}
+          <div
+            className="col-md-8 col-lg-9 p-4"
+            style={{ marginLeft: "25%", marginTop: "70px" }}
+          >
+            {currentLesson && (
+              <>
+                {/* <h4 className="pb-2">{currentLesson?.course?.title || "Course"}</h4> */}
+                {/* <h6 className="mb-3">{currentLesson.title}</h6> */}
 
-              <p className="text-muted">{currentLesson.content}</p>
-            </>
-          )}
-        </div>
-                <div className="col-md-4 col-lg-3 border-end p-0 bg-light">
-          <div className="p-3 fw-bold border-bottom">Curriculum</div>
-          {lessons.map((lesson) => (
-            <button
-              key={lesson._id}
-              onClick={() => setCurrentLesson(lesson)}
-              className={`w-100 text-start px-3 py-3 border-0 bg-transparent d-flex justify-content-between align-items-center
-                ${
-                  currentLesson?._id === lesson._id ? "bg-white fw-bold" : ""
-                }`}
-            >
-              <div className="d-flex gap-2 align-items-center">
-                <Play size={16} color="#0ab99d" />
-                {lesson.title}
-              </div>
-              <small className="text-muted">{lesson.duration}</small>
-            </button>
-          ))}
+                <div
+                  className="mb-4 rounded overflow-hidden"
+                  style={{ aspectRatio: "16/9", background: "#000" }}
+                >
+                  <div id="youtube-player" />
+                </div>
+
+                <p className="text-muted">{currentLesson.content}</p>
+                <button
+                  className="btn btn-lg text-light "
+                  style={{ backgroundColor: "#0eb89c" }}
+                >
+                  complete
+                </button>
+              </>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

@@ -17,7 +17,9 @@ const CoursePlayer = () => {
   }, [courseId]);
 
   return (
-    <div className="container mt-4">
+    
+    <div className="px-3 ">
+   
       <VideoPlayer lessons={lessons} />
     </div>
   );
