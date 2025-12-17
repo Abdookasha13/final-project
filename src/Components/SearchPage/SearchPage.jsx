@@ -6,6 +6,7 @@ import Loader from "../Loader/Loader";
 import CourseCard from "../coursecard/CourseCard";
 import formatTime from "../../utilities/formatTime";
 import { fetchCourses } from "../../Store/Slices/getAllCoursecSlice";
+import { fetchMultipleReviewStats } from "../../Store/Slices/reviewsSlice";
 
 
 
@@ -14,6 +15,8 @@ const SearchPage = () => {
   const dispatch = useDispatch();
   const courses = useSelector((state) => state.getAllCourses.data);
   const isLoading = useSelector((state) => state.getAllCourses.isLoading);
+  const reviewStats = useSelector((state) => state.reviewStats.stats);
+  // const statsLoading = useSelector((state) => state.reviewStats.isLoading);
 
   useEffect(() => {
     document.title = `Search results for "${searchTerm}"`;
@@ -28,6 +31,12 @@ const SearchPage = () => {
     );
   }, [searchTerm, courses]);
 
+  useEffect(() => {
+  if (filteredCourses.length > 0) {
+    const courseIds = filteredCourses.map((c) => c._id);
+    dispatch(fetchMultipleReviewStats(courseIds));
+  }
+}, [filteredCourses, dispatch]);
   if (isLoading) {
     return <Loader />;
   }
@@ -63,6 +72,7 @@ const SearchPage = () => {
                   insImage={course.instructor.profileImage}
                   insName={course.instructor.name}
                   bgColor={"#f8f9fa"}
+                   stats={reviewStats[course._id]}
                 />
               </Link>
             </div>

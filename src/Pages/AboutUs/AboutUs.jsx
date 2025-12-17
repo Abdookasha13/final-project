@@ -13,12 +13,12 @@ function AboutUs() {
   return (
     <>
       {/* ----------- About Section ----------- */}
-      <div className="container it-about-section py-5">
-        <div className="row align-items-center">
+      <div className="container it-about-section py-5 ">
+        <div className="row align-items-center ">
           {/* Left Images */}
-          <div className="col-xl-6 col-lg-6">
+          <div className="col-xl-6 col-lg-6  ">
             <div className="it-about-4-thumb-wrap d-flex align-items-center justify-content-center justify-content-lg-end gap-3">
-              <div className="it-about-4-thumb-double d-flex flex-column gap-3">
+              <div className="it-about-4-thumb-double d-flex flex-column gap-3 ">
                 <img
                   className="it-about-img small-img mb-2"
                   src="https://ordainit.com/html/educate/assets/img/about/thumb-4-1.jpg"

@@ -71,16 +71,16 @@ const CourseDetails = () => {
     return <Loader />;
   }
 
-  const videoList = lessons.map((lesson) => ({
-    id: lesson._id,
-    youtubeId: lesson.videoUrl,
-    title: lesson.title,
-    duration: `${lesson.duration}m`,
-    type: lesson.type,
-    content: lesson.content,
-    isPreview: lesson.isPreview,
-    order: lesson.order,
-  }));
+  // const videoList = lessons.map((lesson) => ({
+  //   id: lesson._id,
+  //   youtubeId: lesson.videoUrl,
+  //   title: lesson.title,
+  //   duration: `${lesson.duration}m`,
+  //   type: lesson.type,
+  //   content: lesson.content,
+  //   isPreview: lesson.isPreview,
+  //   order: lesson.order,
+  // }));
 
   const renderTabContent = {
     Overview: (
@@ -92,9 +92,17 @@ const CourseDetails = () => {
       </div>
     ),
     Curriculum: (
-      <div className="border border-top-0 border-light-subtle">
-        <VideoPlayer videos={videoList} />
-      </div>
+    <div className="border border-top-0 border-light-subtle">
+  {/* <VideoPlayer videos={videoList} /> */}
+  {lessons.map((lesson) => (
+    <div className="d-flex justify-content-between p-4 border-bottom " key={lesson.id}>
+    <div style={{fontSize:"15px",color:"#404040ff"}} className="d-flex gap-3"> <MdOutlinePlayLesson size={"18px"} color="#474747ff" />
+ {lesson.title}</div>
+    <div> {lesson.duration}m</div>
+   
+    </div>
+  ))}
+</div>
     ),
     Instructor: (
       <div className="border border-top-0 border-light-subtle px-4 py-5 d-flex gap-4">

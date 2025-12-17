@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import getLessonsByCId from "../../../utilities/getLessonsByCId";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import handleDeleteLessson from "../../../utilities/handleDeleteLesson";
 import "./InsLessons.css";
 
@@ -8,11 +8,19 @@ const InsLessons = () => {
   const { courseId } = useParams();
   const [lessons, setLessons] = useState([]);
   const navigate = useNavigate();
+  const { searchTerm } = useOutletContext();
 
   useEffect(() => {
-    getLessonsByCId(courseId, setLessons);
-  }, [courseId]);
+    const fetchLessons = async () => {
+      const data = await getLessonsByCId(courseId);
+      setLessons(data);
+    };
 
+    fetchLessons();
+  }, [courseId]);
+  const filteredlessons = lessons.filter((lesson) =>
+    lesson.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
   const handleEdit = (lessonId) => {
     navigate(`/instructor/edit/lesson/${lessonId}`);
   };
@@ -38,7 +46,7 @@ const InsLessons = () => {
       <h3 className="mb-4">Course Lessons</h3>
 
       <div className="row g-3">
-        {lessons.map((lesson, index) => (
+        {filteredlessons.map((lesson, index) => (
           <div className="col-12" key={lesson._id}>
             <div className="lesson-card p-3">
               <div className="d-flex align-items-center gap-3">
@@ -88,7 +96,7 @@ const InsLessons = () => {
         ))}
       </div>
 
-      {lessons.length === 0 && (
+      {filteredlessons.length === 0 && (
         <div className="text-center py-5 text-muted">
           <i className="bi bi-inbox" style={{ fontSize: "3rem" }}></i>
           <p className="mt-2">No lessons yet</p>

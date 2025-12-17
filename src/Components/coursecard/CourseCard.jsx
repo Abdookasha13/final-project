@@ -31,6 +31,7 @@ const CourseCard = ({
   isEnrollment = false,
   onLeaveRating,
   userRating = 0,
+  onClick,
 }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -40,7 +41,6 @@ const CourseCard = ({
 
   const averageRating = stats?.averageRating || 0;
 
-  // تحديث التقييم الحالي لما التقييم يتغير من المكون الأب
   useEffect(() => {
     setCurrentRating(userRating);
   }, [userRating]);
@@ -73,13 +73,15 @@ const CourseCard = ({
   };
 
   const handleRatingClick = (e) => {
-    e.preventDefault?.();
+    e.preventDefault();
+    e.stopPropagation();
 
     onLeaveRating();
   };
 
   return (
     <div
+      onClick={onClick}
       className="coursecard-item px-2 py-3"
       style={{ backgroundColor: bgColor }}
     >
@@ -200,7 +202,7 @@ const CourseCard = ({
 
         {showInstructorActions && (
           <div className="d-flex justify-content-end gap-2 mt-3">
-            <button className="btn btn-sm editbtnn" onClick={handleEdit}>
+            <button className="editbtnn  " onClick={handleEdit}>
               <FaEdit /> Edit
             </button>
             <button

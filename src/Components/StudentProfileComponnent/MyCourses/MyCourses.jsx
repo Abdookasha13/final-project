@@ -3,14 +3,20 @@ import getStdEnrollments from "../../../utilities/getStdEnrollments";
 import Loader from "../../Loader/Loader";
 import { IoBookOutline } from "react-icons/io5";
 import { RiProgress2Line } from "react-icons/ri";
-import { GrCompliance } from "react-icons/gr";
+import { GrCertificate, GrCompliance } from "react-icons/gr";
 import { useTranslation } from "react-i18next";
 import CourseCard from "../../../Components/coursecard/CourseCard";
 import ReviewForm from "../../../Components/ReviewForm/reviewForm";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const MyCourses = () => {
+  const navigate = useNavigate();
+
+  const openCourse = (courseId) => {
+    navigate(`/course/player/${courseId}`);
+  };
   const [showReview, setShowReview] = useState(false);
   const [selectedCourseId, setSelectedCourseId] = useState(null);
   const [ratingLoading, setRatingLoading] = useState(false);
@@ -160,6 +166,17 @@ const MyCourses = () => {
             </div>
           </div>
         </div>
+        <div className="col-md-4">
+          <div style={cardStyle("#fbfbfbff")}>
+            <div style={iconCircleStyle("#daf0deff")}>
+              <GrCertificate color="#0ad02eff" fontSize="32px" />
+            </div>
+            <div>
+              <h6>Certificates</h6>
+              <p className="display-6">{finishedCourses.length}</p>
+            </div>
+          </div>
+        </div>
       </div>
 
       <ul className="nav nav-tabs mb-3 mt-5 border border-0">
@@ -215,6 +232,7 @@ const MyCourses = () => {
                     isEnrollment={true}
                     userRating={userRatings[item.course._id] || 0}
                     onLeaveRating={() => openReviewModal(item.course._id)}
+                    onClick={() => openCourse(item.course._id)}
                   />
                 </div>
               ))}
