@@ -31,8 +31,11 @@
 .service-desc-roka {
   color: #64748b;
   font-size: 15px;
-  line-height: 1.7;
   font-weight: 400;
+  
+  min-height: 80px;   /* أقل ارتفاع */
+  max-height: 80px;   /* نفس الارتفاع */
+  overflow: hidden;    /* يمنع زيادة المحتوى */
 }
 
 .icon-wrapper-roka {
@@ -57,7 +60,8 @@
   content: "";
   position: absolute;
   top: -12px;
-  left: -12px;
+  inset-inline-start: -12px;
+  /* left: -12px; */
   width: 104px;
   height: 104px;
   border: 3px solid #e0f2f1;
@@ -88,8 +92,10 @@
   content: "";
   position: absolute;
   top: 0;
-  left: 0;
-  right: 0;
+  inset-inline-start: 0;
+  inset-inline-end: 0;
+  /* left: 0;
+  right: 0; */
   height: 4px;
   background: #0ab99d;
   transform: scaleX(0);
