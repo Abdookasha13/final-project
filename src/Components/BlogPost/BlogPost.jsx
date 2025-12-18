@@ -7,6 +7,7 @@ import {
 import Button from "../Button/Button";
 import "./BlogPost.css";
 import { useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 function BlogPost({ imgUrl, galry = false }) {
   const boxRef = useRef(null);
@@ -38,6 +39,7 @@ function BlogPost({ imgUrl, galry = false }) {
     }
   };
 
+  const { t } = useTranslation();
   return (
     <>
       <div className="card border-0 p-0 mb-5 overflow-hidden">
@@ -77,22 +79,21 @@ function BlogPost({ imgUrl, galry = false }) {
           <div className="d-flex align-items-center  gap-4 text-secondary mb-4 mt-4">
             <div className="d-flex gap-2">
               <FaRegCalendarAlt color="#17a2b8" />
-              <span>April 21, 2023</span>
+              <span>{t("blogPost.date")} </span>
             </div>
             <div className="d-flex  gap-2">
               <FaUser color="#17a2b8" />
-              <span>Alamgir Chowdhuri</span>
+              <span>{t("blogPost.author")}</span>
             </div>
           </div>
 
-          <h3 className="text-start mb-4 fw-bold">
+          <h3 className="text-inline-start mb-4 fw-bold">
          
-              Curabitur at fermentum purus. Interdum et malesuada fames ac ante
-              ipsum
+            {t("blogPost.paragraph")}
      
           </h3>
 
-          <Button children={"Read More"} />
+          <Button children={t("blogPost.readMore")} />
         </div>
       </div>
     </>

@@ -12,14 +12,12 @@ import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
 
 function Cart() {
-  const { i18n } = useTranslation();
-  const lang = i18n.language.startsWith("ar") ? "ar" : "en";
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
 
   useEffect(() => {
     dispatch(fetchCart());
-  }, [dispatch, lang]);
+  }, [dispatch]);
 
   const handleRemove = (courseId) => {
     dispatch(removeCourseFromCart(courseId));
@@ -33,23 +31,22 @@ function Cart() {
       )
       .toFixed(2);
   };
-
   const handleMoveToWishlist = async (courseId) => {
     const success = await handleAddToWish(courseId);
 
     if (success) {
       handleRemove(courseId);
-      toast.success("Moved to wishlist!");
     } else {
       toast.error("Failed to move to wishlist");
     }
   };
+  const { t } = useTranslation();
 
   // ---------- Empty Cart ----------
   if (!Array.isArray(cartItems) || cartItems.length === 0) {
     return (
       <div className="container shopping-container mt-5 py-5">
-        <h2 style={{ fontSize: "45px" }}>Shopping Cart</h2>
+        <h2 style={{ fontSize: "45px" }}>{t("cart.headline")}</h2>
         <p style={{ fontSize: "15px" }} className="p-0 m-0 pt-3">
           0 Courses in Cart
         </p>
@@ -60,10 +57,10 @@ function Cart() {
             style={{ maxWidth: "300px", marginBottom: "20px" }}
           />
           <p style={{ fontSize: "18px", marginBottom: "20px" }}>
-            Your cart is empty. Keep shopping to find a course!
+            {t("cart.emptycart")}
           </p>
           <Link to="/courses">
-            <Button>Keep Shopping</Button>
+            <Button>{t("cart.keepShopping")}</Button>
           </Link>
         </div>
       </div>
@@ -83,66 +80,21 @@ function Cart() {
       <div className="d-flex flex-column flex-lg-row gap-5 ">
         {/* Left Section */}
         <div className="col-12 col-lg-9 ">
-          {cartItems.map((course) => {
-            return (
-              <div
-                className="cartcard row border-container"
-                key={course.courseId}
-              >
-                <div className="courseimg col-2 p-0">
-                  <img src={course.thumbnailUrl} alt={course?.title} />
-                </div>
+          {cartItems.map((course) => (
+            <div
+              className="cartcard row border-container"
+              key={course.courseId}
+            >
+              <div className="courseimg col-2 p-0">
+                <img src={course.thumbnailUrl} alt={course.title} />
+              </div>
 
-                <div className="contentcourse col-10 px-lg-3 ">
-                  <div className="d-flex flex-column flex-lg-row justify-content-between">
-                    <div className="coursedetails">
-                      <div className="d-flex justify-content-between">
-                        <h5 className="course-title m-0">
-                          {course?.title[lang]}
-                        </h5>
-                        <div className="course-price2 text-end d-xl-none">
-                          <h5>${course.discountPrice}</h5>
-                          {course.price && (
-                            <h6 className="line text-muted text-decoration-line-through">
-                              ${course.price}
-                            </h6>
-                          )}
-                        </div>
-                      </div>
-
-                      <p
-                        style={{ fontSize: "14px", color: "#333" }}
-                        className="course-author m-0 pt-2"
-                      >
-                        By {course.instructor?.name[lang]}
-                      </p>
-
-                      <ul className="course-meta d-flex gap-3 m-0 p-0 list-unstyled">
-                        <p>{course.courseDuration || "0h"}</p>
-                        <li>{course.lessonsCount || 0} lessons</li>
-                        <li>All Levels</li>
-                      </ul>
-                    </div>
-
-                    <div className="d-flex gap-2">
-                      <div className="action-buttons d-flex flex-lg-column flex-sm-row ">
-                        <button
-                          className="btn btn-sm text-danger m-0 p-0"
-                          onClick={() => handleRemove(course.courseId)}
-                        >
-                          Remove
-                        </button>
-
-                        <button
-                          className="btn btn-sm "
-                          style={{ color: "#0ab99d" }}
-                          onClick={() => handleMoveToWishlist(course.courseId)}
-                        >
-                          Move to Wishlist
-                        </button>
-                      </div>
-
-                      <div className="course-price text-end">
+              <div className="contentcourse col-10 px-lg-3 ">
+                <div className="d-flex flex-column flex-lg-row justify-content-between">
+                  <div className="coursedetails">
+                    <div className="d-flex justify-content-between">
+                      <h5 className="course-title m-0">{course.title}</h5>
+                      <div className="course-price2 text-end d-xl-none">
                         <h5>${course.discountPrice}</h5>
                         {course.price && (
                           <h6 className="line text-muted text-decoration-line-through">
@@ -151,11 +103,52 @@ function Cart() {
                         )}
                       </div>
                     </div>
+
+                    <p
+                      style={{ fontSize: "14px", color: "#333" }}
+                      className="course-author m-0 pt-2"
+                    >
+                      By {course.insName}
+                    </p>
+                    {console.log(course.courseDuration)}
+                    <ul className="course-meta d-flex gap-3 m-0 p-0 list-unstyled">
+                      <p>{course.courseDuration}</p>
+                      <li>{course.lessonsCount} lessons</li>
+                      <li>All Levels</li>
+                    </ul>
+                  </div>
+
+                  <div className="d-flex gap-2">
+                    <div className="action-buttons d-flex flex-lg-column flex-sm-row ">
+                      <button
+                        className="btn btn-sm text-danger m-0 p-0"
+                        onClick={() => handleRemove(course.courseId)}
+                      >
+                        Remove
+                      </button>
+
+                      <button
+                        className="btn btn-sm "
+                        style={{ color: "#0ab99d" }}
+                        onClick={() => handleMoveToWishlist(course.courseId)}
+                      >
+                        Move to Wishlist
+                      </button>
+                    </div>
+
+                    <div className="course-price text-end">
+                      <h5>${course.discountPrice}</h5>
+                      {course.price && (
+                        <h6 className="line text-muted text-decoration-line-through">
+                          ${course.price}
+                        </h6>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
-            );
-          })}
+            </div>
+          ))}
         </div>
 
         {/* Right Section */}

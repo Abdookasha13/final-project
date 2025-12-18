@@ -215,10 +215,30 @@
   },
   "faq": {
     "question1": "Why do students prefer online learning?",
+    "answer1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     "question2": "Where should I study abroad?",
+    "answer2": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     "question3": "How can I contact a school directly?",
+    "answer3": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     "question4": "How do I find a school where I want to study?",
-    "question5": "How does it create content?"
+    "answer4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "question5": "How does it create content?",
+    "answer5": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+  },
+  "price": {
+    "Basic Plan": "Basic Plan",
+    "Standard Plan": "Standard Plan",
+    "Premium Plan": "Premium Plan",
+    "perMonth": "mon",
+    "getStarted": "Get Started",
+    "featureHead": "Advanced features for pros who need more customization.",
+    "feature1": "7-Days Shipping World Wide",
+    "feature2": "73 Kg Weight Max /Package",
+    "feature3": "Free Wood Crate",
+    "feature4": "Get in touch to discuss",
+    "feature5": "Use Personal And Commercial",
+    "feature6": "24/7 Support",
+    "button": "Sign up for free"
   },
   "common": {
     "button": {
@@ -235,5 +255,27 @@
       "close": "Close"
     }
   },
-  "Get in Touch": "Get in Touch"
+  "Get in Touch": "Get in Touch",
+  "cart": {
+    "headline": "Shopping Cart",
+    "emptycart": "Your cart is empty. Keep shopping to find a course!",
+    "keepShopping": "Keep Shopping"
+  },
+  "blogCard": {
+    "date": "14 June 2023",
+    "comments": "Comment (06)",
+    "pargraph": "velit esse cillum dolore eu fugiat nulla pariatur.Excepteur sint occaecat cupidatat",
+    "readMore": "Read More"
+  },
+  "blogPost": {
+    "readMore": "Read More",
+    "date": "April 21, 2023",
+    "author": "Alamgir Chowdhuri",
+    "paragraph": "velit esse cillum dolore eu fugiat nulla pariatur.Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+  },
+  "rightSideBar": {
+    "serviceCategory": "Service Category",
+    "graphicDesign": "Graphic Design"
+  }
+
 }
