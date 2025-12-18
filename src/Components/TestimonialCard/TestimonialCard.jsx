@@ -1,10 +1,13 @@
 import "./TestimonialCard.css";
+import { useTranslation } from "react-i18next";
 
-const TestimonialCard = ({ image, name, grade, content }) => {
+const TestimonialCard = ({ image, name, grade, comment }) => {
+  const { i18n } = useTranslation();
+  const lang = i18n.language.startsWith("ar") ? "ar" : "en";
+
   return (
     <div className="col-xl-6 col-lg-6">
       <div className="testimonial-card">
-        {/* Quotation Mark Background */}
         <div className="quote-mark">’’</div>
 
         <div className="author-box">
@@ -32,13 +35,9 @@ const TestimonialCard = ({ image, name, grade, content }) => {
               </span>
             ))}
           </div>
+
           <div className="testimonial-text">
-            <p>
-              "
-              {content ||
-                "This course was incredibly helpful and well-structured. "}
-              "
-            </p>
+            <p>"{comment?.[lang] || comment?.en}"</p>
           </div>
         </div>
       </div>

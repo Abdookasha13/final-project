@@ -6,19 +6,22 @@ import getCoursesByInsId from "../../../utilities/getCoursesByInsId";
 import handleAddLesson from "../../../utilities/handleAddLesson";
 import handleUpdateLesson from "../../../utilities/handleUpdateLesson";
 import Loader from "../../Loader/Loader";
+import "./AddLesson.css";
+import { useTranslation } from "react-i18next";
 
 const AddLesson = () => {
+  const { i18n } = useTranslation();
+  const lang = i18n.language.startsWith("ar") ? "ar" : "en";
   const {
     register,
     handleSubmit,
     control,
     watch,
     reset,
-    formState: { errors },
+    formState: { errors, touchedFields },
   } = useForm({ mode: "onChange" });
 
   const { lessonId } = useParams();
-
   const navigate = useNavigate();
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -27,35 +30,43 @@ const AddLesson = () => {
   const lessonType = watch("type");
 
   useEffect(() => {
-    const fetchcourses = async () => {
+    const fetchCourses = async () => {
       const user = JSON.parse(localStorage.getItem("user"));
       if (user?._id) {
-        const data = await getCoursesByInsId(user._id);
+        const data = await getCoursesByInsId(user._id, lang);
         setCourses(data);
       }
     };
-    fetchcourses();
-  }, []);
+    fetchCourses();
+  }, [lang]);
 
   useEffect(() => {
     if (!isEdit) return;
     const fetchLesson = async () => {
       setLoading(true);
       try {
-        const res = await fetch(`http://localhost:1911/getLesson/${lessonId}`);
+        const res = await fetch(
+          `http://localhost:1911/getLesson/${lessonId}?edit=true`
+        );
         const json = await res.json();
         const lesson = json.data;
+
+        console.log(" Fetched lesson:", lesson);
+
         reset({
           courseId: lesson.course?._id || "",
-          title: lesson.title,
+
+          "title.en": lesson.title.en,
+          "title.ar": lesson.title.ar,
+          "content.en": lesson.content?.en || "",
+          "content.ar": lesson.content?.ar || "",
           type: lesson.type,
-          content: lesson.content,
           videoUrl: lesson.videoUrl,
           duration: lesson.duration,
           isPreview: lesson.isPreview,
         });
       } catch (err) {
-        console.error("Error fetching lesson:", err);
+        console.error(" Error fetching lesson:", err);
       } finally {
         setLoading(false);
       }
@@ -64,6 +75,7 @@ const AddLesson = () => {
   }, [lessonId, isEdit, reset]);
 
   const onSubmit = async (data) => {
+    console.log("Lesson data:", data);
     if (isEdit) {
       await handleUpdateLesson(lessonId, data);
     } else {
@@ -86,7 +98,7 @@ const AddLesson = () => {
                 className={`form-select ${errors.courseId ? "is-invalid" : ""}`}
                 {...register("courseId", { required: "Course is required" })}
               >
-                <option value="">-- Select a course --</option>
+                <option value="">Select a course</option>
                 {courses.map((course) => (
                   <option key={course._id} value={course._id}>
                     {course.title}
@@ -100,16 +112,50 @@ const AddLesson = () => {
               )}
             </div>
 
-            {/* Lesson Title */}
+            {/* Lesson Title EN */}
             <div className="mb-3">
               <label className="form-label">Lesson Title</label>
               <input
+                placeholder="title (EN)"
                 type="text"
-                className={`form-control ${errors.title ? "is-invalid" : ""}`}
-                {...register("title", { required: "Lesson title is required" })}
+                className={`form-control ${
+                  touchedFields.title?.en
+                    ? errors.title?.en
+                      ? "is-invalid"
+                      : "is-valid"
+                    : ""
+                }`}
+                {...register("title.en", {
+                  required: "English title is required",
+                })}
               />
-              {errors.title && (
-                <div className="invalid-feedback">{errors.title.message}</div>
+              {errors.title?.en && (
+                <div className="invalid-feedback">
+                  {errors.title.en.message}
+                </div>
+              )}
+            </div>
+
+            {/* Lesson Title AR */}
+            <div className="mb-3">
+              <input
+                placeholder="title (AR)"
+                type="text"
+                className={`form-control ${
+                  touchedFields.title?.ar
+                    ? errors.title?.ar
+                      ? "is-invalid"
+                      : "is-valid"
+                    : ""
+                }`}
+                {...register("title.ar", {
+                  required: "Arabic title is required",
+                })}
+              />
+              {errors.title?.ar && (
+                <div className="invalid-feedback">
+                  {errors.title.ar.message}
+                </div>
               )}
             </div>
 
@@ -117,11 +163,20 @@ const AddLesson = () => {
             <div className="row g-3 mb-3">
               <div className="col-md-6">
                 <label className="form-label">Lesson Type</label>
-                <select className="form-select" {...register("type")}>
+                <select
+                  className="form-select"
+                  {...register("type", { required: "Lesson type is required" })}
+                >
+                  <option value="">Select type</option>
                   <option value="video">Video</option>
                   <option value="article">Article</option>
                   <option value="quiz">Quiz</option>
                 </select>
+                {errors.type && (
+                  <div className="invalid-feedback d-block">
+                    {errors.type.message}
+                  </div>
+                )}
               </div>
 
               {lessonType === "video" && (
@@ -129,21 +184,71 @@ const AddLesson = () => {
                   <label className="form-label">Video URL</label>
                   <input
                     type="text"
-                    className="form-control"
-                    {...register("videoUrl")}
+                    className={`form-control ${
+                      touchedFields.videoUrl
+                        ? errors.videoUrl
+                          ? "is-invalid"
+                          : "is-valid"
+                        : ""
+                    }`}
+                    {...register("videoUrl", {
+                      required: "Video URL is required for video lessons",
+                    })}
                   />
+                  {errors.videoUrl && (
+                    <div className="invalid-feedback">
+                      {errors.videoUrl.message}
+                    </div>
+                  )}
                 </div>
               )}
             </div>
 
-            {/* Content */}
+            {/* Lesson Content EN */}
             <div className="mb-3">
               <label className="form-label">Lesson Content</label>
               <textarea
-                className="form-control"
+                placeholder="content (EN)"
+                className={`form-control ${
+                  touchedFields.content?.en
+                    ? errors.content?.en
+                      ? "is-invalid"
+                      : "is-valid"
+                    : ""
+                }`}
                 rows="5"
-                {...register("content")}
+                {...register("content.en", {
+                  required: "English content is required",
+                })}
               ></textarea>
+              {errors.content?.en && (
+                <div className="invalid-feedback">
+                  {errors.content.en.message}
+                </div>
+              )}
+            </div>
+
+            {/* Lesson Content AR */}
+            <div className="mb-3">
+              <textarea
+                placeholder="content (AR)"
+                className={`form-control ${
+                  touchedFields.content?.ar
+                    ? errors.content?.ar
+                      ? "is-invalid"
+                      : "is-valid"
+                    : ""
+                }`}
+                rows="5"
+                {...register("content.ar", {
+                  required: "Arabic content is required",
+                })}
+              ></textarea>
+              {errors.content?.ar && (
+                <div className="invalid-feedback">
+                  {errors.content.ar.message}
+                </div>
+              )}
             </div>
 
             {/* Duration + Preview */}
@@ -152,9 +257,26 @@ const AddLesson = () => {
                 <label className="form-label">Duration (minutes)</label>
                 <input
                   type="number"
-                  className="form-control"
-                  {...register("duration")}
+                  className={`form-control ${
+                    touchedFields.duration
+                      ? errors.duration
+                        ? "is-invalid"
+                        : "is-valid"
+                      : ""
+                  }`}
+                  {...register("duration", {
+                    required: "Duration is required",
+                    min: {
+                      value: 1,
+                      message: "Duration must be at least 1 minute",
+                    },
+                  })}
                 />
+                {errors.duration && (
+                  <div className="invalid-feedback">
+                    {errors.duration.message}
+                  </div>
+                )}
               </div>
 
               <div className="col-md-6 d-flex align-items-center">

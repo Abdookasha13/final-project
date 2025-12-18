@@ -7,23 +7,20 @@ import CourseCard from "../../../Components/coursecard/CourseCard";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCourses } from "../../../Store/Slices/getAllCoursecSlice";
 import { fetchMultipleReviewStats } from "../../../Store/Slices/reviewsSlice";
+import { useTranslation } from "react-i18next";
 
 function Courses() {
+  const { i18n } = useTranslation();
+  const lang = i18n.language.startsWith("ar") ? "ar" : "en";
   const dispatch = useDispatch();
-
   const courses = useSelector((state) => state.getAllCourses.data || []);
   const isLoading = useSelector((state) => state.getAllCourses.isLoading);
-
   const reviewStats = useSelector((state) => state.reviewStats.stats);
   const statsLoading = useSelector((state) => state.reviewStats.isLoading);
 
   useEffect(() => {
-    if (!courses.length) {
-      dispatch(fetchCourses());
-   
-      
-    }
-  }, [courses.length, dispatch]);
+    dispatch(fetchCourses(lang));
+  }, [lang, dispatch]);
 
   useEffect(() => {
     if (courses.length > 0) {
@@ -32,44 +29,44 @@ function Courses() {
     }
   }, [courses, dispatch]);
 
-
-
   if (isLoading || statsLoading) {
     return <Loader />;
   }
 
   if (!courses.length) {
-    return <div>no courses hereee</div>;
+    return <div>no courses here</div>;
   }
-console.log("COURSES FROM API:", courses);
+
   return (
     <div className="container coursecardcontainer px-0 mx-0">
       <div className="row g-4">
-        {courses.map((course) => (
-          <div className="col-xl-4 col-lg-4 col-md-6" key={course._id}>
-            <Link
-              to={`/course/details/${course._id}`}
-              style={{ textDecoration: "none" }}
-            >
-              <CourseCard
-                imgSrc={course.thumbnailUrl}
-                title={course.title}
-                price={course.price}
-                discountPrice={course.discountPrice}
-                lessonsCount={course.lessonsCount}
-                courseDuration={formatTime(course.lessons)}
-                studentsCount={course.studentsCount}
-                courseId={course._id}
-                category={course.category?.name}
-                insImage={course.instructor?.profileImage}
-                insName={course.instructor?.name}
-                bgColor={"#f8f9fa"}
-                course={course}
-                stats={reviewStats[course._id]}
-              />
-            </Link>
-          </div>
-        ))}
+        {courses.map((course) => {
+          return (
+            <div className="col-xl-4 col-lg-4 col-md-6" key={course._id}>
+              <Link
+                to={`/course/details/${course._id}`}
+                style={{ textDecoration: "none" }}
+              >
+                <CourseCard
+                  imgSrc={course.thumbnailUrl}
+                  title={course.title}
+                  price={course.price}
+                  discountPrice={course.discountPrice}
+                  lessonsCount={course.lessonsCount || 0}
+                  courseDuration={formatTime(course.lessons)}
+                  studentsCount={course.studentsCount || 0}
+                  courseId={course._id}
+                  category={course.category?.name[lang]}
+                  insImage={course.instructor?.profileImage}
+                  insName={course.instructor?.name}
+                  bgColor={"#f8f9fa"}
+                  course={course}
+                  stats={reviewStats[course._id]}
+                />
+              </Link>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

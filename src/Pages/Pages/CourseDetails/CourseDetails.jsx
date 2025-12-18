@@ -20,6 +20,7 @@ import { fetchReviewStats } from "../../../Store/Slices/reviewsSlice";
 import { toast } from "react-toastify";
 import handleAddToWish from "../../../utilities/handleAddToWish";
 import ReviewStats from "../../../Components/StarRating/starRating";
+import { useTranslation } from "react-i18next";
 
 const tabs = [
   { name: "Overview", icon: GoBookmark },
@@ -29,13 +30,14 @@ const tabs = [
 ];
 
 const CourseDetails = () => {
+  const { i18n } = useTranslation();
+  const lang = i18n.language.startsWith("ar") ? "ar" : "en";
   const dispatch = useDispatch();
   const { courseId } = useParams();
   const [course, setCourse] = useState(null);
   const [lessons, setLessons] = useState([]);
   const [activeTab, setActiveTab] = useState("Overview");
 
-  // من Redux - الـ stats
   const reviewStats = useSelector((state) => state.reviewStats.stats);
   const stats = reviewStats[courseId];
 
@@ -45,11 +47,11 @@ const CourseDetails = () => {
     toast.success("Course added to cart!");
   };
 
-  // جيب الـ course data
+  // جيب الـ course data مع اللغة
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const courseData = await getCourseById(courseId);
+        const courseData = await getCourseById(courseId, lang);
         console.log("Course Data:", courseData);
         setCourse(courseData);
         setLessons(courseData.lessons || []);
@@ -58,9 +60,9 @@ const CourseDetails = () => {
       }
     };
     fetchData();
-  }, [courseId]);
+  }, [courseId, lang]);
 
-  // جيب الـ review stats من Redux
+  // جيب الـ review stats
   useEffect(() => {
     if (courseId) {
       dispatch(fetchReviewStats(courseId));
@@ -70,17 +72,6 @@ const CourseDetails = () => {
   if (!course) {
     return <Loader />;
   }
-
-  // const videoList = lessons.map((lesson) => ({
-  //   id: lesson._id,
-  //   youtubeId: lesson.videoUrl,
-  //   title: lesson.title,
-  //   duration: `${lesson.duration}m`,
-  //   type: lesson.type,
-  //   content: lesson.content,
-  //   isPreview: lesson.isPreview,
-  //   order: lesson.order,
-  // }));
 
   const renderTabContent = {
     Overview: (
@@ -92,31 +83,37 @@ const CourseDetails = () => {
       </div>
     ),
     Curriculum: (
-    <div className="border border-top-0 border-light-subtle">
-  {/* <VideoPlayer videos={videoList} /> */}
-  {lessons.map((lesson) => (
-    <div className="d-flex justify-content-between p-4 border-bottom " key={lesson.id}>
-    <div style={{fontSize:"15px",color:"#404040ff"}} className="d-flex gap-3"> <MdOutlinePlayLesson size={"18px"} color="#474747ff" />
- {lesson.title}</div>
-    <div> {lesson.duration}m</div>
-   
-    </div>
-  ))}
-</div>
+      <div className="border border-top-0 border-light-subtle">
+        {lessons.map((lesson) => (
+          <div
+            className="d-flex justify-content-between p-4 border-bottom"
+            key={lesson._id}
+          >
+            <div
+              style={{ fontSize: "15px", color: "#404040ff" }}
+              className="d-flex gap-3"
+            >
+              <MdOutlinePlayLesson size={"18px"} color="#474747ff" />
+              {lesson.title[lang]}
+            </div>
+            <div>{lesson.duration}m</div>
+          </div>
+        ))}
+      </div>
     ),
     Instructor: (
       <div className="border border-top-0 border-light-subtle px-4 py-5 d-flex gap-4">
-        <div className="insimage ">
+        <div className="insimage">
           <img
-            src={course.instructor.profileImage}
+            src={course.instructor?.profileImage}
             alt=""
             style={{ width: "100px", height: "100px", borderRadius: "50%" }}
           />
         </div>
-        <div className="insinfo ">
-          <h4>{course.instructor.name}</h4>
-          <p>{course.instructor.expertise}</p>
-          <p>Experience:{course.instructor.experience} year</p>
+        <div className="insinfo">
+          <h4>{course.instructor?.name}</h4>
+          <p>{course.instructor?.expertise}</p>
+          <p>Experience: {course.instructor?.experience} year</p>
         </div>
       </div>
     ),
@@ -133,7 +130,7 @@ const CourseDetails = () => {
         {/* الجزء اليسار */}
         <div className="col-xl-9 col-lg-8">
           <div className="course-image-roka mb-4">
-            <img src={course.thumbnailUrl} className="rounded-3" />
+            <img src={course.thumbnailUrl} className="rounded-3" alt="" />
           </div>
 
           <div className="course-rating-roka mb-2 d-flex align-items-center">
@@ -154,14 +151,14 @@ const CourseDetails = () => {
             </span>
           </div>
 
-          <h4 className="course1-title-roka fw-bold mb-4 ">{course.title}</h4>
+          <h4 className="course1-title-roka fw-bold mb-4">{course.title}</h4>
 
           {/* Tabs */}
-          <ul className="nav nav-tabs border-0 d-flex gap-1 flex-nowrap ">
+          <ul className="nav nav-tabs border-0 d-flex gap-1 flex-nowrap">
             {tabs.map((tab) => {
               const Icon = tab.icon;
               return (
-                <li key={tab.name} className="nav-item w-25 fw-bold ">
+                <li key={tab.name} className="nav-item w-25 fw-bold">
                   <button
                     className="nav-link bg-light w-100"
                     style={{
@@ -183,7 +180,7 @@ const CourseDetails = () => {
 
         {/* الجزء اليمين */}
         <div className="col-xl-3 col-lg-4">
-          <div className="course-sidebar-roka shadow-sm p-3 rounded-3 ">
+          <div className="course-sidebar-roka shadow-sm p-3 rounded-3">
             <img
               src="https://ordainit.com/html/educate/assets/img/event/details-sm.jpg"
               alt="instructor"
@@ -194,17 +191,16 @@ const CourseDetails = () => {
               Add To Cart
             </Button>
 
-            <ul className="list-unstyled m-0 mt-3 ">
-              <li className=" border-bottom py-3">
+            <ul className="list-unstyled m-0 mt-3">
+              <li className="border-bottom py-3">
                 <span>
-                  {" "}
                   <BiDollar
                     size={"20px"}
                     color="#0ab99d"
                     style={{ marginRight: "7px" }}
                   />
                   Price
-                </span>{" "}
+                </span>
                 <div className="course-price-roka d-flex gap-2">
                   <span className="current-price-roka fw-bold">
                     ${course.price}
@@ -215,19 +211,18 @@ const CourseDetails = () => {
                 </div>
               </li>
 
-              <li className=" border-bottom py-3">
+              <li className="border-bottom py-3">
                 <span>
-                  {" "}
                   <PiStudent
                     size={"20px"}
                     color="#0ab99d"
                     style={{ marginRight: "7px" }}
                   />
                   Enrolled
-                </span>{" "}
-                <span className="fw-bold">100</span>
+                </span>
+                <span className="fw-bold">{course.studentsCount || 0}</span>
               </li>
-              <li className=" border-bottom py-3">
+              <li className="border-bottom py-3">
                 <span>
                   <MdOutlinePlayLesson
                     size={"20px"}
@@ -235,38 +230,36 @@ const CourseDetails = () => {
                     style={{ marginRight: "7px" }}
                   />
                   Lessons
-                </span>{" "}
-                <span className="fw-bold">80</span>
+                </span>
+                <span className="fw-bold">{course.lessonsCount || 0}</span>
               </li>
-              <li className=" border-bottom py-3">
+              <li className="border-bottom py-3">
                 <span>
-                  {" "}
                   <TfiBarChartAlt
                     size={"20px"}
                     color="#0ab99d"
                     style={{ marginRight: "7px" }}
                   />
                   Skill Level
-                </span>{" "}
+                </span>
                 <span className="fw-bold">Beginner</span>
               </li>
 
-              <li className=" border-bottom py-3">
+              <li className="border-bottom py-3">
                 <span>
-                  {" "}
                   <GrLanguage
                     size={"18px"}
                     color="#0ab99d"
                     style={{ marginRight: "7px" }}
                   />
                   Language
-                </span>{" "}
+                </span>
                 <span className="fw-bold">English</span>
               </li>
             </ul>
             <div
               onClick={() => handleAddToWish(course._id)}
-              className="mt-4  "
+              className="mt-4"
               style={{
                 fontSize: "15px",
                 fontWeight: "500",

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import getStdEnrollments from "../../../utilities/getStdEnrollments";
 import Loader from "../../Loader/Loader";
 import { IoBookOutline } from "react-icons/io5";
-import { RiProgress2Line } from "react-icons/ri";
 import { GrCertificate, GrCompliance } from "react-icons/gr";
 import { useTranslation } from "react-i18next";
 import CourseCard from "../../../Components/coursecard/CourseCard";
@@ -11,8 +10,11 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
+
 const MyCourses = () => {
   const navigate = useNavigate();
+  const { i18n } = useTranslation();
+  const lang = i18n.language.startsWith("ar") ? "ar" : "en";
 
   const openCourse = (courseId) => {
     navigate(`/course/player/${courseId}`);
@@ -25,7 +27,7 @@ const MyCourses = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [activeTab, setActiveTab] = useState("enrolled");
-  // تخزين التقييمات للكورسات
+
   const [userRatings, setUserRatings] = useState({});
 
   const openReviewModal = (courseId) => {
@@ -50,7 +52,6 @@ const MyCourses = () => {
 
       if (res.data.success) {
         toast.success(res.data.message || "Rating submitted successfully!");
-        // تحديث التقييمات المحلية
         setUserRatings((prev) => ({
           ...prev,
           [course]: rating,
@@ -226,8 +227,8 @@ const MyCourses = () => {
                 <div key={item._id} className="col-md-4">
                   <CourseCard
                     imgSrc={item.course.thumbnailUrl}
-                    title={item.course.title}
-                    insName={item.course.instructor.name}
+                    title={item.course.title?.[lang] || item.course.title?.en}
+                    insName={item.course.instructor?.name}
                     insImage={item.course.instructor?.profileImage}
                     isEnrollment={true}
                     userRating={userRatings[item.course._id] || 0}
@@ -259,8 +260,11 @@ const MyCourses = () => {
                 <div key={item._id} className="col-md-4">
                   <CourseCard
                     imgSrc={item.course.thumbnailUrl}
-                    title={item.course.title}
-                    insName={item.course.instructor.name}
+                    title={item.course.title?.[lang] || item.course.title?.en}
+                    insName={
+                      item.course.instructor?.name?.[lang] ||
+                      item.course.instructor?.name?.en
+                    }
                     insImage={item.course.instructor?.profileImage}
                     isEnrollment={true}
                     userRating={userRatings[item.course._id] || 0}

@@ -6,14 +6,26 @@ import Loader from "../../Loader/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMultipleReviewStats } from "../../../Store/Slices/reviewsSlice";
 import { useOutletContext } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const InsCourses = () => {
+  const { i18n } = useTranslation();
+  const lang = i18n.language.startsWith("ar") ? "ar" : "en";
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
   const reviewStats = useSelector((state) => state.reviewStats.stats);
   const [error, setError] = useState(null);
-  const dispatch=useDispatch()
+  const dispatch = useDispatch();
   const { searchTerm } = useOutletContext();
+
+  const getTextByLang = (data, language) => {
+    if (!data) return "N/A";
+    if (typeof data === "string") return data;
+    if (typeof data === "object") {
+      return data[language] || data.en || data.ar || "N/A";
+    }
+    return "N/A";
+  };
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -26,10 +38,12 @@ const InsCourses = () => {
           return;
         }
 
-        const data = await getCoursesByInsId(user._id);
+        // ⭐ مرر اللغة للـ utility
+        const data = await getCoursesByInsId(user._id, lang);
+        console.log("📦 Instructor courses:", data);
         setCourses(data || []);
       } catch (err) {
-        console.error("Error fetching courses:", err);
+        console.error("❌ Error fetching courses:", err);
         setError("Failed to load courses.");
       } finally {
         setLoading(false);
@@ -37,17 +51,20 @@ const InsCourses = () => {
     };
 
     fetchCourses();
-  }, []);
+  }, [lang]); // ⭐ أضف lang في dependency array
+
   const filteredCourses = courses.filter((course) =>
-  course.title.toLowerCase().includes(searchTerm.toLowerCase())
-);
-    useEffect(() => {
+    getTextByLang(course.title, lang)
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase())
+  );
+
+  useEffect(() => {
     if (filteredCourses.length > 0) {
       const courseIds = filteredCourses.map((c) => c._id);
       dispatch(fetchMultipleReviewStats(courseIds));
     }
   }, [filteredCourses, dispatch]);
-
 
   const handleDeleteSuccess = (courseId) => {
     setCourses(courses.filter((c) => c._id !== courseId));
@@ -83,29 +100,35 @@ const InsCourses = () => {
   return (
     <div className="container px-0 mx-0">
       <div className="row g-4">
-        {filteredCourses.map((course) => (
-          <div className="col-xl-4 col-lg-4 col-md-6" key={course._id}>
-            <div className="bg-light rounded-3 h-100 p-2">
-              <CourseCard
-                imgSrc={course.thumbnailUrl}
-                title={course.title}
-                courseId={course._id}
-                showInstructorActions={true}
-                price={course.price}
-                discountPrice={course.discountPrice}
-                lessonsCount={course.lessonsCount}
-                courseDuration={formatTime(course.lessons)}
-                studentsCount={course.studentsCount}
-                category={course.category?.name}
-                onDelete={handleDeleteSuccess}
-                bgColor={"#ffff"}
-                hideInstructorInfo={true}
-                hideCartButton={true}
-                 stats={reviewStats[course._id]}
-              />
+        {filteredCourses.map((course) => {
+          // ⭐ استخدم الـ helper function
+          const title = getTextByLang(course.title, lang);
+          const categoryName = getTextByLang(course.category?.name, lang);
+
+          return (
+            <div className="col-xl-4 col-lg-4 col-md-6" key={course._id}>
+              <div className="bg-light rounded-3 h-100 p-2">
+                <CourseCard
+                  imgSrc={course.thumbnailUrl}
+                  title={title}
+                  courseId={course._id}
+                  showInstructorActions={true}
+                  price={course.price}
+                  discountPrice={course.discountPrice}
+                  lessonsCount={course.lessonsCount}
+                  courseDuration={formatTime(course.lessons)}
+                  studentsCount={course.studentsCount}
+                  category={categoryName}
+                  onDelete={handleDeleteSuccess}
+                  bgColor={"#ffff"}
+                  hideInstructorInfo={true}
+                  hideCartButton={true}
+                  stats={reviewStats[course._id]}
+                />
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

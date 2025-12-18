@@ -15,8 +15,18 @@ const handleAddCourse = async (
     const user = JSON.parse(localStorage.getItem("user"));
 
     const payload = {
-      title: data.title,
-      slug: data.title.toLowerCase().replace(/\s+/g, "-"),
+      title: {
+        en: data.title.en,
+        ar: data.title.ar,
+      },
+      slug: {
+        en: String(data.title.en || "")
+          .toLowerCase()
+          .replace(/\s+/g, "-"),
+        ar: String(data.title.ar || "")
+          .toLowerCase()
+          .replace(/\s+/g, "-"),
+      },
       shortDescription: data.shortDescription,
       description: data.description,
       category: data.category,
@@ -24,7 +34,7 @@ const handleAddCourse = async (
       price: data.isFree ? 0 : Number(data.price),
       discountPrice: data.discountPrice || null,
       isFree: !!data.isFree,
-      tags: data.tags ? data.tags.split(",").map((t) => t.trim()) : [],
+      tags: data.tags || { en: [], ar: [] },
       thumbnailUrl,
       lessons: data.lessons,
     };
