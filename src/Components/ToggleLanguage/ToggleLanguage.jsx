@@ -13,6 +13,7 @@ const ToggleLanguage = () => {
     } else {
       i18n.changeLanguage("en");
       document.documentElement.setAttribute("dir", "ltr");
+      
     }
   }, [isChecked, i18n]);
 

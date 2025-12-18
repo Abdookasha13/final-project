@@ -1,36 +1,39 @@
 import { useState } from "react";
 import FaqsBox from "../../../Components/FaqsBox/FaqsBox";
+import { useTranslation } from "react-i18next";
 
 function FAQ() {
+  const { t } = useTranslation();
   const arr = [
     {
-      question: "Why do students prefer online learning?",
+      question: t("faq.question1"),
       answer:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        t("faq.answer1"),
       imgUrl: "https://ordainit.com/html/educate/assets/img/faq/thumb-1.jpg",
     },
     {
-      question: "Where should I study abroad?",
+      question: t("faq.question2"),
       answer:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        t("faq.answer2"),
       imgUrl: "https://ordainit.com/html/educate/assets/img/faq/thumb-2.jpg",
     },
     {
-      question: "How can I contact a school directly?",
+      question: t("faq.question3"),
       answer:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        t("faq.answer3"),
       imgUrl: "https://ordainit.com/html/educate/assets/img/faq/thumb-2.jpg",
     },
     {
-      question: "How do I find a school where I want to study?",
+
+      question: t("faq.question4"),
       answer:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        t("faq.answer4"),
       imgUrl: "https://ordainit.com/html/educate/assets/img/faq/thumb-2.jpg",
     },
     {
-      question: "How does it create content?",
+      question: t("faq.question5"),
       answer:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        t("faq.answer5"),
       imgUrl: "https://ordainit.com/html/educate/assets/img/faq/thumb-2.jpg",
     },
   ];

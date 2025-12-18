@@ -1,8 +1,10 @@
 import Button from "../../../Components/Button/Button";
 import RightSideBlog from "../../../Components/RightSideBlog/RightSideBlog";
 import "./BlogDetails.css";
+  import { useTranslation } from "react-i18next";
 
 function BlogDetails() {
+  const { i18n } = useTranslation();
   return (
     <>
       <div className="row py-5 mt-5">
@@ -14,38 +16,28 @@ function BlogDetails() {
             />
             <div className="mt-4 d-flex align-items-center gap-5 history-comments">
               <span className="d-flex align-items-center gap-2 fw-bold">
-                <i className="fa-solid fa-calendar-days"></i>14 June 2023
+                <i className="fa-solid fa-calendar-days"></i>{i18n.language === "en" ? "June 14, 2023" : "14 يونيو 2023"}
               </span>
               <span className="d-flex align-items-center gap-2 fw-bold">
-                <i className="fa-regular fa-comments"></i>Comment (06)
+                <i className="fa-regular fa-comments"></i>{ i18n.language === "en" ? "2 Comments" : "2 تعليقات"} 
               </span>
             </div>
           </div>
 
           <div className="left-side-blog-details-box1">
             <h4 className="my-4 ">
-              Pellentesque dignissim enim sit amet venenatis cursus eget nunc.
+            {i18n.language === "en" ? "Understanding Performance Marketing: A Comprehensive Guide" : "فهم التسويق بالأداء: دليل شامل"}
             </h4>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat aute irure dolor in
-              reprehenderit.
+              {i18n.language === "en" ? "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Utenim ad minim veniam, quis nostrud exercitation ullamco labori nisi ut aliquip ex ea commodo consequat aute irure dolor in reprehenderit." : " لوريم إيبسوم دولار سيت أميت، كونسيكتيتور أديبيسشينغ إيليت، سيد دو إيوسمد تيمبور إنسيديدونت أوت لابوري إت دولوري ماغنا أليكا. أوتنيم أد مينيم فينيام، كويز نوسترود إكسرشيتايشن أولامكو لابوري نيسي أوت أليكويب إكس إيا كومودو كونسيكوات أوتي إيرور دولور إن ريبريندينت."}
             </p>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat aute irure dolor in
-              reprehenderit.
+                           {i18n.language === "en" ? "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Utenim ad minim veniam, quis nostrud exercitation ullamco labori nisi ut aliquip ex ea commodo consequat aute irure dolor in reprehenderit." : " لوريم إيبسوم دولار سيت أميت، كونسيكتيتور أديبيسشينغ إيليت، سيد دو إيوسمد تيمبور إنسيديدونت أوت لابوري إت دولوري ماغنا أليكا. أوتنيم أد مينيم فينيام، كويز نوسترود إكسرشيتايشن أولامكو لابوري نيسي أوت أليكويب إكس إيا كومودو كونسيكوات أوتي إيرور دولور إن ريبريندينت."}
+
             </p>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat aute irure dolor in
-              reprehenderit.
+                            {i18n.language === "en" ? "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Utenim ad minim veniam, quis nostrud exercitation ullamco labori nisi ut aliquip ex ea commodo consequat aute irure dolor in reprehenderit." : " لوريم إيبسوم دولار سيت أميت، كونسيكتيتور أديبيسشينغ إيليت، سيد دو إيوسمد تيمبور إنسيديدونت أوت لابوري إت دولوري ماغنا أليكا. أوتنيم أد مينيم فينيام، كويز نوسترود إكسرشيتايشن أولامكو لابوري نيسي أوت أليكويب إكس إيا كومودو كونسيكوات أوتي إيرور دولور إن ريبريندينت."}
+
             </p>
           </div>
 
@@ -65,21 +57,17 @@ function BlogDetails() {
           </div>
 
           <div className="left-side-blog-details-box3">
-            <h4>Latest Articles Updated Daily</h4>
+            <h4>{i18n.language === "en" ? "Latest Articles Updated Daily" : "أحدث المقالات محدثة يومياً"}</h4>
             <p>
-              With worldwide annual spend on digital advertising surpassing $325
-              billion, it’s no surprise that different approaches to online
-              marketing are becoming available. One of these new approaches is
-              performance marketing or digital performance marketing. Keep
-              reading to learn all about performance marketing
+                            {i18n.language === "en" ? "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Utenim ad minim veniam, quis nostrud exercitation ullamco labori nisi ut aliquip ex ea commodo consequat aute irure dolor in reprehenderit." : " لوريم إيبسوم دولار سيت أميت، كونسيكتيتور أديبيسشينغ إيليت، سيد دو إيوسمد تيمبور إنسيديدونت أوت لابوري إت دولوري ماغنا أليكا. أوتنيم أد مينيم فينيام، كويز نوسترود إكسرشيتايشن أولامكو لابوري نيسي أوت أليكويب إكس إيا كومودو كونسيكوات أوتي إيرور دولور إن ريبريندينت."}
+
             </p>
           </div>
 
           <div className="left-side-blog-details-box4 text-center">
             <i className="fas fa-quote-right"></i>
             <p>
-              Diam luctus nostra dapibus varius et semper semper rutrum ad risus
-              felis eros. Cursus libero viverra tempus netus diam vestibulum
+            {i18n.language === "en" ? "The best way to predict the future is to create it." : "أفضل طريقة للتنبؤ بالمستقبل هي خلقه."}
             </p>
             <span>David Backhum</span>
           </div>
@@ -160,7 +148,7 @@ function BlogDetails() {
           </div>
         </div>
         <div className="right-side-blog-details col-lg-4 mt-5 mt-lg-0">
-          <RightSideBlog />
+          <RightSideBlog props={i18n.language} />
         </div>
       </div>
     </>

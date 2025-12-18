@@ -1,8 +1,10 @@
 import BlogPost from "../../../Components/BlogPost/BlogPost";
 import RightSideBlog from "../../../Components/RightSideBlog/RightSideBlog";
 import "./BlogSidebar.css";
-
+import { useTranslation } from "react-i18next";
 function BlogSidebar() {
+
+const { i18n } = useTranslation();
   return (
      <>
       <div className="row py-5 mt-5">
@@ -12,7 +14,7 @@ function BlogSidebar() {
           <BlogPost imgUrl={"https://ordainit.com/html/educate/assets/img/blog/blog-sidebar-2.jpg"} />
         </div>
         <div className="right-side-blog-details col-lg-4 mt-5 mt-lg-0">
-          <RightSideBlog />
+          <RightSideBlog  props={i18n.language} />
         </div>
       </div>
     </>

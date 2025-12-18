@@ -1,47 +1,49 @@
 import PropTypes from "prop-types";
 import Button from "../../../Components/Button/Button";
 import { Check, ArrowRight, CircleCheckBig } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import "./Price.css";
 
 export const Price = () => {
+  const { t } = useTranslation();
   const priceBlansInfo = [
     {
       mainTitle: "Basic Plan",
       time: "20",
-      insideTitle: "Advanced features for pros who need more customization.",
+      insideTitle: t("price.featureHead"),
       features: [
-        "7-Days Shipping World Wide",
-        "3 Kg Weight Max /Package",
-        "Free Wood Crate",
-        "Get in touch to discuss",
-        "Use Personal And Commercial",
-        "24/7 Support",
+        t("price.feature1"),
+        t("price.feature2"),
+        t("price.feature3"),
+        t("price.feature4"),
+        t("price.feature5"),
+        t("price.feature6"),
       ],
     },
     {
       mainTitle: "Standard Plan",
       time: "40",
-      insideTitle: "Advanced features for pros who need more customization.",
+      insideTitle: t("price.featureHead"),
       features: [
-        "7-Days Shipping World Wide",
-        "3 Kg Weight Max /Package",
-        "Free Wood Crate",
-        "Get in touch to discuss",
-        "Use Personal And Commercial",
-        "24/7 Support",
+         t("price.feature1"),
+        t("price.feature2"),
+        t("price.feature3"),
+        t("price.feature4"),
+        t("price.feature5"),
+        t("price.feature6"),
       ],
     },
     {
       mainTitle: "Premium Plan",
       time: "60",
-      insideTitle: "Advanced features for pros who need more customization.",
+      insideTitle: t("price.featureHead"),
       features: [
-        "7-Days Shipping World Wide",
-        "3 Kg Weight Max /Package",
-        "Free Wood Crate",
-        "Get in touch to discuss",
-        "Use Personal And Commercial",
-        "24/7 Support",
+         t("price.feature1"),
+        t("price.feature2"),
+        t("price.feature3"),
+        t("price.feature4"),
+        t("price.feature5"),
+        t("price.feature6"),
       ],
     },
   ];
@@ -57,12 +59,12 @@ export const Price = () => {
                   .toLowerCase()}  mb-4 rounded-3 shadow-sm`}
               >
                 <div className="card-header py-3">
-                  <h4 className="my-0 fw-normal">{Plan.mainTitle}</h4>
+                  <h4 className="my-0 fw-normal">{t(`price.${Plan.mainTitle}`)}</h4>
                 </div>
                 <div className="card-body">
                   <h1 className="card-title pricing-card-title">
                     ${Plan.time}
-                    <small className="text-body-secondary fw-light">/mo</small>
+                    <small className="text-body-secondary fw-light">/{t("price.perMonth")}</small>
                   </h1>
                   <ul className="list-unstyled   mb-4 ">
                     <ul className="lh-lg">
@@ -72,11 +74,7 @@ export const Price = () => {
                       {Plan.features.map((feature, index) => {
                         return (
                           <li key={index} className="responsive-font">
-                            <CircleCheckBig
-                              size={40}
-                              className="pe-4"
-                              color="#1bbda3"
-                            />
+                            
                             {feature}
                           </li>
                         );
@@ -87,7 +85,7 @@ export const Price = () => {
                     type="button"
                     className="button-custimitation m-auto z-1"
                   >
-                    Sign up for free
+                    {t("price.button")}
                   </Button>
                 </div>
               </div>

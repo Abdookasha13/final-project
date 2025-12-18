@@ -27,10 +27,19 @@
    margin-top: -110px !important;
    z-index: 1;
    width: 140%;
-   margin-left: -20% !important;
+   margin-inline-start: -20% !important;
    position: relative;
    height: 90%;
  }
+
+ 
+
+
+
+ .card-basic .card-body ul ul li, .card-standard .card-body ul ul li, .card-premium .card-body ul ul li {
+   text-align: start !important;
+ }
+ 
 
 
  .card-basic .card-body ul ul, .card-standard .card-body ul ul, .card-premium .card-body ul ul {
@@ -43,10 +52,9 @@
   font-size: 1.3em;
   padding-left: 80px;
   border-radius: 0% !important;
-  text-align: left;
  }
 
- 
+  
 
  .card-basic, .card-premium {
   background-color: #0ab99d;
