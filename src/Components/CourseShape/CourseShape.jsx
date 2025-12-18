@@ -7,8 +7,11 @@ import { fetchCourses } from "../../Store/Slices/getAllCoursecSlice";
 import formatTime from "../../utilities/formatTime";
 import { fetchMultipleReviewStats } from "../../Store/Slices/reviewsSlice";
 import { Loader } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 function CourseShape() {
+  const { i18n } = useTranslation();
+  const lang = i18n.language.startsWith("ar") ? "ar" : "en";
   const dispatch = useDispatch();
 
   const courses = useSelector((state) => state.getAllCourses.data || []);
@@ -18,10 +21,9 @@ function CourseShape() {
   const statsLoading = useSelector((state) => state.reviewStats.isLoading);
 
   useEffect(() => {
-    if (!courses.length) {
-      dispatch(fetchCourses());
-    }
-  }, [courses.length, dispatch]);
+    console.log("Fetching courses with language:", lang);
+    dispatch(fetchCourses(lang));
+  }, [lang, dispatch]);
 
   useEffect(() => {
     if (courses.length > 0) {
@@ -35,8 +37,9 @@ function CourseShape() {
   }
 
   if (!courses.length) {
-    return <div>no courses hereee</div>;
+    return <div>no courses here</div>;
   }
+
   return (
     <>
       {/* ----------- Course Section ----------- */}
@@ -114,26 +117,28 @@ function CourseShape() {
             {/* ----------- مكان الكروت ----------- */}
             <div className="row">
               {courses
-                .map((course) => (
-                  <div className="col-md-6 col-lg-4">
-                    <CourseCard
-                      imgSrc={course.thumbnailUrl}
-                      title={course.title}
-                      price={course.price}
-                      discountPrice={course.discountPrice}
-                      lessonsCount={course.lessonsCount}
-                      courseDuration={formatTime(course.lessons)}
-                      studentsCount={course.studentsCount}
-                      courseId={course._id}
-                      category={course.category?.name}
-                      insImage={course.instructor?.profileImage}
-                      insName={course.instructor?.name}
-                      bgColor={"#f8f9fa"}
-                      course={course}
-                      stats={reviewStats[course._id]}
-                    />
-                  </div>
-                ))
+                .map((course) => {
+                  return (
+                    <div className="col-md-6 col-lg-4" key={course._id}>
+                      <CourseCard
+                        imgSrc={course.thumbnailUrl}
+                        title={course.title}
+                        price={course.price}
+                        discountPrice={course.discountPrice}
+                        lessonsCount={course.lessonsCount}
+                        courseDuration={formatTime(course.lessons)}
+                        studentsCount={course.studentsCount}
+                        courseId={course._id}
+                        category={course.category?.name[lang]}
+                        insImage={course.instructor?.profileImage}
+                        insName={course.instructor?.name}
+                        bgColor={"#f8f9fa"}
+                        course={course}
+                        stats={reviewStats[course._id]}
+                      />
+                    </div>
+                  );
+                })
                 .slice(0, 3)}
             </div>
 

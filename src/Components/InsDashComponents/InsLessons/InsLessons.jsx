@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react";
 import getLessonsByCId from "../../../utilities/getLessonsByCId";
 import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import handleDeleteLessson from "../../../utilities/handleDeleteLesson";
+import { useTranslation } from "react-i18next";
 import "./InsLessons.css";
 
 const InsLessons = () => {
+  const { i18n } = useTranslation();
+  const lang = i18n.language.startsWith("ar") ? "ar" : "en";
   const { courseId } = useParams();
   const [lessons, setLessons] = useState([]);
   const navigate = useNavigate();
@@ -12,15 +15,17 @@ const InsLessons = () => {
 
   useEffect(() => {
     const fetchLessons = async () => {
-      const data = await getLessonsByCId(courseId);
+      const data = await getLessonsByCId(courseId, lang);
       setLessons(data);
     };
 
     fetchLessons();
-  }, [courseId]);
+  }, [courseId, lang]);
+
   const filteredlessons = lessons.filter((lesson) =>
-    lesson.title.toLowerCase().includes(searchTerm.toLowerCase())
+    lesson.title[lang].toLowerCase().includes(searchTerm.toLowerCase())
   );
+
   const handleEdit = (lessonId) => {
     navigate(`/instructor/edit/lesson/${lessonId}`);
   };
@@ -58,7 +63,7 @@ const InsLessons = () => {
                       className={`bi ${getTypeIcon(lesson.type)}`}
                       style={{ color: "#0ab99d" }}
                     ></i>
-                    <h6 className="mb-0 fw-bold">{lesson.title}</h6>
+                    <h6 className="mb-0 fw-bold">{lesson.title[lang]}</h6>
                   </div>
                   <div className="d-flex gap-3 small text-muted">
                     <span className="text-capitalize">{lesson.type}</span>

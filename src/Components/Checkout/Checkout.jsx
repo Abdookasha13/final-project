@@ -7,8 +7,11 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { clearCart } from "../../Store/Slices/cartSlice";
+import { useTranslation } from "react-i18next";
 
 function Checkout() {
+  const { i18n } = useTranslation();
+  const lang = i18n.language.startsWith("ar") ? "ar" : "en";
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
@@ -146,11 +149,11 @@ function Checkout() {
                         }
                       );
 
-                      console.log("Order ID:", res.data.id);
+                      console.log("📦 Order ID:", res.data.id);
                       return res.data.id;
                     } catch (error) {
                       console.error(
-                        "CREATE ORDER FRONTEND ERROR:",
+                        "❌ CREATE ORDER FRONTEND ERROR:",
                         error.response?.data || error
                       );
                       toast.error("Failed to create order");
@@ -159,7 +162,7 @@ function Checkout() {
                   }}
                   onApprove={async (data) => {
                     try {
-                      console.log("Capturing order ID:", data.orderID);
+                      console.log("💳 Capturing order ID:", data.orderID);
                       const token = localStorage.getItem("token");
                       const res = await axios.post(
                         "http://localhost:1911/capture-order",
@@ -171,13 +174,13 @@ function Checkout() {
                         }
                       );
 
-                      console.log("Payment successful:", res.data);
+                      console.log("✅ Payment successful:", res.data);
                       dispatch(clearCart());
-                      toast.success("Payment successful");
-                      setTimeout(() => navigate("/cart"), 2000);
+                      toast.success("Payment successful!");
+                      setTimeout(() => navigate("/courses"), 2000);
                     } catch (err) {
                       console.error(
-                        "CAPTURE FRONTEND ERROR:",
+                        "❌ CAPTURE FRONTEND ERROR:",
                         err.response?.data || err
                       );
                       toast.error("Payment failed. Please try again.");
@@ -185,7 +188,7 @@ function Checkout() {
                   }}
                   onError={(err) => {
                     toast.error("Payment error occurred");
-                    console.error(err);
+                    console.error("❌ PayPal Error:", err);
                   }}
                   onCancel={() => {
                     toast.info("Payment cancelled");
@@ -210,28 +213,30 @@ function Checkout() {
               </div>
 
               <div className="order-items">
-                {cartItems.map((item) => (
-                  <div key={item.courseId} className="order-item">
-                    <div className="item-image">
-                      <img src={item.thumbnailUrl} alt={item.title} />
+                {cartItems.map((item) => {
+                  return (
+                    <div key={item.courseId} className="order-item">
+                      <div className="item-image">
+                        <img src={item.thumbnailUrl} />
+                      </div>
+                      <div className="item-details">
+                        <h4>{item?.title[lang]}</h4>
+                        <p className="item-instructor">
+                          <i className="fas fa-chalkboard-teacher"></i>
+                          {item.instructor?.name?.[lang]}
+                        </p>
+                      </div>
+                      <div className="item-price">
+                        <span className="current-price">
+                          ${item.discountPrice || item.price}
+                        </span>
+                        {item.price && item.discountPrice && (
+                          <span className="original-price">${item.price}</span>
+                        )}
+                      </div>
                     </div>
-                    <div className="item-details">
-                      <h4>{item.title}</h4>
-                      <p className="item-instructor">
-                        <i className="fas fa-chalkboard-teacher"></i>
-                        {item.instructorName || "Instructor"}
-                      </p>
-                    </div>
-                    <div className="item-price">
-                      <span className="current-price">
-                        ${item.discountPrice || item.price}
-                      </span>
-                      {item.price && item.discountPrice && (
-                        <span className="original-price">${item.price}</span>
-                      )}
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
 
               <div className="order-pricing">

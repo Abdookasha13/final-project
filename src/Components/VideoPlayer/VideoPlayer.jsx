@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Play } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const getYouTubeId = (url) => {
   if (!url) return "";
@@ -10,6 +11,8 @@ const getYouTubeId = (url) => {
 };
 
 export default function VideoPlayer({ lessons = [] }) {
+  const { i18n } = useTranslation();
+  const lang = i18n.language.startsWith("ar") ? "ar" : "en";
   const [currentLesson, setCurrentLesson] = useState(null);
   const playerRef = useRef(null);
 
@@ -51,17 +54,14 @@ export default function VideoPlayer({ lessons = [] }) {
         style={{ height: "70px", left: "0", backgroundColor: "#f8f9fa" }}
       >
         <img className="" src="/Images/logo-nav.png" alt="" />
-        {/* <h6 className="pt-2 text-white" >{currentLesson?.course.title}</h6> */}
       </div>
       <div className="">
         <div className="row pb-4">
           {/* Sidebar */}
-
           <div
             className="col-md-4 col-lg-3 border-end p-0 bg-light position-fixed vh-100 "
             style={{ top: "70px" }}
           >
-            {/* <div className="p-3 fw-bold border-bottom  ">Curriculum</div> */}
             {lessons.map((lesson) => (
               <button
                 key={lesson._id}
@@ -71,7 +71,7 @@ export default function VideoPlayer({ lessons = [] }) {
               >
                 <div className="d-flex gap-2 align-items-center ">
                   <Play size={16} color="#0ab99d" />
-                  {lesson.title}
+                  {lesson.title[lang]}
                 </div>
                 <small className="text-muted">{lesson.duration}m</small>
               </button>
@@ -84,17 +84,13 @@ export default function VideoPlayer({ lessons = [] }) {
           >
             {currentLesson && (
               <>
-                {/* <h4 className="pb-2">{currentLesson?.course?.title || "Course"}</h4> */}
-                {/* <h6 className="mb-3">{currentLesson.title}</h6> */}
-
                 <div
                   className="mb-4 rounded overflow-hidden"
                   style={{ aspectRatio: "16/9", background: "#000" }}
                 >
                   <div id="youtube-player" />
                 </div>
-
-                <p className="text-muted">{currentLesson.content}</p>
+                <p className="text-muted">{currentLesson.content[lang]}</p>
                 <button
                   className="btn btn-lg text-light "
                   style={{ backgroundColor: "#0eb89c" }}

@@ -34,39 +34,82 @@ const AddCourse = () => {
         console.log(err);
       }
     };
+
     const fetchCourse = async () => {
       if (!isEdit) return;
 
       try {
-        const res = await fetch(`http://localhost:1911/courses/${id}`);
+        const res = await fetch(   `http://localhost:1911/courses/${id}?edit=true`);
         const data = await res.json();
 
+        console.log(" Fetched course data:", data);
+
+  
         reset({
-          title: data.title,
-          shortDescription: data.shortDescription,
-          description: data.description,
+          titleEn: data.title?.en || "",
+          titleAr: data.title?.ar || "",
+          shortDescriptionEn: data.shortDescription?.en || "",
+          shortDescriptionAr: data.shortDescription?.ar || "",
+          descriptionEn: data.description?.en || "",
+          descriptionAr: data.description?.ar || "",
           category: data.category?._id || "",
-          tags: data.tags?.join(", ") || "",
+          tagsEn: data.tags?.en?.join(", ") || "",
+          tagsAr: data.tags?.ar?.join(", ") || "",
           price: data.price,
           discountPrice: data.discountPrice,
           isFree: data.isFree,
         });
-        setThumbnailUrl(data.thumbnail);
-        setPreview(data.thumbnail);
+
+        setThumbnailUrl(data.thumbnailUrl); 
+        setPreview(data.thumbnailUrl);
       } catch (err) {
-        console.error(err);
+        console.error("Error fetching course:", err);
       }
     };
+
     fetchCategory();
     fetchCourse();
   }, [id, isEdit, reset]);
 
   const onSubmit = async (data) => {
+   
+    const formattedData = {
+      title: {
+        en: data.titleEn,
+        ar: data.titleAr,
+      },
+      shortDescription: {
+        en: data.shortDescriptionEn,
+        ar: data.shortDescriptionAr,
+      },
+      description: {
+        en: data.descriptionEn,
+        ar: data.descriptionAr,
+      },
+      category: data.category,
+      tags: {
+        en: data.tagsEn
+          ? data.tagsEn.split(",").map((tag) => tag.trim())
+          : [],
+        ar: data.tagsAr
+          ? data.tagsAr.split(",").map((tag) => tag.trim())
+          : [],
+      },
+      price: parseFloat(data.price),
+      discountPrice: data.discountPrice
+        ? parseFloat(data.discountPrice)
+        : null,
+      isFree: data.isFree || false,
+      thumbnailUrl: thumbnailUrl,
+    };
+
+    console.log("📤 Sending to backend:", formattedData);
+
     if (isEdit) {
-      await handleUpdateCourse(id, data, thumbnailUrl);
+      await handleUpdateCourse(id, formattedData);
     } else {
       await handleAddCourse(
-        data,
+        formattedData,
         setUploading,
         reset,
         thumbnailUrl,
@@ -74,17 +117,9 @@ const AddCourse = () => {
         setThumbnailUrl
       );
     }
+
     navigate("/instructor/courses");
   };
-  // const onSubmit = (data) =>
-  //   handleAddCourse(
-  //     data,
-  //     setUploading,
-  //     reset,
-  //     thumbnailUrl,
-  //     setPreview,
-  //     setThumbnailUrl
-  //   );
 
   return (
     <div className="container my-3">
@@ -93,90 +128,164 @@ const AddCourse = () => {
           {/* Left Column */}
           <div className="col-lg-8">
             <div className="card shadow-sm p-4 mb-4">
-              <div className="mb-3">
-                <label className="form-label fw-semibold">Course Title</label>
-                <input
-                  type="text"
-                  className={`form-control ${errors.title ? "is-invalid" : ""}`}
-                  {...register("title", {
-                    required: "Title is required",
-                    minLength: {
-                      value: 5,
-                      message: "At least 5 characters required",
-                    },
-                  })}
-                />
-                {errors.title && (
-                  <div className="invalid-feedback">{errors.title.message}</div>
-                )}
-              </div>
-
+              {/* Title EN */}
               <div className="mb-3">
                 <label className="form-label fw-semibold">
-                  Short Description
+                  Course Title 
                 </label>
                 <input
+                 placeholder="title(EN)"
                   type="text"
                   className={`form-control ${
-                    errors.shortDescription ? "is-invalid" : ""
+                    errors.titleEn ? "is-invalid" : ""
                   }`}
-                  {...register("shortDescription", {
-                    maxLength: {
-                      value: 200,
-                      message: "Cannot exceed 200 characters",
-                    },
-                  })}
+                  {...register("titleEn", { required: "Title is required" })}
                 />
-                {errors.shortDescription && (
+                {errors.titleEn && (
                   <div className="invalid-feedback">
-                    {errors.shortDescription.message}
+                    {errors.titleEn.message}
                   </div>
                 )}
               </div>
 
+              {/* Title AR */}
+              <div className="mb-3">
+             
+                <input
+                placeholder="title(AR)"
+                  type="text"
+                  className={`form-control ${
+                    errors.titleAr ? "is-invalid" : ""
+                  }`}
+                  {...register("titleAr", { required: "Title is required" })}
+                />
+                {errors.titleAr && (
+                  <div className="invalid-feedback">
+                    {errors.titleAr.message}
+                  </div>
+                )}
+              </div>
+
+              {/* Short Description EN */}
               <div className="mb-3">
                 <label className="form-label fw-semibold">
-                  Full Description
+                  Short Description 
+                </label>
+                <input
+                placeholder="Short Description (EN)"
+                  type="text"
+                  className={`form-control ${
+                    errors.shortDescriptionEn ? "is-invalid" : ""
+                  }`}
+                  {...register("shortDescriptionEn")}
+                />
+                {errors.shortDescriptionEn && (
+                  <div className="invalid-feedback">
+                    {errors.shortDescriptionEn.message}
+                  </div>
+                )}
+              </div>
+
+              {/* Short Description AR */}
+              <div className="mb-3">
+              
+                <input
+                placeholder="  Short Description (AR)"
+                  type="text"
+                  className={`form-control ${
+                    errors.shortDescriptionAr ? "is-invalid" : ""
+                  }`}
+                  {...register("shortDescriptionAr")}
+                />
+                {errors.shortDescriptionAr && (
+                  <div className="invalid-feedback">
+                    {errors.shortDescriptionAr.message}
+                  </div>
+                )}
+              </div>
+
+              {/* Full Description EN */}
+              <div className="mb-3">
+                <label className="form-label fw-semibold">
+                  Full Description 
                 </label>
                 <textarea
+                placeholder="Full Description (EN)"
                   rows="4"
                   className={`form-control ${
-                    errors.description ? "is-invalid" : ""
+                    errors.descriptionEn ? "is-invalid" : ""
                   }`}
-                  {...register("description", {
+                  {...register("descriptionEn", {
                     required: "Description is required",
-                    minLength: {
-                      value: 20,
-                      message: "At least 20 characters required",
-                    },
                   })}
                 ></textarea>
-                {errors.description && (
+                {errors.descriptionEn && (
                   <div className="invalid-feedback">
-                    {errors.description.message}
+                    {errors.descriptionEn.message}
+                  </div>
+                )}
+              </div>
+
+              {/* Full Description AR */}
+              <div className="mb-3">
+               
+                <textarea
+                placeholder="Full Description (AR)"
+                  rows="4"
+                  className={`form-control ${
+                    errors.descriptionAr ? "is-invalid" : ""
+                  }`}
+                  {...register("descriptionAr", {
+                    required: "Description is required",
+                  })}
+                ></textarea>
+                {errors.descriptionAr && (
+                  <div className="invalid-feedback">
+                    {errors.descriptionAr.message}
                   </div>
                 )}
               </div>
 
               <div className="row">
-                <div className="col-md-6 mb-3">
+                <div className="col-md-3 mb-3">
                   <label className="form-label fw-semibold">Category</label>
-
-                  <select className="form-select" {...register("category")}>
+                  <select
+                    className="form-select"
+                    {...register("category", { required: "Select a category" })}
+                  >
+                    <option value="">Choose Category</option>
                     {category.map((cat) => (
                       <option key={cat._id} value={cat._id}>
-                        {cat.name}
+                        {typeof cat.name === "string"
+                          ? cat.name
+                          : cat.name?.en || cat.name}
                       </option>
                     ))}
                   </select>
+                  {errors.category && (
+                    <div className="invalid-feedback">
+                      {errors.category.message}
+                    </div>
+                  )}
                 </div>
 
-                <div className="col-md-6 mb-3">
+                <div className="col-md-3 mb-3">
                   <label className="form-label fw-semibold">Tags</label>
                   <input
                     type="text"
                     className="form-control"
-                    {...register("tags")}
+                    placeholder="tags (EN)"
+                    {...register("tagsEn")}
+                  />
+                </div>
+
+                <div className="col-md-3 mt-4">
+                
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="tags(AR)"
+                    {...register("tagsAr")}
                   />
                 </div>
               </div>
@@ -197,9 +306,10 @@ const AddCourse = () => {
                       errors.price ? "is-invalid" : ""
                     }`}
                     {...register("price", {
+                      required: "Price is required",
                       min: {
-                        value: 1,
-                        message: "Price must be greater than 0",
+                        value: 0,
+                        message: "Price must be 0 or greater",
                       },
                       max: {
                         value: 10000,
@@ -256,7 +366,7 @@ const AddCourse = () => {
 
               <hr />
 
-              <div className="mb-3 ">
+              <div className="mb-3">
                 <label className="form-label fw-semibold">
                   Course Thumbnail
                 </label>
@@ -311,7 +421,7 @@ const AddCourse = () => {
             className="btn text-light"
             style={{ backgroundColor: "#0ab99d" }}
           >
-            Save Course
+            {isEdit ? "Update Course" : "Save Course"}
           </button>
         </div>
       </form>

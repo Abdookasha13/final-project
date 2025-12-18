@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const fetchCourses = createAsyncThunk(
   "courses/fetchAll",
-  async (_, { rejectWithValue }) => {
+  async (lang = "en", { rejectWithValue }) => {
     try {
       const token = localStorage.getItem("token");
 
@@ -15,11 +15,14 @@ export const fetchCourses = createAsyncThunk(
         headers["Authorization"] = `Bearer ${token}`;
       }
 
-      const res = await axios.get("http://localhost:1911/courses", {
-        headers,
-      });
+      const res = await axios.get(
+        `http://localhost:1911/courses?lang=${lang}`,
+        {
+          headers,
+        }
+      );
 
-      console.log("Fetched Courses:", res.data);
+      console.log("Fetched Courses with lang:", lang, res.data);
       return res.data;
     } catch (err) {
       console.error(
