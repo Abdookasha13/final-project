@@ -5,8 +5,10 @@ import handleImageUpload from "../../../utilities/handleImageUpload";
 import handleAddCourse from "../../../utilities/handleAddCourse";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import handleUpdateCourse from "../../../utilities/handleUpdateCourse";
+import { useTranslation } from "react-i18next";
 
 const AddCourse = () => {
+  const { t } = useTranslation();
   const {
     register,
     handleSubmit,
@@ -39,12 +41,13 @@ const AddCourse = () => {
       if (!isEdit) return;
 
       try {
-        const res = await fetch(   `http://localhost:1911/courses/${id}?edit=true`);
+        const res = await fetch(
+          `http://localhost:1911/courses/${id}?edit=true`
+        );
         const data = await res.json();
 
         console.log(" Fetched course data:", data);
 
-  
         reset({
           titleEn: data.title?.en || "",
           titleAr: data.title?.ar || "",
@@ -53,14 +56,14 @@ const AddCourse = () => {
           descriptionEn: data.description?.en || "",
           descriptionAr: data.description?.ar || "",
           category: data.category?._id || "",
-          tagsEn: data.tags?.en?.join(", ") || "",
-          tagsAr: data.tags?.ar?.join(", ") || "",
+          skillLevel: data.skillLevel || "",
+          // tagsAr: data.tags?.ar?.join(", ") || "",
           price: data.price,
           discountPrice: data.discountPrice,
           isFree: data.isFree,
         });
 
-        setThumbnailUrl(data.thumbnailUrl); 
+        setThumbnailUrl(data.thumbnailUrl);
         setPreview(data.thumbnailUrl);
       } catch (err) {
         console.error("Error fetching course:", err);
@@ -72,7 +75,6 @@ const AddCourse = () => {
   }, [id, isEdit, reset]);
 
   const onSubmit = async (data) => {
-   
     const formattedData = {
       title: {
         en: data.titleEn,
@@ -87,18 +89,9 @@ const AddCourse = () => {
         ar: data.descriptionAr,
       },
       category: data.category,
-      tags: {
-        en: data.tagsEn
-          ? data.tagsEn.split(",").map((tag) => tag.trim())
-          : [],
-        ar: data.tagsAr
-          ? data.tagsAr.split(",").map((tag) => tag.trim())
-          : [],
-      },
+      skillLevel: data.skillLevel,
       price: parseFloat(data.price),
-      discountPrice: data.discountPrice
-        ? parseFloat(data.discountPrice)
-        : null,
+      discountPrice: data.discountPrice ? parseFloat(data.discountPrice) : null,
       isFree: data.isFree || false,
       thumbnailUrl: thumbnailUrl,
     };
@@ -131,10 +124,10 @@ const AddCourse = () => {
               {/* Title EN */}
               <div className="mb-3">
                 <label className="form-label fw-semibold">
-                  Course Title 
+                  {t("instructorDashboard.Title")}
                 </label>
                 <input
-                 placeholder="title(EN)"
+                  placeholder="title(EN)"
                   type="text"
                   className={`form-control ${
                     errors.titleEn ? "is-invalid" : ""
@@ -150,9 +143,8 @@ const AddCourse = () => {
 
               {/* Title AR */}
               <div className="mb-3">
-             
                 <input
-                placeholder="title(AR)"
+                  placeholder="title(AR)"
                   type="text"
                   className={`form-control ${
                     errors.titleAr ? "is-invalid" : ""
@@ -169,10 +161,10 @@ const AddCourse = () => {
               {/* Short Description EN */}
               <div className="mb-3">
                 <label className="form-label fw-semibold">
-                  Short Description 
+                  {t("instructorDashboard.shortDescription")}
                 </label>
                 <input
-                placeholder="Short Description (EN)"
+                  placeholder="Short Description (EN)"
                   type="text"
                   className={`form-control ${
                     errors.shortDescriptionEn ? "is-invalid" : ""
@@ -188,9 +180,8 @@ const AddCourse = () => {
 
               {/* Short Description AR */}
               <div className="mb-3">
-              
                 <input
-                placeholder="  Short Description (AR)"
+                  placeholder="  Short Description (AR)"
                   type="text"
                   className={`form-control ${
                     errors.shortDescriptionAr ? "is-invalid" : ""
@@ -207,10 +198,10 @@ const AddCourse = () => {
               {/* Full Description EN */}
               <div className="mb-3">
                 <label className="form-label fw-semibold">
-                  Full Description 
+                  {t("instructorDashboard.Description")}
                 </label>
                 <textarea
-                placeholder="Full Description (EN)"
+                  placeholder="Full Description (EN)"
                   rows="4"
                   className={`form-control ${
                     errors.descriptionEn ? "is-invalid" : ""
@@ -228,9 +219,8 @@ const AddCourse = () => {
 
               {/* Full Description AR */}
               <div className="mb-3">
-               
                 <textarea
-                placeholder="Full Description (AR)"
+                  placeholder="Full Description (AR)"
                   rows="4"
                   className={`form-control ${
                     errors.descriptionAr ? "is-invalid" : ""
@@ -247,8 +237,10 @@ const AddCourse = () => {
               </div>
 
               <div className="row">
-                <div className="col-md-3 mb-3">
-                  <label className="form-label fw-semibold">Category</label>
+                <div className="col-md-6 mb-3">
+                  <label className="form-label fw-semibold">
+                    {t("instructorDashboard.category")}
+                  </label>
                   <select
                     className="form-select"
                     {...register("category", { required: "Select a category" })}
@@ -269,24 +261,32 @@ const AddCourse = () => {
                   )}
                 </div>
 
-                <div className="col-md-3 mb-3">
-                  <label className="form-label fw-semibold">Tags</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="tags (EN)"
-                    {...register("tagsEn")}
-                  />
-                </div>
-
-                <div className="col-md-3 mt-4">
-                
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="tags(AR)"
-                    {...register("tagsAr")}
-                  />
+                <div className="col-md-6 mb-3">
+                  <label className="form-label fw-semibold">
+                    {t("instructorDashboard.skillLevel")}
+                  </label>
+                  <select
+                    className="form-select"
+                    {...register("skillLevel", {
+                      required: "Select skill level",
+                    })}
+                  >
+                    <option value="">Choose Skill Level</option>
+                    <option value="Beginner">
+                      {t("instructorDashboard.beginner")}
+                    </option>
+                    <option value="Intermediate">
+                      {t("instructorDashboard.intermediate")}
+                    </option>
+                    <option value="Advanced">
+                      {t("instructorDashboard.advanced")}
+                    </option>
+                  </select>
+                  {errors.skillLevel && (
+                    <div className="invalid-feedback">
+                      {errors.skillLevel.message}
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -295,10 +295,14 @@ const AddCourse = () => {
           {/* Right Column */}
           <div className="col-lg-4">
             <div className="card shadow-sm p-4 mb-4">
-              <h6 className="fw-semibold mb-3">Course Pricing</h6>
+              <h6 className="fw-semibold mb-3">
+                {t("instructorDashboard.coursepricing")}
+              </h6>
               <div className="row">
                 <div className="col-6 mb-3">
-                  <label className="form-label">Price ($)</label>
+                  <label className="form-label">
+                    {t("instructorDashboard.price")} ($)
+                  </label>
                   <input
                     type="number"
                     step="any"
@@ -325,7 +329,9 @@ const AddCourse = () => {
                 </div>
 
                 <div className="col-6 mb-3">
-                  <label className="form-label">Discount ($)</label>
+                  <label className="form-label">
+                    {t("instructorDashboard.discountPrice")}
+                  </label>
                   <input
                     type="number"
                     step="any"
@@ -360,7 +366,7 @@ const AddCourse = () => {
                   {...register("isFree")}
                 />
                 <label className="form-check-label">
-                  This is a free course
+                  {t("instructorDashboard.thisisfreecourse")}
                 </label>
               </div>
 
@@ -368,7 +374,7 @@ const AddCourse = () => {
 
               <div className="mb-3">
                 <label className="form-label fw-semibold">
-                  Course Thumbnail
+                  {t("instructorDashboard.coursethumbnail")}
                 </label>
                 <div className="custom-file-upload">
                   <input
@@ -389,7 +395,9 @@ const AddCourse = () => {
                     disabled={uploading}
                   />
                   <label htmlFor="course_thumbnails" className="upload-btn">
-                    {uploading ? "Uploading..." : "Upload Image"}
+                    {uploading
+                      ? t("instructorDashboard.uploading")
+                      : t("instructorDashboard.uploadimage")}
                   </label>
                 </div>
                 {preview && (
@@ -414,14 +422,16 @@ const AddCourse = () => {
             className="btn btn-outline-secondary"
             to={"/instructor/courses"}
           >
-            Cancel
+            {t("instructorDashboard.cancel")}
           </Link>
           <button
             type="submit"
             className="btn text-light"
             style={{ backgroundColor: "#0ab99d" }}
           >
-            {isEdit ? "Update Course" : "Save Course"}
+            {isEdit
+              ? t("instructorDashboard.updatecourse")
+              : t("instructorDashboard.savecourse")}
           </button>
         </div>
       </form>

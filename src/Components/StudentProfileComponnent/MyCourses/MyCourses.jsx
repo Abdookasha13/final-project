@@ -10,10 +10,9 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-
 const MyCourses = () => {
   const navigate = useNavigate();
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const lang = i18n.language.startsWith("ar") ? "ar" : "en";
 
   const openCourse = (courseId) => {
@@ -22,7 +21,6 @@ const MyCourses = () => {
   const [showReview, setShowReview] = useState(false);
   const [selectedCourseId, setSelectedCourseId] = useState(null);
   const [ratingLoading, setRatingLoading] = useState(false);
-  const { t } = useTranslation();
   const [enrollments, setEnrollments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -162,7 +160,7 @@ const MyCourses = () => {
               <GrCompliance color="#0ab9d0" fontSize="32px" />
             </div>
             <div>
-              <h6>Finished Courses</h6>
+              <h6>{t("studentProfile.finishedCourses")}</h6>
               <p className="display-6">{finishedCourses.length}</p>
             </div>
           </div>
@@ -173,7 +171,7 @@ const MyCourses = () => {
               <GrCertificate color="#0ad02eff" fontSize="32px" />
             </div>
             <div>
-              <h6>Certificates</h6>
+              <h6>{t("studentProfile.certificate")}</h6>
               <p className="display-6">{finishedCourses.length}</p>
             </div>
           </div>
@@ -190,10 +188,10 @@ const MyCourses = () => {
               borderColor: activeTab === "enrolled" ? "#0ab99d" : "#ddd",
             }}
           >
-            Enrolled
+            {t("studentProfile.Enrolled")}
           </button>
         </li>
-        <li className="nav-item">
+        {/* <li className="nav-item">
           <button
             className={`nav-link ${activeTab === "inprogress" ? "active" : ""}`}
             onClick={() => setActiveTab("inprogress")}
@@ -204,7 +202,7 @@ const MyCourses = () => {
           >
             In Progress
           </button>
-        </li>
+        </li> */}
         <li className="nav-item">
           <button
             className={`nav-link ${activeTab === "finished" ? "active" : ""}`}
@@ -214,7 +212,7 @@ const MyCourses = () => {
               borderColor: activeTab === "finished" ? "#0ab99d" : "#ddd",
             }}
           >
-            Finished
+            {t("studentProfile.Finished")}
           </button>
         </li>
       </ul>

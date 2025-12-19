@@ -11,6 +11,7 @@ import { RiLogoutCircleLine } from "react-icons/ri";
 import { ToastContainer, Zoom } from "react-toastify";
 import { useEffect, useState } from "react";
 import handleGetUserById from "../../../utilities/handleGetUserById";
+import { t } from "i18next";
 
 const InstructorDashboard = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -30,23 +31,23 @@ const InstructorDashboard = () => {
   }, []);
 
   const pageTitles = {
-    "/instructor/dashboard": "Dashboard",
-    "/instructor/courses": "My Courses",
-    "/instructor/add/course": "Add Course",
-    "/instructor/add/lessons": "Add Lesson",
-    "/instructor/profile": "Profile",
-    "/instructor/settings": "Settings",
-    "/instructor/edit/course/:id": "Edit Course",
+    "/instructor/dashboard": t("instructorDashboard.Dashboard"),
+    "/instructor/courses": t("instructorDashboard.myCourses"),
+    "/instructor/add/course": t("instructorDashboard.AddCourse"),
+    "/instructor/add/lessons": t("instructorDashboard.AddLesson"),
+    "/instructor/profile": t("instructorDashboard.Profile"),
+    "/instructor/settings": t("instructorDashboard.Settings"),
+    "/instructor/edit/course/:id": t("instructorDashboard.EditCourse"),
   };
 
   const getPageTitle = () => {
     const pathname = location.pathname;
 
     if (/^\/instructor\/edit\/course\//.test(pathname)) {
-      return "Edit Course";
+      return t("instructorDashboard.EditCourse");
     }
     if (/^\/instructor\/edit\/lesson\//.test(pathname)) {
-      return "Edit Lesson";
+      return t("instructorDashboard.EditLesson");
     }
 
     return pageTitles[location.pathname];
@@ -61,27 +62,27 @@ const InstructorDashboard = () => {
   const navLinks = [
     {
       to: "/instructor/dashboard",
-      label: "Dashboard",
+      label: t("instructorDashboard.Dashboard"),
       icon: <MdOutlineDashboard fontSize="20px" className="me-3" />,
     },
     {
       to: "/instructor/courses",
-      label: "My Courses",
+      label: t("instructorDashboard.myCourses"),
       icon: <BsBook fontSize="20px" className="me-3" />,
     },
     {
       to: "/instructor/add/course",
-      label: "Add Course",
+      label: t("instructorDashboard.AddCourse"),
       icon: <IoIosAddCircleOutline fontSize="20px" className="me-3" />,
     },
     {
       to: "/instructor/add/lessons",
-      label: "Add Lesson",
+      label: t("instructorDashboard.AddLesson"),
       icon: <MdOutlinePlayLesson fontSize="20px" className="me-3" />,
     },
     {
       to: "/instructor/profile",
-      label: "Profile",
+      label: t("instructorDashboard.Profile"),
       icon: <CgProfile fontSize="20px" className="me-3" />,
     },
   ];
@@ -117,7 +118,7 @@ const InstructorDashboard = () => {
               className="nav-link text-secondary d-flex align-items-center"
             >
               <SlLogout className="me-3" />
-              Back To Site
+              {t("instructorDashboard.BackToSite")}
             </Link>
           </li>
         </ul>
@@ -131,7 +132,7 @@ const InstructorDashboard = () => {
                 className="nav-link d-flex align-items-center text-secondary"
               >
                 <IoSettingsOutline className="me-3" />
-                Settings
+                {t("instructorDashboard.Settings")}
               </NavLink>
             </li>
             <li>
@@ -140,7 +141,7 @@ const InstructorDashboard = () => {
                 className="nav-link text-secondary d-flex align-items-center"
               >
                 <RiLogoutCircleLine className="me-3" />
-                Log Out
+                {t("instructorDashboard.Logout")}
               </Link>
             </li>
           </ul>
@@ -169,12 +170,12 @@ const InstructorDashboard = () => {
                       color: "white",
                     }}
                   >
-                    Add new
+                    {t("instructorDashboard.Addnewcourse")}
                   </Link>
                   <input
                     type="text"
                     className="form-control w-75"
-                    placeholder="Search..."
+                    placeholder={t("instructorDashboard.search")}
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                   />
@@ -204,7 +205,7 @@ const InstructorDashboard = () => {
           toastClassName="udemy-toast"
         />
         <main className="p-4 bg-light flex-grow-1">
-          <Outlet context={{ setProfileImage,searchTerm }} />
+          <Outlet context={{ setProfileImage, searchTerm }} />
         </main>
       </div>
     </div>

@@ -9,7 +9,7 @@ import { useOutletContext } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 const InsCourses = () => {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const lang = i18n.language.startsWith("ar") ? "ar" : "en";
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -87,10 +87,11 @@ const InsCourses = () => {
       <div className="container px-0 mx-0">
         <div className="text-center py-5">
           <i className="bi bi-journal-x fs-1 text-muted d-block mb-3"></i>
-          <h4 className="text-muted">No Courses Yet</h4>
+          <h4 className="text-muted">
+            {t("instructorDashboard.NoCoursesYet")}
+          </h4>
           <p className="text-muted">
-            You haven't created any courses yet. Start creating your first
-            course!
+            {t("instructorDashboard.CreateYourFirstCourse")}
           </p>
         </div>
       </div>
