@@ -19,7 +19,7 @@ const StatCard = ({ title, value, subtitle, iconClass }) => (
     <div className="card shadow-sm p-4 ">
       <div className=" card-body d-flex align-items-center">
         <div className="me-3">
-          <i style={{color:"#0ab99d"}} className={`${iconClass} fs-2`}></i>
+          <i style={{ color: "#0ab99d" }} className={`${iconClass} fs-2`}></i>
         </div>
         <div className="text-center">
           <h6 className="card-title mb-1">{title}</h6>
@@ -102,22 +102,21 @@ const InstructorDashboard = () => {
 
       <div className="row">
         <StatCard
-          title="Total Courses"
+          title={t("instructorDashboard.totalCourses")}
           value={counts.courses}
-          subtitle="Active / Published"
-           iconClass="bi bi-book"
+          subtitle={t("instructorDashboard.ActivePublished")}
+          iconClass="bi bi-book"
         />
         <StatCard
-          title="Total Lessons"
+          title={t("instructorDashboard.totalLessons")}
           value={counts.lessons}
-          subtitle="Video / Text lessons"
-        
-           iconClass="bi bi-journal-bookmark"
+          subtitle={t("instructorDashboard.VideoTextLessons")}
+          iconClass="bi bi-journal-bookmark"
         />
         <StatCard
-          title="Total Students"
+          title={t("instructorDashboard.totalStudent")}
           value={counts.students}
-          subtitle="Enrolled users"
+          subtitle={t("instructorDashboard.EnrolledUsers")}
           iconClass="bi bi-people"
         />
       </div>
@@ -125,7 +124,7 @@ const InstructorDashboard = () => {
       {/* Chart */}
       {courses.length > 0 && (
         <div className="mt-5">
-          <h5>Students per Course</h5>
+          <h5>{t("instructorDashboard.studentsCountPerCourse")}</h5>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart
               data={courses}

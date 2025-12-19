@@ -1,6 +1,7 @@
 const formatTime = (lessons) => {
+  
   if (!lessons || lessons.length === 0) {
-    return "0m";
+    return "0";
   }
 
   const totalMinutes = lessons.reduce((sum, lesson) => {
@@ -12,14 +13,14 @@ const formatTime = (lessons) => {
   const minutes = totalMinutes % 60;
 
   if (hours === 0) {
-    return `${minutes}m`;
+    return`${minutes} `;
   }
 
   if (minutes === 0) {
-    return `${hours}h`;
+    return `${hours}`;
   }
 
-  return `${hours}h ${minutes}m`;
+  return `${hours} ${minutes}`;
 };
 
 export default formatTime;

@@ -34,7 +34,7 @@ const handleAddCourse = async (
       price: data.isFree ? 0 : Number(data.price),
       discountPrice: data.discountPrice || null,
       isFree: !!data.isFree,
-      tags: data.tags || { en: [], ar: [] },
+      skillLevel: data.skillLevel,
       thumbnailUrl,
       lessons: data.lessons,
     };

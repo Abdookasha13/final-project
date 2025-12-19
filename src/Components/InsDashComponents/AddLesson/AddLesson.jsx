@@ -10,7 +10,7 @@ import "./AddLesson.css";
 import { useTranslation } from "react-i18next";
 
 const AddLesson = () => {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const lang = i18n.language.startsWith("ar") ? "ar" : "en";
   const {
     register,
@@ -93,12 +93,14 @@ const AddLesson = () => {
           <form onSubmit={handleSubmit(onSubmit)}>
             {/* Select Course */}
             <div className="mb-3">
-              <label className="form-label">Course</label>
+              <label className="form-label">
+                {t("instructorDashboard.course")}
+              </label>
               <select
                 className={`form-select ${errors.courseId ? "is-invalid" : ""}`}
                 {...register("courseId", { required: "Course is required" })}
               >
-                <option value="">Select a course</option>
+                <option value="">{t("instructorDashboard.selectacourse")}</option>
                 {courses.map((course) => (
                   <option key={course._id} value={course._id}>
                     {course.title}
@@ -114,7 +116,9 @@ const AddLesson = () => {
 
             {/* Lesson Title EN */}
             <div className="mb-3">
-              <label className="form-label">Lesson Title</label>
+              <label className="form-label">
+                {t("instructorDashboard.lessontitle")}
+              </label>
               <input
                 placeholder="title (EN)"
                 type="text"
@@ -162,15 +166,23 @@ const AddLesson = () => {
             {/* Type & Video URL */}
             <div className="row g-3 mb-3">
               <div className="col-md-6">
-                <label className="form-label">Lesson Type</label>
+                <label className="form-label">
+                  {t("instructorDashboard.lessontype")}
+                </label>
                 <select
                   className="form-select"
                   {...register("type", { required: "Lesson type is required" })}
                 >
-                  <option value="">Select type</option>
-                  <option value="video">Video</option>
-                  <option value="article">Article</option>
-                  <option value="quiz">Quiz</option>
+                  <option value="">
+                    {t("instructorDashboard.selecttype")}
+                  </option>
+                  <option value="video">
+                    {t("instructorDashboard.video")}
+                  </option>
+                  <option value="article">
+                    {t("instructorDashboard.article")}
+                  </option>
+                  <option value="quiz">{t("instructorDashboard.quiz")}</option>
                 </select>
                 {errors.type && (
                   <div className="invalid-feedback d-block">
@@ -181,7 +193,9 @@ const AddLesson = () => {
 
               {lessonType === "video" && (
                 <div className="col-md-6">
-                  <label className="form-label">Video URL</label>
+                  <label className="form-label">
+                    {t("instructorDashboard.videourl")}
+                  </label>
                   <input
                     type="text"
                     className={`form-control ${
@@ -206,7 +220,9 @@ const AddLesson = () => {
 
             {/* Lesson Content EN */}
             <div className="mb-3">
-              <label className="form-label">Lesson Content</label>
+              <label className="form-label">
+                {t("instructorDashboard.lessoncontent")}
+              </label>
               <textarea
                 placeholder="content (EN)"
                 className={`form-control ${
@@ -254,7 +270,9 @@ const AddLesson = () => {
             {/* Duration + Preview */}
             <div className="row g-3 mb-3">
               <div className="col-md-6">
-                <label className="form-label">Duration (minutes)</label>
+                <label className="form-label">
+                  {t("instructorDashboard.durationminutes")}
+                </label>
                 <input
                   type="number"
                   className={`form-control ${
@@ -295,7 +313,7 @@ const AddLesson = () => {
                         className="form-check-label"
                         htmlFor="previewSwitch"
                       >
-                        Preview Access
+                        {t("instructorDashboard.previewaccess")}
                       </label>
                     </div>
                   )}
@@ -310,14 +328,16 @@ const AddLesson = () => {
                 className="btn btn-outline-secondary"
                 onClick={() => navigate(-1)}
               >
-                Cancel
+                {t("instructorDashboard.cancel")}
               </button>
               <button
                 type="submit"
                 className="btn text-light"
                 style={{ backgroundColor: "#0ab99d" }}
               >
-                {isEdit ? "Update Lesson" : "Save Lesson"}
+                {isEdit
+                  ? t("instructorDashboard.updatelesson")
+                  : t("instructorDashboard.savelesson")}
               </button>
             </div>
           </form>

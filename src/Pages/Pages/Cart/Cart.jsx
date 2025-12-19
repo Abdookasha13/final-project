@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Button from "../../../Components/Button/Button";
+import { useTranslation } from "react-i18next";
+
 import {
   fetchCart,
   removeCourseFromCart,
@@ -9,9 +11,10 @@ import {
 import "./Cart.css";
 import handleAddToWish from "../../../utilities/handleAddToWish";
 import { toast } from "react-toastify";
-import { useTranslation } from "react-i18next";
 
 function Cart() {
+  const { i18n } = useTranslation();
+  const lang = i18n.language.startsWith("ar") ? "ar" : "en";
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
 
@@ -86,14 +89,14 @@ function Cart() {
               key={course.courseId}
             >
               <div className="courseimg col-2 p-0">
-                <img src={course.thumbnailUrl} alt={course.title} />
+                <img src={course.thumbnailUrl} alt={course.title[lang]} />
               </div>
 
               <div className="contentcourse col-10 px-lg-3 ">
                 <div className="d-flex flex-column flex-lg-row justify-content-between">
                   <div className="coursedetails">
                     <div className="d-flex justify-content-between">
-                      <h5 className="course-title m-0">{course.title}</h5>
+                      <h5 className="course-title m-0">{course.title[lang]}</h5>
                       <div className="course-price2 text-end d-xl-none">
                         <h5>${course.discountPrice}</h5>
                         {course.price && (

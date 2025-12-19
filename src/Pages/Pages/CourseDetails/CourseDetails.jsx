@@ -22,15 +22,12 @@ import handleAddToWish from "../../../utilities/handleAddToWish";
 import ReviewStats from "../../../Components/StarRating/starRating";
 import { useTranslation } from "react-i18next";
 
-const tabs = [
-  { name: "Overview", icon: GoBookmark },
-  { name: "Curriculum", icon: LuMenu },
-  { name: "Instructor", icon: AiOutlineUser },
-  { name: "Reviews", icon: GoCommentDiscussion },
-];
+
+
 
 const CourseDetails = () => {
-  const { i18n } = useTranslation();
+
+  const { t,i18n } = useTranslation();
   const lang = i18n.language.startsWith("ar") ? "ar" : "en";
   const dispatch = useDispatch();
   const { courseId } = useParams();
@@ -46,7 +43,12 @@ const CourseDetails = () => {
     dispatch(addCourseToCart(course._id));
     toast.success("Course added to cart!");
   };
-
+  const tabs = [
+    { key: "Overview", label: t("courseDetails.overview"), icon: GoBookmark },
+    { key: "Curriculum", label: t("courseDetails.curriculum"), icon: LuMenu },
+    { key: "Instructor", label: t("courseDetails.instructor"), icon: AiOutlineUser },
+    { key: "Reviews", label: t("courseDetails.reviews"), icon: GoCommentDiscussion },
+  ];
   // جيب الـ course data مع اللغة
   useEffect(() => {
     const fetchData = async () => {
@@ -76,9 +78,9 @@ const CourseDetails = () => {
   const renderTabContent = {
     Overview: (
       <div className="course1-content-roka px-4 py-4 border border-top-0 border-light-subtle">
-        <h5 className="fw-bold">Course Description</h5>
+        <h5 className="fw-bold">{t("courseDetails.courseDescription")}</h5>
         <p className="pb-3">{course.shortDescription}</p>
-        <h5 className="fw-bold">What Will I Learn From This Course?</h5>
+        <h5 className="fw-bold">{t("courseDetails.whatWillILearn")}</h5>
         <p>{course.description}</p>
       </div>
     ),
@@ -154,25 +156,26 @@ const CourseDetails = () => {
           <h4 className="course1-title-roka fw-bold mb-4">{course.title}</h4>
 
           {/* Tabs */}
-          <ul className="nav nav-tabs border-0 d-flex gap-1 flex-nowrap">
-            {tabs.map((tab) => {
-              const Icon = tab.icon;
-              return (
-                <li key={tab.name} className="nav-item w-25 fw-bold">
-                  <button
-                    className="nav-link bg-light w-100"
-                    style={{
-                      color: activeTab === tab.name ? "#0ab99d" : "#333",
-                    }}
-                    onClick={() => setActiveTab(tab.name)}
-                  >
-                    <Icon fontSize="18px" style={{ marginRight: "10px" }} />
-                    {tab.name}
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
+ <ul className="nav nav-tabs border-0 d-flex gap-1 flex-nowrap">
+  {tabs.map((tab) => {
+    const Icon = tab.icon;
+    return (
+      <li key={tab.key} className="nav-item w-25 fw-bold">
+        <button
+          className="nav-link bg-light w-100"
+          style={{
+            color: activeTab === tab.key ? "#0ab99d" : "#333",
+          }}
+          onClick={() => setActiveTab(tab.key)}
+        >
+          <Icon fontSize="18px" style={{ marginRight: "10px" }} />
+          {tab.label}
+        </button>
+      </li>
+    );
+  })}
+</ul>
+
 
           {/* Tab Content */}
           {renderTabContent[activeTab]}
@@ -188,7 +191,7 @@ const CourseDetails = () => {
             />
 
             <Button onClick={handleAdd} className="ticketbtn">
-              Add To Cart
+            {t("courseDetails.addtocart")}
             </Button>
 
             <ul className="list-unstyled m-0 mt-3">
@@ -199,7 +202,7 @@ const CourseDetails = () => {
                     color="#0ab99d"
                     style={{ marginRight: "7px" }}
                   />
-                  Price
+                  {t("courseDetails.price")}
                 </span>
                 <div className="course-price-roka d-flex gap-2">
                   <span className="current-price-roka fw-bold">
@@ -218,7 +221,7 @@ const CourseDetails = () => {
                     color="#0ab99d"
                     style={{ marginRight: "7px" }}
                   />
-                  Enrolled
+                 {t("courseDetails.Enrolled")}
                 </span>
                 <span className="fw-bold">{course.studentsCount || 0}</span>
               </li>
@@ -229,7 +232,7 @@ const CourseDetails = () => {
                     color="#0ab99d"
                     style={{ marginRight: "7px" }}
                   />
-                  Lessons
+                 {t("courseDetails.lessons")}
                 </span>
                 <span className="fw-bold">{course.lessonsCount || 0}</span>
               </li>
@@ -240,9 +243,9 @@ const CourseDetails = () => {
                     color="#0ab99d"
                     style={{ marginRight: "7px" }}
                   />
-                  Skill Level
+                 {t("courseDetails.skillLevel")}
                 </span>
-                <span className="fw-bold">Beginner</span>
+                <span className="fw-bold">{t(`courseDetails.${course.skillLevel}`)}</span>
               </li>
 
               <li className="border-bottom py-3">
@@ -252,9 +255,9 @@ const CourseDetails = () => {
                     color="#0ab99d"
                     style={{ marginRight: "7px" }}
                   />
-                  Language
+                 {t("courseDetails.language")}
                 </span>
-                <span className="fw-bold">English</span>
+                <span className="fw-bold">{t("courseDetails.English")}</span>
               </li>
             </ul>
             <div
@@ -267,7 +270,7 @@ const CourseDetails = () => {
                 cursor: "pointer",
               }}
             >
-              <FaRegHeart color="#0ab99d" size={"18px"} /> Add To Wishlist
+              <FaRegHeart color="#0ab99d" size={"18px"} /> {t("courseDetails.addToWishlist")}
             </div>
           </div>
         </div>

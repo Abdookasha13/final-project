@@ -8,8 +8,10 @@ import { addCourseToCart } from "../../Store/Slices/cartSlice";
 import { toast } from "react-toastify";
 import HalfStarRating from "../HalfStar/HalfStarRating";
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 const CourseCard = ({
+
   imgSrc,
   title,
   courseId,
@@ -38,6 +40,7 @@ const CourseCard = ({
   const [currentRating, setCurrentRating] = useState(userRating);
   const [hoverRating, setHoverRating] = useState(0);
   const [isAdded, setIsAdded] = useState(false);
+  const{t}=useTranslation();
 
   const averageRating = stats?.averageRating || 0;
 
@@ -121,15 +124,15 @@ const CourseCard = ({
                 if (showInstructorActions) showMyLessons();
               }}
             >
-              <i className="fa-regular fa-file-lines"></i> Lesson {lessonsCount}
+              <i className="fa-regular fa-file-lines "></i> {t("courseCard.lesson")} {lessonsCount}
+            </span>
+
+            <span className="text-lowercase">
+              <i className="fa-sharp fa-regular fa-clock " ></i> {courseDuration} {t("courseCard.m")}
             </span>
 
             <span>
-              <i className="fa-sharp fa-regular fa-clock"></i> {courseDuration}
-            </span>
-
-            <span>
-              <i className="fa-regular fa-user"></i> Students {studentsCount}
+              <i className="fa-regular fa-user"></i> {t("courseCard.students")} {studentsCount}
             </span>
           </div>
         )}
@@ -153,7 +156,7 @@ const CourseCard = ({
                   <div className="added-checkmark">
                     <FaCheck />
                   </div>
-                  <span>Added to Cart</span>
+                  <span>{t("courseCard.AddedtoCart")}</span>
                 </div>
               ) : (
                 <a
@@ -164,7 +167,7 @@ const CourseCard = ({
                     handleAdd();
                   }}
                 >
-                  <BsCart3 color="#0e2a46" fontSize={"20px"} /> Add to cart
+                  <BsCart3 color="#0e2a46" fontSize={"20px"} /> {t("courseCard.addtocart")}
                 </a>
               ))}
           </div>
