@@ -43,7 +43,7 @@ function Navbar() {
               </div>
             </div>
             {/* =================links navbar======================= */}
-            <div className="col-xl-7 d-none d-xl-block ps-5">
+            <div className="col-xl-6 d-none d-xl-block ps-5">
               <nav className="links-navbar ">
                 <ul>
                   {/* ===========home================= */}
@@ -150,7 +150,7 @@ function Navbar() {
               </nav>
             </div>
 
-            <div className="col-6 col-xl-3">
+            <div className="col-6 col-xl-4">
               <div className="right-navbar d-flex align-items-center justify-content-end gap-3">
                 <FaSearch
                   size={22}
