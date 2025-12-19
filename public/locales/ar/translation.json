@@ -23,7 +23,8 @@
     "error": "خطأ",
     "instructorDashboard": "لوحة تحكم المدرب",
     "blogSidebar": "المدونة - الشريط الجانبي",
-    "blogDetails": "تفاصيل المدونة"
+    "blogDetails": "تفاصيل المدونة",
+    "logout": "تسجيل الخروج"
   },
   "header": {
     "help": "مساعدة",

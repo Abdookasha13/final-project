@@ -50,18 +50,54 @@ ul {
 
 /* ======= Right side ======= */
 
-.right-head-navbar ul {
+.right-head-navbar {
   display: flex;
-  justify-content: flex-end;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Auth links (Register | Sign In) */
+.auth-link {
+  color: #ffffff;
+  font-size: 14px;
+  padding: 8px 0;
+}
+
+.auth-link:hover {
+  color: #00c896;
+}
+
+.divider {
+  color: #41576d;
+  margin: 0 8px;
+}
+
+/* Profile section (logged in user) */
+.profile-section {
+  display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.head-social a {
-  margin-left: 5px;
-  transition: color 0.2s ease;
+.profile-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #00c896;
 }
 
-.head-social a:hover {
-  color: #00c896;
+.logout-btn {
+  background-color: #00c896;
+  color: #0e2a46;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background-color: #00b089;
 }

@@ -17,13 +17,14 @@
     "testimonial": "Testimonial",
     "price": "Price",
     "cart": "Cart",
-    "registration": "Registration",
+    "registration": "Register",
     "faq": "FAQ",
-    "signIn": "Sign In",
+    "signIn": "Login",
     "error": "Error",
     "instructorDashboard": "Instructor Dashboard",
     "blogSidebar": "Blog Sidebar",
-    "blogDetails": "Blog Details"
+    "blogDetails": "Blog Details",
+    "logout": "Logout"
   },
   "header": {
     "help": "Help",

@@ -1,9 +1,30 @@
+import { useTranslation } from "react-i18next";
 import ToggleLanguage from "../ToggleLanguage/ToggleLanguage";
 import "./HeadNavbar.css";
-import { useTranslation } from "react-i18next";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 function HeadNavbar() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const [student, setStudent] = useState(null);
+  const [token, setToken] = useState(null);
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const userToken = localStorage.getItem("token");
+    setToken(userToken);
+    setStudent(user);
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    setStudent(null);
+    setToken(null);
+    navigate("/");
+  };
+
   return (
     <>
       <div className="head-navbar">
@@ -29,7 +50,7 @@ function HeadNavbar() {
                       pacargoinfo@gmail.com
                     </a>
                   </li>
-                  <li>
+                  <li className="d-none d-md-inline-block">
                     <a href="#">
                       <span>
                         <i className="fa-solid fa-map-marker-alt"></i>
@@ -44,33 +65,32 @@ function HeadNavbar() {
             <div className="col-6 col-md-7 col-lg-7 col-xl-4">
               <div className="text-end d-flex align-items-center justify-content-end gap-3">
                 <ToggleLanguage />
-                <div className="right-head-navbar d-none d-sm-block">
-                  <ul>
-                    <li>
-                      <div className="d-none d-md-block">
-                        <a href="#">{t("header.help")} / </a>
-                        <a href="#">{t("header.support")}</a>
-                        <a href="#"> / {t("header.contact")}</a>
-                      </div>
-                    </li>
-                    <li>
-                      <div className="head-social">
-                        <a href="#">
-                          <i className="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#">
-                          <i className="fab fa-twitter"></i>
-                        </a>
-                        <a href="#">
-                          <i className="fab fa-skype"></i>
-                        </a>
-                        <a href="#">
-                          <i className="fab fa-linkedin"></i>
-                        </a>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
+                {token ? (
+                  <div className="right-head-navbar">
+                    <div className="profile-section">
+                      {student?.profileImage && (
+                        <img
+                          src={student.profileImage}
+                          alt="Profile"
+                          className="profile-image"
+                        />
+                      )}
+                      <button className="logout-btn" onClick={handleLogout}>
+                        {t("navbar.logout") || "Logout"}
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="right-head-navbar">
+                    <NavLink to="/register" className="auth-link">
+                      {t("navbar.registration")}
+                    </NavLink>
+                    <span className="divider">|</span>
+                    <NavLink to="/sign/in" className="auth-link">
+                      {t("navbar.signIn")}
+                    </NavLink>
+                  </div>
+                )}
               </div>
             </div>
           </div>

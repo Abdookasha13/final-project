@@ -78,11 +78,6 @@ function Navbar() {
                           <NavLink to="/teacher">{t("navbar.teacher")}</NavLink>
                         </li>
                         <li>
-                          <NavLink to="/teacher/details">
-                            {t("navbar.teacherDetails")}
-                          </NavLink>
-                        </li>
-                        <li>
                           <NavLink to="stdprofile/mycourses">
                             {t("navbar.studentProfile")}
                           </NavLink>
@@ -110,15 +105,7 @@ function Navbar() {
 
                       <div>
                         <li>
-                          <NavLink to="/register">
-                            {t("navbar.registration")}
-                          </NavLink>
-                        </li>
-                        <li>
                           <NavLink to="/faqs">{t("navbar.faq")}</NavLink>
-                        </li>
-                        <li>
-                          <NavLink to="/sign/in">{t("navbar.signIn")}</NavLink>
                         </li>
                         <li>
                           <NavLink to="*">{t("navbar.error")}</NavLink>
