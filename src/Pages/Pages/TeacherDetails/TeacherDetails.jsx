@@ -4,39 +4,15 @@ import TeachersProgress from "../../../Components/TeachersProgress/TeachersProgr
 import "./TeacherDetails.css";
 import { useEffect, useState } from "react";
 import getInstructorById from "../../../utilities/getInstructorById";
-import { useDispatch, useSelector } from "react-redux";
-import CourseCard from "../../../Components/coursecard/CourseCard";
-import { Link } from "react-router-dom";
-import formatTime from "../../../utilities/formatTime";
-import { fetchMultipleReviewStats } from "../../../Store/Slices/reviewsSlice";
-import { useTranslation } from "react-i18next";
-import { fetchCourses } from "../../../Store/Slices/getAllCoursecSlice";
+import Courses from "../Courses/Courses";
 
 function TeacherDetails() {
   const { id } = useParams();
   const [instructor, setInstructor] = useState(null);
-  const dispatch = useDispatch();
-  const courses = useSelector((state) => state.getAllCourses.data || []);
-  const reviewStats = useSelector((state) => state.reviewStats.stats);
-  const { i18n } = useTranslation();
-  const lang = i18n.language.startsWith("ar") ? "ar" : "en";
-  const [instCourses, setInstCourses] = useState([]);
-
-  useEffect(() => {
-    dispatch(fetchCourses(lang));
-  }, [lang, dispatch]);
-
-  useEffect(() => {
-    if (courses.length > 0) {
-      const courseIds = courses.map((c) => c._id);
-      dispatch(fetchMultipleReviewStats(courseIds));
-    }
-  }, [courses, dispatch]);
 
   useEffect(() => {
     getInstructorById(id, setInstructor);
-    setInstCourses(courses.filter((course) => course.instructor._id === id));
-  }, [id, courses]);
+  }, [id]);
   return (
     <>
       <div className="teacher-details p-lg-5 px-3 py-5">
@@ -120,35 +96,7 @@ function TeacherDetails() {
           </div>
         </div>
 
-        <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-          {instCourses.map((course) => {
-            return (
-              <div className="col" key={course._id}>
-                <Link
-                  to={`/course/details/${course._id}`}
-                  style={{ textDecoration: "none" }}
-                >
-                  <CourseCard
-                    imgSrc={course.thumbnailUrl}
-                    title={course.title}
-                    price={course.price}
-                    discountPrice={course.discountPrice}
-                    lessonsCount={course.lessonsCount || 0}
-                    courseDuration={formatTime(course.lessons)}
-                    studentsCount={course.studentsCount || 0}
-                    courseId={course._id}
-                    category={course.category?.name[lang]}
-                    insImage={course.instructor?.profileImage}
-                    insName={course.instructor?.name}
-                    bgColor={"#f8f9fa"}
-                    course={course}
-                    stats={reviewStats[course._id]}
-                  />
-                </Link>
-              </div>
-            );
-          })}
-        </div>
+        <Courses filterFn={(course) => course.instructor._id === id} />
       </div>
     </>
   );

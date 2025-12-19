@@ -9,7 +9,7 @@ import { fetchCourses } from "../../../Store/Slices/getAllCoursecSlice";
 import { fetchMultipleReviewStats } from "../../../Store/Slices/reviewsSlice";
 import { useTranslation } from "react-i18next";
 
-function Courses() {
+function Courses({ filterFn }) {
   const { i18n } = useTranslation();
   const lang = i18n.language.startsWith("ar") ? "ar" : "en";
   const dispatch = useDispatch();
@@ -33,14 +33,16 @@ function Courses() {
     return <Loader />;
   }
 
-  if (!courses.length) {
-    return <div>no courses here</div>;
+  const filteredCourses = filterFn ? courses.filter(filterFn) : courses;
+
+  if (!filteredCourses.length) {
+    return <div className="text-center py-5">No courses found</div>;
   }
 
   return (
-    <div className="container coursecardcontainer px-0 mx-0">
+    <div className="container coursecardcontainer px-0 mx-0 py-5" >
       <div className="row g-4">
-        {courses.map((course) => {
+        {filteredCourses.map((course) => {
           return (
             <div className="col-xl-4 col-lg-4 col-md-6" key={course._id}>
               <Link
