@@ -1,49 +1,32 @@
-import React from 'react'
-import TeacherCard from '../../../Components/TeacherCard/TeacherCard'
+import { useEffect, useState } from "react";
+import TeacherCard from "../../../Components/TeacherCard/TeacherCard";
+import getAllInstructors from "../../../utilities/getAllInstructors";
 
 function Teacher() {
+  const [instructors, setInstructors] = useState([]);
+
+  useEffect(() => {
+    getAllInstructors(setInstructors);
+  }, []);
+
   return (
     <>
-<div className="container py-5">
-        <div className="row g-4">
-      
-    <TeacherCard />
-    <TeacherCard 
-    imgSrc="https://ordainit.com/html/educate/assets/img/team/team-3-2.jpg"
-    title={<a href="#">Esther Boyd</a>}
-    />
-    <TeacherCard 
-    imgSrc="https://ordainit.com/html/educate/assets/img/team/team-3-3.jpg"
-    title={<a href="#">Jamie Keller</a>}
-    />
-    <TeacherCard 
-    imgSrc="https://ordainit.com/html/educate/assets/img/team/team-3-4.jpg"
-    title={<a href="#">Jesus Pendley</a>}
-    />
-    <TeacherCard 
-    imgSrc="https://ordainit.com/html/educate/assets/img/team/team-1-5.jpg"
-    title={<a href="#">Melvin Warner</a>}
-    />
-    <TeacherCard 
-    imgSrc="https://ordainit.com/html/educate/assets/img/team/team-1-6.jpg"
-    title={<a href="#">Nancy Dickens</a>}
-    />
-    <TeacherCard 
-    imgSrc="https://ordainit.com/html/educate/assets/img/team/team-1-7.jpg"
-    title={<a href="#">Harriet Graham</a>}
-    />
-    <TeacherCard 
-    imgSrc="https://ordainit.com/html/educate/assets/img/team/team-1-8.jpg"
-    title={<a href="#">Ernest Dustin</a>}
-    />
-
-
+      <div className="container py-5">
+        <div className="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
+          {instructors?.length === 0 && (
+            <div className="col-12 text-center py-4">
+              No instructors available
+            </div>
+          )}
+          {instructors?.map((instructor) => (
+            <div className="col" key={instructor._id}>
+              <TeacherCard instructor={instructor} />
+            </div>
+          ))}
         </div>
       </div>
-
-
     </>
-  )
+  );
 }
 
-export default Teacher
+export default Teacher;

@@ -1,7 +1,6 @@
 /* ------------------------------
    TeacherCard Styles
 ------------------------------ */
-
 .it-team-3-item {
   position: relative;
   overflow: hidden;
@@ -19,8 +18,10 @@
 
 .it-team-3-thumb img {
   width: 100%;
-  height: auto;
+  height: 300px;
   display: block;
+  object-fit: cover;
+  cursor: pointer;
   transition: transform 0.6s ease;
 }
 
