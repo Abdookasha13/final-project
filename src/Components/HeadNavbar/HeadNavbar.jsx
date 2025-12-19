@@ -2,26 +2,17 @@ import { useTranslation } from "react-i18next";
 import ToggleLanguage from "../ToggleLanguage/ToggleLanguage";
 import "./HeadNavbar.css";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../Store/Slices/authSlice";
 
 function HeadNavbar() {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const [student, setStudent] = useState(null);
-  const [token, setToken] = useState(null);
-
-  useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    const userToken = localStorage.getItem("token");
-    setToken(userToken);
-    setStudent(user);
-  }, []);
+  const dispatch = useDispatch();
+  const { user: student, token } = useSelector((state) => state.auth);
 
   const handleLogout = () => {
-    localStorage.removeItem("user");
-    localStorage.removeItem("token");
-    setStudent(null);
-    setToken(null);
+    dispatch(logout());
     navigate("/");
   };
 
