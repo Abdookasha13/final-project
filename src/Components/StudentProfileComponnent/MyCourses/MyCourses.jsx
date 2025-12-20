@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import getStdEnrollments from "../../../utilities/getStdEnrollments";
+import { useSelector } from "react-redux";
 import Loader from "../../Loader/Loader";
 import { IoBookOutline } from "react-icons/io5";
 import { GrCertificate, GrCompliance } from "react-icons/gr";
@@ -14,19 +14,105 @@ const MyCourses = () => {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const lang = i18n.language.startsWith("ar") ? "ar" : "en";
+  const API_BASE = "http://localhost:1911";
+
+  // جيب الـ token من Redux
+  const token = useSelector((state) => state.auth.token);
 
   const openCourse = (courseId) => {
     navigate(`/course/player/${courseId}`);
   };
+
   const [showReview, setShowReview] = useState(false);
   const [selectedCourseId, setSelectedCourseId] = useState(null);
   const [ratingLoading, setRatingLoading] = useState(false);
-  const [enrollments, setEnrollments] = useState([]);
+  const [stats, setStats] = useState({
+    totalEnrolled: 0,
+    completed: 0,
+    inProgress: 0,
+    certificates: 0,
+    avgProgress: 0,
+  });
+  const [enrolledCourses, setEnrolledCourses] = useState([]);
+  const [inProgressCourses, setInProgressCourses] = useState([]);
+  const [completedCourses, setCompletedCourses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [activeTab, setActiveTab] = useState("enrolled");
-
   const [userRatings, setUserRatings] = useState({});
+
+  const getAxiosConfig = () => ({
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  });
+
+  // جيب الإحصائيات
+  const fetchStats = async () => {
+    try {
+      const res = await axios.get(
+        `${API_BASE}/myenrollments/stats`,
+        getAxiosConfig()
+      );
+      setStats(res.data);
+    } catch (err) {
+      console.error("Error fetching stats:", err);
+    }
+  };
+
+  // جيب جميع الكورسات (enrolled و in progress)
+  const fetchAllEnrolledCourses = async () => {
+    try {
+      const res = await axios.get(
+        `${API_BASE}/myenrollments/enrolled`,
+        getAxiosConfig()
+      );
+      const allCourses = res.data || [];
+
+      // فرّق بين enrolled و in progress
+      const enrolled = allCourses.filter((e) => e.progressPercentage === 0);
+      const inProgress = allCourses.filter(
+        (e) => e.progressPercentage > 0 && e.progressPercentage < 100
+      );
+
+      setEnrolledCourses(enrolled);
+      setInProgressCourses(inProgress);
+
+      // جيب التقييمات
+
+    } catch (err) {
+      console.error("Error fetching enrolled courses:", err);
+      toast.error("Failed to load courses");
+    }
+  };
+  const fetchMyReviews = async () => {
+  const res = await axios.get(
+    `${API_BASE}/my-reviews`,
+    getAxiosConfig()
+  );
+
+  const ratingsMap = {};
+  res.data.data.forEach((review) => {
+    ratingsMap[review.course] = review.rating;
+  });
+
+  setUserRatings(ratingsMap);
+};
+
+  // جيب الكورسات المخلصة
+  const fetchCompletedCourses = async () => {
+    try {
+      const res = await axios.get(
+        `${API_BASE}/myenrollments/completed`,
+        getAxiosConfig()
+      );
+      setCompletedCourses(res.data || []);
+    } catch (err) {
+      console.error("Error fetching completed courses:", err);
+      toast.error("Failed to load completed courses");
+    }
+  };
 
   const openReviewModal = (courseId) => {
     setSelectedCourseId(courseId);
@@ -34,18 +120,12 @@ const MyCourses = () => {
   };
 
   const submitRating = async ({ course, rating }) => {
-    const token = localStorage.getItem("token");
     setRatingLoading(true);
     try {
       const res = await axios.post(
-        "http://localhost:1911/addReview",
+        `${API_BASE}/addReview`,
         { course, rating },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
+        getAxiosConfig()
       );
 
       if (res.data.success) {
@@ -64,58 +144,38 @@ const MyCourses = () => {
       );
     } finally {
       setRatingLoading(false);
+      setShowReview(false);
     }
   };
 
   useEffect(() => {
-    const fetchCourses = async () => {
+    const fetchAllData = async () => {
       try {
-        const user = JSON.parse(localStorage.getItem("user"));
-        if (!user?._id) {
-          setError("User not found. Please login.");
-          setLoading(false);
+        setLoading(true);
+        if (!token) {
+          setError("User not authenticated. Please login.");
           return;
         }
 
-        const data = await getStdEnrollments(user._id);
-        const enrollmentsArray = Array.isArray(data) ? data : [];
-        setEnrollments(enrollmentsArray);
-
-        const ratingsMap = {};
-        enrollmentsArray.forEach((enrollment) => {
-          if (enrollment.rating) {
-            const courseId = enrollment.course?._id || enrollment.course;
-            ratingsMap[courseId] = enrollment.rating;
-          }
-        });
-        setUserRatings(ratingsMap);
+        await Promise.all([
+          fetchStats(),
+          fetchAllEnrolledCourses(),
+          fetchCompletedCourses(),
+           fetchMyReviews(),
+        ]);
       } catch (err) {
-        console.error("Error fetching courses:", err);
+        console.error("Error fetching data:", err);
         setError("Failed to load courses.");
       } finally {
         setLoading(false);
       }
     };
 
-    fetchCourses();
-  }, []);
+    fetchAllData();
+  }, [token]);
 
   if (loading) return <Loader />;
   if (error) return <div className="alert alert-danger">{error}</div>;
-
-  // تصنيف الكورسات حسب الحالة
-  const enrolledCourses = enrollments.filter(
-    (e) => !e.progress || e.progress.length === 0
-  );
-  const inProgressCourses = enrollments.filter(
-    (e) => e.progress && e.progress.some((p) => !p.completed)
-  );
-  const finishedCourses = enrollments.filter(
-    (e) =>
-      e.progress &&
-      e.progress.length > 0 &&
-      e.progress.every((p) => p.completed)
-  );
 
   const cardStyle = (bgColor) => ({
     display: "flex",
@@ -138,7 +198,7 @@ const MyCourses = () => {
   });
 
   return (
-    <div className="container ">
+    <div className="container">
       <div className="row g-3 text-center">
         {/* Enrolled */}
         <div className="col-md-4">
@@ -153,6 +213,19 @@ const MyCourses = () => {
           </div>
         </div>
 
+        {/* In Progress */}
+        <div className="col-md-4">
+          <div style={cardStyle("#fbfbfbff")}>
+            <div style={iconCircleStyle("rgba(255, 235, 205, 1)")}>
+              <GrCompliance color="#ffa500" fontSize="32px" />
+            </div>
+            <div>
+              <h6>In Progress</h6>
+              <p className="display-6">{inProgressCourses.length}</p>
+            </div>
+          </div>
+        </div>
+
         {/* Finished */}
         <div className="col-md-4">
           <div style={cardStyle("#fbfbfbff")}>
@@ -161,18 +234,20 @@ const MyCourses = () => {
             </div>
             <div>
               <h6>{t("studentProfile.finishedCourses")}</h6>
-              <p className="display-6">{finishedCourses.length}</p>
+              <p className="display-6">{stats.completed}</p>
             </div>
           </div>
         </div>
-        <div className="col-md-4">
+
+        {/* Certificates */}
+        <div className="col-md-4 mt-3">
           <div style={cardStyle("#fbfbfbff")}>
             <div style={iconCircleStyle("#daf0deff")}>
               <GrCertificate color="#0ad02eff" fontSize="32px" />
             </div>
             <div>
               <h6>{t("studentProfile.certificate")}</h6>
-              <p className="display-6">{finishedCourses.length}</p>
+              <p className="display-6">{stats.certificates}</p>
             </div>
           </div>
         </div>
@@ -191,90 +266,123 @@ const MyCourses = () => {
             {t("studentProfile.Enrolled")}
           </button>
         </li>
-        {/* <li className="nav-item">
+        <li className="nav-item">
           <button
-            className={`nav-link ${activeTab === "inprogress" ? "active" : ""}`}
-            onClick={() => setActiveTab("inprogress")}
+            className={`nav-link ${activeTab === "inProgress" ? "active" : ""}`}
+            onClick={() => setActiveTab("inProgress")}
             style={{
-              color: activeTab === "inprogress" ? "#0ab99d" : "#333",
-              borderColor: activeTab === "inprogress" ? "#0ab99d" : "#ddd",
+              color: activeTab === "inProgress" ? "#ffa500" : "#333",
+              borderColor: activeTab === "inProgress" ? "#ffa500" : "#ddd",
             }}
           >
             In Progress
           </button>
-        </li> */}
+        </li>
         <li className="nav-item">
           <button
             className={`nav-link ${activeTab === "finished" ? "active" : ""}`}
             onClick={() => setActiveTab("finished")}
             style={{
-              color: activeTab === "finished" ? "#0ab99d" : "#333",
-              borderColor: activeTab === "finished" ? "#0ab99d" : "#ddd",
+              color: activeTab === "finished" ? "#0ab9d0" : "#333",
+              borderColor: activeTab === "finished" ? "#0ab9d0" : "#ddd",
             }}
           >
             {t("studentProfile.Finished")}
           </button>
         </li>
       </ul>
+
       {/* Tab Content */}
       <div className="pb-5">
+        {/* Enrolled Tab */}
         {activeTab === "enrolled" &&
           (enrolledCourses.length > 0 ? (
             <div className="row g-3">
-              {enrolledCourses.map((item) => (
-                <div key={item._id} className="col-md-4">
+              {enrolledCourses.map((enrollment) => (
+                <div key={enrollment._id} className="col-md-4">
                   <CourseCard
-                    imgSrc={item.course.thumbnailUrl}
-                    title={item.course.title?.[lang] || item.course.title?.en}
-                    insName={item.course.instructor?.name}
-                    insImage={item.course.instructor?.profileImage}
+                    imgSrc={enrollment.course.thumbnailUrl}
+                    title={
+                      enrollment.course.title?.[lang] ||
+                      enrollment.course.title?.en
+                    }
+                    insName={enrollment.course.instructor?.name}
+                    insImage={enrollment.course.instructor?.profileImage}
                     isEnrollment={true}
-                    userRating={userRatings[item.course._id] || 0}
-                    onLeaveRating={() => openReviewModal(item.course._id)}
-                    onClick={() => openCourse(item.course._id)}
+                    // progress={enrollment.progressPercentage || 0}
+                    userRating={userRatings[enrollment.course._id] || 0}
+                    onLeaveRating={() => openReviewModal(enrollment.course._id)}
+                    onClick={() => openCourse(enrollment.course._id)}
                   />
                 </div>
               ))}
             </div>
           ) : (
-            <p>No enrolled courses</p>
+            <p>
+              {t("studentProfile.noEnrolledCourses") || "No enrolled courses"}
+            </p>
           ))}
 
-        {activeTab === "inprogress" &&
+        {/* In Progress Tab */}
+        {activeTab === "inProgress" &&
           (inProgressCourses.length > 0 ? (
-            inProgressCourses.map((course) => (
-              <div key={course._id} className="card mb-2 p-3 shadow-sm">
-                {course.course?.title || "No Title"}
-              </div>
-            ))
+            <div className="row g-3">
+              {inProgressCourses.map((enrollment) => (
+                <div key={enrollment._id} className="col-md-4">
+                  <CourseCard
+                    imgSrc={enrollment.course.thumbnailUrl}
+                    title={
+                      enrollment.course.title?.[lang] ||
+                      enrollment.course.title?.en
+                    }
+                    insName={enrollment.course.instructor?.name}
+                    insImage={enrollment.course.instructor?.profileImage}
+                    isEnrollment={true}
+                    progress={enrollment.progressPercentage || 0}
+                    userRating={userRatings[enrollment.course._id] || 0}
+                    onLeaveRating={() => openReviewModal(enrollment.course._id)}
+                    onClick={() => openCourse(enrollment.course._id)}
+                  />
+                </div>
+              ))}
+            </div>
           ) : (
             <p>No courses in progress</p>
           ))}
 
+        {/* Finished Tab */}
         {activeTab === "finished" &&
-          (finishedCourses.length > 0 ? (
+          (completedCourses.length > 0 ? (
             <div className="row g-3">
-              {finishedCourses.map((item) => (
-                <div key={item._id} className="col-md-4">
+              {completedCourses.map((enrollment) => (
+                <div key={enrollment._id} className="col-md-4">
                   <CourseCard
-                    imgSrc={item.course.thumbnailUrl}
-                    title={item.course.title?.[lang] || item.course.title?.en}
-                    insName={
-                      item.course.instructor?.name?.[lang] ||
-                      item.course.instructor?.name?.en
+                    imgSrc={enrollment.course.thumbnailUrl}
+                    title={
+                      enrollment.course.title?.[lang] ||
+                      enrollment.course.title?.en
                     }
-                    insImage={item.course.instructor?.profileImage}
+                    insName={
+                      enrollment.course.instructor?.name?.[lang] ||
+                      enrollment.course.instructor?.name?.en
+                    }
+                    insImage={enrollment.course.instructor?.profileImage}
                     isEnrollment={true}
-                    userRating={userRatings[item.course._id] || 0}
-                    onLeaveRating={() => openReviewModal(item.course._id)}
+                    progress={100}
+                    userRating={userRatings[enrollment.course._id] || 0}
+                    onLeaveRating={() => openReviewModal(enrollment.course._id)}
+                    certificateUrl={enrollment.certificateUrl}
                   />
                 </div>
               ))}
             </div>
           ) : (
-            <p>No finished courses</p>
+            <p>
+              {t("studentProfile.noFinishedCourses") || "No finished courses"}
+            </p>
           ))}
       </div>
+
       {showReview && (
         <ReviewForm
           show={showReview}

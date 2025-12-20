@@ -11,7 +11,6 @@ import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 const CourseCard = ({
-
   imgSrc,
   title,
   courseId,
@@ -34,13 +33,14 @@ const CourseCard = ({
   onLeaveRating,
   userRating = 0,
   onClick,
+  progress = 0,
 }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [currentRating, setCurrentRating] = useState(userRating);
   const [hoverRating, setHoverRating] = useState(0);
   const [isAdded, setIsAdded] = useState(false);
-  const{t}=useTranslation();
+  const { t } = useTranslation();
 
   const averageRating = stats?.averageRating || 0;
 
@@ -78,15 +78,19 @@ const CourseCard = ({
   const handleRatingClick = (e) => {
     e.preventDefault();
     e.stopPropagation();
-
     onLeaveRating();
   };
 
   return (
     <div
       onClick={onClick}
-      className="coursecard-item px-2 py-3"
-      style={{ backgroundColor: bgColor }}
+      className="coursecard-item px-2 pt-3"
+      style={{
+        backgroundColor: bgColor,
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+      }}
     >
       <div className="coursecard-img">
         <img src={imgSrc} alt="" />
@@ -97,7 +101,10 @@ const CourseCard = ({
         )}
       </div>
 
-      <div className="coursecard-itemcontent">
+      <div
+        className="coursecard-itemcontent"
+        style={{ flex: 1, display: "flex", flexDirection: "column" }}
+      >
         {!isEnrollment && (
           <div className="coursecard-rating d-flex gap-1">
             <HalfStarRating rating={averageRating} />
@@ -108,6 +115,7 @@ const CourseCard = ({
         <h4 className="coursecard-title">
           <p>{title}</p>
         </h4>
+
         {!isEnrollment && (
           <div
             className="coursecard-iteminfo d-flex flex-row justify-content-between"
@@ -124,18 +132,22 @@ const CourseCard = ({
                 if (showInstructorActions) showMyLessons();
               }}
             >
-              <i className="fa-regular fa-file-lines "></i> {t("courseCard.lesson")} {lessonsCount}
+              <i className="fa-regular fa-file-lines "></i>{" "}
+              {t("courseCard.lesson")} {lessonsCount}
             </span>
 
             <span className="text-lowercase">
-              <i className="fa-sharp fa-regular fa-clock " ></i> {courseDuration} {t("courseCard.m")}
+              <i className="fa-sharp fa-regular fa-clock "></i> {courseDuration}
+              {t("courseCard.m")}
             </span>
 
             <span>
-              <i className="fa-regular fa-user"></i> {t("courseCard.students")} {studentsCount}
+              <i className="fa-regular fa-user"></i> {t("courseCard.students")}{" "}
+              {studentsCount}
             </span>
           </div>
         )}
+
         {!hideInstructorInfo && (
           <div className="coursecard-teacherimg">
             <img src={insImage} alt="instructor" />
@@ -167,39 +179,67 @@ const CourseCard = ({
                     handleAdd();
                   }}
                 >
-                  <BsCart3 color="#0e2a46" fontSize={"20px"} /> {t("courseCard.addtocart")}
+                  <BsCart3 color="#0e2a46" fontSize={"20px"} />{" "}
+                  {t("courseCard.addtocart")}
                 </a>
               ))}
           </div>
         ) : (
           <div
-            className="leave-rating d-flex flex-column"
-            style={{ cursor: "pointer" }}
-            onClick={handleRatingClick}
-            onMouseEnter={() => setHoverRating(1)}
-            onMouseLeave={() => setHoverRating(0)}
+            className="d-flex justify-content-between align-items-end"
+            style={{ marginTop: "auto" }}
           >
-            <div className="stars d-flex gap-1 m-0">
-              {[...Array(5)].map((_, i) => (
-                <div key={i}>
-                  {i < currentRating ? (
-                    <FaStar color="#ffc107" size={15} />
-                  ) : (
-                    <FaRegStar color="#ffc107" size={15} />
-                  )}
-                </div>
-              ))}
-            </div>
-            <span
-              className="mt-2"
-              style={{ fontSize: "14px", color: "#0e2a46" }}
+            {isEnrollment && progress > 0 && progress < 100 && (
+              <div
+                style={{
+                  fontSize: "12px",
+                  color: "#0ab99d",
+                  fontWeight: "600",
+                }}
+              >
+                {progress}% Complete
+              </div>
+            )}
+            {isEnrollment && progress === 100 && (
+              <div
+                style={{
+                  fontSize: "12px",
+                  color: "#0ad02e",
+                  fontWeight: "600",
+                }}
+              >
+                ✓ Completed
+              </div>
+            )}
+            <div
+              className="leave-rating d-flex align-itens-end flex-column"
+              style={{ cursor: "pointer" }}
+              onClick={handleRatingClick}
+              onMouseEnter={() => setHoverRating(1)}
+              onMouseLeave={() => setHoverRating(0)}
             >
-              {currentRating > 0
-                ? hoverRating
-                  ? `Edit rating`
-                  : `Your rating`
-                : "Leave a rating"}
-            </span>
+              <div className="stars d-flex gap-1 m-0">
+                {[...Array(5)].map((_, i) => (
+                  <div key={i}>
+                    {i < currentRating ? (
+                      <FaStar color="#ffc107" size={15} />
+                    ) : (
+                      <FaRegStar color="#ffc107" size={15} />
+                    )}
+                  </div>
+                ))}
+              </div>
+              <span
+                className="mt-2"
+                style={{ fontSize: "14px", color: "#0e2a46" }}
+              >
+                {currentRating > 0
+                  ? hoverRating
+                    ? `Edit rating`
+                    : `Your rating`
+                  : "Leave a rating"}
+              </span>
+            </div>
           </div>
         )}
 
@@ -217,6 +257,29 @@ const CourseCard = ({
           </div>
         )}
       </div>
+
+      {/* Progress Bar - جوه الكارد من الأسفل */}
+      {isEnrollment && progress > 0 && (
+        <div
+          style={{
+            height: "6px",
+            backgroundColor: "#e0e0e0",
+            marginTop: "12px",
+            overflow: "hidden",
+            borderRadius: "3px",
+          }}
+        >
+          <div
+            style={{
+              height: "100%",
+              width: `${progress}%`,
+              backgroundColor: "#0ab99d",
+              transition: "width 0.3s ease",
+              borderRadius: "3px",
+            }}
+          />
+        </div>
+      )}
     </div>
   );
 };
