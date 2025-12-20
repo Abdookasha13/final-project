@@ -2,7 +2,7 @@ import "./CourseDetails.css";
 import Button from "../../../Components/Button/Button";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import VideoPlayer from "../../../Components/VideoPlayer/VideoPlayer";
+import Modal from "react-bootstrap/Modal";
 import { GoBookmark, GoCommentDiscussion } from "react-icons/go";
 import { LuMenu } from "react-icons/lu";
 import { AiOutlineUser } from "react-icons/ai";
@@ -21,35 +21,46 @@ import { toast } from "react-toastify";
 import handleAddToWish from "../../../utilities/handleAddToWish";
 import ReviewStats from "../../../Components/StarRating/starRating";
 import { useTranslation } from "react-i18next";
-
-
-
+import { getYouTubeId } from "../../../utilities/getYoutubeId";
 
 const CourseDetails = () => {
-
-  const { t,i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const lang = i18n.language.startsWith("ar") ? "ar" : "en";
   const dispatch = useDispatch();
   const { courseId } = useParams();
   const [course, setCourse] = useState(null);
   const [lessons, setLessons] = useState([]);
   const [activeTab, setActiveTab] = useState("Overview");
-
   const reviewStats = useSelector((state) => state.reviewStats.stats);
   const stats = reviewStats[courseId];
+  const [showPreview, setShowPreview] = useState(false);
+  const [previewLesson, setPreviewLesson] = useState(null);
+
+  const handlePreview = (lesson) => {
+    setPreviewLesson(lesson);
+    setShowPreview(true);
+  };
 
   const handleAdd = () => {
-    console.log(course._id);
     dispatch(addCourseToCart(course._id));
     toast.success("Course added to cart!");
   };
+
   const tabs = [
     { key: "Overview", label: t("courseDetails.overview"), icon: GoBookmark },
     { key: "Curriculum", label: t("courseDetails.curriculum"), icon: LuMenu },
-    { key: "Instructor", label: t("courseDetails.instructor"), icon: AiOutlineUser },
-    { key: "Reviews", label: t("courseDetails.reviews"), icon: GoCommentDiscussion },
+    {
+      key: "Instructor",
+      label: t("courseDetails.instructor"),
+      icon: AiOutlineUser,
+    },
+    {
+      key: "Reviews",
+      label: t("courseDetails.reviews"),
+      icon: GoCommentDiscussion,
+    },
   ];
-  // جيب الـ course data مع اللغة
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -64,7 +75,6 @@ const CourseDetails = () => {
     fetchData();
   }, [courseId, lang]);
 
-  // جيب الـ review stats
   useEffect(() => {
     if (courseId) {
       dispatch(fetchReviewStats(courseId));
@@ -85,23 +95,84 @@ const CourseDetails = () => {
       </div>
     ),
     Curriculum: (
-      <div className="border border-top-0 border-light-subtle">
-        {lessons.map((lesson) => (
-          <div
-            className="d-flex justify-content-between p-4 border-bottom"
-            key={lesson._id}
-          >
+      <>
+        <div className="border border-top-0 border-light-subtle">
+          {lessons.map((lesson) => (
             <div
-              style={{ fontSize: "15px", color: "#404040ff" }}
-              className="d-flex gap-3"
+              className="d-flex justify-content-between p-4 border-bottom align-items-center"
+              key={lesson._id}
             >
-              <MdOutlinePlayLesson size={"18px"} color="#474747ff" />
-              {lesson.title[lang]}
+              <div
+                style={{ fontSize: "15px", color: "#404040ff" }}
+                className="d-flex gap-3 align-items-center"
+              >
+                <MdOutlinePlayLesson size={"18px"} color="#00bfa6" />
+                {lesson.title[lang]}
+
+                {lesson.isPreview && (
+                  <a
+                    style={{
+                      marginLeft: "10px",
+                      fontSize: "12px",
+                      color: "#00bfa6",
+                      fontWeight: "600",
+                      cursor: "pointer",
+                    }}
+                    onMouseEnter={(e) => (e.target.style.color = "#00796b")}
+                    onMouseLeave={(e) => (e.target.style.color = "#00bfa6")}
+                    onClick={() => handlePreview(lesson)}
+                  >
+                    Preview
+                  </a>
+                )}
+              </div>
+              <div>
+                {lesson.duration}
+                {t("courseDetails.m")}
+              </div>
             </div>
-            <div>{lesson.duration}m</div>
-          </div>
-        ))}
-      </div>
+          ))}
+
+          <Modal
+            show={showPreview}
+            onHide={() => setShowPreview(false)}
+            size="lg"
+            centered
+          >
+            <Modal.Header closeButton>
+              <Modal.Title>{previewLesson?.title[lang]}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body style={{ padding: 0 }}>
+              {previewLesson?.videoUrl && (
+                <div
+                  style={{
+                    position: "relative",
+                    paddingBottom: "56.25%",
+                    height: 0,
+                  }}
+                >
+                  <iframe
+                    src={`https://www.youtube.com/embed/${getYouTubeId(
+                      previewLesson.videoUrl
+                    )}`}
+                    title={previewLesson.title[lang]}
+                    style={{
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      width: "100%",
+                      height: "100%",
+                      border: "none",
+                    }}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+              )}
+            </Modal.Body>
+          </Modal>
+        </div>
+      </>
     ),
     Instructor: (
       <div className="border border-top-0 border-light-subtle px-4 py-5 d-flex gap-4">
@@ -156,26 +227,25 @@ const CourseDetails = () => {
           <h4 className="course1-title-roka fw-bold mb-4">{course.title}</h4>
 
           {/* Tabs */}
- <ul className="nav nav-tabs border-0 d-flex gap-1 flex-nowrap">
-  {tabs.map((tab) => {
-    const Icon = tab.icon;
-    return (
-      <li key={tab.key} className="nav-item w-25 fw-bold">
-        <button
-          className="nav-link bg-light w-100"
-          style={{
-            color: activeTab === tab.key ? "#0ab99d" : "#333",
-          }}
-          onClick={() => setActiveTab(tab.key)}
-        >
-          <Icon fontSize="18px" style={{ marginRight: "10px" }} />
-          {tab.label}
-        </button>
-      </li>
-    );
-  })}
-</ul>
-
+          <ul className="nav nav-tabs border-0 d-flex gap-1 flex-nowrap">
+            {tabs.map((tab) => {
+              const Icon = tab.icon;
+              return (
+                <li key={tab.key} className="nav-item w-25 fw-bold">
+                  <button
+                    className="nav-link bg-light w-100"
+                    style={{
+                      color: activeTab === tab.key ? "#0ab99d" : "#333",
+                    }}
+                    onClick={() => setActiveTab(tab.key)}
+                  >
+                    <Icon fontSize="18px" style={{ marginRight: "10px" }} />
+                    {tab.label}
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
 
           {/* Tab Content */}
           {renderTabContent[activeTab]}
@@ -191,7 +261,7 @@ const CourseDetails = () => {
             />
 
             <Button onClick={handleAdd} className="ticketbtn">
-            {t("courseDetails.addtocart")}
+              {t("courseDetails.addtocart")}
             </Button>
 
             <ul className="list-unstyled m-0 mt-3">
@@ -221,7 +291,7 @@ const CourseDetails = () => {
                     color="#0ab99d"
                     style={{ marginRight: "7px" }}
                   />
-                 {t("courseDetails.Enrolled")}
+                  {t("courseDetails.Enrolled")}
                 </span>
                 <span className="fw-bold">{course.studentsCount || 0}</span>
               </li>
@@ -232,7 +302,7 @@ const CourseDetails = () => {
                     color="#0ab99d"
                     style={{ marginRight: "7px" }}
                   />
-                 {t("courseDetails.lessons")}
+                  {t("courseDetails.lessons")}
                 </span>
                 <span className="fw-bold">{course.lessonsCount || 0}</span>
               </li>
@@ -243,9 +313,11 @@ const CourseDetails = () => {
                     color="#0ab99d"
                     style={{ marginRight: "7px" }}
                   />
-                 {t("courseDetails.skillLevel")}
+                  {t("courseDetails.skillLevel")}
                 </span>
-                <span className="fw-bold">{t(`courseDetails.${course.skillLevel}`)}</span>
+                <span className="fw-bold">
+                  {t(`courseDetails.${course.skillLevel}`)}
+                </span>
               </li>
 
               <li className="border-bottom py-3">
@@ -255,7 +327,7 @@ const CourseDetails = () => {
                     color="#0ab99d"
                     style={{ marginRight: "7px" }}
                   />
-                 {t("courseDetails.language")}
+                  {t("courseDetails.language")}
                 </span>
                 <span className="fw-bold">{t("courseDetails.English")}</span>
               </li>
@@ -270,7 +342,8 @@ const CourseDetails = () => {
                 cursor: "pointer",
               }}
             >
-              <FaRegHeart color="#0ab99d" size={"18px"} /> {t("courseDetails.addToWishlist")}
+              <FaRegHeart color="#0ab99d" size={"18px"} />{" "}
+              {t("courseDetails.addToWishlist")}
             </div>
           </div>
         </div>

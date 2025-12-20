@@ -85,7 +85,7 @@ const CourseCard = ({
     <div
       onClick={onClick}
       className="coursecard-item px-2 pt-3"
-      style={{ 
+      style={{
         backgroundColor: bgColor,
         display: "flex",
         flexDirection: "column",
@@ -101,7 +101,10 @@ const CourseCard = ({
         )}
       </div>
 
-      <div className="coursecard-itemcontent" style={{ flex: 1, display: "flex", flexDirection: "column" }}>
+      <div
+        className="coursecard-itemcontent"
+        style={{ flex: 1, display: "flex", flexDirection: "column" }}
+      >
         {!isEnrollment && (
           <div className="coursecard-rating d-flex gap-1">
             <HalfStarRating rating={averageRating} />
@@ -112,7 +115,7 @@ const CourseCard = ({
         <h4 className="coursecard-title">
           <p>{title}</p>
         </h4>
-        
+
         {!isEnrollment && (
           <div
             className="coursecard-iteminfo d-flex flex-row justify-content-between"
@@ -129,15 +132,18 @@ const CourseCard = ({
                 if (showInstructorActions) showMyLessons();
               }}
             >
-              <i className="fa-regular fa-file-lines "></i> {t("courseCard.lesson")} {lessonsCount}
+              <i className="fa-regular fa-file-lines "></i>{" "}
+              {t("courseCard.lesson")} {lessonsCount}
             </span>
 
             <span className="text-lowercase">
-              <i className="fa-sharp fa-regular fa-clock "></i> {courseDuration} {t("courseCard.m")}
+              <i className="fa-sharp fa-regular fa-clock "></i> {courseDuration}
+              {t("courseCard.m")}
             </span>
 
             <span>
-              <i className="fa-regular fa-user"></i> {t("courseCard.students")} {studentsCount}
+              <i className="fa-regular fa-user"></i> {t("courseCard.students")}{" "}
+              {studentsCount}
             </span>
           </div>
         )}
@@ -173,12 +179,13 @@ const CourseCard = ({
                     handleAdd();
                   }}
                 >
-                  <BsCart3 color="#0e2a46" fontSize={"20px"} /> {t("courseCard.addtocart")}
+                  <BsCart3 color="#0e2a46" fontSize={"20px"} />{" "}
+                  {t("courseCard.addtocart")}
                 </a>
               ))}
           </div>
         ) : (
-          <div 
+          <div
             className="d-flex justify-content-between align-items-end"
             style={{ marginTop: "auto" }}
           >

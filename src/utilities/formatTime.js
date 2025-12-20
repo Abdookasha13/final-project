@@ -20,7 +20,7 @@ const formatTime = (lessons) => {
     return `${hours}`;
   }
 
-  return `${hours} ${minutes}`;
+  return `${hours}h ${minutes}`;
 };
 
 export default formatTime;

@@ -80,18 +80,25 @@ const MyCourses = () => {
       setInProgressCourses(inProgress);
 
       // جيب التقييمات
-      const ratingsMap = {};
-      allCourses.forEach((enrollment) => {
-        if (enrollment.course?._id) {
-          ratingsMap[enrollment.course._id] = 0; // default
-        }
-      });
-      setUserRatings(ratingsMap);
+
     } catch (err) {
       console.error("Error fetching enrolled courses:", err);
       toast.error("Failed to load courses");
     }
   };
+  const fetchMyReviews = async () => {
+  const res = await axios.get(
+    `${API_BASE}/my-reviews`,
+    getAxiosConfig()
+  );
+
+  const ratingsMap = {};
+  res.data.data.forEach((review) => {
+    ratingsMap[review.course] = review.rating;
+  });
+
+  setUserRatings(ratingsMap);
+};
 
   // جيب الكورسات المخلصة
   const fetchCompletedCourses = async () => {
@@ -154,6 +161,7 @@ const MyCourses = () => {
           fetchStats(),
           fetchAllEnrolledCourses(),
           fetchCompletedCourses(),
+           fetchMyReviews(),
         ]);
       } catch (err) {
         console.error("Error fetching data:", err);
