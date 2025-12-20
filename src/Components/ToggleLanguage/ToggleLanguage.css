@@ -1,6 +1,7 @@
 .flipswitch {
   position: relative;
   width: 80px;
+  direction: ltr !important;
 }
 
 .flipswitch input[type=checkbox] {
