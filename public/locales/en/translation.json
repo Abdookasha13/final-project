@@ -360,7 +360,8 @@
   "addtocart":"Add to Cart",
   "lessons":"Lessons",
     "Intermediate":"Intermediate", 
-    "Advanced":"Advanced"
+    "Advanced":"Advanced",
+    "m":"m"
   },
 
   "courseCard":{
