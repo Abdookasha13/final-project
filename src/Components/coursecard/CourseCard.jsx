@@ -39,13 +39,9 @@ const CourseCard = ({
   const dispatch = useDispatch();
   const [currentRating, setCurrentRating] = useState(userRating);
   const [hoverRating, setHoverRating] = useState(0);
-<<<<<<< HEAD
+
   const { t } = useTranslation();
   const cartItems = useSelector((state) => state.cart.cartItems);
-=======
-  const [isAdded, setIsAdded] = useState(false);
-  const { t } = useTranslation();
->>>>>>> 6488cdebb746015fdbf980958d31c6acf6470fa9
 
   const averageRating = stats?.averageRating || 0;
 
@@ -148,11 +144,7 @@ const CourseCard = ({
             </span>
 
             <span className="text-lowercase">
-<<<<<<< HEAD
-              <i className="fa-sharp fa-regular fa-clock "></i> {courseDuration}{" "}
-=======
               <i className="fa-sharp fa-regular fa-clock "></i> {courseDuration}
->>>>>>> 6488cdebb746015fdbf980958d31c6acf6470fa9
               {t("courseCard.m")}
             </span>
 
