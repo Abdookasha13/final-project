@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { FaRegHeart } from "react-icons/fa";
 import { IoBookOutline, IoSettingsOutline } from "react-icons/io5";
-import { MdOutlineQuiz } from "react-icons/md";
 import { TbLogout } from "react-icons/tb";
 import { NavLink, Outlet } from "react-router-dom";
 import "./StudentProfile.css";
