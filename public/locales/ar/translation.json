@@ -371,6 +371,16 @@
     "addtocart": "أضف إلى السلة",
     "AddedtoCart": "تمت الإضافة إلى السلة"
   },
+  "searchPage": {
+    "noResults": "لم يتم العثور على نتائج",
+    "noCoursesFound": "لا توجد دورات تطابق البحث عن",
+    "trySuggestion": "جرّب البحث باستخدام كلمات مختلفة",
+    "backHome": "العودة إلى الرئيسية",
+    "resultsFor": "نتائج البحث عن",
+    "foundCount": "تم العثور على",
+    "course": "دورة",
+    "courses": "دورات"
+  },
   "chatWidget": {
     "toggleOpen": "فتح الدردشة",
     "toggleClose": "إغلاق الدردشة",

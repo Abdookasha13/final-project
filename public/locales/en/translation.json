@@ -371,6 +371,16 @@
     "addtocart": "Add to Cart",
     "AddedtoCart": "Added to Cart"
   },
+  "searchPage": {
+    "noResults": "No Results Found",
+    "noCoursesFound": "No courses match your search for",
+    "trySuggestion": "Try searching with different keywords",
+    "backHome": "Back to Home",
+    "resultsFor": "Search results for",
+    "foundCount": "Found",
+    "course": "course",
+    "courses": "courses"
+  },
   "chatWidget": {
     "toggleOpen": "Open Chat",
     "toggleClose": "Close Chat",
