@@ -3,7 +3,7 @@ import { BsCart3 } from "react-icons/bs";
 import { FaEdit, FaRegStar, FaStar, FaTrash, FaCheck } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import handleDeleteCourse from "../../utilities/handleDeleteCourse";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addCourseToCart } from "../../Store/Slices/cartSlice";
 import { toast } from "react-toastify";
 import HalfStarRating from "../HalfStar/HalfStarRating";
@@ -11,7 +11,6 @@ import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 const CourseCard = ({
-
   imgSrc,
   title,
   courseId,
@@ -39,10 +38,12 @@ const CourseCard = ({
   const dispatch = useDispatch();
   const [currentRating, setCurrentRating] = useState(userRating);
   const [hoverRating, setHoverRating] = useState(0);
-  const [isAdded, setIsAdded] = useState(false);
-  const{t}=useTranslation();
+  const { t } = useTranslation();
+  const cartItems = useSelector((state) => state.cart.cartItems);
 
   const averageRating = stats?.averageRating || 0;
+
+  const isAdded = cartItems.some((item) => item.courseId === courseId);
 
   useEffect(() => {
     setCurrentRating(userRating);
@@ -70,7 +71,6 @@ const CourseCard = ({
     } else {
       console.log(course._id);
       dispatch(addCourseToCart(course._id));
-      setIsAdded(true);
       toast.success("Course added to cart!");
     }
   };
@@ -81,6 +81,11 @@ const CourseCard = ({
 
     onLeaveRating();
   };
+
+  // if (isAdded) {
+  //   toast.info("Course already in cart");
+  //   return;
+  // }
 
   return (
     <div
@@ -124,15 +129,18 @@ const CourseCard = ({
                 if (showInstructorActions) showMyLessons();
               }}
             >
-              <i className="fa-regular fa-file-lines "></i> {t("courseCard.lesson")} {lessonsCount}
+              <i className="fa-regular fa-file-lines "></i>{" "}
+              {t("courseCard.lesson")} {lessonsCount}
             </span>
 
             <span className="text-lowercase">
-              <i className="fa-sharp fa-regular fa-clock " ></i> {courseDuration} {t("courseCard.m")}
+              <i className="fa-sharp fa-regular fa-clock "></i> {courseDuration}{" "}
+              {t("courseCard.m")}
             </span>
 
             <span>
-              <i className="fa-regular fa-user"></i> {t("courseCard.students")} {studentsCount}
+              <i className="fa-regular fa-user"></i> {t("courseCard.students")}{" "}
+              {studentsCount}
             </span>
           </div>
         )}
@@ -167,7 +175,8 @@ const CourseCard = ({
                     handleAdd();
                   }}
                 >
-                  <BsCart3 color="#0e2a46" fontSize={"20px"} /> {t("courseCard.addtocart")}
+                  <BsCart3 color="#0e2a46" fontSize={"20px"} />{" "}
+                  {t("courseCard.addtocart")}
                 </a>
               ))}
           </div>

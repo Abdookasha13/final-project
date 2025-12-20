@@ -4,6 +4,7 @@ import "./HeadNavbar.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../Store/Slices/authSlice";
+import { clearCart } from "../../Store/Slices/cartSlice";
 
 function HeadNavbar() {
   const { t } = useTranslation();
@@ -13,6 +14,7 @@ function HeadNavbar() {
 
   const handleLogout = () => {
     dispatch(logout());
+    dispatch(clearCart());
     navigate("/");
   };
 
