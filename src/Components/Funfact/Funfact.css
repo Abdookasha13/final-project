@@ -6,7 +6,7 @@
     background: linear-gradient(90deg, #00b58b, #00b58b);
   }
   .it-funfact-bg-wrap {
-    padding: 40px 50px;
+   padding: 40px 50px;
   }
   .it-funfact-item {
     display: flex;

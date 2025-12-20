@@ -150,13 +150,22 @@ function AboutUs() {
                     <TeacherCard className="al-card-color" />
                   </div>
                   <div className="col-xl-3 col-lg-4 col-md-6 mb-30">
-                    <TeacherCard imgSrc="https://ordainit.com/html/educate/assets/img/team/team-3-2.jpg" />
+                    <TeacherCard 
+                      imgSrc="https://ordainit.com/html/educate/assets/img/team/team-3-2.jpg"
+                      title={t("teacherCard.EstherBoyd")}
+                    />
                   </div>
                   <div className="col-xl-3 col-lg-4 col-md-6 mb-30">
-                    <TeacherCard imgSrc="https://ordainit.com/html/educate/assets/img/team/team-3-3.jpg" />
+                    <TeacherCard 
+                      imgSrc="https://ordainit.com/html/educate/assets/img/team/team-3-3.jpg"
+                      title={t("teacherCard.JamieKeller")}
+                    />
                   </div>
                   <div className="col-xl-3 col-lg-4 col-md-6 mb-30">
-                    <TeacherCard imgSrc="https://ordainit.com/html/educate/assets/img/team/team-3-4.jpg" />
+                    <TeacherCard 
+                      imgSrc="https://ordainit.com/html/educate/assets/img/team/team-3-4.jpg"
+                      title={t("teacherCard.JesusPendley")}
+                    />
                   </div>
                 </div>
               </div>

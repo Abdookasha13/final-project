@@ -5,7 +5,7 @@
   overflow: hidden;
 }
 
-/* shapes common style */
+/* ================= Shapes ================= */
 .it-newsletter-shape-1,
 .it-newsletter-shape-2,
 .it-newsletter-shape-3,
@@ -13,11 +13,37 @@
   position: absolute;
   z-index: 1;
 }
+/* الشكل أعلى الركن */
+.it-newsletter-shape-1 {
+  top: 0;
+}
+
+/* الشكل أسفل الركن */
+.it-newsletter-shape-2 {
+  bottom: 0;
+}
+
+/* اللغة الإنجليزية */
+:dir(ltr) .it-newsletter-shape-1 {
+  left: 0; /* أو inset-inline-start: 0; */
+}
+:dir(ltr) .it-newsletter-shape-2 {
+  right: 0; /* أو inset-inline-end: 0; */
+}
+
+/* اللغة العربية */
+:dir(rtl) .it-newsletter-shape-1 {
+  left: 0;
+}
+:dir(rtl) .it-newsletter-shape-2 {
+  right: 0;
+}
+
 
 /* النجمة أسفل العنوان */
 .it-newsletter-shape-3 {
   bottom: 30px;
-  left: 80px;
+  inset-inline-start: 80px;
   animation: rotate 12s linear infinite;
   transform-origin: center;
 }
@@ -25,23 +51,12 @@
 /* الدواير بجانب الزرار */
 .it-newsletter-shape-4 {
   top: 20px;
-  right: 180px;
+  inset-inline-end: 180px;
   animation: rotate 10s linear infinite;
   transform-origin: center;
 }
 
-/* باقي الأشكال الثابتة */
-.it-newsletter-shape-1 {
-  top: 0;
-  left: 0;
-}
-
-.it-newsletter-shape-2 {
-  bottom: 0;
-  right: 0;
-}
-
-/* rotate animation */
+/* ================= Animation ================= */
 @keyframes rotate {
   from {
     transform: rotate(0deg);
@@ -50,16 +65,19 @@
     transform: rotate(360deg);
   }
 }
+
+/* ================= Right side (Input + Button) ================= */
 .it-newsletter-right {
   position: relative;
   width: 100%;
   max-width: 600px;
   margin: 1.5rem auto 0 auto;
+  text-align: end;
 }
 
 .it-newsletter-right input {
-  padding: 0 1rem;
-  padding-right: 160px;
+  padding-inline-start: 1rem;
+  padding-inline-end: 160px;
   border: none;
   outline: none;
   border-radius: 10px;
@@ -71,7 +89,7 @@
 .it-newsletter-right .it-btn {
   position: absolute;
   top: 50%;
-  right: 5px;
+  inset-inline-end: 5px;
   transform: translateY(-50%);
   padding: 10px 18px;
   border: none;
@@ -84,6 +102,7 @@
   z-index: 1000;
 }
 
+/* ================= Left side ================= */
 .it-newsletter-left h4 {
   font-size: clamp(1.8rem, 3vw, 2.25rem);
   font-weight: bold;

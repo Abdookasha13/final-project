@@ -15,38 +15,69 @@
     color: #0ab99d;
     }
     .it-section-title {
-    font-size: 38px;
-    font-weight: 700;
-    color: #0c2239;
-    position: relative;
-    z-index: 2;
-    }
-    .it-section-title .p-relative svg {
-    position: absolute;
-    bottom: -15px;
-    right: 0px;
-    z-index: -1;
-    }
-    /* ====== الأسهم ====== */
-    .it-testimonial-arrow {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 40px;
-    margin-left: 380px;
-    }
-    .it-testimonial-arrow button {
-    background: #0ab99d;
-    color: #fff;
-    border: none;
-    width: 45px;
-    height: 45px;
-    font-size: 18px;
-    cursor: pointer;
-    }
-    .it-testimonial-arrow button:hover {
-    background: #089b84;
-    }
+  font-size: 38px;
+  font-weight: 700;
+  color: #0c2239;
+  position: relative;
+}
+
+.title-highlight {
+  position: relative;
+  display: inline-block;
+  z-index: 1;
+}
+
+.title-highlight .title-shape {
+  position: absolute;
+  inset-inline-start: 0;   /* بدل left / right */
+  bottom: -12px;
+  z-index: -1;
+  width: 110%;
+}
+
+   /* ====== الأسهم ====== */
+.it-testimonial-arrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 40px;
+  margin-left: 0;
+  justify-content: flex-end; /* default LTR */
+}
+
+/* الأزرار */
+.it-testimonial-arrow button {
+  background: #0ab99d;
+  color: #fff;
+  border: none;
+  width: 45px;
+  height: 45px;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s;
+}
+
+.it-testimonial-arrow button:hover {
+  background: #089b84;
+}
+
+/* ====== RTL SUPPORT ====== */
+html[dir="rtl"] .it-testimonial-arrow {
+  justify-content: flex-end; /* يجعل الأسهم تبدأ من اليمين */
+  gap: 12px;
+}
+
+html[dir="rtl"] .it-testimonial-arrow button:first-child i {
+  transform: rotate(180deg); /* يعكس سهم اليسار */
+}
+
+html[dir="rtl"] .it-testimonial-arrow button:last-child i {
+  transform: rotate(180deg); /* يعكس سهم اليمين */
+}
+
     /* ====== صندوق التستيموني ====== */
     .it-testimonial-slide-wrap {
     background: #0c2239;
@@ -96,26 +127,114 @@
     margin-bottom: 15px;
     }
     /* ====== استجابة للموبايل ====== */
-    @media (max-width: 768px) {
-    .it-section-title {
-    font-size: 28px;
-    }
-    .it-testimonial-slide-wrap {
+   /* ===============================
+   TABLETS & SMALL LAPTOPS
+   =============================== */
+@media (max-width: 992px) {
+  .it-section-title {
+    font-size: 32px;
+  }
+
+  .it-testimonial-arrow {
+    justify-content: flex-start;
+    margin-top: 20px;
+  }
+
+  .it-testimonial-slide-wrap {
+    padding: 35px 25px;
+  }
+
+  .it-testimonial-slide-nav-active {
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 25px;
+  }
+
+  .it-testimonial-nav-item.active {
+    transform: scale(1.2);
+  }
+}
+
+/* ===============================
+   MOBILE & SMALL TABLETS
+   =============================== */
+@media (max-width: 768px) {
+  .it-testimonial-area {
+    padding: 70px 0 90px 0;
+  }
+
+  .it-section-title {
+    font-size: 26px;
+    line-height: 1.35;
+  }
+
+  .it-testimonial-title-box {
+    text-align: center;
+  }
+
+  .it-testimonial-arrow {
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+
+  .it-testimonial-slide-wrap {
     padding: 30px 20px;
-    }
-    .it-testimonial-slide-quote {
-    font-size: 35px;
-    }
-    .it-testimonial-nav-thumb img {
-    width: 55px;
-    height: 55px;
-    }
-    .it-section-title .p-relative svg {
-    bottom: -15px;
-    right: 0px;
-    }
-    .it-testimonial-arrow{
-    margin-left: 250px;
-    margin-bottom: 40px;
-    }
-    }
+  }
+
+  /* avatars تتحول أفقي */
+  .it-testimonial-slide-nav-active {
+    flex-direction: row;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 25px;
+  }
+
+  .it-testimonial-nav-thumb img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .it-testimonial-slide-info {
+    padding: 0;
+    text-align: center;
+  }
+
+  .it-testimonial-user-name {
+    font-size: 20px;
+  }
+
+  /* اقفل الشكل الكبير */
+  .it-testimonial-slide-quote,
+  .it-testimonial-shape-1 {
+    display: none;
+  }
+
+  .it-section-title .p-relative svg {
+    width: 120px;
+    bottom: -10px;
+    right: auto;
+    left: 0;
+  }
+}
+
+/* ===============================
+   SMALL MOBILES
+   =============================== */
+@media (max-width: 576px) {
+  .it-section-title {
+    font-size: 22px;
+  }
+
+  .it-testimonial-user-name {
+    font-size: 18px;
+  }
+
+  .it-testimonial-slide-info span {
+    font-size: 12px;
+  }
+
+  .it-testimonial-slide-info p {
+    font-size: 14px;
+    line-height: 24px;
+  }
+}
