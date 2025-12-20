@@ -12,6 +12,7 @@ import { ToastContainer, Zoom } from "react-toastify";
 import { useEffect, useState } from "react";
 import handleGetUserById from "../../../utilities/handleGetUserById";
 import { t } from "i18next";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 const InstructorDashboard = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -90,7 +91,7 @@ const InstructorDashboard = () => {
   return (
     <div className="d-flex">
       {/* Sidebar */}
-      <aside className="instructor-dash-sidebar bg-white border-end p-3 d-flex flex-column">
+      <aside className="instructor-dash-sidebar bg-white border-end p-3 d-flex flex-column d-none d-md-block">
         <div className="d-flex align-items-center mb-4">
           <img src="/Images/logo-nav.png" alt="logo" />
         </div>
@@ -189,6 +190,7 @@ const InstructorDashboard = () => {
                 width="70"
                 height="70"
               />
+              <GiHamburgerMenu className="ms-2 d-md-none" size={22} />
             </div>
           </div>
         </nav>

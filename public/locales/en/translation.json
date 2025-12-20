@@ -1,3 +1,4 @@
+
 {
   "navbar": {
     "home": "Home",
@@ -24,7 +25,10 @@
     "instructorDashboard": "Instructor Dashboard",
     "blogSidebar": "Blog Sidebar",
     "blogDetails": "Blog Details",
-    "logout": "Logout"
+    "logout": "Logout",
+    "Hudson,Wisconsin(WI),54016": "Hudson, Wisconsin (WI), 54016"
+   
+
   },
   "header": {
     "help": "Help",

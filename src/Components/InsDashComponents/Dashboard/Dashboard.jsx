@@ -124,7 +124,7 @@ const InstructorDashboard = () => {
       {/* Chart */}
       {courses.length > 0 && (
         <div className="mt-5">
-          <h5>{t("instructorDashboard.studentsCountPerCourse")}</h5>
+          <h5>{t("instructorDashboard.StudentscountperCourse")}</h5>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart
               data={courses}

@@ -109,12 +109,15 @@ const CourseCard = ({
       </div>
 
       <div
-        className="coursecard-itemcontent"
+        className="coursecard-itemcontent "
         style={{ flex: 1, display: "flex", flexDirection: "column" }}
       >
         {!isEnrollment && (
-          <div className="coursecard-rating d-flex gap-1">
-            <HalfStarRating rating={averageRating} />
+          <div className="coursecard-rating d-flex gap-1" >
+            <div dir="ltr">
+              <HalfStarRating rating={averageRating} />
+            </div>
+            
             <span>({averageRating.toFixed(1)})</span>
           </div>
         )}
@@ -193,7 +196,7 @@ const CourseCard = ({
           </div>
         ) : (
           <div
-            className="d-flex justify-content-between align-items-end"
+            className="d-flex justify-content-between align-items-end "
             style={{ marginTop: "auto" }}
           >
             {isEnrollment && progress > 0 && progress < 100 && (

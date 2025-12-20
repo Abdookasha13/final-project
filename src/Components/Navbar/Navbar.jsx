@@ -69,53 +69,37 @@ function Navbar() {
                         <li>
                           <NavLink to="/courses">{t("navbar.courses")}</NavLink>
                         </li>
-                        <li>
-                          <NavLink to="/course/details">
-                            {t("navbar.courseDetails")}
-                          </NavLink>
-                        </li>
+
                         <li>
                           <NavLink to="/teacher">{t("navbar.teacher")}</NavLink>
                         </li>
-                        <li>
-                          <NavLink to="stdprofile/mycourses">
-                            {t("navbar.studentProfile")}
-                          </NavLink>
-                        </li>
+
                         <li>
                           <NavLink to="/events">{t("navbar.event")}</NavLink>
                         </li>
                       </div>
                       <div>
                         <li>
-                          <NavLink to="/">{t("navbar.checkout")}</NavLink>
-                        </li>
-                        <li>
                           <NavLink to="/testimonial">
                             {t("navbar.testimonial")}
                           </NavLink>
                         </li>
-                        <li>
+                        {/* <li>
                           <NavLink to="/price">{t("navbar.price")}</NavLink>
-                        </li>
+                        </li> */}
                         <li>
                           <NavLink to="/cart">{t("navbar.cart")}</NavLink>
                         </li>
+                             <li>
+                          <NavLink to="/faqs">{t("navbar.faq")}</NavLink>
+                        </li>
                       </div>
 
-                      <div>
+                      {/* <div>
                         <li>
                           <NavLink to="/faqs">{t("navbar.faq")}</NavLink>
                         </li>
-                        <li>
-                          <NavLink to="*">{t("navbar.error")}</NavLink>
-                        </li>
-                        <li>
-                          <NavLink to="/instructor/dashboard">
-                            {t("navbar.instructorDashboard")}
-                          </NavLink>
-                        </li>
-                      </div>
+                      </div> */}
                     </ul>
                   </li>
                   {/* ============blog========================== */}

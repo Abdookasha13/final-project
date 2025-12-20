@@ -24,7 +24,9 @@
     "instructorDashboard": "لوحة تحكم المدرب",
     "blogSidebar": "المدونة - الشريط الجانبي",
     "blogDetails": "تفاصيل المدونة",
-    "logout": "تسجيل الخروج"
+    "logout": "تسجيل الخروج",
+    "Hudson,Wisconsin(WI),54016": "هادسون، ويسكونسن (WI)، 54016"
+ 
   },
   "header": {
     "help": "مساعدة",
