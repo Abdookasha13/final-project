@@ -69,9 +69,10 @@ const MyCourses = () => {
         getAxiosConfig()
       );
       const allCourses = res.data || [];
+      console.log("all courses:", allCourses);
 
       // فرّق بين enrolled و in progress
-      const enrolled = allCourses.filter((e) => e.progressPercentage === 0);
+      const enrolled = allCourses; // كل الـ courses اللي status: "in_progress"
       const inProgress = allCourses.filter(
         (e) => e.progressPercentage > 0 && e.progressPercentage < 100
       );
@@ -80,25 +81,28 @@ const MyCourses = () => {
       setInProgressCourses(inProgress);
 
       // جيب التقييمات
-
+      const ratingsMap = {};
+      allCourses.forEach((enrollment) => {
+        if (enrollment.course?._id) {
+          // ratingsMap[enrollment.course._id] = 0; // default
+        }
+      });
+      setUserRatings(ratingsMap);
     } catch (err) {
       console.error("Error fetching enrolled courses:", err);
       toast.error("Failed to load courses");
     }
   };
   const fetchMyReviews = async () => {
-  const res = await axios.get(
-    `${API_BASE}/my-reviews`,
-    getAxiosConfig()
-  );
+    const res = await axios.get(`${API_BASE}/my-reviews`, getAxiosConfig());
 
-  const ratingsMap = {};
-  res.data.data.forEach((review) => {
-    ratingsMap[review.course] = review.rating;
-  });
+    const ratingsMap = {};
+    res.data.data.forEach((review) => {
+      ratingsMap[review.course] = review.rating;
+    });
 
-  setUserRatings(ratingsMap);
-};
+    setUserRatings(ratingsMap);
+  };
 
   // جيب الكورسات المخلصة
   const fetchCompletedCourses = async () => {
@@ -108,6 +112,7 @@ const MyCourses = () => {
         getAxiosConfig()
       );
       setCompletedCourses(res.data || []);
+      console.log("completed courses:", res.data);
     } catch (err) {
       console.error("Error fetching completed courses:", err);
       toast.error("Failed to load completed courses");
@@ -161,7 +166,7 @@ const MyCourses = () => {
           fetchStats(),
           fetchAllEnrolledCourses(),
           fetchCompletedCourses(),
-           fetchMyReviews(),
+          fetchMyReviews(),
         ]);
       } catch (err) {
         console.error("Error fetching data:", err);
@@ -362,10 +367,7 @@ const MyCourses = () => {
                       enrollment.course.title?.[lang] ||
                       enrollment.course.title?.en
                     }
-                    insName={
-                      enrollment.course.instructor?.name?.[lang] ||
-                      enrollment.course.instructor?.name?.en
-                    }
+                    insName={enrollment.course.instructor?.name}
                     insImage={enrollment.course.instructor?.profileImage}
                     isEnrollment={true}
                     progress={100}

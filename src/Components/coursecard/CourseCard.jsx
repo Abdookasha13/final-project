@@ -1,5 +1,5 @@
 import "./CourseCard.css";
-import { BsCart3 } from "react-icons/bs";
+import { BsCart3, BsThreeDots } from "react-icons/bs";
 import { FaEdit, FaRegStar, FaStar, FaTrash, FaCheck } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import handleDeleteCourse from "../../utilities/handleDeleteCourse";
@@ -9,6 +9,8 @@ import { toast } from "react-toastify";
 import HalfStarRating from "../HalfStar/HalfStarRating";
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { CiSquareRemove } from "react-icons/ci";
+import { IoCloseSharp } from "react-icons/io5";
 
 const CourseCard = ({
   imgSrc,
@@ -34,6 +36,8 @@ const CourseCard = ({
   userRating = 0,
   onClick,
   progress = 0,
+  isWishlist=false,
+  onRemove
 }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -99,6 +103,15 @@ const CourseCard = ({
         height: "100%",
       }}
     >
+   {isWishlist && (
+  <IoCloseSharp  size={18} className=" align-self-end  mb-2" style={{cursor:"pointer"}}
+    onClick={(e) => {
+      e.stopPropagation(); 
+      onRemove(courseId);
+    }}
+  />
+)}
+ 
       <div className="coursecard-img">
         <img src={imgSrc} alt="" />
         {!isEnrollment && (

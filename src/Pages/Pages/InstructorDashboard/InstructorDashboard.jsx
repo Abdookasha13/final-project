@@ -3,7 +3,7 @@ import { Outlet, Link, NavLink, useLocation } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { MdOutlineDashboard, MdOutlinePlayLesson } from "react-icons/md";
 import { BsBook } from "react-icons/bs";
-import { IoIosAddCircleOutline } from "react-icons/io";
+import { IoIosAddCircleOutline, IoMdClose } from "react-icons/io";
 import { CgProfile } from "react-icons/cg";
 import { IoSettingsOutline } from "react-icons/io5";
 import { SlLogout } from "react-icons/sl";
@@ -15,6 +15,7 @@ import { t } from "i18next";
 import { GiHamburgerMenu } from "react-icons/gi";
 
 const InstructorDashboard = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [profileImage, setProfileImage] = useState("");
   const location = useLocation();
@@ -91,9 +92,18 @@ const InstructorDashboard = () => {
   return (
     <div className="d-flex">
       {/* Sidebar */}
-      <aside className="instructor-dash-sidebar bg-white border-end p-3 d-flex flex-column d-none d-md-block">
-        <div className="d-flex align-items-center mb-4">
+      <aside  className={`instructor-dash-sidebar bg-white border-end p-3 d-flex flex-column
+    ${isSidebarOpen ? "open" : ""}
+  `}>
+        <div className="d-flex align-items-center mb-4 justify-content-between">
           <img src="/Images/logo-nav.png" alt="logo" />
+            <button
+    className="btn d-md-none"
+    onClick={() => setIsSidebarOpen(false)}
+  >
+    <IoMdClose size={22} />
+
+  </button>
         </div>
 
         <ul className="nav flex-column mb-auto">
@@ -148,6 +158,12 @@ const InstructorDashboard = () => {
           </ul>
         </div>
       </aside>
+      {isSidebarOpen && (
+  <div
+    className="sidebar-overlay d-md-none"
+    onClick={() => setIsSidebarOpen(false)}
+  />
+)}
 
       {/* Main Area */}
       <div className="flex-grow-1 d-flex flex-column">
@@ -186,11 +202,11 @@ const InstructorDashboard = () => {
               <img
                 src={profileImage}
                 alt="Instructor"
-                className="rounded-circle"
+                className="rounded-circle profile-image"
                 width="70"
                 height="70"
               />
-              <GiHamburgerMenu className="ms-2 d-md-none" size={22} />
+              <GiHamburgerMenu className="ms-2 d-md-none" size={22}   onClick={() => setIsSidebarOpen(true)} />
             </div>
           </div>
         </nav>

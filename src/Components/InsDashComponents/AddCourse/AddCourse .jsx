@@ -6,6 +6,7 @@ import handleAddCourse from "../../../utilities/handleAddCourse";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import handleUpdateCourse from "../../../utilities/handleUpdateCourse";
 import { useTranslation } from "react-i18next";
+import "./AddCourse.css";
 
 const AddCourse = () => {
   const { t } = useTranslation();
@@ -116,17 +117,18 @@ const AddCourse = () => {
 
   return (
     <div className="container my-3">
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form className="courseform" onSubmit={handleSubmit(onSubmit)}>
         <div className="row g-4">
           {/* Left Column */}
           <div className="col-lg-8">
             <div className="card shadow-sm p-4 mb-4">
               {/* Title EN */}
-              <div className="mb-3">
+              <div className="mb-3 bg">
                 <label className="form-label fw-semibold">
                   {t("instructorDashboard.Title")}
                 </label>
                 <input
+                
                   placeholder="title(EN)"
                   type="text"
                   className={`form-control ${
@@ -362,7 +364,7 @@ const AddCourse = () => {
               <div className="form-check mb-3">
                 <input
                   type="checkbox"
-                  className="form-check-input"
+                  className="form-check-input p-0"
                   {...register("isFree")}
                 />
                 <label className="form-check-label">

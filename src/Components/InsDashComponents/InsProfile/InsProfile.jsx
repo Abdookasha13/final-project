@@ -68,7 +68,7 @@ const InsProfile = () => {
 
   return (
     <div className="container ">
-      <form onSubmit={handleSubmit(onSubmit)} className="row g-3">
+      <form  onSubmit={handleSubmit(onSubmit)} className="row g-3 courseform">
         <div className="col-md-6">
           <label className="form-label">
             {t("instructorDashboard.fullname")}

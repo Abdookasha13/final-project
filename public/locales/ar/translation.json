@@ -365,7 +365,8 @@
      "Intermediate":"متوسط", 
     "Advanced":"متقدم",
     "addtocart":"أضف إلى السلة",
-    "m":"د"
+    "m":"د",
+    "removeFromWishlist":"إزالة من قائمة الرغبات"
   }
   ,
    "courseCard":{

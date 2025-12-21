@@ -365,7 +365,8 @@
   "lessons":"Lessons",
     "Intermediate":"Intermediate", 
     "Advanced":"Advanced",
-    "m":"m"
+    "m":"m",
+    "removeFromWishlist":"Remove From Wishlist"
   },
 
   "courseCard":{
