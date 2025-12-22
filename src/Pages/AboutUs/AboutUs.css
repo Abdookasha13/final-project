@@ -1,166 +1,237 @@
-
-/* Images Styling (Cylinder/Elliptical Shape EXACT like design) */
-.it-about-4-thumb-wrap {
-  margin-right: 30px;
+/* =========================
+   GLOBAL FIX
+========================= */
+html,
+body {
+  overflow-x: hidden;
 }
 
+/* =========================
+   About Images Styling
+   Supports LTR & RTL
+========================= */
+
+/* Wrapper */
+.it-about-4-thumb-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-inline-end: 30px;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+/* RTL Fix */
+[dir="rtl"] .it-about-4-thumb-wrap {
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+  margin-inline-end: 0;
+  margin-inline-start: 30px;
+}
+
+/* Double images column */
+.it-about-4-thumb-double {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* RTL alignment for small images */
+[dir="rtl"] .it-about-4-thumb-double {
+  align-items: flex-end;
+}
+
+/* General image style */
 .it-about-4-thumb-double img,
 .it-about-4-thumb-single img {
-width: 230px;
-height: 320px;
-object-fit: cover;
-border-radius: 120px; 
+  width: 230px;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 120px;
 }
-/* Top/Bottom image size adjustments */
-.it-about-4-thumb-double img:first-child ,
-.it-about-4-thumb-double img:last-child{
-width: 180px;
-height: 290px;
+
+/* Top & bottom small images */
+.it-about-4-thumb-double img:first-child,
+.it-about-4-thumb-double img:last-child {
+  width: 180px;
+  height: 290px;
 }
-/* Center main big image */
+
+/* Main large image */
 .it-about-4-thumb-single img {
-width: 240px;
-height: 500px;
+  width: 240px;
+  height: 500px;
 }
+
+/* =========================
+   Text & Content Styling
+========================= */
+
 /* Subtitle */
 .it-section-subtitle {
-margin-bottom: 25px;
-font-size: 14px;
-font-weight: 600;
+  margin-bottom: 25px;
+  font-size: 14px;
+  font-weight: 600;
 }
+
 .subtitle-icon {
-width: 16px;
+  width: 16px;
 }
+
 /* Title */
 .it-section-title-3 {
-font-size: 36px;
-font-weight: 700;
-color: #00214d;
+  font-size: 36px;
+  font-weight: 700;
+  color: #00214d;
 }
+
 .it-section-title-3 span {
-color: #00b58b;
+  color: #00b58b;
 }
+
 /* Description */
 .it-about-desc {
-color: #687387;
-font-size: 16px;
+  color: #687387;
+  font-size: 16px;
 }
+
+/* Feature icon box */
 .it-about-4-list-icon {
-font-size: 22px;
-color: white;
-background: #00b58b;
-width: 48px;
-height: 48px;
-display: flex;
-justify-content: center;
-align-items: center;
-border-radius: 12px;
-flex-shrink: 0;
+  font-size: 22px;
+  color: #fff;
+  background: #00b58b;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  flex-shrink: 0;
 }
 
 .it-about-4-list-icon i {
-font-style: normal; /* Ensure flaticon text works */
-} */
-.it-about-4-list-icon {
-font-size: 24px;
-
+  font-style: normal;
 }
+
+/* Feature text */
 .it-about-3-mv-title {
-font-weight: 700;
-font-size: 18px;
+  font-weight: 700;
+  font-size: 18px;
 }
+
 .it-about-3-mv-item p {
-color: #687387;
-font-size: 15px;
-margin-top: 5px;
+  color: #687387;
+  font-size: 15px;
+  margin-top: 5px;
 }
-/* Right side bottom zigzag shape */
+
+/* Decorative shape */
 .it-about-3-left-shape-3 {
-position: absolute;
-right: 70px;
-bottom: -2px;
-z-index: -1;
-}
-/* Responsive */
-@media (max-width: 992px) {
-.large-img {
-  width: 180px;
-  height: 240px;
-}
-.small-img {
-  width: 130px;
-  height: 170px;
-}
-.it-section-title-3 {
-  font-size: 28px;
-}
-.it-section-subtitle{
-  margin-top: 35px;
-}
+  position: absolute;
+  right: 70px;
+  bottom: -2px;
+  z-index: -1;
 }
 
+/* RTL decorative fix */
+[dir="rtl"] .it-about-3-left-shape-3 {
+  right: auto;
+  left: 70px;
+}
 
-/*==========================================*/
+/* =========================
+   TEAM SECTION
+========================= */
 .it-team-3-area {
-position: relative;
-z-index: 1;
-padding-top: 100px;
-padding-bottom: 100px;
+  position: relative;
+  z-index: 1;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  overflow-x: hidden;
 }
+
 .it-team-3-bg {
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
 }
-/* Bootstrap هيتكفل بالتوزيع، نعدل فقط حجم الكارت */
+
+/* Bootstrap handles layout */
 .it-team-3-wrapper .col-xl-3,
 .it-team-3-wrapper .col-lg-4,
 .it-team-3-wrapper .col-md-6 {
-display: flex;
-justify-content: center;
-}
-.it-team-3-wrapper .col-xl-3 > * {
-width: 100%;
-max-width: 270px; 
-}
-/* Responsive adjustments */
-@media (max-width: 1200px) {
-.it-team-3-wrapper .col-xl-3 > * {
-  max-width: 250px;
-}
-}
-@media (max-width: 992px) {
-.it-team-3-wrapper .col-lg-4 > * {
-  max-width: 260px;
-}
-}
-@media (max-width: 768px) {
-.it-team-3-wrapper .col-md-6 > * {
-  max-width: 300px;
-}
-.it-about-4-thumb-wrap {
-  margin-right:0px;
+  display: flex;
+  justify-content: center;
 }
 
-.it-about-4-thumb-double img,
-.it-about-4-thumb-single img {
-width: 88px;
-height: 300px;
-object-fit: cover;
-border-radius: 120px; 
+.it-team-3-wrapper .col-xl-3 > * {
+  width: 100%;
+  max-width: 270px;
 }
-/* Top/Bottom image size adjustments */
-.it-about-4-thumb-double img:first-child ,
-.it-about-4-thumb-double img:last-child{
-width: 140px;
-height: 200px;
+
+/* =========================
+   RESPONSIVE FIXES
+========================= */
+
+/* Tablets */
+@media (max-width: 1200px) {
+  .it-team-3-wrapper .col-xl-3 > * {
+    max-width: 250px;
+  }
 }
-/* Center main big image */
-.it-about-4-thumb-single img {
-width: 200px;
-height: 350px;
+
+@media (max-width: 992px) {
+  .it-team-3-wrapper .col-lg-4 > * {
+    max-width: 260px;
+  }
+
+  .it-section-title-3 {
+    font-size: 28px;
+  }
+
+  .it-section-subtitle {
+    margin-top: 35px;
+  }
 }
+
+/* Mobile */
+@media (max-width: 576px) {
+  /* Bootstrap row overflow fix */
+  .row {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  /* About images wrapper */
+  .it-about-4-thumb-wrap {
+    margin-inline-start: 0 !important;
+    margin-inline-end: 0 !important;
+    justify-content: center;
+  }
+
+  /* Prevent image overflow */
+  .it-about-4-thumb-double img,
+  .it-about-4-thumb-single img {
+    max-width: 100%;
+  }
+
+  /* Image sizes (same design, safe width) */
+  .it-about-4-thumb-double img {
+    width: 140px;
+    height: 200px;
+  }
+
+  .it-about-4-thumb-single img {
+    width: 200px;
+    height: 350px;
+  }
+
+  /* RTL mobile fix */
+  [dir="rtl"] .it-about-4-thumb-wrap {
+    margin-inline-start: 0 !important;
+    margin-inline-end: 0 !important;
+  }
 }

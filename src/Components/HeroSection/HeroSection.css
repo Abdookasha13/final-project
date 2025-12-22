@@ -109,24 +109,28 @@
     z-index: 3;
   }
   
-  .it-hero-2-title {
-    font-size: 40px;
-    font-weight: 700;
-    color: #062a4d;
-  }
-  
-  .it-hero-2-title .title-shape svg {
-    position: absolute;
-    left: 170px;
-    top: -10px;
-    width: 110px;
-  }
-  
-  .it-hero-2-text p {
-    margin-top: 20px;
-    font-size: 12px;
-  }
-  
+.it-hero-2-title {
+  font-size: 40px;
+  font-weight: 700;
+  color: #062a4d;
+}
+
+.hero-word {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.hero-title-shape {
+  position: absolute;
+  inset-inline-start: -18px;   /* بدل left */
+  inset-block-start: 50%;
+  transform: translateY(-50%);
+  width: 110%;
+  z-index: -1;
+  pointer-events: none;
+}
+
   /* ======================================================
      PLAY BUTTON + HALO
   ====================================================== */
@@ -210,7 +214,7 @@
     100% { transform: scaleX(1); }
   }
   
-  @media (max-width: 990px) {
+  @media (max-width: 991px) {
   
     /* نخلي السكشن كله عمودي والكلام فوق والصورة تحت */
     .it-hero-2-area .row {
@@ -276,4 +280,24 @@
     }
   }
   
-  
+  @media (max-width: 551px) {
+  .it-hero-2-btn-box {
+    display: flex;
+    flex-direction: column; /* يحط العناصر فوق بعض */
+    align-items: center;
+    gap: 15px;
+  }
+
+  /* نخلي circle (play button) يظهر أولاً */
+  .it-hero-2-play {
+    order: -1; /* يظهر فوق الزرار */
+    margin-left: 0 !important; /* إزالة المسافة الجانبية */
+  }
+
+  /* الزرار يبقى بعده */
+  .it-hero-2-btn-box button {
+    order: 0;
+    width: 100%; /* اختياري لو تحب يوخد سطر كامل */
+    max-width: 250px; /* لتحديد عرض مناسب */
+  }
+}
