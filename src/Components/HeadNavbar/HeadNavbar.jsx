@@ -60,7 +60,13 @@ function HeadNavbar() {
                 <ToggleLanguage />
                 {token ? (
                   <div className="right-head-navbar">
-                    <div className="profile-section">
+
+                    <div className="profile-section" style={{ cursor: "pointer" }} onClick={() => {
+                      student?.role === "instructor" ? navigate("/instructor/dashboard")
+                        : navigate("/stdprofile/myCourses")
+                    }
+
+                    }>
                       {student?.profileImage && (
                         <img
                           src={student.profileImage}
@@ -68,10 +74,11 @@ function HeadNavbar() {
                           className="profile-image"
                         />
                       )}
-                      <button className="logout-btn" onClick={handleLogout}>
-                        {t("navbar.logout") || "Logout"}
-                      </button>
+
                     </div>
+                    <button className="logout-btn" onClick={handleLogout}>
+                      {t("navbar.logout") || "Logout"}
+                    </button>
                   </div>
                 ) : (
                   <div className="right-head-navbar">

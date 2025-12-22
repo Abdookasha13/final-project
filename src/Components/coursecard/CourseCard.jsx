@@ -1,5 +1,5 @@
 import "./CourseCard.css";
-import { BsCart3 } from "react-icons/bs";
+import { BsCart3, BsThreeDots } from "react-icons/bs";
 import { FaEdit, FaRegStar, FaStar, FaTrash, FaCheck } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import handleDeleteCourse from "../../utilities/handleDeleteCourse";
@@ -9,6 +9,8 @@ import { toast } from "react-toastify";
 import HalfStarRating from "../HalfStar/HalfStarRating";
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { CiSquareRemove } from "react-icons/ci";
+import { IoCloseSharp } from "react-icons/io5";
 
 const CourseCard = ({
   imgSrc,
@@ -34,6 +36,8 @@ const CourseCard = ({
   userRating = 0,
   onClick,
   progress = 0,
+  isWishlist=false,
+  onRemove
 }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -99,6 +103,15 @@ const CourseCard = ({
         height: "100%",
       }}
     >
+   {isWishlist && (
+  <IoCloseSharp  size={18} className=" align-self-end  mb-2" style={{cursor:"pointer"}}
+    onClick={(e) => {
+      e.stopPropagation(); 
+      onRemove(courseId);
+    }}
+  />
+)}
+ 
       <div className="coursecard-img">
         <img src={imgSrc} alt="" />
         {!isEnrollment && (
@@ -109,12 +122,15 @@ const CourseCard = ({
       </div>
 
       <div
-        className="coursecard-itemcontent"
+        className="coursecard-itemcontent "
         style={{ flex: 1, display: "flex", flexDirection: "column" }}
       >
         {!isEnrollment && (
-          <div className="coursecard-rating d-flex gap-1">
-            <HalfStarRating rating={averageRating} />
+          <div className="coursecard-rating d-flex gap-1" >
+            <div dir="ltr">
+              <HalfStarRating rating={averageRating} />
+            </div>
+            
             <span>({averageRating.toFixed(1)})</span>
           </div>
         )}
@@ -193,7 +209,7 @@ const CourseCard = ({
           </div>
         ) : (
           <div
-            className="d-flex justify-content-between align-items-end"
+            className="d-flex justify-content-between align-items-end "
             style={{ marginTop: "auto" }}
           >
             {isEnrollment && progress > 0 && progress < 100 && (

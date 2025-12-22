@@ -90,7 +90,7 @@ const AddLesson = () => {
     <div className="container my-3">
       <div className="card shadow-sm p-4">
         <div className="card-body">
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form className="courseform" onSubmit={handleSubmit(onSubmit)}>
             {/* Select Course */}
             <div className="mb-3">
               <label className="form-label">
@@ -182,7 +182,6 @@ const AddLesson = () => {
                   <option value="article">
                     {t("instructorDashboard.article")}
                   </option>
-                  <option value="quiz">{t("instructorDashboard.quiz")}</option>
                 </select>
                 {errors.type && (
                   <div className="invalid-feedback d-block">

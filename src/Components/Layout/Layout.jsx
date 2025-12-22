@@ -30,7 +30,7 @@ function Layout({ children }) {
         )}
 
       <ToastContainer
-        position="bottom-right"
+        position="top-center"
         autoClose={3000}
         transition={Zoom}
         hideProgressBar

@@ -7,6 +7,8 @@ import CourseCard from "../../../Components/coursecard/CourseCard";
 import Loader from "../../Loader/Loader";
 import formatTime from "../../../utilities/formatTime";
 import { fetchMultipleReviewStats } from "../../../Store/Slices/reviewsSlice";
+import removeFromWish from "../../../utilities/handleremovefromWish";
+import Button from "../../Button/Button";
 
 const Wishlist = () => {
   const { i18n } = useTranslation();
@@ -27,6 +29,8 @@ const Wishlist = () => {
     },
   });
 
+
+
   const fetchWishlist = async () => {
     if (!token) {
       setError("Please login to view wishlist");
@@ -37,10 +41,12 @@ const Wishlist = () => {
     setError(null);
 
     try {
-      console.log("📡 Fetching wishlist...");
+      console.log(" Fetching wishlist...");
       const res = await axios.get(`${API_BASE}/wishlist`, getAxiosConfig());
       if (res.data && res.data.wishlist) {
         setWishlist(res.data.wishlist);
+        console.log("annna",res.data.wishlist);
+        
         console.log(`✅ Loaded ${res.data.wishlist.length} courses`);
       }
     } catch (err) {
@@ -50,6 +56,16 @@ const Wishlist = () => {
       setLoading(false);
     }
   };
+
+    const handleRemoveFromWishlist = async (courseId) => {
+  const removed = await removeFromWish(courseId);
+
+  if (removed) {
+    setWishlist(prev =>
+      prev.filter(course => course._id !== courseId)
+    );
+  }
+};
 
   useEffect(() => {
     fetchWishlist();
@@ -73,17 +89,20 @@ const Wishlist = () => {
 
   if (wishlist.length === 0)
     return (
-      <div className="container mt-5 text-center">
-        <div className="alert alert-info" role="alert">
-          <h4>Your wishlist is empty</h4>
-          <p>Add courses to your wishlist to see them here</p>
+      <div className="container m-0 p-0 text-center">
+        <div className="" role="alert">
+             <img src="/Images/wish.png " className="py-3" width={"200px"} height={"200px"}></img>
+          <h3>Your wishlist is empty</h3>
+          <p >Add courses to your wishlist to see them here</p>
+          {/* <Button >Start Learning</Button> */}
+       
         </div>
       </div>
     );
 
   return (
     <div className="container py-4">
-      <h2 className="mb-4">My Wishlist ({wishlist.length})</h2>
+    
 
       <div className="row g-3">
         {wishlist.map((course) => (
@@ -97,10 +116,12 @@ const Wishlist = () => {
               courseDuration={formatTime(course.lessons) || 0}
               studentsCount={course.studentsCount || 0}
               courseId={course._id}
-              category={course.category?.name || "N/A"}
+              category={course.category?.name[lang] || "N/A"}
               insImage={course.instructor?.profileImage}
-              insName={course.instructor?.name || "Instructor"}
+              insName={course.instructor?.name }
               stats={reviewStats[course._id] || {}}
+              isWishlist={true}
+              onRemove={handleRemoveFromWishlist}
             />
           </div>
         ))}
