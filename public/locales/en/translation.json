@@ -1,3 +1,4 @@
+
 {
   "navbar": {
     "home": "Home",
@@ -24,7 +25,10 @@
     "instructorDashboard": "Instructor Dashboard",
     "blogSidebar": "Blog Sidebar",
     "blogDetails": "Blog Details",
-    "logout": "Logout"
+    "logout": "Logout",
+    "Hudson,Wisconsin(WI),54016": "Hudson, Wisconsin (WI), 54016"
+   
+
   },
   "header": {
     "help": "Help",
@@ -353,15 +357,16 @@
     "language": "Language",
     "Enrolled": "Enrolled",
     "courseDescription": "Course Description",
-    "whatWillILearn": "What Will I Learn From This Course",
-    "addToWishlist": "Add To Wishlist",
-    "English": "English",
-    "Beginner": "Beginner",
-    "addtocart": "Add to Cart",
-    "lessons": "Lessons",
-    "Intermediate": "Intermediate",
-    "Advanced": "Advanced",
-    "m": "m"
+    "whatWillILearn":"What Will I Learn From This Course",
+  "addToWishlist":"Add To Wishlist",
+  "English":"English",
+ "Beginner":"Beginner",
+  "addtocart":"Add to Cart",
+  "lessons":"Lessons",
+    "Intermediate":"Intermediate", 
+    "Advanced":"Advanced",
+    "m":"m",
+    "removeFromWishlist":"Remove From Wishlist"
   },
 
   "courseCard": {

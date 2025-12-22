@@ -4,6 +4,7 @@ import handleGetUserById from "../../../utilities/handleGetUserById";
 import getLessonsByIns from "../../../utilities/getLessonsByIns";
 import Loader from "../../Loader/Loader";
 import { useTranslation } from "react-i18next";
+import "./Dashboard.css";
 import {
   BarChart,
   Bar,
@@ -11,11 +12,11 @@ import {
   YAxis,
   Tooltip,
   ResponsiveContainer,
-  LabelList,
+  CartesianGrid,
 } from "recharts";
 
 const StatCard = ({ title, value, subtitle, iconClass }) => (
-  <div className="col-md-4 mb-3">
+  <div className="col-md-4 mb-3 statCard">
     <div className="card shadow-sm p-4 ">
       <div className=" card-body d-flex align-items-center">
         <div className="me-3">
@@ -42,6 +43,7 @@ const InstructorDashboard = () => {
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [chartVisible, setChartVisible] = useState(false);
 
   useEffect(() => {
     const loadDashboardData = async () => {
@@ -79,7 +81,6 @@ const InstructorDashboard = () => {
         console.error("Error loading dashboard:", err);
         setError("Failed to load dashboard data.");
       } finally {
-        // ✅ finally بيشتغل في كل الحالات
         setLoading(false);
       }
     };
@@ -87,12 +88,43 @@ const InstructorDashboard = () => {
     loadDashboardData();
   }, []);
 
+  useEffect(() => {
+    if (courses.length > 0) {
+      setChartVisible(true);
+    }
+  }, [courses]);
+
+  const CustomTooltip = ({ active, payload }) => {
+    if (active && payload && payload.length) {
+      return (
+        <div
+          style={{
+            background: "rgba(10, 185, 157, 0.95)",
+            padding: "12px 16px",
+            borderRadius: "8px",
+            color: "white",
+            boxShadow: "0 8px 24px rgba(10, 185, 157, 0.3)",
+            backdropFilter: "blur(10px)",
+          }}
+        >
+          <p style={{ margin: 0, fontWeight: "600" }}>
+            {payload[0].payload.title}
+          </p>
+          <p style={{ margin: "4px 0 0 0", fontSize: "14px" }}>
+            {payload[0].value} students
+          </p>
+        </div>
+      );
+    }
+    return null;
+  };
+
   if (loading) return <Loader />;
   if (error) return <div className="alert alert-danger">{error}</div>;
 
   return (
-    <div>
-      <div className="mb-4">
+    <div className=" p-5 shadow-sm " style={{backgroundColor:"#f4f7f7ff", borderRadius:"20px"}} >
+      <div className="mb-4 ">
         <h2>
           {t("instructorDashboard.welcomeBack")},{" "}
           {instructor?.name ?? "Instructor"}!
@@ -121,33 +153,104 @@ const InstructorDashboard = () => {
         />
       </div>
 
-      {/* Chart */}
+
       {courses.length > 0 && (
-        <div className="mt-5">
-          <h5>{t("instructorDashboard.studentsCountPerCourse")}</h5>
-          <ResponsiveContainer width="100%" height={300}>
+        <div
+          style={{
+            background: "white",
+            borderRadius: "16px",
+            padding: "32px",
+            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.07)",
+            border: "1px solid rgba(255, 255, 255, 0.8)",
+            marginTop: "40px",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              marginBottom: "24px",
+            }}
+          >
+            <h5
+              style={{
+                fontSize: "1.4rem",
+                color: "#1a1a1a",
+                fontWeight: "700",
+                margin: 0,
+              }}
+            >
+              Students by Course
+            </h5>
+            <span
+              style={{
+                background: "linear-gradient(135deg, #0ab99d 0%, #06a691 100%)",
+                color: "white",
+                padding: "6px 14px",
+                borderRadius: "20px",
+                fontSize: "0.75rem",
+                fontWeight: "600",
+                textTransform: "uppercase",
+              }}
+            >
+              Latest Data
+            </span>
+          </div>
+          <ResponsiveContainer width="100%" height={350}>
             <BarChart
               data={courses}
-              margin={{ top: 20, right: 30, left: 0, bottom: 5 }}
+              margin={{ top: 30, right: 30, left: 0, bottom: 20 }}
+              style={{
+                opacity: chartVisible ? 1 : 0,
+                transition: "opacity 0.6s",
+              }}
             >
-              <XAxis dataKey="title" />
-              <YAxis />
-              <Tooltip />
+              <defs>
+                <linearGradient id="barGradient" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="#0ab99d" />
+                  <stop offset="100%" stopColor="#06a691" />
+                </linearGradient>
+                <filter id="shadow">
+                  <feDropShadow
+                    dx="0"
+                    dy="4"
+                    stdDeviation="3"
+                    floodOpacity="0.2"
+                  />
+                </filter>
+              </defs>
+              <CartesianGrid
+                strokeDasharray="3 3"
+                stroke="#e0e0e0"
+                vertical={false}
+              />
+              <XAxis
+                dataKey="title"
+                tick={{ fill: "#666", fontSize: 12 }}
+                axisLine={{ stroke: "#e0e0e0" }}
+                tickLine={false}
+              />
+              <YAxis
+                tick={{ fill: "#666", fontSize: 12 }}
+                axisLine={{ stroke: "#e0e0e0" }}
+                tickLine={false}
+              />
+              <Tooltip
+                content={<CustomTooltip />}
+                cursor={{ fill: "transparent" }}
+              />
               <Bar
                 dataKey="studentsCount"
-                fill="#0ab99d"
-                radius={[10, 10, 0, 0]}
+                fill="url(#barGradient)"
+                radius={[12, 12, 0, 0]}
+                filter="url(#shadow)"
                 barSize={
-                  courses.length <= 4 ? 500 : courses.length <= 8 ? 40 : 30
+                  courses.length <= 4 ? 60 : courses.length <= 8 ? 45 : 35
                 }
-              >
-                <LabelList
-                  dataKey="studentsCount"
-                  position="top"
-                  fill="#333"
-                  fontSize={12}
-                />
-              </Bar>
+                animationDuration={1000}
+                animationBegin={200}
+              />
             </BarChart>
           </ResponsiveContainer>
         </div>

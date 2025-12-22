@@ -115,7 +115,7 @@ function Cart() {
                     </p>
                     {console.log(course.courseDuration)}
                     <ul className="course-meta d-flex gap-3 m-0 p-0 list-unstyled">
-                      <p>{course.courseDuration}</p>
+                      <p className="mt-3">{course.courseDuration}</p>
                       <li>{course.lessonsCount} lessons</li>
                       <li>All Levels</li>
                     </ul>
