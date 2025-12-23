@@ -10,8 +10,8 @@
     "contactUs": "Contact Us",
     "courses": "Courses",
     "courseDetails": "Course Details",
-    "teacher": "Teacher",
-    "teacherDetails": "Teacher Details",
+    "teacher": "Instructors",
+    "teacherDetails": "Instructor Details",
     "studentProfile": "Student Profile",
     "event": "Event",
     "checkout": "Checkout",
@@ -33,7 +33,20 @@
   "header": {
     "help": "Help",
     "support": "Support",
-    "contact": "Contact"
+    "contact": "Contact Us",
+    "about":"About Us",
+    "blog":"Blog",
+    "services":"Services",
+    "courses":"Courses",
+    "teacher":"Instructor",
+    "faqs":"FAQS",
+    "cart":"Cart",
+    "testimonial":"Testimonial",
+    "coursedetails":"Course Details",
+    "teacherDetails":"Instructor Details",
+    "stdmycourses":"My Courses",
+    "settings":"Settings"
+    
   },
   "hero": {
     "title": "Develop Your skills with online courses From A Pro",
@@ -209,16 +222,20 @@
     "locationValue": "Riverside 255, San Francisco, USA"
   },
   "studentProfile": {
+    "noenrolledxourses":"No Enrolled Courses",
     "logout": "Logout",
     "enrolledCourses": "Enrolled Courses",
-    "inProgressCourses": "In Progress Courses",
+    "inProgressCourses": "In Progress",
     "finishedCourses": "Finished Courses",
     "settings": "Settings",
     "wishlist": "Wishlist",
     "mycourses": "My Courses",
     "certificate": "Certificates",
     "Enrolled": "Enrolled",
-    "Finished": "Finished"
+    "Finished": "Finished",
+    "noEnrolledCourses":"No Enrolled Courses",
+    "nocoursesinprog":"No courses in progress",
+    "nofinishedcourses":"No finished courses"
   },
   "instructorDashboard": {
     "welcomeBack": "Welcome back",
@@ -407,7 +424,7 @@
   ],
   "teacherCard": {
   "defaultName": "Nathan Allen",
-  "role": "Teacher",
+  "role": "Instructor",
   "EstherBoyd": "Esther Boyd",
   "JamieKeller": "Jamie Keller",
   "JesusPendley": "Jesus Pendley",

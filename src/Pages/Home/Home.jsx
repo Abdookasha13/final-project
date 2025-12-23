@@ -9,10 +9,12 @@ import "./Home.css";
 import { useTranslation } from "react-i18next";
 import getAllServices from "../../utilities/getAllServices";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   const { t } = useTranslation();
   const [services, setServices] = useState([]);
+  const navigate=useNavigate()
 
   useEffect(() => {
     getAllServices(setServices);
@@ -207,7 +209,7 @@ function Home() {
                   </div>
                 </div>
 
-                <Button>{t("about.moreAboutUs")}</Button>
+                <Button onClick={()=>navigate("/about")}>{t("about.moreAboutUs")}</Button>
               </div>
             </div>
           </div>
@@ -273,7 +275,7 @@ function Home() {
                   <a href="tel:+91958423452">(+91)958423452</a>
                 </h3>
                 <div className="it-video-button">
-                  <Button>{t("video.joinWithUs")}</Button>
+                  <Button onClick={()=>navigate("/contact")}>{t("video.joinWithUs")}</Button>
                 </div>
               </div>
             </div>
@@ -478,8 +480,8 @@ function Home() {
                 </div>
 
                 <div className="it-team-button mb-5">
-                  <Button>{t("instructor.contactUs")}</Button>
-                  <Button>{t("instructor.exploreCourse")}</Button>
+                  <Button onClick={()=>navigate("/contact")}>{t("instructor.contactUs")}</Button>
+                  <Button onClick={()=>navigate("/Instructors")}>{t("instructor.exploreCourse")}</Button>
                 </div>
               </div>
             </div>

@@ -2,12 +2,29 @@ import { NavLink, useLocation } from "react-router-dom";
 import "./HeaderSection.css";
 import { useTranslation } from "react-i18next";
 export default function HeaderSection() {
+  const titleMap = {
+  "about": "header.about",
+  "contact": "header.contact",
+  "blog": "header.blog",
+  "services":"header.services",
+  "courses":"header.courses",
+  "Instructors":"header.teacher",
+  "faqs":"header.faqs",
+    "cart":"header.cart",
+      "testimonial":"header.testimonial",
+      "course/details":"header.coursedetails",
+      "Instructor/details":"header.teacherDetails",
+      "stdprofile/myCourses":"header.stdmycourses",
+      "stdprofile/settings":"header.settings"
+};
+
   const { t } = useTranslation();
   const { pathname } = useLocation();
   const parts = pathname.slice(1).split("/");
 
   if (parts.length > 2) parts.pop();
-  const headTitle = parts.join(" ");
+const headTitleKey = titleMap[parts.join("/")] || parts.join(" ");
+const headTitle = t(headTitleKey);
 
   return (
     <div className="header-section">

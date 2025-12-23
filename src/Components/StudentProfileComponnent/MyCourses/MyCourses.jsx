@@ -280,7 +280,7 @@ const MyCourses = () => {
               borderColor: activeTab === "inProgress" ? "#ffa500" : "#ddd",
             }}
           >
-            In Progress
+             {t("studentProfile.inProgressCourses")}
           </button>
         </li>
         <li className="nav-item">
@@ -352,7 +352,9 @@ const MyCourses = () => {
               ))}
             </div>
           ) : (
-            <p>No courses in progress</p>
+            <p>
+            {t("studentProfile.nocoursesinprog")}
+            </p>
           ))}
 
         {/* Finished Tab */}
@@ -380,7 +382,7 @@ const MyCourses = () => {
             </div>
           ) : (
             <p>
-              {t("studentProfile.noFinishedCourses") || "No finished courses"}
+              {t("studentProfile.finishedCourses") || "No finished courses"}
             </p>
           ))}
       </div>

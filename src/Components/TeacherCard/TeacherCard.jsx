@@ -29,7 +29,7 @@ const TeacherCard = ({
       <div
         className="it-team-3-thumb fix"
         onClick={() =>
-          teacherId && navigate(`/teacher/details/${teacherId}`)
+          teacherId && navigate(`/Instructor/details/${teacherId}`)
         }
         style={{ cursor: teacherId ? "pointer" : "default" }}
       >
