@@ -25,6 +25,8 @@ import StudentProfile from "./Pages/StudentProfile/StudentProfile";
 import Checkout from "./Components/Checkout/Checkout";
 import CoursePlayer from "./Components/StudentProfileComponnent/CoursePlayer/CoursePlayer";
 import GoogleSuccess from "./Components/google-success/google-success";
+import ResetPassword from "./Components/ResetPassword/ResetPassword";
+import ForgotPassword from "./Components/ForgotPassword/ForgotPassword";
 function Routess() {
   return (
     <>
@@ -58,6 +60,8 @@ function Routess() {
         <Route path="/checkout" element={<Checkout />} />
         <Route path="course/player/:courseId" element={<CoursePlayer />} />
         <Route path="/google-success" element={<GoogleSuccess />} />
+        <Route path="/forgot/password" element={<ForgotPassword />} />
+        <Route path="/reset/password/:token" element={<ResetPassword />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </>

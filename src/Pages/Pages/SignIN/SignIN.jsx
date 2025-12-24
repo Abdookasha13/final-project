@@ -78,9 +78,9 @@ export default function SignIN() {
 
           {/* Remember me / Forgot password */}
           <div className="d-flex justify-content-between align-items-center mb-4">
-            <a href="#" className="text-danger text-decoration-none">
+            <Link to="/forgot/password" className="text-danger text-decoration-none">
               {t("signIn.forgotPassword")}
-            </a>
+            </Link>
             <div className="form-check">
               <input
                 type="checkbox"
