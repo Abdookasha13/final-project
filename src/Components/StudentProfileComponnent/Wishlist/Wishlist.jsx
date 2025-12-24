@@ -40,6 +40,7 @@ const Wishlist = () => {
     setLoading(true);
     setError(null);
 
+
     try {
       console.log(" Fetching wishlist...");
       const res = await axios.get(`${API_BASE}/wishlist`, getAxiosConfig());

@@ -2,15 +2,26 @@ import  { useEffect, useState } from "react";
 import { FaRegHeart } from "react-icons/fa";
 import { IoBookOutline, IoSettingsOutline } from "react-icons/io5";
 import { TbLogout } from "react-icons/tb";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import "./StudentProfile.css";
 import handleGetUserById from "../../utilities/handleGetUserById";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+import { logout } from "../../Store/Slices/authSlice";
+import { clearCart } from "../../Store/Slices/cartSlice";
 
 const StudentProfile = () => {
   const { t } = useTranslation();
   const [student, setStudent] = useState(null);
   const [profileImage, setProfileImage] = useState(""); 
+    const dispatch=useDispatch();
+  const navigate=useNavigate()
+    const handleLogout = () => {
+      dispatch(logout());
+      dispatch(clearCart())
+ 
+      navigate("/");
+    };
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
@@ -54,7 +65,7 @@ const StudentProfile = () => {
                     }`
                   }
                 >
-                  <IoBookOutline className="me-2" fontSize="22px" />{" "}
+                  <IoBookOutline className="mx-2" fontSize="22px" />{" "}
                   {t("studentProfile.mycourses")}
                 </NavLink>
               </li>
@@ -72,7 +83,7 @@ const StudentProfile = () => {
                     }`
                   }
                 >
-                  <FaRegHeart className="me-2" fontSize="22px" />{" "}
+                  <FaRegHeart className="mx-2" fontSize="22px" />{" "}
                   {t("studentProfile.wishlist")}
                 </NavLink>
               </li>
@@ -85,22 +96,17 @@ const StudentProfile = () => {
                     }`
                   }
                 >
-                  <IoSettingsOutline className="me-2" fontSize="22px" />{" "}
+                  <IoSettingsOutline className="mx-2" fontSize="22px" />{" "}
                   {t("studentProfile.settings")}
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink
-                  to="logout"
-                  className={({ isActive }) =>
-                    `nav-link d-flex align-items-center p-2 rounded ${
-                      isActive ? "bg-site-color text-white" : "text-dark"
-                    }`
-                  }
-                >
-                  <TbLogout className="me-2" fontSize="22px" />{" "}
+                <button
+                 onClick={()=>handleLogout()}
+                  className="border-0  p-2 btn-logout "                >
+                  <TbLogout className="mx-2 " fontSize="22px" />{" "}
                   {t("studentProfile.logout")}
-                </NavLink>
+                </button>
               </li>
             </ul>
           </div>

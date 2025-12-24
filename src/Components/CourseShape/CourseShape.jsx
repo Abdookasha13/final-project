@@ -8,11 +8,13 @@ import formatTime from "../../utilities/formatTime";
 import { fetchMultipleReviewStats } from "../../Store/Slices/reviewsSlice";
 import { Loader } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 function CourseShape() {
   const { i18n } = useTranslation();
   const lang = i18n.language.startsWith("ar") ? "ar" : "en";
   const dispatch = useDispatch();
+  const navigate=useNavigate()
 
   const courses = useSelector((state) => state.getAllCourses.data || []);
   const isLoading = useSelector((state) => state.getAllCourses.isLoading);
@@ -146,7 +148,7 @@ function CourseShape() {
             <div className="col-xl-12">
               <div className="it-course-button text-center pt-45">
                 <div className="btn-placeholder pt-5">
-                  <Button>Learn More Course</Button>
+                  <Button onClick={()=>navigate("/courses")}>Learn More Course</Button>
                 </div>
               </div>
             </div>

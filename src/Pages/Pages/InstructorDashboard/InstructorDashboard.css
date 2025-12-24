@@ -3,8 +3,11 @@
   width: 250px;
   background: #fff;
   border-right: 1px solid #ddd;
+  z-index: 99;
 }
-
+.mainarea{
+    padding-left: 250px; 
+}
 .instructor-dash-sidebar .nav-link.active {
   background-color: #19bda230;
   color:#0ab99d;

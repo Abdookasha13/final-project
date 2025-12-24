@@ -31,7 +31,19 @@
   "header": {
     "help": "مساعدة",
     "support": "الدعم",
-    "contact": "اتصل"
+    "contact": "اتصل بنا",
+    "about":"من نحن",
+    "blog":"المدونة",
+    "services":"خدماتنا",
+    "courses":"الدورات",
+    "teacher":"المدربون",
+    "faqs":"الأسئلة الشائعة",
+    "cart":"السلة",
+    "testimonial":"آراء متدربينا",
+    "coursedetails":"تفاصيل الدورة",
+    "teacherDetails":"تفاصيل المدرب",
+    "stdmycourses":"دوراتي",
+    "settings":"الإعدادات"
   },
   "hero": {
     "title": "طور مهاراتك مع الدورات التدريبية عبر الإنترنت من محترف",
@@ -216,7 +228,10 @@
     "mycourses": "دوراتي",
     "certificate": "الشهادات",
     "Enrolled": "الدورات المسجلة",
-    "Finished": "الدورات المنتهية"
+    "Finished": "الدورات المنتهية",
+    "noEnrolledCourses":"لا يوجد دورات مسجل بها",
+    "nofinishedcourses":"لا توجد دورات منتهية",
+    "nocoursesinprog":"لم يتم بدء أي دورة"
   },
   "instructorDashboard": {
     "welcomeBack": "مرحباً بعودتك",

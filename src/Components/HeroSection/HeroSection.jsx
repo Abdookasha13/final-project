@@ -1,9 +1,12 @@
 import "./HeroSection.css";
 import Button from "../../Components/Button/Button";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+
 
 const HeroSection = () => {
   const { t } = useTranslation();
+  const navigate=useNavigate();
   return (
     <div
       className="it-hero-2-area it-hero-2-bg fix"
@@ -92,7 +95,7 @@ const HeroSection = () => {
                 <p>{t("hero.description")}</p>
 
                 <div className="it-hero-2-btn-box d-flex align-items-center">
-                  <Button>{t("hero.exploreAllCourses")}</Button>
+                  <Button onClick={()=>navigate("/courses")}>{t("hero.exploreAllCourses")}</Button>
 
                   <div className="it-hero-2-play">
                     <a

@@ -2,7 +2,17 @@
 .bg-site-color {
   background-color: #0ab99d !important;
 }
+.btn-logout{
+  background-color: white;
+  width: 220px;
+  border-radius: 5px;
+  text-align: left;
+}
+.btn-logout:hover{
+  background-color:  #d7eeea;
 
+
+}
 
 .sideBarr .nav-link:hover {
   background-color: #d7eeea;

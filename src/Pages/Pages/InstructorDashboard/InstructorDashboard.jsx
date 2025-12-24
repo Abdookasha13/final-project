@@ -1,5 +1,11 @@
 import "./InstructorDashboard.css";
-import { Outlet, Link, NavLink, useLocation } from "react-router-dom";
+import {
+  Outlet,
+  Link,
+  NavLink,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { MdOutlineDashboard, MdOutlinePlayLesson } from "react-icons/md";
 import { BsBook } from "react-icons/bs";
@@ -13,8 +19,18 @@ import { useEffect, useState } from "react";
 import handleGetUserById from "../../../utilities/handleGetUserById";
 import { t } from "i18next";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { useDispatch } from "react-redux";
+import { logout } from "../../../Store/Slices/authSlice";
 
 const InstructorDashboard = () => {
+  // const {  token } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleLogOut = () => {
+    dispatch(logout());
+
+    navigate("/home");
+  };
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [profileImage, setProfileImage] = useState("");
@@ -22,6 +38,7 @@ const InstructorDashboard = () => {
   const [_, setInstructor] = useState(null);
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
+    if (!user) return;
     const userId = user?._id;
     const fetchUser = async () => {
       const data = await handleGetUserById(userId);
@@ -81,29 +98,25 @@ const InstructorDashboard = () => {
       to: "/instructor/add/lessons",
       label: t("instructorDashboard.AddLesson"),
       icon: <MdOutlinePlayLesson fontSize="20px" className="me-3" />,
-    },
-    {
-      to: "/instructor/profile",
-      label: t("instructorDashboard.Profile"),
-      icon: <CgProfile fontSize="20px" className="me-3" />,
-    },
+    }
+
   ];
 
   return (
     <div className="d-flex">
       {/* Sidebar */}
-      <aside  className={`instructor-dash-sidebar bg-white border-end p-3 d-flex flex-column
-    ${isSidebarOpen ? "open" : ""}
-  `}>
+      <aside
+        className={`instructor-dash-sidebar bg-white border-end p-3 d-flex flex-column position-fixed    ${isSidebarOpen ? "open" : ""}
+  `}
+      >
         <div className="d-flex align-items-center mb-4 justify-content-between">
           <img src="/Images/logo-nav.png" alt="logo" />
-            <button
-    className="btn d-md-none"
-    onClick={() => setIsSidebarOpen(false)}
-  >
-    <IoMdClose size={22} />
-
-  </button>
+          <button
+            className="btn d-md-none"
+            onClick={() => setIsSidebarOpen(false)}
+          >
+            <IoMdClose size={22} />
+          </button>
         </div>
 
         <ul className="nav flex-column mb-auto">
@@ -147,26 +160,26 @@ const InstructorDashboard = () => {
               </NavLink>
             </li>
             <li>
-              <Link
-                to="/home"
-                className="nav-link text-secondary d-flex align-items-center"
+              <button
+                onClick={handleLogOut}
+                className="nav-link d-flex align-items-center text-secondary bg-transparent border-0"
               >
                 <RiLogoutCircleLine className="me-3" />
                 {t("instructorDashboard.Logout")}
-              </Link>
+              </button>
             </li>
           </ul>
         </div>
       </aside>
       {isSidebarOpen && (
-  <div
-    className="sidebar-overlay d-md-none"
-    onClick={() => setIsSidebarOpen(false)}
-  />
-)}
+        <div
+          className="sidebar-overlay d-md-none"
+          onClick={() => setIsSidebarOpen(false)}
+        />
+      )}
 
       {/* Main Area */}
-      <div className="flex-grow-1 d-flex flex-column">
+      <div className="flex-grow-1 d-flex flex-column mainarea">
         <nav className="navbar navbar-light bg-white border-bottom px-4 py-1">
           <div className="container-fluid">
             <h5 className="fw-bold mb-0">{pageTitle}</h5>
@@ -206,7 +219,11 @@ const InstructorDashboard = () => {
                 width="70"
                 height="70"
               />
-              <GiHamburgerMenu className="ms-2 d-md-none" size={22}   onClick={() => setIsSidebarOpen(true)} />
+              <GiHamburgerMenu
+                className="ms-2 d-md-none"
+                size={22}
+                onClick={() => setIsSidebarOpen(true)}
+              />
             </div>
           </div>
         </nav>

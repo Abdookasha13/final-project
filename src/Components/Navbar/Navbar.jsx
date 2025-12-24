@@ -71,7 +71,7 @@ function Navbar() {
                         </li>
 
                         <li>
-                          <NavLink to="/teacher">{t("navbar.teacher")}</NavLink>
+                          <NavLink to="/Instructors">{t("navbar.teacher")}</NavLink>
                         </li>
 
                         <li>

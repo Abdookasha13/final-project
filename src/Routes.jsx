@@ -39,10 +39,10 @@ function Routess() {
 
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/sidebar" element={<BlogSidebar />} />
-        <Route path="/teacher" element={<Teacher />} />
+        <Route path="/Instructors" element={<Teacher />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/blog/details" element={<BlogDetails />} />
-        <Route path="/teacher/details/:id" element={<TeacherDetails />} />
+        <Route path="/Instructor/details/:id" element={<TeacherDetails />} />
         <Route path="/courses" element={<Courses />} />
         <Route path="/events" element={<Event />} />
         <Route path="/faqs" element={<FAQ />} />

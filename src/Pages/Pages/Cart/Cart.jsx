@@ -113,7 +113,6 @@ function Cart() {
                     >
                       By {course.insName}
                     </p>
-                    {console.log(course.courseDuration)}
                     <ul className="course-meta d-flex gap-3 m-0 p-0 list-unstyled">
                       <p className="mt-3">{course.courseDuration}</p>
                       <li>{course.lessonsCount} lessons</li>
@@ -163,7 +162,7 @@ function Cart() {
           </Link>
           <p style={{ fontSize: "12px" }}>You won't be charged yet.</p>
           <hr />
-          <Button>Apply Coupon</Button>
+          {/* <Button>Apply Coupon</Button> */}
         </div>
       </div>
     </div>
