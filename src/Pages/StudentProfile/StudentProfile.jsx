@@ -42,7 +42,7 @@ const StudentProfile = () => {
           <img
             src={
               profileImage ||
-              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkAJEkJQ1WumU0hXNpXdgBt9NUKc0QDVIiaw&s"
+              "https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png"
             }
             width="100px"
             height="100px"

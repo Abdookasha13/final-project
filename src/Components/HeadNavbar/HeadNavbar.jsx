@@ -70,13 +70,11 @@ function HeadNavbar() {
                           : navigate("/stdprofile/myCourses");
                       }}
                     >
-                      {student?.profileImage && (
                         <img
-                          src={student.profileImage}
+                          src={student.profileImage || "https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png"}
                           alt="Profile"
                           className="profile-image"
                         />
-                      )}
                     </div>
                     <button className="logout-btn" onClick={handleLogout}>
                       <LuLogOut className="logout-icon" />
