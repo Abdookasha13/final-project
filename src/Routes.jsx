@@ -24,6 +24,7 @@ import SearchPage from "./Components/SearchPage/SearchPage";
 import StudentProfile from "./Pages/StudentProfile/StudentProfile";
 import Checkout from "./Components/Checkout/Checkout";
 import CoursePlayer from "./Components/StudentProfileComponnent/CoursePlayer/CoursePlayer";
+import GoogleSuccess from "./Components/google-success/google-success";
 function Routess() {
   return (
     <>
@@ -56,6 +57,7 @@ function Routess() {
         <Route path="/stdprofile" element={<StudentProfile />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="course/player/:courseId" element={<CoursePlayer />} />
+        <Route path="/google-success" element={<GoogleSuccess />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </>

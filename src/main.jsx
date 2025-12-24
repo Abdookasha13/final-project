@@ -1,4 +1,3 @@
-import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.jsx";
 import { Provider } from "react-redux";
@@ -6,7 +5,6 @@ import store from "./Store/store.js";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import "./18n.js";
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
     <Provider store={store}>
       <PayPalScriptProvider
         options={{
@@ -17,5 +15,4 @@ createRoot(document.getElementById("root")).render(
         <App />
       </PayPalScriptProvider>
     </Provider>
-  </StrictMode>
 );

@@ -88,16 +88,25 @@ ul {
 }
 
 .logout-btn {
-  background-color: #00c896;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  padding: 6px 14px;
+  background-color: transparent;
+  color: #00c896;
+  border: 1px solid #00c896;
+  border-radius: 5px;
+  padding: 8px 12px;
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.3s ease;
+}
+
+.logout-icon {
+  font-size: 15px;
 }
 
 .logout-btn:hover {
-  background-color: #00b089;
+  background-color: #00c896;
+  color: #fff;
 }

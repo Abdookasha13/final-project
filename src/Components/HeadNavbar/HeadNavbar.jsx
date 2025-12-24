@@ -5,6 +5,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../Store/Slices/authSlice";
 import { clearCart } from "../../Store/Slices/cartSlice";
+import { LuLogOut } from "react-icons/lu";
 
 function HeadNavbar() {
   const { t } = useTranslation();
@@ -60,13 +61,15 @@ function HeadNavbar() {
                 <ToggleLanguage />
                 {token ? (
                   <div className="right-head-navbar">
-
-                    <div className="profile-section" style={{ cursor: "pointer" }} onClick={() => {
-                      student?.role === "instructor" ? navigate("/instructor/dashboard")
-                        : navigate("/stdprofile/myCourses")
-                    }
-
-                    }>
+                    <div
+                      className="profile-section"
+                      style={{ cursor: "pointer" }}
+                      onClick={() => {
+                        student?.role === "instructor"
+                          ? navigate("/instructor/dashboard")
+                          : navigate("/stdprofile/myCourses");
+                      }}
+                    >
                       {student?.profileImage && (
                         <img
                           src={student.profileImage}
@@ -74,10 +77,10 @@ function HeadNavbar() {
                           className="profile-image"
                         />
                       )}
-
                     </div>
                     <button className="logout-btn" onClick={handleLogout}>
-                      {t("navbar.logout") || "Logout"}
+                      <LuLogOut className="logout-icon" />
+                      <span>{t("navbar.logout") || "Logout"}</span>
                     </button>
                   </div>
                 ) : (

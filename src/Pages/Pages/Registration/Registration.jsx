@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import handleImageUpload from "../../../utilities/handleImageUpload";
 import handleRegistrationSubmit from "../../../utilities/handleRegistrationSubmit";
 import { useTranslation } from "react-i18next";
+import { FaGoogle } from "react-icons/fa";
 
 const Registration = () => {
   const { t } = useTranslation();
@@ -217,6 +218,18 @@ const Registration = () => {
                 {t("registration.becomeInstructor")}
               </label>
             </div>
+
+            {/* Sign with Google Button */}
+            <button
+              type="button"
+              className="google-signin-btn"
+              onClick={() =>
+                (window.location.href = "http://localhost:1911/auth/google")
+              }
+            >
+              <FaGoogle className="google-icon" />
+              <span>Sign in with Google</span>
+            </button>
 
             {/* Submit */}
             <button type="submit" className="border-0 bg-transparent p-0">

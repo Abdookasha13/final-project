@@ -32,3 +32,34 @@ select:focus {
   box-shadow: none !important;
   border-color: #ccc !important;
 }
+/* Google Sign-in Button */
+.google-signin-btn {
+  width: 100%;
+  padding: 12px 16px;
+  margin-top: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  color: #1f2937;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.google-icon {
+  font-size: 16px;
+  color: #1f2937;
+}
+
+.google-signin-btn:hover {
+  background-color: #f3f4f6;
+  border-color: #d1d5db;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
