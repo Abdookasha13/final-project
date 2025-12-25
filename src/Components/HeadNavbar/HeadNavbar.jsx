@@ -25,40 +25,15 @@ function HeadNavbar() {
         <div className="container">
           <div className="row align-items-center">
             {/* ================left head navbar================== */}
-            <div className="col-md-5 col-lg-5 col-xl-8">
+            <div className="col-4 col-md-5 col-lg-5 col-xl-8">
               <div className="left-head-navbar">
-                <ul className="text-center text-sm-start">
-                  <li className="d-none d-xl-inline-block">
-                    <a href="tel:(00)8757845682">
-                      <span>
-                        <i className="fa-solid fa-phone-volume"></i>
-                      </span>
-                      (00) 875 784 5682
-                    </a>
-                  </li>
-                  <li className="d-none d-xl-inline-block">
-                    <a href="mailto:pacargoinfo@gmail.com">
-                      <span>
-                        <i className="fa-solid fa-envelope-open-text"></i>
-                      </span>
-                      pacargoinfo@gmail.com
-                    </a>
-                  </li>
-                  <li className="d-none d-md-inline-block">
-                    <a href="#">
-                      <span>
-                        <i className="fa-solid fa-map-marker-alt"></i>
-                      </span>
-                      Hudson, Wisconsin(WI), 54016
-                    </a>
-                  </li>
-                </ul>
+                <ToggleLanguage />
               </div>
             </div>
             {/* ================right head navbar================== */}
-            <div className="col-12 col-md-7 col-lg-7 col-xl-4">
+            <div className="col-8 col-md-7 col-lg-7 col-xl-4">
               <div className="text-end d-flex align-items-center justify-content-end gap-3">
-                <ToggleLanguage />
+                
                 {token ? (
                   <div className="right-head-navbar">
                     <div

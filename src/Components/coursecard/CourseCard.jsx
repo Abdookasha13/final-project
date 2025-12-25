@@ -199,7 +199,7 @@ const CourseCard = ({
                     <div className="added-checkmark">
                       <FaCheck />
                     </div>
-                    <span>{t("courseCard.AddedtoCart")}</span>
+                    <div>{t("courseCard.AddedtoCart")}</div>
                   </div>
                 ) : (
                   <button
