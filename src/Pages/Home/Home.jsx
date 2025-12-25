@@ -12,11 +12,13 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CategoryCard from "../../Components/CategoryCard/CategoryCard";
 import getAllCategories from "../../utilities/getAllCategories";
+import getAllInstructors from "../../utilities/getAllInstructors";
 
 function Home() {
   const { t } = useTranslation();
 
   const [categories, setCategories] = useState([]);
+  const [instructors, setInstructors] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -25,6 +27,13 @@ function Home() {
       setCategories(res);
     };
     fetchCategory();
+  }, []);
+
+  useEffect(() => {
+    const fetchIns = async () => {
+      await getAllInstructors(setInstructors);
+    };
+    fetchIns();
   }, []);
 
   return (
@@ -501,85 +510,69 @@ function Home() {
             </div>
 
             <div className="col-xl-7 col-lg-7">
-              <div className="it-team-right-box">
+              <div className="it-team-right-box ">
                 <div className="row">
-                  {[
-                    {
-                      img: "https://ordainit.com/html/educate/assets/img/team/team-1-1.png",
-                      name: "Esther Howard",
-                      role: "Junior Instructor",
-                    },
-                    {
-                      img: "https://ordainit.com/html/educate/assets/img/team/team-1-2.png",
-                      name: "Beverly Hathcock",
-                      role: "Junior Instructor",
-                    },
-                    {
-                      img: "https://ordainit.com/html/educate/assets/img/team/team-1-3.png",
-                      name: "Donald Gonzales",
-                      role: "Junior Instructor",
-                    },
-                    {
-                      img: "https://ordainit.com/html/educate/assets/img/team/team-1-4.png",
-                      name: "Eddie Lenz",
-                      role: "Junior Instructor",
-                    },
-                  ].map((t, i) => (
-                    <div key={i} className="col-xl-6 col-lg-6 col-md-6 mb-30">
-                      <div className="it-team-item">
-                        <div className="it-team-thumb-box p-relative">
-                          <div className="it-team-thumb">
-                            <img src={t.img} alt="team" />
-                          </div>
-
-                          <div className="it-team-social-box">
-                            <button>
-                              <i className="fa-solid fa-share-nodes"></i>
-                            </button>
-                            <div className="it-team-social">
-                              <a href="#">
-                                <i className="fa-brands fa-facebook"></i>
-                              </a>
-                              <a href="#">
-                                <i className="fa-brands fa-pinterest-p"></i>
-                              </a>
-                              <a href="#">
-                                <i className="fa-brands fa-instagram"></i>
-                              </a>
-                              <a href="#">
-                                <i className="fa-brands fa-linkedin"></i>
-                              </a>
+                  {instructors
+                    .map((i) => (
+                      <div
+                        key={i._id}
+                        className="col-xl-6 col-lg-6 col-md-6 mb-30 "
+                      >
+                        <div className="it-team-item">
+                          <div className="it-team-thumb-box p-relative ">
+                            <div className="it-team-thumb">
+                              <img src={i.profileImage} alt="team" />
                             </div>
-                          </div>
 
-                          <div className="it-team-author-box d-flex align-items-center justify-content-between">
-                            <div className="it-team-author-info">
-                              <h5 className="it-team-author-name">
-                                <a href="teacher-details.html">{t.name}</a>
-                              </h5>
-                              <span>{t.role}</span>
+                            <div className="it-team-social-box">
+                              <button>
+                                <i className="fa-solid fa-share-nodes"></i>
+                              </button>
+                              <div className="it-team-social">
+                                <a href="#">
+                                  <i className="fa-brands fa-facebook"></i>
+                                </a>
+                                <a href="#">
+                                  <i className="fa-brands fa-pinterest-p"></i>
+                                </a>
+                                <a href="#">
+                                  <i className="fa-brands fa-instagram"></i>
+                                </a>
+                                <a href="#">
+                                  <i className="fa-brands fa-linkedin"></i>
+                                </a>
+                              </div>
                             </div>
-                            <div className="it-team-link">
-                              <a href="teacher-details.html">
-                                <svg
-                                  width="21"
-                                  height="8"
-                                  viewBox="0 0 21 8"
-                                  fill="none"
-                                  xmlns="http://www.w3.org/2000/svg"
-                                >
-                                  <path
-                                    d="M20.3536 4.35355C20.5488 4.15829 20.5488 3.84171 20.3536 3.64645L17.1716 0.464466C16.9763 0.269204 16.6597 0.269204 16.4645 0.464466C16.2692 0.659728 16.2692 0.976311 16.4645 1.17157L19.2929 4L16.4645 6.82843C16.2692 7.02369 16.2692 7.34027 16.4645 7.53553C16.6597 7.7308 16.9763 7.7308 17.1716 7.53553L20.3536 4.35355ZM0 4.5H20V3.5H0V4.5Z"
-                                    fill="currentColor"
-                                  />
-                                </svg>
-                              </a>
+
+                            <div className="it-team-author-box d-flex align-items-center justify-content-between">
+                              <div className="it-team-author-info">
+                                <h5 className="it-team-author-name">
+                                  <a href="teacher-details.html">{i.name}</a>
+                                </h5>
+                                <span>{i.expertise}</span>
+                              </div>
+                              <div className="it-team-link">
+                                <a href="teacher-details.html">
+                                  <svg
+                                    width="21"
+                                    height="8"
+                                    viewBox="0 0 21 8"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <path
+                                      d="M20.3536 4.35355C20.5488 4.15829 20.5488 3.84171 20.3536 3.64645L17.1716 0.464466C16.9763 0.269204 16.6597 0.269204 16.4645 0.464466C16.2692 0.659728 16.2692 0.976311 16.4645 1.17157L19.2929 4L16.4645 6.82843C16.2692 7.02369 16.2692 7.34027 16.4645 7.53553C16.6597 7.7308 16.9763 7.7308 17.1716 7.53553L20.3536 4.35355ZM0 4.5H20V3.5H0V4.5Z"
+                                      fill="currentColor"
+                                    />
+                                  </svg>
+                                </a>
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    ))
+                    .slice(0, 3)}
                 </div>
               </div>
             </div>

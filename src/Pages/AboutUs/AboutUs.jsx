@@ -6,9 +6,18 @@ import Testimonials from "../../Components/Testimonials/Testimonials.jsx";
 import Funfact from "../../Components/Funfact/Funfact.jsx";
 import CourseShape from "../../Components/CourseShape/CourseShape.jsx";
 import { useTranslation } from "react-i18next";
+import { useEffect, useState } from "react";
+import getAllInstructors from "../../utilities/getAllInstructors.js";
 
 function AboutUs() {
   const { t } = useTranslation();
+  const [instructors, setInstructors] = useState([]);
+  useEffect(() => {
+    const fetchIns = async () => {
+      await getAllInstructors(setInstructors);
+    };
+    fetchIns();
+  }, []);
 
   return (
     <>
@@ -146,27 +155,13 @@ function AboutUs() {
                   {t("instructor.subtitle")}
                 </h2>
                 <div className="it-team-3-wrapper row justify-content-center">
-                  <div className="col-xl-3 col-lg-4 col-md-6 mb-30">
-                    <TeacherCard className="al-card-color" />
-                  </div>
-                  <div className="col-xl-3 col-lg-4 col-md-6 mb-30">
-                    <TeacherCard 
-                      imgSrc="https://ordainit.com/html/educate/assets/img/team/team-3-2.jpg"
-                      title={t("teacherCard.EstherBoyd")}
-                    />
-                  </div>
-                  <div className="col-xl-3 col-lg-4 col-md-6 mb-30">
-                    <TeacherCard 
-                      imgSrc="https://ordainit.com/html/educate/assets/img/team/team-3-3.jpg"
-                      title={t("teacherCard.JamieKeller")}
-                    />
-                  </div>
-                  <div className="col-xl-3 col-lg-4 col-md-6 mb-30">
-                    <TeacherCard 
-                      imgSrc="https://ordainit.com/html/educate/assets/img/team/team-3-4.jpg"
-                      title={t("teacherCard.JesusPendley")}
-                    />
-                  </div>
+                  {instructors
+                    .map((ins) => (
+                      <div className="col-xl-3 col-lg-4 col-md-6 mb-30">
+                        <TeacherCard instructor={ins} />
+                      </div>
+                    ))
+                    .slice(0, 3)}
                 </div>
               </div>
             </div>
