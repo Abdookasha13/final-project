@@ -303,7 +303,7 @@ const AddLesson = () => {
                   render={({ field }) => (
                     <div className="form-check form-switch mt-4">
                       <input
-                        className="form-check-input"
+                        className="form-check-input "
                         type="checkbox"
                         {...field}
                         id="previewSwitch"
