@@ -1,4 +1,3 @@
-/* ============ GENERAL FORM STYLES ============ */
 .courseform {
   animation: fadeIn 0.6s ease-out;
 }
@@ -16,18 +15,17 @@
   max-width: 1200px;
 }
 
-/* ============ FORM CARDS ============ */
 .courseform .card {
-  border: 1px solid #e0e9e5 !important;
-  border-radius: 16px !important;
-  box-shadow: 0 2px 12px rgba(10, 185, 157, 0.08) !important;
+  border: 1px solid #e0e9e5;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(10, 185, 157, 0.08);
   transition: all 0.3s ease;
-  background: white !important;
+  background: white;
 }
 
 .courseform .card:hover {
-  box-shadow: 0 8px 24px rgba(10, 185, 157, 0.12) !important;
-  border-color: #0ab99d !important;
+  box-shadow: 0 8px 24px rgba(10, 185, 157, 0.12);
+  border-color: #0ab99d;
 }
 
 .courseform .card h6 {
@@ -37,9 +35,8 @@
   letter-spacing: -0.3px;
 }
 
-/* ============ FORM LABELS ============ */
 .courseform .form-label {
-  color: #2c3e50 !important;
+  color: #2c3e50;
   font-weight: 600;
   font-size: 14px;
   margin-bottom: 10px;
@@ -47,11 +44,10 @@
   text-transform: capitalize;
 }
 
-/* ============ FORM INPUTS & TEXTAREA ============ */
 .courseform input,
 .courseform textarea,
 .courseform select {
-  border: 1.5px solid #e0e9e5 !important;
+  border: 1.5px solid #e0e9e5;
   border-radius: 10px;
   padding: 12px 16px;
   resize: none;
@@ -72,7 +68,7 @@
 .courseform input:hover,
 .courseform textarea:hover,
 .courseform select:hover {
-  border-color: #0ab99d !important;
+  border-color: #0ab99d;
   background: white;
 }
 
@@ -91,7 +87,6 @@
   line-height: 1.6;
 }
 
-/* ============ FORM VALIDATION ============ */
 .courseform .is-invalid {
   border-color: #dc3545 !important;
 }
@@ -120,8 +115,7 @@
   }
 }
 
-/* ============ FILE UPLOAD ============ */
-.custom-file-upload {
+.courseform .custom-file-upload {
   position: relative;
   margin-bottom: 12px;
 }
@@ -130,7 +124,7 @@
   display: none;
 }
 
-.upload-btn {
+.courseform .upload-btn {
   display: inline-block;
   width: 100%;
   padding: 32px 16px;
@@ -146,14 +140,14 @@
   margin-bottom: 0;
 }
 
-.upload-btn:hover {
+.courseform .upload-btn:hover {
   background: linear-gradient(135deg, #f0fdf9 0%, #e8f8f5 100%);
   border-color: #088a71;
-  color: #088a71;
+  color: #408e7e;
   transform: translateY(-2px);
 }
 
-.upload-btn:active {
+.courseform .upload-btn:active {
   transform: translateY(0);
 }
 
@@ -169,30 +163,30 @@
   border-color: #0ab99d;
 }
 
-/* ============ CHECKBOX ============ */
 .courseform .form-check {
-  padding: 12px;
+  padding: 22px 42px;
   background: #fafbfc;
   border-radius: 8px;
   transition: all 0.3s ease;
 }
 
-.courseform .form-check:hover {
+/* .courseform .form-check:hover {
   background: #f0fdf9;
-}
+} */
 
 .courseform .form-check-input {
   width: 20px;
   height: 20px;
   margin-top: 2px;
   cursor: pointer;
-  border: 1.5px solid #e0e9e5 !important;
+  border: 1.5px solid #e0e9e5;
   border-radius: 5px;
   transition: all 0.3s ease;
+  padding: 10px 12px;
 }
 
 .courseform .form-check-input:checked {
-  background-color: #0ab99d !important;
+  /* background-color: #0ab99d !important; */
   border-color: #0ab99d !important;
   box-shadow: 0 2px 6px rgba(10, 185, 157, 0.25);
 }
@@ -201,17 +195,17 @@
   box-shadow: 0 0 0 4px rgba(10, 185, 157, 0.12) !important;
 }
 
-/* .courseform .form-check-label {
+.courseform .form-check-label {
   color: #2c3e50;
   font-weight: 500;
   font-size: 14px;
   margin-bottom: 0;
   cursor: pointer;
   margin-left: 8px;
-} */
+}
 
 /* ============ BUTTONS ============ */
-.courseform .d-flex.justify-content-end {
+.courseform .btns {
   gap: 12px;
   margin-top: 32px;
   padding-top: 24px;

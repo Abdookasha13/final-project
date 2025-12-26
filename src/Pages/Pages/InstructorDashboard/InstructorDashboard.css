@@ -4,17 +4,17 @@
   background: linear-gradient(135deg, #ffffff 0%, #fcfffe 100%);
   border-right: none;
   z-index: 99;
-  box-shadow: 0 8px 32px rgba(10, 185, 157, 0.15);
+  box-shadow: 0 8px 32px rgba(177, 176, 176, 0.15);
   padding: 0;
-  color: white;
+  color: rgb(184, 182, 182);
 }
 
 .sidebar-header {
-  padding: 24px 20px;
+  padding: 5px 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(43, 43, 43, 0.1);
 }
 
 .logodash {
@@ -72,7 +72,7 @@
   z-index: 1040;
 } */
 
-.profile-image {
+.insdash .profile-image {
   width: 50px;
   height: 50px;
   border: 2px solid #e0e9e5;
@@ -80,7 +80,7 @@
   cursor: pointer;
 }
 
-.profile-image:hover {
+.insdash .profile-image:hover {
   border-color: #0ab99d;
   transform: scale(1.05);
 }
@@ -88,7 +88,7 @@
 /* ============ NAVBAR ============ */
 .insdash .navbar {
   background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
-  box-shadow: 0 2px 12px rgba(10, 185, 157, 0.1);
+  box-shadow: 0 8px 32px rgba(177, 176, 176, 0.15);
   border-bottom: 1px solid #e0e9e5;
   padding: 0.5rem;
 }
@@ -101,18 +101,19 @@
 }
 
 .insdash .navbar .btn {
-  background-color: #0ab99d !important;
-  color: white !important;
+  background-color: #0ab99d;
+  color: white;
   border: none;
   border-radius: 8px;
   padding: 10px 20px;
   font-weight: 600;
-  font-size: 13px;
+  font-size: 14px;
+  width: 130px;
   transition: all 0.3s ease;
   box-shadow: 0 4px 12px rgba(10, 185, 157, 0.3);
 }
 
-.navbar .btn:hover {
+.insdash .navbar .btn:hover {
   background-color: #088a71 !important;
   transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(10, 185, 157, 0.4);
@@ -141,7 +142,7 @@
   background: linear-gradient(135deg, #f8f9fc 0%, #f1f4f9 100%);
   /* padding: 32px; */
   flex-grow: 1;
-  overflow-y: auto;
+  /* overflow-y: auto; */
 }
 
 /* main {
