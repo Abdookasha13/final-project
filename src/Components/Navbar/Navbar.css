@@ -89,7 +89,7 @@
 }
 
 .pages-menue {
-  width: 1000px;
+  width: 400px;
   display: flex;
   align-items: first baseline !important;
   justify-content: space-evenly;

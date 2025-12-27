@@ -189,14 +189,14 @@ const CourseCard = ({
               <span className="price">{price}</span>
             </div>
 
-            {!hideCartButton &&
-              (isAdded ? (
-                <div className="coursecard-added-success">
-                  <div className="added-checkmark">
-                    <FaCheck />
-                  </div>
-                  <span>{t("courseCard.AddedtoCart")}</span>
-                </div>
+              {!hideCartButton &&
+                (isAdded ? (
+                  <div className="coursecard-added-success">
+                    <div className="added-checkmark">
+                      <FaCheck />
+                    </div>
+                    <div>{t("courseCard.AddedtoCart")}</div>
+                 </div>
               ) : (
                 <button
                   onClick={(e) => {

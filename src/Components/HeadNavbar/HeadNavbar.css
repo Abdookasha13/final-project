@@ -27,27 +27,6 @@ ul {
   padding: 0 !important;
 }
 
-/* ======= Left side ======= */
-
-.left-head-navbar ul li {
-  display: inline-block;
-  padding-right: 20px;
-  border-right: 1px solid #41576d;
-  margin-right: 20px;
-}
-
-.left-head-navbar ul li:last-child {
-  border-right: none;
-  margin-right: 0;
-  padding-right: 0;
-}
-
-.left-head-navbar i {
-  color: #00c896;
-  margin-right: 6px;
-  font-size: 14px;
-}
-
 /* ======= Right side ======= */
 
 .right-head-navbar {
