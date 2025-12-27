@@ -121,10 +121,10 @@ const AddCourse = () => {
         <div className="row g-4">
           {/* Left Column */}
           <div className="col-lg-8">
-            <div className="card shadow-sm p-4 mb-4">
+            <div className="card  p-4 mb-4">
               {/* Title EN */}
-              <div className="mb-3 bg">
-                <label className="form-label fw-semibold">
+              <div className="mb-3 ">
+                <label className="form-label ">
                   {t("instructorDashboard.Title")}
                 </label>
                 <input
@@ -162,7 +162,7 @@ const AddCourse = () => {
 
               {/* Short Description EN */}
               <div className="mb-3">
-                <label className="form-label fw-semibold">
+                <label className="form-label ">
                   {t("instructorDashboard.shortDescription")}
                 </label>
                 <input
@@ -199,7 +199,7 @@ const AddCourse = () => {
 
               {/* Full Description EN */}
               <div className="mb-3">
-                <label className="form-label fw-semibold">
+                <label className="form-label">
                   {t("instructorDashboard.Description")}
                 </label>
                 <textarea
@@ -240,7 +240,7 @@ const AddCourse = () => {
 
               <div className="row">
                 <div className="col-md-6 mb-3">
-                  <label className="form-label fw-semibold">
+                  <label className="form-label ">
                     {t("instructorDashboard.category")}
                   </label>
                   <select
@@ -264,7 +264,7 @@ const AddCourse = () => {
                 </div>
 
                 <div className="col-md-6 mb-3">
-                  <label className="form-label fw-semibold">
+                  <label className="form-label ">
                     {t("instructorDashboard.skillLevel")}
                   </label>
                   <select
@@ -296,8 +296,8 @@ const AddCourse = () => {
 
           {/* Right Column */}
           <div className="col-lg-4">
-            <div className="card shadow-sm p-4 mb-4">
-              <h6 className="fw-semibold mb-3">
+            <div className="card  p-4 mb-4">
+              <h6 className=" mb-3">
                 {t("instructorDashboard.coursepricing")}
               </h6>
               <div className="row">
@@ -364,7 +364,7 @@ const AddCourse = () => {
               <div className="form-check mb-3">
                 <input
                   type="checkbox"
-                  className="form-check-input p-0"
+                  className="form-check-input "
                   {...register("isFree")}
                 />
                 <label className="form-check-label">
@@ -375,7 +375,7 @@ const AddCourse = () => {
               <hr />
 
               <div className="mb-3">
-                <label className="form-label fw-semibold">
+                <label className="form-label ">
                   {t("instructorDashboard.coursethumbnail")}
                 </label>
                 <div className="custom-file-upload">
@@ -419,7 +419,7 @@ const AddCourse = () => {
           </div>
         </div>
 
-        <div className="d-flex justify-content-end gap-2 mt-4 pt-3">
+        <div className="btns d-flex justify-content-end gap-2 mt-4 pt-3">
           <Link
             className="btn btn-outline-secondary"
             to={"/instructor/courses"}

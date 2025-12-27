@@ -106,11 +106,11 @@ const InstructorDashboard = () => {
     <div className="d-flex">
       {/* Sidebar */}
       <aside
-        className={`instructor-dash-sidebar bg-white border-end p-3 d-flex flex-column position-fixed    ${isSidebarOpen ? "open" : ""}
+        className={`instructor-dash-sidebar  border-end p-3 d-flex flex-column position-fixed      ${isSidebarOpen ? "open" : ""}
   `}
       >
-        <div className="d-flex align-items-center mb-4 justify-content-between">
-          <img src="/Images/logo-nav.png" alt="logo" />
+        <div className=" sidebar-header ">
+          <img className="logodash" src="/Images/logo-nav.png" alt="logo" />
           <button
             className="btn d-md-none"
             onClick={() => setIsSidebarOpen(false)}
@@ -119,14 +119,14 @@ const InstructorDashboard = () => {
           </button>
         </div>
 
-        <ul className="nav flex-column mb-auto">
+        <ul className="nav flex-column mb-auto pt-3">
           {navLinks.map((link) => (
-            <li className="nav-item" key={link.to}>
+            <li className="nav-item " key={link.to}>
               <NavLink
                 to={link.to}
                 className={({ isActive }) =>
                   `nav-link d-flex align-items-center ${
-                    isActive ? "active" : "fw-bold text-secondary"
+                    isActive ? "active" : " "
                   }`
                 }
               >
@@ -136,10 +136,10 @@ const InstructorDashboard = () => {
             </li>
           ))}
 
-          <li className="nav-item mt-2">
+          <li className="nav-item ">
             <Link
               to="/home"
-              className="nav-link text-secondary d-flex align-items-center"
+              className="nav-link  d-flex align-items-center"
             >
               <SlLogout className="me-3" />
               {t("instructorDashboard.BackToSite")}
@@ -147,13 +147,13 @@ const InstructorDashboard = () => {
           </li>
         </ul>
 
-        <div className="mt-auto">
+        <div className="mt-auto insdash">
           <hr />
           <ul className="nav flex-column">
-            <li>
+            <li className="nav-item">
               <NavLink
                 to="/instructor/settings"
-                className="nav-link d-flex align-items-center text-secondary"
+                className="nav-link d-flex align-items-center "
               >
                 <IoSettingsOutline className="me-3" />
                 {t("instructorDashboard.Settings")}
@@ -162,7 +162,7 @@ const InstructorDashboard = () => {
             <li>
               <button
                 onClick={handleLogOut}
-                className="nav-link d-flex align-items-center text-secondary bg-transparent border-0"
+                className="nav-link d-flex align-items-center  bg-transparent border-0"
               >
                 <RiLogoutCircleLine className="me-3" />
                 {t("instructorDashboard.Logout")}
@@ -179,8 +179,8 @@ const InstructorDashboard = () => {
       )}
 
       {/* Main Area */}
-      <div className="flex-grow-1 d-flex flex-column mainarea">
-        <nav className="navbar navbar-light bg-white border-bottom px-4 py-1">
+      <div className="flex-grow-1 d-flex flex-column main-content-area insdash">
+        <nav className="navbar  ">
           <div className="container-fluid">
             <h5 className="fw-bold mb-0">{pageTitle}</h5>
 
@@ -193,12 +193,8 @@ const InstructorDashboard = () => {
                         ? "/instructor/add/course"
                         : `/instructor/add/lessons`
                     }
-                    className="btn btn-sm "
-                    style={{
-                      width: "100px",
-                      backgroundColor: "#0ab99d",
-                      color: "white",
-                    }}
+                    className="btn"
+                 
                   >
                     {t("instructorDashboard.Addnewcourse")}
                   </Link>
@@ -216,8 +212,7 @@ const InstructorDashboard = () => {
                 src={profileImage}
                 alt="Instructor"
                 className="rounded-circle profile-image"
-                width="70"
-                height="70"
+             
               />
               <GiHamburgerMenu
                 className="ms-2 d-md-none"
@@ -239,7 +234,7 @@ const InstructorDashboard = () => {
           newestOnTop
           toastClassName="udemy-toast"
         />
-        <main className="p-4 bg-light flex-grow-1">
+        <main  className="p-4 flex-grow-1 ">
           <Outlet context={{ setProfileImage, searchTerm }} />
         </main>
       </div>

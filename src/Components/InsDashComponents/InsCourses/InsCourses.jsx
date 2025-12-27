@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchMultipleReviewStats } from "../../../Store/Slices/reviewsSlice";
 import { useOutletContext } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import "./InsCourses.css"
 
 const InsCourses = () => {
   const { t, i18n } = useTranslation();

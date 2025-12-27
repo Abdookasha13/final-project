@@ -1,13 +1,75 @@
-.courseform input,
+.courseform {
+  animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.courseform .container {
+  max-width: 1200px;
+}
+
+.courseform .card {
+  border: 1px solid #e0e9e5;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(10, 185, 157, 0.08);
+  transition: all 0.3s ease;
+  background: white;
+}
+
+.courseform .card:hover {
+  box-shadow: 0 8px 24px rgba(10, 185, 157, 0.12);
+  border-color: #0ab99d;
+}
+
+.courseform .card h6 {
+  color: #2c3e50;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: -0.3px;
+}
+
+.courseform .form-label {
+  color: #2c3e50;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 10px;
+  letter-spacing: 0.3px;
+  text-transform: capitalize;
+}
+
+/* .courseform input, */
 .courseform textarea,
 .courseform select {
-  border: 1px solid rgba(0, 0, 0, 0.15);
+  border: 1.5px solid #e0e9e5;
   border-radius: 10px;
-
-padding: 10px 15px;
+  padding: 12px 16px;
   resize: none;
-  transition: all 0.3s ease;
-  font-size: 0.95rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 14px;
+  background: #fafbfc;
+  color: #2c3e50;
+  font-weight: 500;
+}
+
+.courseform input::placeholder,
+.courseform textarea::placeholder {
+  color: #9ca3af;
+  font-weight: 400;
+  font-size: 13px;
+}
+
+.courseform input:hover,
+.courseform textarea:hover,
+.courseform select:hover {
+  border-color: #0ab99d;
+  /* background: white; */
 }
 
 .courseform input:focus,
@@ -15,11 +77,306 @@ padding: 10px 15px;
 .courseform select:focus {
   border-color: #0ab99d !important;
   outline: none;
-  box-shadow: 0 0 0 3px rgba(10, 185, 157, 0.1) !important;
+  box-shadow: 0 0 0 4px rgba(10, 185, 157, 0.12) !important;
+  /* background: white; */
 }
 
-.courseform input::placeholder,
-.courseform textarea::placeholder,
-.courseform select::placeholder {
-  color: #4f5051;
+.courseform textarea {
+  resize: vertical;
+  min-height: 120px;
+  line-height: 1.6;
+}
+
+.courseform .is-invalid {
+  border-color: #dc3545 !important;
+}
+
+.courseform .is-invalid:focus {
+  box-shadow: 0 0 0 4px rgba(220, 53, 69, 0.12) !important;
+}
+
+.courseform .invalid-feedback {
+  font-size: 12px;
+  color: #dc3545;
+  margin-top: 6px;
+  font-weight: 500;
+  display: block;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.courseform .custom-file-upload {
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.courseform #course_thumbnails {
+  display: none;
+}
+
+.courseform .upload-btn {
+  display: inline-block;
+  width: 100%;
+  padding: 32px 16px;
+  background: linear-gradient(135deg, #f8f9fc 0%, #f1f4f9 100%);
+  border: 2px dashed #0ab99d;
+  border-radius: 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #0ab99d;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 0;
+}
+
+.courseform .upload-btn:hover {
+  background: linear-gradient(135deg, #f0fdf9 0%, #e8f8f5 100%);
+  border-color: #088a71;
+  color: #408e7e;
+  transform: translateY(-2px);
+}
+
+.courseform .upload-btn:active {
+  transform: translateY(0);
+}
+
+.courseform .mt-3 {
+  border-radius: 12px;
+  border: 1px solid #e0e9e5;
+  box-shadow: 0 4px 12px rgba(10, 185, 157, 0.1);
+  transition: all 0.3s ease;
+}
+
+.courseform .mt-3:hover {
+  box-shadow: 0 8px 20px rgba(10, 185, 157, 0.15);
+  border-color: #0ab99d;
+}
+
+/* .courseform .form-check {
+  padding: 22px 42px;
+  background: #fafbfc;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+} */
+
+/* .courseform .form-check:hover {
+  background: #f0fdf9;
+} */
+
+/* .courseform .form-check-input {
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  cursor: pointer;
+  border: 1.5px solid #e0e9e5;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  padding: 10px 12px;
+} */
+
+
+
+/* .courseform .form-check-input:focus {
+  box-shadow: 0 0 0 4px rgba(10, 185, 157, 0.12) !important;
+} */
+
+/* .courseform .form-check-label {
+  color: #2c3e50;
+  font-weight: 500;
+  font-size: 14px;
+  margin-bottom: 0;
+  cursor: pointer;
+  margin-left: 8px;
+} */
+
+/* ============ BUTTONS ============ */
+.courseform .btns {
+  gap: 12px;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid #e0e9e5;
+  animation: slideUp 0.6s ease-out 0.5s both;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* .courseform .btn {
+  padding: 12px 28px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+} */
+
+.courseform .btn-outline-secondary {
+  color: #2c3e50;
+  border: 1.5px solid #e0e9e5;
+  background: white;
+}
+
+.courseform .btn-outline-secondary:hover {
+  background: #f8f9fc;
+  border-color: #2c3e50;
+  color: #2c3e50;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(44, 62, 80, 0.1);
+}
+
+.courseform button[type="submit"] {
+  background: linear-gradient(135deg, #0ab99d 0%, #088a71 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(10, 185, 157, 0.3);
+}
+
+.courseform button[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(10, 185, 157, 0.4);
+}
+
+.courseform button[type="submit"]:active {
+  transform: translateY(0);
+}
+
+/* ============ ROW & COLUMN SPACING ============ */
+/* .courseform .row {
+  gap: 16px;
+} */
+
+.courseform .mb-3 {
+  margin-bottom: 24px;
+}
+
+.courseform .col-6,
+.courseform .col-md-6 {
+  padding-right: 8px;
+  padding-left: 8px;
+}
+
+.courseform hr {
+  border: none;
+  border-top: 1px solid #e0e9e5;
+  margin: 24px 0;
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 992px) {
+  .courseform .card {
+    margin-bottom: 24px;
+  }
+
+  .courseform .col-lg-8,
+  .courseform .col-lg-4 {
+    max-width: 100%;
+    flex: 0 0 100%;
+  }
+
+  .courseform input,
+  .courseform textarea,
+  .courseform select {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 768px) {
+  .courseform .container {
+    padding: 12px;
+  }
+
+  .courseform .card {
+    padding: 20px !important;
+    margin-bottom: 20px;
+  }
+
+  .courseform .form-label {
+    font-size: 13px;
+  }
+
+  .courseform input,
+  .courseform textarea,
+  .courseform select {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  .upload-btn {
+    padding: 24px 12px;
+    font-size: 13px;
+  }
+
+  .courseform .d-flex.justify-content-end {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .courseform .btn {
+    width: 100%;
+    padding: 10px 16px;
+    font-size: 13px;
+  }
+
+  .courseform .row {
+    gap: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .courseform .container {
+    padding: 8px;
+  }
+
+  .courseform .card {
+    padding: 16px !important;
+  }
+
+  .courseform .col-6 {
+    flex: 0 0 100%;
+  }
+
+  .courseform input,
+  .courseform textarea,
+  .courseform select {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+
+  .upload-btn {
+    padding: 20px 12px;
+    font-size: 12px;
+  }
+
+  .courseform h6 {
+    font-size: 14px;
+  }
+
+  .courseform .form-label {
+    font-size: 12px;
+  }
+
+  .invalid-feedback {
+    font-size: 11px;
+  }
 }

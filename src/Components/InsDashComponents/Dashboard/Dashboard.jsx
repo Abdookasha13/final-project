@@ -123,12 +123,12 @@ const InstructorDashboard = () => {
   if (error) return <div className="alert alert-danger">{error}</div>;
 
   return (
-    <div className=" p-5 shadow-sm " style={{backgroundColor:"#f4f7f7ff", borderRadius:"20px"}} >
+    <div className=" p-2  " style={{ borderRadius:"20px"}} >
       <div className="mb-4 ">
-        <h2>
+        <h3>
           {t("instructorDashboard.welcomeBack")},{" "}
           {instructor?.name ?? "Instructor"}!
-        </h2>
+        </h3>
         <p className="text-muted">{t("instructorDashboard.overviewText")}</p>
       </div>
 

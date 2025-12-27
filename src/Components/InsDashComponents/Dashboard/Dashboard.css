@@ -1,5 +1,333 @@
-.statCard:hover {
-  transform: translateY(-5px);
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #f8f9fc 0%, #f1f4f9 100%);
+}
+
+
+.dashboard-container {
+  padding: 32px;
+  border-radius: 20px;
+}
+
+.dashboard-container h3 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+}
+
+.dashboard-container p {
+  font-size: 14px;
+  color: #7c8fa3;
+  margin: 0;
+  font-weight: 500;
+}
+
+/* ============ STAT CARDS ============ */
+.statCard {
+  padding: 12px;
+  margin-bottom: 24px;
+}
+
+.statCard .card {
+  border: 1px solid #e0e9e5 !important;
+  border-radius: 12px !important;
+  background: white !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 28px !important;
+  overflow: hidden;
+  position: relative;
+}
+
+.statCard .card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #0ab99d 0%, #06a691 100%);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.statCard .card:hover::before {
+  transform: scaleX(1);
+}
+
+.statCard .card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 32px rgba(10, 185, 157, 0.15) !important;
+  border-color: #0ab99d !important;
+}
+
+.statCard .card-body {
+  padding: 0 !important;
+  align-items: center;
+  gap: 24px;
+}
+
+.statCard .card-body > div:first-child {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 70px;
+}
+
+.statCard i {
+  font-size: 42px !important;
+  color: #0ab99d !important;
+  filter: drop-shadow(0 2px 8px rgba(10, 185, 157, 0.15));
   transition: all 0.3s ease;
+}
+
+.statCard .card:hover i {
+  transform: scale(1.1) rotate(5deg);
+  filter: drop-shadow(0 4px 12px rgba(10, 185, 157, 0.25));
+}
+
+.statCard .card-body > div:last-child {
+  flex: 1;
+  text-align: left;
+}
+
+.statCard .card-title {
+  font-size: 13px !important;
+  color: #7c8fa3 !important;
+  font-weight: 600 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px !important;
+}
+
+.statCard h3 {
+  font-size: 32px !important;
+  font-weight: 700 !important;
+  color: #2c3e50 !important;
+  margin-bottom: 6px !important;
+  line-height: 1;
+}
+
+.statCard small {
+  font-size: 12px !important;
+  color: #9ca3af !important;
+  font-weight: 500;
+}
+
+/* ============ CHART CONTAINER ============ */
+.chart-container {
+  background: white !important;
+  border-radius: 16px !important;
+  padding: 32px !important;
+  box-shadow: 0 4px 12px rgba(10, 185, 157, 0.08) !important;
+  border: 1px solid #e0e9e5 !important;
+  margin-top: 40px;
+  transition: all 0.3s ease;
+}
+
+.chart-container:hover {
+  box-shadow: 0 12px 32px rgba(10, 185, 157, 0.15) !important;
+  border-color: #0ab99d !important;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #f0fdf9;
+}
+
+.chart-header h5 {
+  font-size: 22px !important;
+  color: #2c3e50 !important;
+  font-weight: 700 !important;
+  margin: 0 !important;
+  letter-spacing: -0.5px;
+}
+
+.chart-badge {
+  background: linear-gradient(135deg, #0ab99d 0%, #06a691 100%);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  box-shadow: 0 4px 12px rgba(10, 185, 157, 0.25);
+  transition: all 0.3s ease;
+}
+
+.chart-badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(10, 185, 157, 0.35);
+}
+
+/* ============ RECHARTS CUSTOMIZATION ============ */
+.recharts-surface {
+  overflow: visible !important;
+}
+
+.recharts-cartesian-axis-tick {
+  font-size: 12px !important;
+}
+
+.recharts-tooltip-wrapper {
+  outline: none !important;
+}
+
+.recharts-bar {
+  transition: all 0.3s ease !important;
+}
+
+.recharts-bar:hover {
+  filter: drop-shadow(0 4px 12px rgba(10, 185, 157, 0.25));
+}
+
+/* ============ ANIMATIONS ============ */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.statCard {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.statCard:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.statCard:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.statCard:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.chart-container {
+  animation: slideInFromLeft 0.6s ease-out 0.4s forwards;
+  opacity: 0;
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 16px;
+  }
+
+  .dashboard-container h3 {
+    font-size: 22px;
+  }
+
+  .dashboard-container p {
+    font-size: 13px;
+  }
+
+  .statCard {
+    margin-bottom: 16px;
+  }
+
+  .statCard .card {
+    padding: 20px !important;
+  }
+
+  .statCard .card-body {
+    gap: 16px;
+  }
+
+  .statCard i {
+    font-size: 36px !important;
+  }
+
+  .statCard h3 {
+    font-size: 26px !important;
+  }
+
+  .statCard .card-title {
+    font-size: 12px !important;
+  }
+
+  .chart-container {
+    padding: 20px !important;
+    margin-top: 24px;
+  }
+
+  .chart-header {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .chart-header h5 {
+    font-size: 18px !important;
+  }
+
+  .chart-container {
+    height: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-container {
+    padding: 12px;
+  }
+
+  .dashboard-container h3 {
+    font-size: 18px;
+  }
+
+  .statCard .card-body {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .statCard .card-body > div:last-child {
+    text-align: center;
+  }
+
+  .statCard i {
+    font-size: 32px !important;
+  }
+
+  .statCard h3 {
+    font-size: 22px !important;
+  }
+
+  .chart-header {
+    gap: 8px;
+  }
+
+  .chart-badge {
+    width: 100%;
+    text-align: center;
+  }
 }
