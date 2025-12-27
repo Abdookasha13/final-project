@@ -1,10 +1,6 @@
 import "./TestimonialCard.css";
-import { useTranslation } from "react-i18next";
 
-const TestimonialCard = ({ image, name, grade, comment }) => {
-  const { i18n } = useTranslation();
-  const lang = i18n.language.startsWith("ar") ? "ar" : "en";
-
+const TestimonialCard = ({ image, name, grade, content }) => {
   return (
     <div className="col-xl-6 col-lg-6">
       <div className="testimonial-card">
@@ -17,12 +13,13 @@ const TestimonialCard = ({ image, name, grade, comment }) => {
                 image ||
                 "https://ordainit.com/html/educate/assets/img/avatar/avatar-3-1.png"
               }
-              alt={name}
+              alt={name || "Anonymous"}
               className="avatar-img"
             />
           </div>
+
           <div className="author-info">
-            <h5 className="author-name">{name || "Jorge Carter"}</h5>
+            <h5 className="author-name">{name || "Anonymous"}</h5>
             <span className="author-grade">{grade || "Student"}</span>
           </div>
         </div>
@@ -30,14 +27,12 @@ const TestimonialCard = ({ image, name, grade, comment }) => {
         <div className="testimonial-content">
           <div className="stars">
             {[...Array(5)].map((_, i) => (
-              <span key={i} className="star">
-                ★
-              </span>
+              <span key={i} className="star">★</span>
             ))}
           </div>
 
           <div className="testimonial-text">
-            <p>"{comment?.[lang] || comment?.en}"</p>
+            <p>"{content || "No comment provided"}"</p>
           </div>
         </div>
       </div>
