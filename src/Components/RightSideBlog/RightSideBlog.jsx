@@ -1,75 +1,13 @@
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
-import "./RightSideBlog.css";
 import { GoSearch } from "react-icons/go";
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
+import "./RightSideBlog.css";
 
-function RightSideBlog(language) {
-  const posts =  [
-    {
-      id: 1,
-      img: "https://ordainit.com/html/educate/assets/img/blog/blog-sidebar-sm-1.jpg",
-      date: language.props == "en" ? "14 June 2023" : "14 يونيو 2023",
-      title: language.props == "en" ? "Interdum velit laoreet id donec ultrices tincidunt arcu." : "إنتردوم فيليت لاوريت إيد دونيك ألتريسيس تينسيدونت أركو.",
-    },
-    {
-      id: 2,
-      img: "https://ordainit.com/html/educate/assets/img/blog/blog-sidebar-sm-2.jpg",
-      date:  language.props == "en" ? "14 June 2023" : "14 يونيو 2023",
-      title: language.props == "en" ? "Interdum velit laoreet id donec ultrices tincidunt arcu." : "إنتردوم فيليت لاوريت إيد دونيك ألتريسيس تينسيدونت أركو.",
-    },
-    {
-      id: 3,
-      img: "https://ordainit.com/html/educate/assets/img/blog/blog-sidebar-sm-3.jpg",
-      date:  language.props == "en" ? "14 June 2023" : "14 يونيو 2023",
-      title: language.props == "en" ? "Interdum velit laoreet id donec ultrices tincidunt arcu." : "إنتردوم فيليت لاوريت إيد دونيك ألتريسيس تينسيدونت أركو.",
-    },
-    {
-      id: 4,
-      img: "https://ordainit.com/html/educate/assets/img/blog/blog-sidebar-sm-4.jpg",
-      date:  language.props == "en" ? "14 June 2023" : "14 يونيو 2023",
-      title: language.props == "en" ? "Interdum velit laoreet id donec ultrices tincidunt arcu." : "إنتردوم فيليت لاوريت إيد دونيك ألتريسيس تينسيدونت أركو.",
-    },
-    {
-      id: 5,
-      img: "https://ordainit.com/html/educate/assets/img/blog/blog-sidebar-sm-5.jpg",
-      date: language.props == "en" ? "14 June 2023" : "14 يونيو 2023",
-      title: language.props == "en" ? "Interdum velit laoreet id donec ultrices tincidunt arcu." : "إنتردوم فيليت لاوريت إيد دونيك ألتريسيس تينسيدونت أركو.",
-    },
-  ];
-
-  const tags = language.props == "en" ? [
-    "Balance",
-    "Coaching",
-    "Motivation",
-    "Courses",
-    "Life guide",
-    "Strategy",
-    "Education",
-    "Coach",
-  ] : [
-    "توازن",
-    "التدريب",
-    "التحفيز",
-    "الدورات",
-    "دليل الحياة",
-    "استراتيجية",
-    "التعليم",
-    "مدرب",
-  ];
-
-  const categories = language.props == "en" ? [
-     "graphic Design",
-    "Web Design",
-    "It And Software",
-    "Sales Marketing",
-    "Art & Humanities",
-    "Mobile Application",
-  ] : ["مصمم جرافيك", "مصمم ويب", "تكنولوجيا المعلومات والبرمجيات", "مبيعات وتسويق", "الفنون والعلوم الإنسانية", "تطبيقات الجوال"]
-
-   
-  
-
-console.log("hi how ar");
+function RightSideBlog() {
+  const { t } = useTranslation();
+  const posts = t("rightBlog.posts", { returnObjects: true });
+  const tags = t("rightBlog.tags", { returnObjects: true });
+  const categories = t("rightBlog.categories", { returnObjects: true });
 
   return (
     <div className="right-side-blog ps-lg-5">
@@ -78,7 +16,11 @@ console.log("hi how ar");
         <div className="detailsSide">
           {/* Search Section */}
           <div className="rightsec-search">
-            <input className="sinput" type="text" placeholder={language.props == "en" ? "Search" : "بحث"} />
+            <input
+              className="sinput"
+              type="text"
+              placeholder={t("rightBlog.searchPlaceholder")}
+            />
             <button className="rightsec-btn" type="submit">
               <GoSearch />
             </button>
@@ -86,7 +28,9 @@ console.log("hi how ar");
 
           {/* Categories Section */}
           <div className="sercat">
-            <h3 className="right-side-blog-title">{language.props == "en" ? "service categories" : "فئات الخدمة"}</h3>
+            <h3 className="right-side-blog-title">
+              {t("rightBlog.categoriesTitle")}
+            </h3>
             {categories.map((category, index) => (
               <div key={index} className="sidecat">
                 {category}
@@ -98,13 +42,14 @@ console.log("hi how ar");
           </div>
         </div>
       </div>
+
       {/* Center Section */}
       <div className="right-side-blog-center">
-        <h3 className="right-side-blog-title">{language.props == "en" ? "Recent Post" : "آخر المنشورات"}</h3>
+        <h3 className="right-side-blog-title">{t("rightBlog.recentPostTitle")}</h3>
         <div className="right-side-blog-posts-list">
-          {posts.map((post) => (
+          {posts.map((post, index) => (
             <div
-              key={post.id}
+              key={index}
               className="right-side-blog-post-item d-flex align-items-start"
             >
               <div className="right-side-blog-post-image">
@@ -127,7 +72,9 @@ console.log("hi how ar");
 
       {/* Bottom Section */}
       <div className="right-side-blog-bottom">
-        <h3 className="right-side-blog-title">{language.props == "en" ? "Popular Tags" : "العلامات الشائعة"}:</h3>
+        <h3 className="right-side-blog-title">
+          {t("rightBlog.popularTagsTitle")}
+        </h3>
         <div className="right-side-blog-tags d-flex flex-wrap justify-content-between">
           {tags.map((tag, index) => (
             <a key={index} href="#">
