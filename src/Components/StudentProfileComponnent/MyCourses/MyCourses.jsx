@@ -9,6 +9,7 @@ import ReviewForm from "../../../Components/ReviewForm/reviewForm";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import "./MyCourses.css";
 
 const MyCourses = () => {
   const navigate = useNavigate();
@@ -16,7 +17,6 @@ const MyCourses = () => {
   const lang = i18n.language.startsWith("ar") ? "ar" : "en";
   const API_BASE = "http://localhost:1911";
 
-  // جيب الـ token من Redux
   const token = useSelector((state) => state.auth.token);
 
   const openCourse = (courseId) => {
@@ -48,7 +48,6 @@ const MyCourses = () => {
     },
   });
 
-  // جيب الإحصائيات
   const fetchStats = async () => {
     try {
       const res = await axios.get(
@@ -61,7 +60,6 @@ const MyCourses = () => {
     }
   };
 
-  // جيب جميع الكورسات (enrolled و in progress)
   const fetchAllEnrolledCourses = async () => {
     try {
       const res = await axios.get(
@@ -71,8 +69,7 @@ const MyCourses = () => {
       const allCourses = res.data || [];
       console.log("all courses:", allCourses);
 
-      // فرّق بين enrolled و in progress
-      const enrolled = allCourses; // كل الـ courses اللي status: "in_progress"
+      const enrolled = allCourses;
       const inProgress = allCourses.filter(
         (e) => e.progressPercentage > 0 && e.progressPercentage < 100
       );
@@ -104,7 +101,6 @@ const MyCourses = () => {
     setUserRatings(ratingsMap);
   };
 
-  // جيب الكورسات المخلصة
   const fetchCompletedCourses = async () => {
     try {
       const res = await axios.get(
@@ -203,12 +199,15 @@ const MyCourses = () => {
   });
 
   return (
-    <div className="container">
+    <div className="container myCoursesPage ">
       <div className="row g-3 text-center">
         {/* Enrolled */}
         <div className="col-md-4">
-          <div style={cardStyle("#fbfbfbff")}>
-            <div style={iconCircleStyle("rgba(220, 242, 237, 1)")}>
+          <div className="statCard " style={cardStyle("#fbfbfbff")}>
+            <div
+              className="icon"
+              style={iconCircleStyle("rgba(220, 242, 237, 1)")}
+            >
               <IoBookOutline color="#0ab99d" fontSize="32px" />
             </div>
             <div>
@@ -220,12 +219,12 @@ const MyCourses = () => {
 
         {/* In Progress */}
         <div className="col-md-4">
-          <div style={cardStyle("#fbfbfbff")}>
+          <div className="statCard" style={cardStyle("#fbfbfbff")}>
             <div style={iconCircleStyle("rgba(255, 235, 205, 1)")}>
               <GrCompliance color="#ffa500" fontSize="32px" />
             </div>
             <div>
-              <h6>In Progress</h6>
+              <h6>In Progress Courses</h6>
               <p className="display-6">{inProgressCourses.length}</p>
             </div>
           </div>
@@ -233,7 +232,7 @@ const MyCourses = () => {
 
         {/* Finished */}
         <div className="col-md-4">
-          <div style={cardStyle("#fbfbfbff")}>
+          <div className="statCard" style={cardStyle("#fbfbfbff")}>
             <div style={iconCircleStyle("rgba(217, 240, 242, 1)")}>
               <GrCompliance color="#0ab9d0" fontSize="32px" />
             </div>
@@ -246,7 +245,7 @@ const MyCourses = () => {
 
         {/* Certificates */}
         <div className="col-md-4 mt-3">
-          <div style={cardStyle("#fbfbfbff")}>
+          <div className="statCard" style={cardStyle("#fbfbfbff")}>
             <div style={iconCircleStyle("#daf0deff")}>
               <GrCertificate color="#0ad02eff" fontSize="32px" />
             </div>
@@ -258,39 +257,27 @@ const MyCourses = () => {
         </div>
       </div>
 
-      <ul className="nav nav-tabs mb-3 mt-5 border border-0">
-        <li className="nav-item">
+      <ul className="courses-tabs mt-5 mb-4">
+        <li>
           <button
-            className={`nav-link ${activeTab === "enrolled" ? "active" : ""}`}
+            className={activeTab === "enrolled" ? "active" : ""}
             onClick={() => setActiveTab("enrolled")}
-            style={{
-              color: activeTab === "enrolled" ? "#0ab99d" : "#333",
-              borderColor: activeTab === "enrolled" ? "#0ab99d" : "#ddd",
-            }}
           >
             {t("studentProfile.Enrolled")}
           </button>
         </li>
-        <li className="nav-item">
+        <li>
           <button
-            className={`nav-link ${activeTab === "inProgress" ? "active" : ""}`}
+            className={activeTab === "inProgress" ? "active" : ""}
             onClick={() => setActiveTab("inProgress")}
-            style={{
-              color: activeTab === "inProgress" ? "#ffa500" : "#333",
-              borderColor: activeTab === "inProgress" ? "#ffa500" : "#ddd",
-            }}
           >
             {t("studentProfile.inProgressCourses")}
           </button>
         </li>
-        <li className="nav-item">
+        <li>
           <button
-            className={`nav-link ${activeTab === "finished" ? "active" : ""}`}
+            className={activeTab === "finished" ? "active" : ""}
             onClick={() => setActiveTab("finished")}
-            style={{
-              color: activeTab === "finished" ? "#0ab9d0" : "#333",
-              borderColor: activeTab === "finished" ? "#0ab9d0" : "#ddd",
-            }}
           >
             {t("studentProfile.Finished")}
           </button>
