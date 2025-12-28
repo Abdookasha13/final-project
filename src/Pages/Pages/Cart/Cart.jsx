@@ -72,32 +72,72 @@ function Cart() {
 
   // ---------- Cart with Items ----------
   return (
-    <div className="container shopping-container mt-5">
-      <h2 className="d-none d-xl-block" style={{ fontSize: "45px" }}>
-        Shopping Cart
-      </h2>
+    <div className="container shopping-container my-5">
+      <h2 style={{ fontSize: "45px" }}>Shopping Cart</h2>
       <p style={{ fontSize: "15px" }} className="p-0 m-0 pt-3">
         {cartItems.length} Courses in Cart
       </p>
 
-      <div className="d-flex flex-column flex-lg-row gap-5 ">
+      <div className="row g-3 align-items-start">
         {/* Left Section */}
-        <div className="col-12 col-lg-9 ">
-          {cartItems.map((course) => (
-            <div
-              className="cartcard row border-container"
-              key={course.courseId}
-            >
-              <div className="courseimg col-2 p-0">
-                <img src={course.thumbnailUrl} alt={course.title[lang]} />
-              </div>
+        <div className=" col-lg-8">
+          <div className="left-side-shoping">
+            {cartItems.map((course) => (
+              <div
+                className="cartcard row border-container g-4"
+                key={course.courseId}
+              >
+                <div className="courseimg col-12 col-md-3 p-0">
+                  <img src={course.thumbnailUrl} alt={course.title[lang]} />
+                </div>
 
-              <div className="contentcourse col-10 px-lg-3 ">
-                <div className="d-flex flex-column flex-lg-row justify-content-between">
-                  <div className="coursedetails">
-                    <div className="d-flex justify-content-between">
-                      <h5 className="course-title m-0">{course.title[lang]}</h5>
-                      <div className="course-price2 text-end d-xl-none">
+                <div className="contentcourse col-12 col-md-9 px-lg-3">
+                  <div className="d-flex flex-column flex-lg-row justify-content-between">
+                    <div className="coursedetails">
+                      <div className="d-flex justify-content-between">
+                        <h5 className="course-title">{course.title[lang]}</h5>
+                        <div className="course-price2 text-end d-xl-none">
+                          <h5>${course.discountPrice}</h5>
+                          {course.price && (
+                            <h6 className="line text-muted text-decoration-line-through">
+                              ${course.price}
+                            </h6>
+                          )}
+                        </div>
+                      </div>
+
+                      <p
+                        style={{ fontSize: "14px", color: "#333" }}
+                        className="course-author m-0 pt-2"
+                      >
+                        By {course.insName}
+                      </p>
+                      <ul className="course-meta d-flex gap-3 m-0 p-0 list-unstyled">
+                        <p className="mt-3">{course.courseDuration}</p>
+                        <li>{course.lessonsCount} lessons</li>
+                        <li>All Levels</li>
+                      </ul>
+                    </div>
+
+                    <div className="d-flex gap-2">
+                      <div className="action-buttons d-flex flex-lg-column flex-sm-row ">
+                        <button
+                          className="btn btn-sm text-danger m-0 p-0"
+                          onClick={() => handleRemove(course.courseId)}
+                        >
+                          Remove
+                        </button>
+
+                        <button
+                          className="btn btn-sm "
+                          style={{ color: "#0ab99d" }}
+                          onClick={() => handleMoveToWishlist(course.courseId)}
+                        >
+                          Move to Wishlist
+                        </button>
+                      </div>
+
+                      <div className="course-price text-end">
                         <h5>${course.discountPrice}</h5>
                         {course.price && (
                           <h6 className="line text-muted text-decoration-line-through">
@@ -106,63 +146,24 @@ function Cart() {
                         )}
                       </div>
                     </div>
-
-                    <p
-                      style={{ fontSize: "14px", color: "#333" }}
-                      className="course-author m-0 pt-2"
-                    >
-                      By {course.insName}
-                    </p>
-                    <ul className="course-meta d-flex gap-3 m-0 p-0 list-unstyled">
-                      <p className="mt-3">{course.courseDuration}</p>
-                      <li>{course.lessonsCount} lessons</li>
-                      <li>All Levels</li>
-                    </ul>
-                  </div>
-
-                  <div className="d-flex gap-2">
-                    <div className="action-buttons d-flex flex-lg-column flex-sm-row ">
-                      <button
-                        className="btn btn-sm text-danger m-0 p-0"
-                        onClick={() => handleRemove(course.courseId)}
-                      >
-                        Remove
-                      </button>
-
-                      <button
-                        className="btn btn-sm "
-                        style={{ color: "#0ab99d" }}
-                        onClick={() => handleMoveToWishlist(course.courseId)}
-                      >
-                        Move to Wishlist
-                      </button>
-                    </div>
-
-                    <div className="course-price text-end">
-                      <h5>${course.discountPrice}</h5>
-                      {course.price && (
-                        <h6 className="line text-muted text-decoration-line-through">
-                          ${course.price}
-                        </h6>
-                      )}
-                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
         {/* Right Section */}
-        <div className="col-12 col-lg-3">
-          <h5>Total:</h5>
-          <h2>${calculateTotal()}</h2>
-          <Link to="/checkout">
-            <Button>Proceed to Checkout</Button>
-          </Link>
-          <p style={{ fontSize: "12px" }}>You won't be charged yet.</p>
-          <hr />
-          {/* <Button>Apply Coupon</Button> */}
+        <div className="col-lg-4">
+          <div className=" right-side-shopping border-start ps-3">
+            <h5>Total:</h5>
+            <h2>${calculateTotal()}</h2>
+            <Link to="/checkout">
+              <Button>Proceed to Checkout</Button>
+            </Link>
+            <p style={{ fontSize: "12px" }}>You won't be charged yet.</p>
+            {/* <Button>Apply Coupon</Button> */}
+          </div>
         </div>
       </div>
     </div>

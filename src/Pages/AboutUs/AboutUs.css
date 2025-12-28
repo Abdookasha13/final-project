@@ -200,10 +200,6 @@ body {
 /* Mobile */
 @media (max-width: 576px) {
   /* Bootstrap row overflow fix */
-  .row {
-    margin-left: 0;
-    margin-right: 0;
-  }
 
   /* About images wrapper */
   .it-about-4-thumb-wrap {

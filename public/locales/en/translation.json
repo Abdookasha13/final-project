@@ -9,8 +9,8 @@
     "contactUs": "Contact Us",
     "courses": "Courses",
     "courseDetails": "Course Details",
-    "teacher": "Teacher",
-    "teacherDetails": "Teacher Details",
+    "teacher": "Instructors",
+    "teacherDetails": "Instructor Details",
     "studentProfile": "Student Profile",
     "event": "Event",
     "checkout": "Checkout",
@@ -29,7 +29,19 @@
   "header": {
     "help": "Help",
     "support": "Support",
-    "contact": "Contact"
+    "contact": "Contact Us",
+    "about": "About Us",
+    "blog": "Blog",
+    "services": "Services",
+    "courses": "Courses",
+    "teacher": "Instructor",
+    "faqs": "FAQS",
+    "cart": "Cart",
+    "testimonial": "Testimonial",
+    "coursedetails": "Course Details",
+    "teacherDetails": "Instructor Details",
+    "stdmycourses": "My Courses",
+    "settings": "Settings"
   },
   "hero": {
     "title": "Develop Your skills with online courses From A Pro",
@@ -52,11 +64,11 @@
     "artHumanities": "Art & Humanities",
     "mobileApp": "Mobile App",
     "finance": "Finance",
-    "coursesCount": "25 Courses"
+    "coursesCount": "Courses"
   },
   "about": {
     "title": "About Us",
-    "subtitle": "Learn & Grow your skills From anywhere",
+    "subtitle": "Learn & Grow your <highlight>skills</highlight> From anywhere",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     "flexibleClasses": "Flexible Classes",
     "flexibleDescription": "Suspendisse ultrice gravida dictum fusce placerat ultricies integer quis auctor elit sed vulputate mi sit.",
@@ -74,7 +86,7 @@
   },
   "whyChooseUs": {
     "title": "WHY CHOOSE US",
-    "subtitle": "Creating A Community Of Life Long Learners.",
+    "subtitle": "Creating A Community Of <highlight>Life Long Learners</highlight>.",
     "worldClassTrainers": "World Class Trainers",
     "easyLearning": "Easy Learning",
     "flexible": "Flexible",
@@ -108,7 +120,7 @@
     "subscribeNow": "Subscribe Now"
   },
   "footer": {
-    "description": " Our website is a comprehensive Learning Management System (LMS) that enables effective interaction between students and instructors",
+    "description": "Interdum velit laoreet id donec ultrices tincidunt arcu. Tincidunt tortor aliquam nulla facilisi cras fermentum odio eu.",
     "ourServices": "Our Services:",
     "webDevelopment": "Web development",
     "uiUxDesign": "UI/UX Design",
@@ -205,16 +217,20 @@
     "locationValue": "Riverside 255, San Francisco, USA"
   },
   "studentProfile": {
+    "noenrolledxourses": "No Enrolled Courses",
     "logout": "Logout",
     "enrolledCourses": "Enrolled Courses",
-    "inProgressCourses": "In Progress Courses",
+    "inProgressCourses": "In Progress",
     "finishedCourses": "Finished Courses",
     "settings": "Settings",
     "wishlist": "Wishlist",
     "mycourses": "My Courses",
     "certificate": "Certificates",
     "Enrolled": "Enrolled",
-    "Finished": "Finished"
+    "Finished": "Finished",
+    "noEnrolledCourses": "No Enrolled Courses",
+    "nocoursesinprog": "No courses in progress",
+    "nofinishedcourses": "No finished courses"
   },
   "instructorDashboard": {
     "welcomeBack": "Welcome back",
@@ -291,6 +307,36 @@
     "question5": "How does it create content?",
     "answer5": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
   },
+  "testimonials": {
+    "subtitle": "testimonial",
+    "title": {
+      "line1": "Creating A Community Of",
+      "line2": "Life Long Learners."
+    },
+    "role": "happy customer",
+    "items": [
+      {
+        "name": "Courtney Henry",
+        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua..."
+      },
+      {
+        "name": "Jane Cooper",
+        "text": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat..."
+      },
+      {
+        "name": "Esther Howard",
+        "text": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur..."
+      }
+    ]
+  },
+  "funfact": {
+    "items": [
+      { "label": "Successfully Trained" },
+      { "label": "Classes Completed" },
+      { "label": "Satisfaction Rate" },
+      { "label": "Students Community" }
+    ]
+  },
   "price": {
     "Basic Plan": "Basic Plan",
     "Standard Plan": "Standard Plan",
@@ -327,10 +373,11 @@
     "emptycart": "Your cart is empty. Keep shopping to find a course!",
     "keepShopping": "Keep Shopping"
   },
+
   "blogCard": {
     "date": "14 June 2023",
     "comments": "Comment (06)",
-    "pargraph": "Performance marketing is one of the most important modern digital marketing strategies, relying primarily on measuring real results and achieving clear objectives such as clicks, sign-ups, or sales. ",
+    "pargraph": "Performance marketing is one of the most important modern digital marketing strategies.",
     "readMore": "Read More"
   },
   "blogPost": {
@@ -398,9 +445,9 @@
     "lessons": "Lessons",
     "Intermediate": "Intermediate",
     "Advanced": "Advanced",
-    "m": "m"
+    "m": "m",
+    "removeFromWishlist": "Remove From Wishlist"
   },
-
   "courseCard": {
     "lesson": "lesson",
     "students": "students",
@@ -421,7 +468,7 @@
     "errorDefault": "Sorry, an error occurred. Please try again.",
     "errorConnection": "Sorry, connection error. Make sure the server is running."
   },
-   "serviceDetails": {
+  "serviceDetails": {
     "serviceDescription": "Service Description",
     "requirements": "Requirements",
     "description": "Description",
@@ -433,7 +480,7 @@
     "paragraph4": "The curriculum also covers best practices in coding standards, version control using Git, and agile project management techniques.",
     "paragraph5": "Interactive video tutorials are included to demonstrate key concepts and advanced techniques in a hands-on manner.",
     "paragraph6": "You will understand advanced web development patterns, including component-based architecture, state management, and routing best practices.",
-"paragraph7": "By the end of this section, you will be able to implement scalable and maintainable web applications with confidence.This service provides comprehensive web development training, including frontend and backend technologies. You'll gain practical experience building modern web applications with React, Node.js, and MongoDB."
+    "paragraph7": "By the end of this section, you will be able to implement scalable and maintainable web applications with confidence.This service provides comprehensive web development training, including frontend and backend technologies. You'll gain practical experience building modern web applications with React, Node.js, and MongoDB."
   },
   "testimonial": {
     "cards": [
@@ -476,15 +523,15 @@
     ]
   },
   "eventDetails": {
-  "pageTitle": "Event Details",
-  "lessons": "Lesson 10",
-  "descriptionTitle": "Event Description",
-  "introText": "Join this event to gain valuable knowledge and practical experience through guided sessions.",
-  "buyTicket": "Buy Ticket",
-  "email": "roqaia@gmail.com",
-  "phone": "+9870123456789"
-},
-"blogDetails": {
+    "pageTitle": "Event Details",
+    "lessons": "Lesson 10",
+    "descriptionTitle": "Event Description",
+    "introText": "Join this event to gain valuable knowledge and practical experience through guided sessions.",
+    "buyTicket": "Buy Ticket",
+    "email": "roqaia@gmail.com",
+    "phone": "+9870123456789"
+  },
+  "blogDetails": {
     "date": "June 14, 2023",
     "comments": "2 Comments",
 
@@ -520,5 +567,4 @@
 
     "sendMessage": "Send Message"
   }
-
 }
