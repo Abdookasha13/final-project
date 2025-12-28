@@ -280,7 +280,7 @@ const MyCourses = () => {
               borderColor: activeTab === "inProgress" ? "#ffa500" : "#ddd",
             }}
           >
-             {t("studentProfile.inProgressCourses")}
+            {t("studentProfile.inProgressCourses")}
           </button>
         </li>
         <li className="nav-item">
@@ -317,7 +317,8 @@ const MyCourses = () => {
                     // progress={enrollment.progressPercentage || 0}
                     userRating={userRatings[enrollment.course._id] || 0}
                     onLeaveRating={() => openReviewModal(enrollment.course._id)}
-                    onClick={() => openCourse(enrollment.course._id)}
+                    onCourseClick={openCourse}
+                    courseId={enrollment.course._id}
                   />
                 </div>
               ))}
@@ -352,9 +353,7 @@ const MyCourses = () => {
               ))}
             </div>
           ) : (
-            <p>
-            {t("studentProfile.nocoursesinprog")}
-            </p>
+            <p>{t("studentProfile.nocoursesinprog")}</p>
           ))}
 
         {/* Finished Tab */}
