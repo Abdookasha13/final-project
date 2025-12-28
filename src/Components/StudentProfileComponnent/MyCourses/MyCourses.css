@@ -1,0 +1,87 @@
+.myCoursesPage {
+  animation: fadeUp 0.5s ease;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.statCard {
+  background: #fff;
+  border-radius: 14px;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  transition: all 0.25s ease;
+}
+
+.statCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* .statCard .icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 26px;
+} */
+
+.statCard h6 {
+  margin: 0;
+  font-size: 18px;
+  color: #555;
+}
+
+.statCard span {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.courses-tabs {
+  display: flex;
+  gap: 3px;
+  border-bottom: none;
+}
+
+.courses-tabs li {
+  list-style: none;
+}
+
+.courses-tabs button {
+  padding: 10px 33px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  background: #fff;
+  font-weight: 500;
+  transition: all 0.25s ease;
+}
+
+.courses-tabs button:hover {
+  background: #f2f7f6;
+}
+
+.courses-tabs button.active {
+  background: #0ab99d;
+  color: #fff;
+  border-color: #0ab99d;
+}
+
+.myCoursesPage .col-md-4 {
+  transition: transform 0.25s ease;
+}
+
+.myCoursesPage .col-md-4:hover {
+  transform: translateY(-6px);
+}

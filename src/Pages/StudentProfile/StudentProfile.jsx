@@ -1,4 +1,4 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FaRegHeart } from "react-icons/fa";
 import { IoBookOutline, IoSettingsOutline } from "react-icons/io5";
 import { TbLogout } from "react-icons/tb";
@@ -13,15 +13,15 @@ import { clearCart } from "../../Store/Slices/cartSlice";
 const StudentProfile = () => {
   const { t } = useTranslation();
   const [student, setStudent] = useState(null);
-  const [profileImage, setProfileImage] = useState(""); 
-    const dispatch=useDispatch();
-  const navigate=useNavigate()
-    const handleLogout = () => {
-      dispatch(logout());
-      dispatch(clearCart())
- 
-      navigate("/");
-    };
+  const [profileImage, setProfileImage] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    dispatch(logout());
+    dispatch(clearCart());
+
+    navigate("/");
+  };
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
@@ -44,17 +44,21 @@ const StudentProfile = () => {
               profileImage ||
               "https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png"
             }
-            width="100px"
-            height="100px"
-            style={{ borderRadius: "50%", objectFit: "cover" }}
+            width="130px"
+            height="130px"
+            style={{
+              borderRadius: "50%",
+              objectFit: "cover",
+              border: "2px solid #00c896",
+            }}
           />
-          <h4>{student?.name}</h4>
+          <h3>{student?.name}</h3>
         </div>
 
         {/* Main Area */}
         <div className="mainArea d-flex mt-5 gap-4 flex-wrap flex-lg-nowrap">
           {/* Sidebar */}
-          <div className="sideBarr col-12 col-lg-2">
+          <div className="sideBarr col-12 col-lg-2 p-2">
             <ul className="nav flex-row flex-lg-column mb-auto gap-2">
               <li className="nav-item">
                 <NavLink
@@ -102,8 +106,9 @@ const StudentProfile = () => {
               </li>
               <li className="nav-item">
                 <button
-                 onClick={()=>handleLogout()}
-                  className="border-0  p-2 btn-logout "                >
+                  onClick={() => handleLogout()}
+                  className="border-0  p-2 btn-logout "
+                >
                   <TbLogout className="mx-2 " fontSize="22px" />{" "}
                   {t("studentProfile.logout")}
                 </button>
