@@ -38,6 +38,7 @@ const CourseCard = ({
   progress = 0,
   isWishlist = false,
   onRemove,
+   onCourseClick,
 }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -94,7 +95,15 @@ const CourseCard = ({
 
   return (
     <div
-      onClick={() => navigate(`/course/details/${courseId}`)}
+onClick={() => {
+        // إذا كان enrollment وفيه onCourseClick، ناديه
+        if (isEnrollment && onCourseClick) {
+          onCourseClick(courseId);
+        } else if (!isEnrollment) {
+          // إذا كان course عادي، روح للديتيلز
+          navigate(`/course/details/${courseId}`);
+        }
+      }}
       className="coursecard-item px-2 pt-3"
       style={{
         backgroundColor: bgColor,
