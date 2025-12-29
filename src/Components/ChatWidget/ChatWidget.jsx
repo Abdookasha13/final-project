@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { FaComments, FaPaperPlane, FaTimes, FaRobot } from "react-icons/fa";
+import { FaPaperPlane, FaTimes, FaRobot } from "react-icons/fa";
+import { SiChatbot } from "react-icons/si";
 import "./ChatWidget.css";
 import { useTranslation } from "react-i18next";
 
@@ -72,7 +73,7 @@ const ChatWidget = () => {
           open ? t("chatWidget.toggleClose") : t("chatWidget.toggleOpen")
         }
       >
-        {open ? <FaTimes /> : <FaComments />}
+        {open ? <FaTimes /> : <SiChatbot />}
       </button>
 
       {open && (

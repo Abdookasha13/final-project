@@ -24,9 +24,10 @@
 
 .links-navbar ul li > a {
   color: #333;
-  font-weight: 600;
+  font-weight: 700;
   transition: 0.7s;
   padding: 21px 0;
+  font-size: 18px;
 }
 
 /* .links-navbar ul li a.active, */
@@ -155,9 +156,9 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  padding: 2px 6px;
   font-size: 12px;
   font-weight: bold;
-  line-height: 20px;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

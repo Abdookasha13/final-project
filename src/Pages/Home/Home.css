@@ -940,14 +940,13 @@ html[dir="rtl"] .it-video-shape-2 {
 .it-team-thumb {
   position: relative;
   overflow: hidden;
-  border-radius: 12px;
 }
 
 .it-team-thumb img {
   width: 100%;
   height: 400px;
   transition: 1s ease;
-  transform: scale(1);
+  object-fit: cover;
 }
 
 .it-team-thumb::after {
@@ -1046,12 +1045,14 @@ html[dir="rtl"] .it-video-shape-2 {
   font-size: 14px;
 }
 
-.it-team-link a svg {
-  transition: 0.3s;
+.instructor-arrow {
+  font-size: 1.5rem;
+  color: #0ab99d;
+  transition: color 0.3s;
 }
 
-.it-team-link a:hover svg {
-  transform: translateX(4px);
+.instructor-arrow:hover {
+  color: #077a6b;
 }
 
 

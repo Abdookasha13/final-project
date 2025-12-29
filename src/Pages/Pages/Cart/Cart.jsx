@@ -78,15 +78,12 @@ function Cart() {
         {cartItems.length} Courses in Cart
       </p>
 
-      <div className="row g-3 align-items-start">
+      <div className="row g-5 align-items-start">
         {/* Left Section */}
         <div className=" col-lg-8">
           <div className="left-side-shoping">
             {cartItems.map((course) => (
-              <div
-                className="cartcard row border-container g-4"
-                key={course.courseId}
-              >
+              <div className="row border-container mt-4" key={course.courseId}>
                 <div className="courseimg col-12 col-md-3 p-0">
                   <img src={course.thumbnailUrl} alt={course.title[lang]} />
                 </div>
@@ -94,8 +91,8 @@ function Cart() {
                 <div className="contentcourse col-12 col-md-9 px-lg-3">
                   <div className="d-flex flex-column flex-lg-row justify-content-between">
                     <div className="coursedetails">
-                      <div className="d-flex justify-content-between">
-                        <h5 className="course-title">{course.title[lang]}</h5>
+                      <div className="d-flex justify-content-between mt-4 mt-md-0">
+                        <h5 className="course-title ">{course.title[lang]}</h5>
                         <div className="course-price2 text-end d-xl-none">
                           <h5>${course.discountPrice}</h5>
                           {course.price && (
@@ -155,14 +152,14 @@ function Cart() {
 
         {/* Right Section */}
         <div className="col-lg-4">
-          <div className=" right-side-shopping border-start ps-3">
-            <h5>Total:</h5>
-            <h2>${calculateTotal()}</h2>
-            <Link to="/checkout">
-              <Button>Proceed to Checkout</Button>
-            </Link>
-            <p style={{ fontSize: "12px" }}>You won't be charged yet.</p>
-            {/* <Button>Apply Coupon</Button> */}
+          <div className=" right-side-shopping border-container mt-0 mt-lg-4 d-flex flex-column gap-3">
+            <h5>Total: ${calculateTotal()}</h5>
+            <div>
+              <Link to="/checkout">
+                <Button>Checkout</Button>
+              </Link>
+              <p style={{ fontSize: "12px" }}>You won't be charged yet.</p>
+            </div>
           </div>
         </div>
       </div>
