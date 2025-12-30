@@ -207,11 +207,7 @@ const CourseDetails = () => {
     Instructor: (
       <div className="border border-top-0 border-light-subtle px-4 py-5 d-flex gap-4">
         <div className="insimage">
-          <img
-            src={course.instructor?.profileImage}
-            alt=""
-            style={{ width: "100px", height: "100px", borderRadius: "50%" }}
-          />
+          <img src={course.instructor?.profileImage} />
         </div>
         <div className="insinfo">
           <h4>{course.instructor?.name}</h4>
