@@ -11,6 +11,7 @@ import { markLessonAsComplete } from "../../utilities/markAsComplete";
 import { initializeYouTubePlayer } from "../../utilities/initializeYoutubePlayer";
 import { getYouTubeId } from "../../utilities/getYoutubeId";
 import { MdOutlinePlayLesson } from "react-icons/md";
+import "./videoPlayer.css";
 
 export default function VideoPlayer({ lessons = [], enrollmentId }) {
   const { i18n } = useTranslation();
@@ -74,7 +75,7 @@ export default function VideoPlayer({ lessons = [], enrollmentId }) {
         if (currentIndex < lessons.length - 1) {
           setCurrentLesson(lessons[currentIndex + 1]);
         } else {
-          toast.success("🎉 Course completed! Congratulations!");
+          toast.success("Course completed! Congratulations!");
         }
       }
     } catch (err) {
@@ -132,11 +133,10 @@ export default function VideoPlayer({ lessons = [], enrollmentId }) {
           </div>
 
           <button
-            className="h-100 border-0 text-center"
-            style={{ width: "50px", backgroundColor: "#e7e7e7ff" }}
+            className=" closeIcon "
             onClick={() => navigate("/stdprofile/mycourses")}
           >
-            <IoMdClose size={"30px"} />
+            <IoMdClose size={"30px"} color=" #333" />
           </button>
         </div>
       </div>
@@ -175,12 +175,9 @@ export default function VideoPlayer({ lessons = [], enrollmentId }) {
                     <Play size={16} color="#0ab99d" />
                   )}
                   <span
-                    style={{
-                      color: isLessonCompleted(lesson._id) ? "#0ab99d" : "#333",
-                      textDecoration: isLessonCompleted(lesson._id)
-                        ? "line-through"
-                        : "none",
-                    }}
+                    className={`lesTitle ${
+                      isLessonCompleted(lesson._id) ? "completed" : "incomplete"
+                    }`}
                   >
                     {lesson.title[lang]}
                   </span>
@@ -199,7 +196,7 @@ export default function VideoPlayer({ lessons = [], enrollmentId }) {
               <>
                 <div
                   className="mb-4 rounded overflow-hidden"
-                  style={{ aspectRatio: "16/9", background: "#000" }}
+                  style={{ aspectRatio: "16/6", background: "#000" }}
                 >
                   <div id="youtube-player" />
                 </div>
