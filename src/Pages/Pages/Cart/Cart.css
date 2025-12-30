@@ -147,6 +147,11 @@
     min-height: 180px;
     padding: 16px;
   }
+  .course-price2 h5 {
+    color: #0ab99d;
+    font-weight: 800;
+    font-size: 24px;
+  }
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {

@@ -100,7 +100,9 @@ const AddLesson = () => {
                 className={`form-select ${errors.courseId ? "is-invalid" : ""}`}
                 {...register("courseId", { required: "Course is required" })}
               >
-                <option value="">{t("instructorDashboard.selectacourse")}</option>
+                <option value="">
+                  {t("instructorDashboard.selectacourse")}
+                </option>
                 {courses.map((course) => (
                   <option key={course._id} value={course._id}>
                     {course.title}
@@ -305,7 +307,8 @@ const AddLesson = () => {
                       <input
                         className="form-check-input "
                         type="checkbox"
-                        {...field}
+                        checked={!!field.value}
+                        onChange={(e) => field.onChange(e.target.checked)}
                         id="previewSwitch"
                       />
                       <label

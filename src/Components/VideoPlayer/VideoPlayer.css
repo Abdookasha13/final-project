@@ -8,3 +8,35 @@
     transform: translateY(0);
   }
 }
+.closeIcon {
+  background-color: #e7e7e7ff;
+  border: none;
+  width: 50px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s;
+
+}
+
+.closeIcon:hover {
+  background-color: rgb(220, 219, 219); 
+  cursor: pointer;
+}
+.lesTitle {
+  transition: color 0.3s ease;
+}
+
+.lesTitle:hover {
+  color: #0eb89c !important;
+}
+
+.lesTitle.completed {
+  color: #0ab99d;
+  text-decoration: line-through;
+}
+
+.lesTitle.incomplete {
+  color: #333;
+}

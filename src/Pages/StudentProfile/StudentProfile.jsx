@@ -44,8 +44,8 @@ const StudentProfile = () => {
               profileImage ||
               "https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png"
             }
-            width="130px"
-            height="130px"
+            width="100px"
+            height="100px"
             style={{
               borderRadius: "50%",
               objectFit: "cover",

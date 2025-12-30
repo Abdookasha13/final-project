@@ -94,11 +94,16 @@ function Cart() {
                       <div className="d-flex justify-content-between mt-4 mt-md-0">
                         <h5 className="course-title ">{course.title[lang]}</h5>
                         <div className="course-price2 text-end d-xl-none">
-                          <h5>${course.discountPrice}</h5>
-                          {course.price && (
-                            <h6 className="line text-muted text-decoration-line-through">
-                              ${course.price}
-                            </h6>
+                          {course.discountPrice ? (
+                            <>
+                              <h5>${course.discountPrice}</h5>
+
+                              <h6 className="line text-muted text-decoration-line-through">
+                                ${course.price}
+                              </h6>
+                            </>
+                          ) : (
+                            <h5>${course.price}</h5>
                           )}
                         </div>
                       </div>
@@ -112,7 +117,7 @@ function Cart() {
                       <ul className="course-meta d-flex gap-3 m-0 p-0 list-unstyled">
                         <p className="mt-3">{course.courseDuration}</p>
                         <li>{course.lessonsCount} lessons</li>
-                        <li>All Levels</li>
+                        <li>{course.skillLevel}</li>
                       </ul>
                     </div>
 
@@ -135,11 +140,16 @@ function Cart() {
                       </div>
 
                       <div className="course-price text-end">
-                        <h5>${course.discountPrice}</h5>
-                        {course.price && (
-                          <h6 className="line text-muted text-decoration-line-through">
-                            ${course.price}
-                          </h6>
+                        {course.discountPrice ? (
+                          <>
+                            <h5>${course.discountPrice}</h5>
+
+                            <h6 className="line text-muted text-decoration-line-through">
+                              ${course.price}
+                            </h6>
+                          </>
+                        ) : (
+                          <h5>${course.price}</h5>
                         )}
                       </div>
                     </div>

@@ -76,15 +76,6 @@ const MyCourses = () => {
 
       setEnrolledCourses(enrolled);
       setInProgressCourses(inProgress);
-
-      // جيب التقييمات
-      const ratingsMap = {};
-      allCourses.forEach((enrollment) => {
-        if (enrollment.course?._id) {
-          // ratingsMap[enrollment.course._id] = 0; // default
-        }
-      });
-      setUserRatings(ratingsMap);
     } catch (err) {
       console.error("Error fetching enrolled courses:", err);
       toast.error("Failed to load courses");
@@ -334,7 +325,8 @@ const MyCourses = () => {
                     progress={enrollment.progressPercentage || 0}
                     userRating={userRatings[enrollment.course._id] || 0}
                     onLeaveRating={() => openReviewModal(enrollment.course._id)}
-                    onClick={() => openCourse(enrollment.course._id)}
+                    onCourseClick={openCourse}
+                    courseId={enrollment.course._id}
                   />
                 </div>
               ))}
@@ -362,6 +354,8 @@ const MyCourses = () => {
                     userRating={userRatings[enrollment.course._id] || 0}
                     onLeaveRating={() => openReviewModal(enrollment.course._id)}
                     certificateUrl={enrollment.certificateUrl}
+                    onCourseClick={openCourse}
+                    courseId={enrollment.course._id}
                   />
                 </div>
               ))}

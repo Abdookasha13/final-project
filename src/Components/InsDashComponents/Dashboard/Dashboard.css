@@ -30,12 +30,12 @@ body {
 }
 
 /* ============ STAT CARDS ============ */
-.statCard {
+.statCard2 {
   padding: 12px;
   margin-bottom: 24px;
 }
 
-.statCard .card {
+.statCard2 .card {
   border: 1px solid #e0e9e5 !important;
   border-radius: 12px !important;
   background: white !important;
@@ -45,7 +45,7 @@ body {
   position: relative;
 }
 
-.statCard .card::before {
+.statCard2 .card::before {
   content: '';
   position: absolute;
   top: 0;
@@ -58,47 +58,47 @@ body {
   transition: transform 0.3s ease;
 }
 
-.statCard .card:hover::before {
+.statCard2 .card:hover::before {
   transform: scaleX(1);
 }
 
-.statCard .card:hover {
+.statCard2 .card:hover {
   transform: translateY(-6px);
   box-shadow: 0 12px 32px rgba(10, 185, 157, 0.15) !important;
   border-color: #0ab99d !important;
 }
 
-.statCard .card-body {
+.statCard2 .card-body {
   padding: 0 !important;
   align-items: center;
   gap: 24px;
 }
 
-.statCard .card-body > div:first-child {
+.statCard2 .card-body > div:first-child {
   display: flex;
   align-items: center;
   justify-content: center;
   min-width: 70px;
 }
 
-.statCard i {
+.statCard2 i {
   font-size: 42px !important;
   color: #0ab99d !important;
   filter: drop-shadow(0 2px 8px rgba(10, 185, 157, 0.15));
   transition: all 0.3s ease;
 }
 
-.statCard .card:hover i {
+.statCard2 .card:hover i {
   transform: scale(1.1) rotate(5deg);
   filter: drop-shadow(0 4px 12px rgba(10, 185, 157, 0.25));
 }
 
-.statCard .card-body > div:last-child {
+.statCard2 .card-body > div:last-child {
   flex: 1;
   text-align: left;
 }
 
-.statCard .card-title {
+.statCard2 .card-title {
   font-size: 13px !important;
   color: #7c8fa3 !important;
   font-weight: 600 !important;
@@ -107,7 +107,7 @@ body {
   margin-bottom: 12px !important;
 }
 
-.statCard h3 {
+.statCard2 h3 {
   font-size: 32px !important;
   font-weight: 700 !important;
   color: #2c3e50 !important;
@@ -115,7 +115,7 @@ body {
   line-height: 1;
 }
 
-.statCard small {
+.statCard2 small {
   font-size: 12px !important;
   color: #9ca3af !important;
   font-weight: 500;
@@ -216,19 +216,19 @@ body {
   }
 }
 
-.statCard {
+.statCard2 {
   animation: fadeInUp 0.6s ease-out forwards;
 }
 
-.statCard:nth-child(1) {
+.statCard2:nth-child(1) {
   animation-delay: 0.1s;
 }
 
-.statCard:nth-child(2) {
+.statCard2:nth-child(2) {
   animation-delay: 0.2s;
 }
 
-.statCard:nth-child(3) {
+.statCard2:nth-child(3) {
   animation-delay: 0.3s;
 }
 
@@ -251,27 +251,27 @@ body {
     font-size: 13px;
   }
 
-  .statCard {
+  .statCard2 {
     margin-bottom: 16px;
   }
 
-  .statCard .card {
+  .statCard2 .card {
     padding: 20px !important;
   }
 
-  .statCard .card-body {
+  .statCard2 .card-body {
     gap: 16px;
   }
 
-  .statCard i {
+  .statCard2 i {
     font-size: 36px !important;
   }
 
-  .statCard h3 {
+  .statCard2 h3 {
     font-size: 26px !important;
   }
 
-  .statCard .card-title {
+  .statCard2 .card-title {
     font-size: 12px !important;
   }
 
@@ -304,20 +304,20 @@ body {
     font-size: 18px;
   }
 
-  .statCard .card-body {
+  .statCard2 .card-body {
     flex-direction: column;
     text-align: center;
   }
 
-  .statCard .card-body > div:last-child {
+  .statCard2 .card-body > div:last-child {
     text-align: center;
   }
 
-  .statCard i {
+  .statCard2 i {
     font-size: 32px !important;
   }
 
-  .statCard h3 {
+  .statCard2 h3 {
     font-size: 22px !important;
   }
 
