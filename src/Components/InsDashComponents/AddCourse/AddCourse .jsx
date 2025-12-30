@@ -17,7 +17,7 @@ const AddCourse = () => {
     formState: { errors },
     reset,
   } = useForm({ mode: "onChange" });
-
+  const [courseData, setCourseData] = useState(null);
   const [thumbnailUrl, setThumbnailUrl] = useState("");
   const [uploading, setUploading] = useState(false);
   const [preview, setPreview] = useState(null);
@@ -26,54 +26,58 @@ const AddCourse = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const isEdit = Boolean(id);
+  const fetchCategory = async () => {
+    try {
+      const res = await fetch(`http://localhost:1911/category`);
+      const data = await res.json();
+      setCategory(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const fetchCourse = async () => {
+    if (!isEdit) return;
+
+    try {
+      const res = await fetch(`http://localhost:1911/courses/${id}?edit=true`);
+      const data = await res.json();
+      setCourseData(data);
+
+      console.log(" Fetched course data:", data);
+
+      setThumbnailUrl(data.thumbnailUrl);
+      setPreview(data.thumbnailUrl);
+    } catch (err) {
+      console.error("Error fetching course:", err);
+    }
+  };
+  useEffect(() => {
+    fetchCategory();
+  }, []);
+  useEffect(() => {
+    if (isEdit) {
+      fetchCourse();
+    }
+  }, [isEdit]);
 
   useEffect(() => {
-    const fetchCategory = async () => {
-      try {
-        const res = await fetch(`http://localhost:1911/category`);
-        const data = await res.json();
-        setCategory(data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
+    if (!courseData || category.length === 0) return;
 
-    const fetchCourse = async () => {
-      if (!isEdit) return;
-
-      try {
-        const res = await fetch(
-          `http://localhost:1911/courses/${id}?edit=true`
-        );
-        const data = await res.json();
-
-        console.log(" Fetched course data:", data);
-
-        reset({
-          titleEn: data.title?.en || "",
-          titleAr: data.title?.ar || "",
-          shortDescriptionEn: data.shortDescription?.en || "",
-          shortDescriptionAr: data.shortDescription?.ar || "",
-          descriptionEn: data.description?.en || "",
-          descriptionAr: data.description?.ar || "",
-          category: data.category?._id || "",
-          skillLevel: data.skillLevel || "",
-          // tagsAr: data.tags?.ar?.join(", ") || "",
-          price: data.price,
-          discountPrice: data.discountPrice,
-          isFree: data.isFree,
-        });
-
-        setThumbnailUrl(data.thumbnailUrl);
-        setPreview(data.thumbnailUrl);
-      } catch (err) {
-        console.error("Error fetching course:", err);
-      }
-    };
-
-    fetchCategory();
-    fetchCourse();
-  }, [id, isEdit, reset]);
+    reset({
+      titleEn: courseData.title?.en || "",
+      titleAr: courseData.title?.ar || "",
+      shortDescriptionEn: courseData.shortDescription?.en || "",
+      shortDescriptionAr: courseData.shortDescription?.ar || "",
+      descriptionEn: courseData.description?.en || "",
+      descriptionAr: courseData.description?.ar || "",
+      category: courseData.category?._id || "",
+      skillLevel: courseData.skillLevel || "",
+      price: courseData.price,
+      discountPrice: courseData.discountPrice,
+      isFree: courseData.isFree,
+    });
+  }, [courseData, category, reset]);
 
   const onSubmit = async (data) => {
     const formattedData = {
@@ -92,9 +96,10 @@ const AddCourse = () => {
       category: data.category,
       skillLevel: data.skillLevel,
       price: parseFloat(data.price),
-    discountPrice: data.discountPrice && data.discountPrice !== "" 
-  ? parseFloat(data.discountPrice) 
-  : null,
+      discountPrice:
+        data.discountPrice && data.discountPrice !== ""
+          ? parseFloat(data.discountPrice)
+          : null,
       isFree: data.isFree || false,
       thumbnailUrl: thumbnailUrl,
     };
@@ -130,7 +135,6 @@ const AddCourse = () => {
                   {t("instructorDashboard.Title")}
                 </label>
                 <input
-                
                   placeholder="title(EN)"
                   type="text"
                   className={`form-control ${
