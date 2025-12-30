@@ -4,7 +4,7 @@ import Navbar from "../Navbar/Navbar";
 import Newsletter from "../Newsletter/Newsletter";
 import Footer from "../Footer/Footer";
 import ScrollTopButton from "../ScrollTopButton/ScrollTopButton";
-import { ToastContainer, Zoom } from "react-toastify";
+import { ToastContainer, Slide} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useLocation } from "react-router-dom";
 import HeaderSection from "../HeaderSection/HeaderSection";
@@ -30,9 +30,9 @@ function Layout({ children }) {
         )}
 
       <ToastContainer
-        position="top-center"
+        position="top-right"
         autoClose={3000}
-        transition={Zoom}
+        transition={Slide}
         hideProgressBar
         closeOnClick
         pauseOnHover
