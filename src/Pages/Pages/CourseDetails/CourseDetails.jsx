@@ -43,6 +43,7 @@ const CourseDetails = () => {
     setPreviewLesson(lesson);
     setShowPreview(true);
   };
+  const { user, token } = useSelector((state) => state.auth);
 
   const handleAdd = () => {
     dispatch(addCourseToCart(course._id));
@@ -284,10 +285,10 @@ const CourseDetails = () => {
               alt="instructor"
               className="img-fluid rounded mb-3"
             />
-
+{token&&user.role!=="instructor" &&
             <Button onClick={handleAdd} className="ticketbtn">
               {t("courseDetails.addtocart")}
-            </Button>
+            </Button>}
 
             <ul className="list-unstyled m-0 mt-3">
               <li className="border-bottom py-3">
@@ -351,7 +352,7 @@ const CourseDetails = () => {
                   {t(`courseDetails.${course.skillLevel}`)}
                 </span>
               </li>
-              <li className="border-bottom py-3">
+              <li className=" py-3">
                 <span>
                   <GrLanguage
                     size={"18px"}
@@ -363,22 +364,23 @@ const CourseDetails = () => {
                 <span className="fw-bold">{t("courseDetails.English")}</span>
               </li>
             </ul>
-
-            <div
-              onClick={handleWishlist}
-              className="mt-4"
-              style={{
-                fontSize: "15px",
-                fontWeight: "500",
-                color: "#333",
-                cursor: "pointer",
-              }}
-            >
-              <FaRegHeart color="#0ab99d" size={"18px"} />{" "}
-              {isWishlisted
-                ? t("courseDetails.removeFromWishlist")
-                : t("courseDetails.addToWishlist")}
-            </div>
+            {token && user.role !== "instructor" && (
+              <div
+                onClick={handleWishlist}
+                className="mt-4"
+                style={{
+                  fontSize: "15px",
+                  fontWeight: "500",
+                  color: "#333",
+                  cursor: "pointer",
+                }}
+              >
+                <FaRegHeart color="#0ab99d" size={"18px"} />{" "}
+                {isWishlisted
+                  ? t("courseDetails.removeFromWishlist")
+                  : t("courseDetails.addToWishlist")}
+              </div>
+            )}
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import "./CourseCard.css";
-import { BsCart3, BsThreeDots } from "react-icons/bs";
+import { BsCart3 } from "react-icons/bs";
 import { FaEdit, FaRegStar, FaStar, FaTrash, FaCheck } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import handleDeleteCourse from "../../utilities/handleDeleteCourse";
 import { useDispatch, useSelector } from "react-redux";
 import { addCourseToCart } from "../../Store/Slices/cartSlice";
@@ -9,7 +9,6 @@ import { toast } from "react-toastify";
 import HalfStarRating from "../HalfStar/HalfStarRating";
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { CiSquareRemove } from "react-icons/ci";
 import { IoCloseSharp } from "react-icons/io5";
 
 const CourseCard = ({
@@ -34,22 +33,22 @@ const CourseCard = ({
   isEnrollment = false,
   onLeaveRating,
   userRating = 0,
-
   progress = 0,
   isWishlist = false,
   onRemove,
   onCourseClick,
+  isUserEnrolled = false,
 }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [currentRating, setCurrentRating] = useState(userRating);
   const [hoverRating, setHoverRating] = useState(0);
+  const { user, token } = useSelector((state) => state.auth);
 
   const { t } = useTranslation();
   const cartItems = useSelector((state) => state.cart.cartItems);
 
   const averageRating = stats?.averageRating || 0;
-
   const isAdded = cartItems.some((item) => item.courseId === courseId);
 
   useEffect(() => {
@@ -76,10 +75,13 @@ const CourseCard = ({
       toast.error("Please login to continue");
       navigate("/sign/in");
     } else {
-      console.log(course._id);
       dispatch(addCourseToCart(course._id));
       toast.success("Course added to cart!");
     }
+  };
+
+  const handleGoToCourse = (courseId) => {
+    navigate(`/course/player/${courseId}`);
   };
 
   const handleRatingClick = (e) => {
@@ -88,19 +90,12 @@ const CourseCard = ({
     onLeaveRating();
   };
 
-  // if (isAdded) {
-  //   toast.info("Course already in cart");
-  //   return;
-  // }
-
   return (
     <div
       onClick={() => {
-        // إذا كان enrollment وفيه onCourseClick، ناديه
         if (isEnrollment && onCourseClick) {
           onCourseClick(courseId);
-        } else if (!isEnrollment) {
-          // إذا كان course عادي، روح للديتيلز
+        } else if (!isEnrollment && !isUserEnrolled) {
           navigate(`/course/details/${courseId}`);
         }
       }}
@@ -115,7 +110,7 @@ const CourseCard = ({
       {isWishlist && (
         <IoCloseSharp
           size={18}
-          className=" align-self-end  mb-2"
+          className="align-self-end mb-2"
           style={{ cursor: "pointer" }}
           onClick={(e) => {
             e.stopPropagation();
@@ -134,7 +129,7 @@ const CourseCard = ({
       </div>
 
       <div
-        className="coursecard-itemcontent "
+        className="coursecard-itemcontent"
         style={{ flex: 1, display: "flex", flexDirection: "column" }}
       >
         {!isEnrollment && (
@@ -142,7 +137,6 @@ const CourseCard = ({
             <div dir="ltr">
               <HalfStarRating rating={averageRating} />
             </div>
-
             <span>({averageRating.toFixed(1)})</span>
           </div>
         )}
@@ -168,12 +162,12 @@ const CourseCard = ({
                 if (showInstructorActions) showMyLessons();
               }}
             >
-              <i className="fa-regular fa-file-lines "></i>{" "}
+              <i className="fa-regular fa-file-lines"></i>{" "}
               {t("courseCard.lesson")} {lessonsCount}
             </span>
 
             <span className="text-lowercase">
-              <i className="fa-sharp fa-regular fa-clock "></i> {courseDuration}
+              <i className="fa-sharp fa-regular fa-clock"></i> {courseDuration}
               {t("courseCard.m")}
             </span>
 
@@ -209,30 +203,45 @@ const CourseCard = ({
               )}
             </div>
 
-            {!hideCartButton &&
-              (isAdded ? (
-                <div className="coursecard-added-success">
-                  <div className="added-checkmark">
-                    <FaCheck />
+            {!hideCartButton && token && user.role !== "instructor" && (
+              <>
+                {isUserEnrolled ? (
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      handleGoToCourse(course._id);
+                    }}
+                    className="itemprice-button"
+                  >
+                    {t("courseCard.gotocourse") || "Go to Course"}
+                  </button>
+                ) : isAdded ? (
+                  <div className="coursecard-added-success">
+                    <div className="added-checkmark">
+                      <FaCheck />
+                    </div>
+                    <div>{t("courseCard.AddedtoCart")}</div>
                   </div>
-                  <div>{t("courseCard.AddedtoCart")}</div>
-                </div>
-              ) : (
-                <button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    handleAdd();
-                  }}
-                >
-                  <BsCart3 color="#1e4b43ff" fontSize={"20px"} />{" "}
-                  {t("courseCard.addtocart")}
-                </button>
-              ))}
+                ) : (
+                  <button
+                    className="itemprice-button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      handleAdd();
+                    }}
+                  >
+                    <BsCart3 color="#1e4b43ff" fontSize={"20px"} />{" "}
+                    {t("courseCard.addtocart")}
+                  </button>
+                )}
+              </>
+            )}
           </div>
         ) : (
           <div
-            className="d-flex justify-content-between align-items-end "
+            className="d-flex justify-content-between align-items-end"
             style={{ marginTop: "auto" }}
           >
             {isEnrollment && progress > 0 && progress < 100 && (
@@ -281,8 +290,8 @@ const CourseCard = ({
               >
                 {currentRating > 0
                   ? hoverRating
-                    ? `Edit rating`
-                    : `Your rating`
+                    ? "Edit rating"
+                    : "Your rating"
                   : "Leave a rating"}
               </span>
             </div>
@@ -292,7 +301,7 @@ const CourseCard = ({
         {showInstructorActions && (
           <div className="d-flex justify-content-end gap-2 mt-3">
             <button
-              className="editbtnn  "
+              className="editbtnn"
               onClick={(e) => {
                 e.stopPropagation();
                 handleEdit();
@@ -313,7 +322,6 @@ const CourseCard = ({
         )}
       </div>
 
-      {/* Progress Bar - جوه الكارد من الأسفل */}
       {isEnrollment && progress > 0 && (
         <div
           style={{

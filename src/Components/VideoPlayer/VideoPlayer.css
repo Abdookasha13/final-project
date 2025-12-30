@@ -19,7 +19,11 @@
   transition: background-color 0.3s;
 
 }
-
+.custom-complete-alert {
+  background-color: #0ab99d;   
+  color: #ffffff;
+  border: none;
+}
 .closeIcon:hover {
   background-color: rgb(220, 219, 219); 
   cursor: pointer;

@@ -14,8 +14,10 @@ function Navbar() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
   const [isSearch, setIsSearch] = useState(false);
+   const { user, token } = useSelector((state) => state.auth);
 
   useEffect(() => {
+   
     const handleScroll = () => {
       const header = document.querySelector(".header-section");
       if (!header) return;
@@ -84,22 +86,13 @@ function Navbar() {
                             {t("navbar.testimonial")}
                           </NavLink>
                         </li>
-                        {/* <li>
-                          <NavLink to="/price">{t("navbar.price")}</NavLink>
-                        </li> */}
-                        <li>
-                          <NavLink to="/cart">{t("navbar.cart")}</NavLink>
-                        </li>
+                   
                              <li>
                           <NavLink to="/faqs">{t("navbar.faq")}</NavLink>
                         </li>
                       </div>
 
-                      {/* <div>
-                        <li>
-                          <NavLink to="/faqs">{t("navbar.faq")}</NavLink>
-                        </li>
-                      </div> */}
+                  
                     </ul>
                   </li>
                   {/* ============blog========================== */}
@@ -143,7 +136,7 @@ function Navbar() {
                     setIsSearch(!isSearch);
                   }}
                 />
-                {!isSearch && (
+                {token&&!isSearch && user.role=="student"&&(
                   <div className="cart-wrapper">
                     <Link to="/cart">
                       <PiShoppingCartBold size={28} className="cart-icon" />
