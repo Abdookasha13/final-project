@@ -92,7 +92,9 @@ const AddCourse = () => {
       category: data.category,
       skillLevel: data.skillLevel,
       price: parseFloat(data.price),
-      discountPrice: data.discountPrice ? parseFloat(data.discountPrice) : null,
+    discountPrice: data.discountPrice && data.discountPrice !== "" 
+  ? parseFloat(data.discountPrice) 
+  : null,
       isFree: data.isFree || false,
       thumbnailUrl: thumbnailUrl,
     };

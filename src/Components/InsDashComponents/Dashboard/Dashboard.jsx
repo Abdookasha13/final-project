@@ -16,7 +16,7 @@ import {
 } from "recharts";
 
 const StatCard = ({ title, value, subtitle, iconClass }) => (
-  <div className="col-md-4 mb-3 statCard">
+  <div className="col-md-4 mb-3 statCard2">
     <div className="card shadow-sm p-4 ">
       <div className=" card-body d-flex align-items-center">
         <div className="me-3">

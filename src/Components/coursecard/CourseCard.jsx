@@ -38,7 +38,7 @@ const CourseCard = ({
   progress = 0,
   isWishlist = false,
   onRemove,
-   onCourseClick,
+  onCourseClick,
 }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -95,7 +95,7 @@ const CourseCard = ({
 
   return (
     <div
-onClick={() => {
+      onClick={() => {
         // إذا كان enrollment وفيه onCourseClick، ناديه
         if (isEnrollment && onCourseClick) {
           onCourseClick(courseId);
@@ -194,18 +194,29 @@ onClick={() => {
         {!isEnrollment ? (
           <div className="coursecard-itemprice d-flex flex-row justify-content-between">
             <div className="d-flex align-items-center gap-2">
-              <span className="discount">{discountPrice}$</span>
-              <span className="price">{price}</span>
+              {discountPrice ? (
+                <>
+                  <span className="discount">${discountPrice}</span>
+                  <span
+                    className="price"
+                    style={{ textDecoration: "line-through" }}
+                  >
+                    ${price}
+                  </span>
+                </>
+              ) : (
+                <span className="discount">${price}</span>
+              )}
             </div>
 
-              {!hideCartButton &&
-                (isAdded ? (
-                  <div className="coursecard-added-success">
-                    <div className="added-checkmark">
-                      <FaCheck />
-                    </div>
-                    <div>{t("courseCard.AddedtoCart")}</div>
-                 </div>
+            {!hideCartButton &&
+              (isAdded ? (
+                <div className="coursecard-added-success">
+                  <div className="added-checkmark">
+                    <FaCheck />
+                  </div>
+                  <div>{t("courseCard.AddedtoCart")}</div>
+                </div>
               ) : (
                 <button
                   onClick={(e) => {
