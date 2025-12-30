@@ -23,9 +23,17 @@
 }
 
 .main-content-area {
-  padding-left: 230px;
+  /* padding-left: 230px; */
   background: linear-gradient(135deg, #f8f9fc 0%, #f1f4f9 100%);
   min-height: 100vh;
+}
+
+:dir(ltr) .main-content-area {
+  padding-left: 230px;
+}
+
+:dir(rtl) .main-content-area {
+  padding-right: 230px;
 }
 
 .instructor-dash-sidebar .nav-link {
