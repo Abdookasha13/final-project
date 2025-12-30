@@ -236,7 +236,7 @@ export default function VideoPlayer({ lessons = [], enrollmentId }) {
                 </button>
 
                 {completedLessons.size === lessons.length && (
-                  <div className="alert alert-success mt-3" role="alert">
+                  <div className="alert custom-complete-alert  mt-3" role="alert">
                     Congratulations! You've completed all lessons in this
                     course!
                   </div>

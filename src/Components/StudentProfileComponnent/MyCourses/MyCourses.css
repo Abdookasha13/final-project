@@ -16,7 +16,7 @@
 .statCard {
   background: #fff;
   border-radius: 14px;
-  padding: 1.5rem;
+  /* padding: 1.9rem; */
   display: flex;
   align-items: center;
   gap: 16px;

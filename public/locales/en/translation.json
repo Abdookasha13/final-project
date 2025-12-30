@@ -453,7 +453,8 @@
     "students": "students",
     "m": "m",
     "addtocart": "Add to Cart",
-    "AddedtoCart": "Added to Cart"
+    "AddedtoCart": "Added to Cart",
+    "gotocourse":"Go to Course"
   },
   "chatWidget": {
     "toggleOpen": "Open Chat",

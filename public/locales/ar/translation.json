@@ -254,7 +254,8 @@
     "students": "طلاب",
     "m": "د",
     "addtocart": "أضف إلى السلة",
-    "AddedtoCart": "تمت الإضافة للسلة"
+    "AddedtoCart": "تمت الإضافة للسلة",
+    "gotocourse":"انتقل إلى الدورة"
   },
   "chatWidget": {
     "toggleOpen": "فتح المحادثة",

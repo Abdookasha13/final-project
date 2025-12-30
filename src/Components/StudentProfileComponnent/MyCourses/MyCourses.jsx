@@ -194,7 +194,7 @@ const MyCourses = () => {
       <div className="row g-3 text-center">
         {/* Enrolled */}
         <div className="col-md-4">
-          <div className="statCard " style={cardStyle("#fbfbfbff")}>
+          <div className="statCard p-4  " style={cardStyle("#fbfbfbff")}>
             <div
               className="icon"
               style={iconCircleStyle("rgba(220, 242, 237, 1)")}
@@ -210,7 +210,7 @@ const MyCourses = () => {
 
         {/* In Progress */}
         <div className="col-md-4">
-          <div className="statCard" style={cardStyle("#fbfbfbff")}>
+          <div className="statCard p-4" style={cardStyle("#fbfbfbff")}>
             <div style={iconCircleStyle("rgba(255, 235, 205, 1)")}>
               <GrCompliance color="#ffa500" fontSize="32px" />
             </div>
@@ -223,7 +223,7 @@ const MyCourses = () => {
 
         {/* Finished */}
         <div className="col-md-4">
-          <div className="statCard" style={cardStyle("#fbfbfbff")}>
+          <div className="statCard p-4" style={cardStyle("#fbfbfbff")}>
             <div style={iconCircleStyle("rgba(217, 240, 242, 1)")}>
               <GrCompliance color="#0ab9d0" fontSize="32px" />
             </div>
@@ -235,7 +235,7 @@ const MyCourses = () => {
         </div>
 
         {/* Certificates */}
-        <div className="col-md-4 mt-3">
+        {/* <div className="col-md-4 mt-3">
           <div className="statCard" style={cardStyle("#fbfbfbff")}>
             <div style={iconCircleStyle("#daf0deff")}>
               <GrCertificate color="#0ad02eff" fontSize="32px" />
@@ -245,7 +245,7 @@ const MyCourses = () => {
               <p className="display-6">{stats.certificates}</p>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
 
       <ul className="courses-tabs mt-5 mb-4">
@@ -354,8 +354,8 @@ const MyCourses = () => {
                     userRating={userRatings[enrollment.course._id] || 0}
                     onLeaveRating={() => openReviewModal(enrollment.course._id)}
                     certificateUrl={enrollment.certificateUrl}
-                    onCourseClick={openCourse}
-                    courseId={enrollment.course._id}
+                    // onCourseClick={openCourse}
+                    // courseId={enrollment.course._id}
                   />
                 </div>
               ))}
