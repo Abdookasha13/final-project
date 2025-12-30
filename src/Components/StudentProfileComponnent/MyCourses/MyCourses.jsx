@@ -334,7 +334,8 @@ const MyCourses = () => {
                     progress={enrollment.progressPercentage || 0}
                     userRating={userRatings[enrollment.course._id] || 0}
                     onLeaveRating={() => openReviewModal(enrollment.course._id)}
-                    onClick={() => openCourse(enrollment.course._id)}
+                    onCourseClick={openCourse}
+                    courseId={enrollment.course._id}
                   />
                 </div>
               ))}
@@ -362,6 +363,8 @@ const MyCourses = () => {
                     userRating={userRatings[enrollment.course._id] || 0}
                     onLeaveRating={() => openReviewModal(enrollment.course._id)}
                     certificateUrl={enrollment.certificateUrl}
+                          onCourseClick={openCourse}
+                    courseId={enrollment.course._id}
                   />
                 </div>
               ))}

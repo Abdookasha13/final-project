@@ -96,6 +96,7 @@
   transition: all 0.3s ease;
   color: #1e293b;
   min-height: 50px;
+  cursor: pointer;
 }
 .coursecard-title p:hover {
   color: #0ab99d;
