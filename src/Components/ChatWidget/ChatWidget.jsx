@@ -118,7 +118,7 @@ const ChatWidget = () => {
             )}
 
             {messages.map((msg, i) => (
-              <div key={i} className={`chat-msg chat-msg-${msg.from}`}>
+              <div key={i} className={`chat-msg chat-msg-${msg.from}`} style={{ whiteSpace: "pre-line" }}>
                 {msg.text}
               </div>
             ))}
