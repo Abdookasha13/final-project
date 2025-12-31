@@ -12,6 +12,7 @@ import { initializeYouTubePlayer } from "../../utilities/initializeYoutubePlayer
 import { getYouTubeId } from "../../utilities/getYoutubeId";
 import { MdOutlinePlayLesson } from "react-icons/md";
 import "./videoPlayer.css";
+import AIQuiz from "../AI/AIQuiz";
 
 export default function VideoPlayer({ lessons = [], enrollmentId }) {
   const { i18n } = useTranslation();
@@ -243,6 +244,19 @@ export default function VideoPlayer({ lessons = [], enrollmentId }) {
                 )}
               </>
             )}
+                                      <div className="mt-5">
+      <h5 className="mb-4">📚 Learning Tools</h5>
+      
+      {/* Quiz Generator */}
+      <AIQuiz
+        lessonContent={currentLesson?.content[lang]}
+        lessonTitle={currentLesson?.title[lang]}
+        token={token}
+        lang={lang}
+      />
+
+
+    </div>
           </div>
         </div>
       </div>
