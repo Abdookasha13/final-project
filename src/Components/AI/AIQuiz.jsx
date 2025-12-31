@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { CheckCircle, XCircle, Loader, AlertCircle } from "lucide-react";
 import "./AIQuiz.css";
@@ -87,36 +87,15 @@ const AIQuiz = ({
       <button
         onClick={generateQuiz}
         disabled={loading}
-        style={{
-          padding: "10px 20px",
-          backgroundColor: "#0ab99d",
-          color: "#fff",
-          border: "none",
-          borderRadius: "6px",
-          fontSize: "0.9rem",
-          fontWeight: "600",
-          cursor: loading ? "not-allowed" : "pointer",
-          display: "flex",
-          alignItems: "center",
-          gap: "8px",
-          whiteSpace: "nowrap",
-          transition: "all 0.2s ease",
-          opacity: loading ? 0.7 : 1,
-        }}
+        className="quiz-compact-btn"
       >
         {loading ? (
           <>
-            <Loader
-              size={16}
-              style={{
-                display: "inline-block",
-                animation: "spin 1s linear infinite",
-              }}
-            />
+            <Loader size={16} className="quiz-loader" />
             {lang === "ar" ? "التحضير..." : "Preparing..."}
           </>
         ) : (
-          <>📝 {lang === "ar" ? "ابدأ الاختبار" : "Start Quiz"}</>
+          <>{lang === "ar" ? "ابدأ الاختبار" : "Start Quiz"}</>
         )}
       </button>
     );
@@ -127,39 +106,32 @@ const AIQuiz = ({
     return (
       <div className="mt-4">
         {error && (
-          <div
-            className="alert alert-danger alert-dismissible fade show"
-            role="alert"
-          >
-            <AlertCircle size={18} className="me-2" />
+          <div className="quiz-alert quiz-alert-danger" role="alert">
+            <AlertCircle size={18} />
             {error}
             <button
               type="button"
-              className="btn-close"
+              className="quiz-alert-close"
               onClick={() => setError(null)}
-            ></button>
+              aria-label="Close"
+            >
+              ×
+            </button>
           </div>
         )}
         <button
           onClick={generateQuiz}
           disabled={loading}
-          className="btn btn-primary w-100"
-          style={{ fontSize: "1rem", padding: "10px" }}
+          className="quiz-start-btn w-100"
+          style={{ fontSize: "1rem", padding: "12px" }}
         >
           {loading ? (
             <>
-              <Loader
-                size={18}
-                className="me-2"
-                style={{
-                  display: "inline-block",
-                  animation: "spin 1s linear infinite",
-                }}
-              />
+              <Loader size={18} className="quiz-loader" />
               {lang === "ar" ? "جاري التحضير..." : "Preparing Quiz..."}
             </>
           ) : (
-            <>📝 {lang === "ar" ? "ابدأ الاختبار" : "Start Quiz"}</>
+            <>{lang === "ar" ? "ابدأ الاختبار" : "Start Quiz"}</>
           )}
         </button>
       </div>
@@ -171,43 +143,29 @@ const AIQuiz = ({
   const isPassed = percentage >= PASSING_SCORE;
 
   return (
-    <div
-      className="mt-4 p-4  w-100"
-      // style={{ backgroundColor: "#f9f9f9" }}
-    >
-      {/* <div className="mb-4">
-        <h5 className="fw-semibold mb-1">
-          {lang === "ar" ? "التطبيق والتقييم" : "Practice & Assessment"}
-        </h5>
-        <small className="text-muted">
-          {lang === "ar"
-            ? "اختبر فهمك للمحتوى قبل المتابعة"
-            : "Check your understanding before moving on"}
-        </small>
-      </div> */}
-
+    <div className="ai-quiz-container mt-4 w-100">
       {error && (
-        <div
-          className="alert alert-warning alert-dismissible fade show"
-          role="alert"
-        >
-          <AlertCircle size={18} className="me-2" />
+        <div className="quiz-alert quiz-alert-warning" role="alert">
+          <AlertCircle size={18} />
           {error}
           <button
             type="button"
-            className="btn-close"
+            className="quiz-alert-close"
             onClick={() => setError(null)}
-          ></button>
+            aria-label="Close"
+          >
+            ×
+          </button>
         </div>
       )}
 
       {quiz.map((question, qIdx) => (
-        <div key={qIdx} className="mb-4 p-3 bg-white rounded border">
-          <p className="fw-bold mb-3" style={{ fontSize: "1.05rem" }}>
+        <div key={qIdx} className="quiz-question-container">
+          <p className="quiz-question-number">
             {qIdx + 1}. {question.question}
           </p>
 
-          <div className="ms-3">
+          <div className="quiz-options">
             {question.options.map((option, oIdx) => {
               const isCorrect = oIdx === question.correctAnswer;
               const userSelected = userAnswers[qIdx] === oIdx;
@@ -215,7 +173,12 @@ const AIQuiz = ({
               const showWrong = showResults && userSelected && !isCorrect;
 
               return (
-                <div key={oIdx} className="form-check mb-2">
+                <div
+                  key={oIdx}
+                  className={`quiz-option-wrapper ${
+                    showCorrect ? "quiz-option-correct" : ""
+                  } ${showWrong ? "quiz-option-wrong" : ""}`}
+                >
                   <input
                     type="radio"
                     name={`question-${qIdx}`}
@@ -226,30 +189,22 @@ const AIQuiz = ({
                       handleAnswerSelect(qIdx, oIdx);
                       setError(null);
                     }}
-                    className="form-check-input"
+                    className="quiz-option-input"
                     disabled={showResults}
-                    style={{ cursor: "pointer" }}
                   />
                   <label
                     htmlFor={`option-${qIdx}-${oIdx}`}
-                    className={`form-check-label d-flex align-items-center gap-2 ${
-                      showCorrect ? "text-success fw-bold" : ""
-                    } ${showWrong ? "text-danger" : ""}`}
-                    style={{
-                      cursor: showResults ? "default" : "pointer",
-                      padding: "8px",
-                      borderRadius: "6px",
-                      backgroundColor: showCorrect
-                        ? "#d4edda"
-                        : showWrong
-                        ? "#f8d7da"
-                        : "transparent",
-                      transition: "background-color 0.3s ease",
-                    }}
+                    className={`quiz-option-label ${
+                      showResults ? "quiz-option-disabled" : ""
+                    }`}
                   >
                     {option}
-                    {showCorrect && <CheckCircle size={16} />}
-                    {showWrong && <XCircle size={16} />}
+                    {showCorrect && (
+                      <CheckCircle size={16} className="quiz-option-icon" />
+                    )}
+                    {showWrong && (
+                      <XCircle size={16} className="quiz-option-icon" />
+                    )}
                   </label>
                 </div>
               );
@@ -257,72 +212,49 @@ const AIQuiz = ({
           </div>
 
           {showResults && (
-            <div
-              className="mt-3 p-3 rounded"
-              style={{
-                backgroundColor: "#e7f3f0",
-                borderLeft: "4px solid #10b981",
-              }}
-            >
-              <small className="text-muted">
-                <strong>💡 {lang === "ar" ? "شرح" : "Explanation"}:</strong>{" "}
-                {question.explanation}
-              </small>
+            <div className="quiz-explanation">
+              <span className="quiz-explanation-label">
+                {lang === "ar" ? "شرح" : "Explanation"}:
+              </span>
+              {question.explanation}
             </div>
           )}
         </div>
       ))}
 
-      <div className="mt-4 ">
+      <div className="quiz-button-section">
         {!showResults ? (
-          <button
-            onClick={handleSubmit}
-            className="btn  w-25 "
-            style={{
-              padding: "12px",
-              fontSize: "1rem",
-              backgroundColor: "#0ab99d",
-            }}
-          >
+          <button onClick={handleSubmit} className="quiz-submit-btn">
             {lang === "ar" ? "تسليم الاختبار" : "Submit Quiz"}
           </button>
         ) : (
           <>
             <div
-              className="alert mb-3 p-3"
-              role="alert"
-              style={{
-                backgroundColor: isPassed ? "#d4edda" : "#fff3cd",
-                borderColor: isPassed ? "#c3e6cb" : "#ffeaa7",
-                border: "2px solid",
-              }}
+              className={`quiz-results-card ${
+                isPassed ? "quiz-results-passed" : "quiz-results-failed"
+              }`}
             >
-              <div className="d-flex justify-content-between align-items-center mb-2">
-                <strong style={{ fontSize: "1.1rem" }}>
+              <div className="quiz-results-header">
+                <strong className="quiz-score-display">
                   {lang === "ar" ? "درجتك" : "Score"}: {score} / {quiz.length}
                 </strong>
-                <span style={{ fontSize: "1.2rem" }}>
-                  {isPassed ? "✅" : "📚"}
-                </span>
               </div>
 
-              <p className="mb-2">
+              <p className="quiz-results-message">
                 {isPassed
                   ? lang === "ar"
-                    ? "🎉 ممتاز! لقد نجحت!"
-                    : "🎉 Great! You Passed!"
+                    ? "ممتاز! لقد نجحت!"
+                    : "Great! You Passed!"
                   : lang === "ar"
-                  ? `⚠️ تحتاج لـ ${PASSING_SCORE}% للمتابعة (درجتك: ${percentage}%)`
-                  : `⚠️ You need ${PASSING_SCORE}% to continue (Your score: ${percentage}%)`}
+                  ? `تحتاج لـ ${PASSING_SCORE}% للمتابعة (درجتك: ${percentage}%)`
+                  : `You need ${PASSING_SCORE}% to continue (Your score: ${percentage}%)`}
               </p>
 
-              <div className="progress" style={{ height: "10px" }}>
+              <div className="quiz-progress-bar">
                 <div
-                  className="progress-bar"
+                  className="quiz-progress-fill"
                   style={{
                     width: `${percentage}%`,
-                    backgroundColor: isPassed ? "#28a745" : "#ffc107",
-                    transition: "width 0.5s ease",
                   }}
                 ></div>
               </div>
@@ -331,32 +263,24 @@ const AIQuiz = ({
             {!isPassed && (
               <button
                 onClick={generateQuiz}
-                className="btn btn-warning w-100 mb-2"
-                style={{ padding: "12px", fontSize: "1rem" }}
+                className="quiz-action-btn quiz-retry-btn"
               >
                 {lang === "ar" ? "حاول مرة أخرى" : "Try Again"}
               </button>
             )}
 
             {isPassed && (
-              <div
-                className="p-3 rounded-3 mt-3"
-                style={{
-                  backgroundColor: "#e7f3f0",
-                  borderLeft: "4px solid #10b981",
-                }}
-              >
+              <div className="quiz-success-message">
                 {lang === "ar"
-                  ? "🎉 أحسنت! يمكنك المتابعة للدرس التالي"
-                  : "🎉 Great job! You can now move to the next lesson"}
+                  ? "أحسنت! يمكنك المتابعة للدرس التالي"
+                  : "Great job! You can now move to the next lesson"}
               </div>
             )}
 
             {isPassed && (
               <button
                 onClick={generateQuiz}
-                className="btn btn-primary w-100"
-                style={{ padding: "12px", fontSize: "1rem" }}
+                className="quiz-action-btn quiz-new-quiz-btn"
               >
                 {lang === "ar" ? "اختبار جديد" : "New Quiz"}
               </button>

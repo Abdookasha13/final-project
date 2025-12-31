@@ -230,9 +230,13 @@ function Checkout() {
                         <span className="current-price">
                           ${item.discountPrice || item.price}
                         </span>
-                        {item.price && item.discountPrice && (
-                          <span className="original-price">${item.price}</span>
-                        )}
+                        {item.price &&
+                          item.discountPrice &&
+                          item.price > item.discountPrice && (
+                            <span className="original-price">
+                              ${item.price}
+                            </span>
+                          )}
                       </div>
                     </div>
                   );
