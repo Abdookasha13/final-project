@@ -145,8 +145,6 @@ body {
 .it-team-3-area {
   position: relative;
   z-index: 1;
-  padding-top: 100px;
-  padding-bottom: 100px;
   overflow-x: hidden;
 }
 

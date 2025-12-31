@@ -127,7 +127,7 @@ function AboutUs() {
       <CourseShape />
 
       {/* ----------- Teacher Section ----------- */}
-      <div className="it-team-3-area p-relative z-index pt-110 pb-90">
+      <div className="it-team-3-area p-relative z-index py-5">
         <div
           className="it-team-3-bg"
           style={{
@@ -140,18 +140,7 @@ function AboutUs() {
           <div className="row">
             <div className="col-xl-12">
               <div className="text-center">
-                <span className="it-section-subtitle text-white">
-                  <img
-                    src="https://ordainit.com/html/educate/assets/img/team/bok.svg"
-                    alt=""
-                  />
-                  {t("instructor.title").split(" ")[1]}
-                  <img
-                    src="https://ordainit.com/html/educate/assets/img/team/bok.svg"
-                    alt=""
-                  />
-                </span>
-                <h2 className="it-section-title-3 text-white">
+                <h2 className="it-section-title-3 text-white mb-5">
                   {t("instructor.subtitle")}
                 </h2>
                 <div className="it-team-3-wrapper row justify-content-center">
@@ -161,7 +150,7 @@ function AboutUs() {
                         <TeacherCard instructor={ins} />
                       </div>
                     ))
-                    .slice(0, 3)}
+                    .slice(0, 4)}
                 </div>
               </div>
             </div>
