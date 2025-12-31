@@ -22,6 +22,8 @@ export default function VideoPlayer({ lessons = [], enrollmentId }) {
   const [currentLesson, setCurrentLesson] = useState(null);
   const [completedLessons, setCompletedLessons] = useState(new Set());
   const [loading, setLoading] = useState(false);
+  const [quizPassed, setQuizPassed] = useState(false);
+  const [sidebarOpen, _] = useState(true);
   const playerRef = useRef(null);
 
   useEffect(() => {
@@ -46,9 +48,39 @@ export default function VideoPlayer({ lessons = [], enrollmentId }) {
     initializeYouTubePlayer(videoId, playerRef);
   }, [currentLesson]);
 
+  useEffect(() => {
+    setQuizPassed(false);
+  }, [currentLesson?._id]);
+
+  const handleQuizComplete = (passed, percentage) => {
+    setQuizPassed(passed);
+    if (passed) {
+      toast.success(
+        lang === "ar"
+          ? `تهانينا! حصلت على ${percentage}% 🎉`
+          : `Congratulations! You scored ${percentage}% 🎉`
+      );
+    } else {
+      toast.info(
+        lang === "ar"
+          ? `درجتك ${percentage}%. تحتاج لـ 70% للمتابعة`
+          : `You scored ${percentage}%. You need 70% to continue`
+      );
+    }
+  };
+
   const markLessonComplete = async () => {
     if (!enrollmentId || !currentLesson?._id) {
       toast.error("Missing enrollment or lesson information");
+      return;
+    }
+
+    if (!quizPassed) {
+      toast.error(
+        lang === "ar"
+          ? "يجب النجاح في الاختبار أولاً (70% فما فوق)"
+          : "You must pass the quiz first (70% or higher)"
+      );
       return;
     }
 
@@ -62,21 +94,27 @@ export default function VideoPlayer({ lessons = [], enrollmentId }) {
 
       if (updatedEnrollment) {
         const progress = updatedEnrollment.progress;
-
         const completed = new Set(
           progress.filter((p) => p.completed).map((p) => p.lesson._id)
         );
-
         setCompletedLessons(completed);
 
-        // Move to next lesson
         const currentIndex = lessons.findIndex(
           (l) => l._id === currentLesson._id
         );
         if (currentIndex < lessons.length - 1) {
           setCurrentLesson(lessons[currentIndex + 1]);
+          toast.success(
+            lang === "ar"
+              ? "ممتاز! انتقل للدرس التالي"
+              : "Great! Moving to next lesson"
+          );
         } else {
-          toast.success("Course completed! Congratulations!");
+          toast.success(
+            lang === "ar"
+              ? "مبروك! انتهيت من جميع الدروس 🎓"
+              : "Course completed! Congratulations! 🎓"
+          );
         }
       }
     } catch (err) {
@@ -93,171 +131,417 @@ export default function VideoPlayer({ lessons = [], enrollmentId }) {
 
   return (
     <>
+      {/* Header - Minimal & Clean */}
       <div
-        className="w-100 d-flex align-items-center position-fixed gap-5 border justify-content-between"
+        className="w-100 d-flex align-items-center gap-4"
         style={{
-          height: "70px",
+          height: "60px",
+          backgroundColor: "#fff",
+          borderBottom: "1px solid #e5e7eb",
+          padding: "0 20px",
+          position: "fixed",
           top: 0,
           left: 0,
-          backgroundColor: "#f8f9fa",
           zIndex: 100,
+          boxShadow: "0 1px 3px rgba(0,0,0,0.05)",
         }}
       >
         {/* Logo */}
-        <img
-          className="px-3"
-          src="/Images/logo-nav.png"
-          alt="Logo"
-          height="40"
-        />
+        <img src="/Images/logo-nav.png" alt="Logo" height="35" />
 
-        {/* Progress + text */}
+        {/* Progress Info */}
         <div
-          className="d-flex align-items-center gap-3 h-100 "
-          style={{ width: "500px" }}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "12px",
+            flex: 1,
+          }}
         >
-          <small className="text-muted text-nowrap">
-            {completedLessons.size} / {lessons.length} lessons completed
+          <small
+            style={{
+              color: "#6b7280",
+              whiteSpace: "nowrap",
+              fontSize: "0.85rem",
+            }}
+          >
+            {completedLessons.size} / {lessons.length}
           </small>
-          <div className="progress flex-grow-1" style={{ height: "8px" }}>
+          <div
+            style={{
+              flex: 1,
+              height: "6px",
+              backgroundColor: "#f3f4f6",
+              borderRadius: "3px",
+              overflow: "hidden",
+            }}
+          >
             <div
-              className="progress-bar"
-              role="progressbar"
               style={{
                 width:
                   lessons.length > 0
                     ? `${(completedLessons.size / lessons.length) * 100}%`
                     : "0%",
+                height: "100%",
                 backgroundColor: "#0ab99d",
+                transition: "width 0.3s ease",
               }}
             />
           </div>
-
-          <button
-            className=" closeIcon "
-            onClick={() => navigate("/stdprofile/mycourses")}
-          >
-            <IoMdClose size={"30px"} color=" #333" />
-          </button>
         </div>
+
+        {/* Close Button */}
+        <button
+          onClick={() => navigate("/stdprofile/mycourses")}
+          style={{
+            border: "none",
+            background: "none",
+            cursor: "pointer",
+            color: "#6b7280",
+            fontSize: "24px",
+            display: "flex",
+            alignItems: "center",
+            transition: "color 0.2s",
+          }}
+          onMouseEnter={(e) => (e.target.style.color = "#1f2937")}
+          onMouseLeave={(e) => (e.target.style.color = "#6b7280")}
+        >
+          <IoMdClose />
+        </button>
       </div>
 
-      <div className="">
-        <div className="row pb-4">
-          {/* Sidebar - Lessons List */}
-          <div
-            className="col-md-4 col-lg-3 border-end p-0 bg-light position-fixed vh-100"
-            style={{ top: "70px", overflowY: "auto" }}
-          >
-            {lessons.map((lesson) => (
-              <button
-                key={lesson._id}
-                onClick={() => setCurrentLesson(lesson)}
-                className={`border-bottom w-100 text-start px-3 py-3 border-0 bg-transparent d-flex justify-content-between align-items-center transition-all
-                ${
-                  currentLesson?._id === lesson._id
-                    ? "bg-white fw-bold"
-                    : "hover"
-                }`}
+      {/* Main Content */}
+      <div
+        style={{
+          marginTop: "60px",
+          display: "flex",
+          minHeight: "calc(100vh - 60px)",
+        }}
+      >
+        {/* Sidebar - Lightweight */}
+        <div
+          style={{
+            width: sidebarOpen ? "280px" : "0",
+            backgroundColor: "#f9fafb",
+            borderRight: "1px solid #e5e7eb",
+            overflowY: "auto",
+            transition: "width 0.3s ease",
+            flexShrink: 0,
+          }}
+        >
+          {sidebarOpen && (
+            <div style={{ padding: "16px 0" }}>
+              {lessons.map((lesson) => (
+                <button
+                  key={lesson._id}
+                  onClick={() => setCurrentLesson(lesson)}
+                  style={{
+                    width: "100%",
+                    padding: "12px 16px",
+                    border: "none",
+                    background:
+                      currentLesson?._id === lesson._id
+                        ? "#fff"
+                        : "transparent",
+                    borderLeft:
+                      currentLesson?._id === lesson._id
+                        ? "3px solid #10b981"
+                        : "3px solid transparent",
+                    cursor: "pointer",
+                    textAlign: "left",
+                    transition: "all 0.2s ease",
+                    display: "flex",
+                    gap: "10px",
+                    alignItems: "center",
+                  }}
+                  onMouseEnter={(e) => {
+                    if (currentLesson?._id !== lesson._id) {
+                      e.currentTarget.style.backgroundColor = "#f3f4f6";
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (currentLesson?._id !== lesson._id) {
+                      e.currentTarget.style.backgroundColor = "transparent";
+                    }
+                  }}
+                >
+                  <div style={{ flexShrink: 0 }}>
+                    {isLessonCompleted(lesson._id) ? (
+                      <Check size={16} color="#10b981" strokeWidth={3} />
+                    ) : (
+                      <Play size={14} color="#9ca3af" />
+                    )}
+                  </div>
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <p
+                      style={{
+                        margin: "0",
+                        fontSize: "0.9rem",
+                        color:
+                          currentLesson?._id === lesson._id
+                            ? "#1f2937"
+                            : "#6b7280",
+                        fontWeight:
+                          currentLesson?._id === lesson._id ? "600" : "400",
+                        textDecoration: isLessonCompleted(lesson._id)
+                          ? "line-through"
+                          : "none",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        whiteSpace: "nowrap",
+                      }}
+                    >
+                      {lesson.title[lang]}
+                    </p>
+                  </div>
+                  <small
+                    style={{
+                      color: "#9ca3af",
+                      fontSize: "0.75rem",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    {lesson.duration}m
+                  </small>
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Main Content Area */}
+        <div style={{ flex: 1, overflowY: "auto" }}>
+          {currentLesson && (
+            <div style={{ maxWidth: "100%", padding: "32px", margin: "0 " }}>
+              {/* Video Player */}
+              <div
                 style={{
-                  background:
-                    currentLesson?._id === lesson._id
-                      ? "#fff"
-                      : isLessonCompleted(lesson._id)
-                      ? "#f0f9f7"
-                      : "transparent",
-                  cursor: "pointer",
+                  marginBottom: "32px",
+                  borderRadius: "12px",
+                  overflow: "hidden",
+                  aspectRatio: "16/7",
+                  backgroundColor: "#000",
+                  boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
                 }}
               >
-                <div className="d-flex gap-2 align-items-center">
-                  {isLessonCompleted(lesson._id) ? (
-                    <Check size={16} color="#0ab99d" />
-                  ) : (
-                    <Play size={16} color="#0ab99d" />
-                  )}
-                  <span
-                    className={`lesTitle ${
-                      isLessonCompleted(lesson._id) ? "completed" : "incomplete"
-                    }`}
-                  >
-                    {lesson.title[lang]}
-                  </span>
-                </div>
-                <small className="text-muted">{lesson.duration}m</small>
-              </button>
-            ))}
-          </div>
-
-          {/* Main Content - Video and Description */}
-          <div
-            className="col-md-8 col-lg-9 p-4"
-            style={{ marginLeft: "25%", marginTop: "70px" }}
-          >
-            {currentLesson && (
-              <>
                 <div
-                  className="mb-4 rounded overflow-hidden"
-                  style={{ aspectRatio: "16/6", background: "#000" }}
-                >
-                  <div id="youtube-player" />
-                </div>
+                  id="youtube-player"
+                  style={{ width: "100%", height: "100%" }}
+                />
+              </div>
 
-                <h4 className="mb-3 fs-5 text-dark">
-                  <MdOutlinePlayLesson size={30} color="#0ab99d" /> content
-                </h4>
-                <p className="text-muted mb-4">{currentLesson.content[lang]}</p>
-
-                <button
-                  className={`btn btn-lg text-light`}
+              {/* Lesson Title */}
+              <div style={{ marginBottom: "24px" }}>
+                <h4
                   style={{
-                    backgroundColor: isLessonCompleted(currentLesson._id)
-                      ? "#0aa58bff"
-                      : "#0eb89c",
+                    fontSize: "1.5rem",
+                    fontWeight: "600",
+                    color: "#1f2937",
+                    margin: 0,
                   }}
-                  onClick={markLessonComplete}
-                  disabled={loading || isLessonCompleted(currentLesson._id)}
                 >
-                  {loading ? (
-                    <>
-                      <span
-                        className="spinner-border spinner-border-sm me-2"
-                        role="status"
-                        aria-hidden="true"
-                      ></span>
-                      Loading...
-                    </>
-                  ) : isLessonCompleted(currentLesson._id) ? (
-                    <>
-                      <Check size={20} className="me-2" />
-                      Completed
-                    </>
-                  ) : (
-                    "Complete Lesson"
-                  )}
-                </button>
+                  {currentLesson.title[lang]}
+                </h4>
+              </div>
 
-                {completedLessons.size === lessons.length && (
-                  <div className="alert custom-complete-alert  mt-3" role="alert">
-                    Congratulations! You've completed all lessons in this
-                    course!
-                  </div>
+              {/* Lesson Content */}
+              <div
+                style={{
+                  marginBottom: "24px",
+                  padding: "16px",
+                  backgroundColor: "#f9fafb",
+                  borderRadius: "8px",
+                  lineHeight: "1.6",
+                  color: "#4b5563",
+                  fontSize: "0.95rem",
+                }}
+              >
+                {currentLesson.content[lang]}
+              </div>
+
+              {/* Complete Button */}
+              <div style={{ marginBottom: "32px" }}>
+                {isLessonCompleted(currentLesson._id) ? (
+                  <button
+                    style={{
+                      width: "25%",
+                      padding: "12px 16px",
+                      backgroundColor: "#d1fae5",
+                      color: "#065f46",
+                      border: "none",
+                      borderRadius: "8px",
+                      fontSize: "0.95rem",
+                      fontWeight: "600",
+                      cursor: "not-allowed",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      gap: "8px",
+                    }}
+                    disabled
+                  >
+                    <Check size={18} />
+                    {lang === "ar" ? "مكتمل " : "Completed "}
+                  </button>
+                ) : (
+                  <button
+                    style={{
+                      width: "25%",
+                      padding: "12px 16px",
+                      backgroundColor: quizPassed ? "#0ab99d" : "#0ab99d",
+                      color: "#fff",
+                      border: "none",
+                      borderRadius: "8px",
+                      fontSize: "0.95rem",
+                      fontWeight: "600",
+                      cursor: quizPassed ? "pointer" : "not-allowed",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      gap: "8px",
+                      opacity: quizPassed ? 1 : 0.6,
+                      transition: "all 0.2s ease",
+                    }}
+                    onClick={markLessonComplete}
+                    disabled={loading || !quizPassed}
+                  >
+                    {loading ? (
+                      <>
+                        <span
+                          style={{
+                            display: "inline-block",
+                            width: "16px",
+                            height: "16px",
+                            border: "2px solid #fff",
+                            borderTopColor: "transparent",
+                            borderRadius: "50%",
+                            animation: "spin 0.6s linear infinite",
+                          }}
+                        />
+                        {lang === "ar" ? "جاري الحفظ..." : "Saving..."}
+                      </>
+                    ) : (
+                      <>
+                        <Check size={18} />
+                        {lang === "ar" ? "إكمال الدرس" : "Complete Lesson"}
+                      </>
+                    )}
+                  </button>
                 )}
-              </>
-            )}
-                                      <div className="mt-5">
-      <h5 className="mb-4">📚 Learning Tools</h5>
-      
-      {/* Quiz Generator */}
-      <AIQuiz
-        lessonContent={currentLesson?.content[lang]}
-        lessonTitle={currentLesson?.title[lang]}
-        token={token}
-        lang={lang}
-      />
+              </div>
 
+              {/* Quiz Alert & Button Container */}
+              {!quizPassed && !isLessonCompleted(currentLesson._id) && (
+                <div
+                  className="d-flex flex-column"
+                  style={{
+                    marginBottom: "24px",
+                    padding: "16px 20px",
+                    backgroundColor: "#f8fafc",
+                    border: "1px solid #e2e8f0",
+                    borderRadius: "8px",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    gap: "20px",
+                    boxShadow: "0 1px 3px rgba(0,0,0,0.05)",
+                  }}
+                >
+                  <div className="text-center">
+                    <p
+                      style={{
+                        margin: "0 0 4px 0",
+                        fontWeight: "600",
+                        color: "#0ab99d",
+                        fontSize: "0.95rem",
+                      }}
+                    >
+                      {lang === "ar"
+                        ? "📝 اختبر فهمك أولاً"
+                        : "📝 Take the quiz first"}
+                    </p>
+                    <small style={{ color: "#64748b", fontSize: "0.85rem" }}>
+                      {lang === "ar"
+                        ? "يرجى اجتياز التقييم بنسبة 70% أو أعلى"
+                        : "You need to score 70% or higher to continue"}
+                    </small>
+                  </div>
+                  <AIQuiz
+                    lessonContent={currentLesson?.content[lang]}
+                    lessonTitle={currentLesson?.title[lang]}
+                    token={token}
+                    lang={lang}
+                    onQuizComplete={handleQuizComplete}
+                    isCompact={true}
+                  />
+                </div>
+              )}
 
-    </div>
-          </div>
+              {/* Quiz Section - Full when already passed */}
+              {quizPassed && !isLessonCompleted(currentLesson._id) && (
+                <div style={{ marginTop: "40px" }}>
+                  <AIQuiz
+                    lessonContent={currentLesson?.content[lang]}
+                    lessonTitle={currentLesson?.title[lang]}
+                    token={token}
+                    lang={lang}
+                    onQuizComplete={handleQuizComplete}
+                  />
+                </div>
+              )}
+
+              {/* Quiz Section - Full when lesson not completed */}
+              {/* {!isLessonCompleted(currentLesson._id) && !quizPassed && (
+                <div style={{ marginTop: "40px" }}>
+                  <p style={{ color: "#6b7280", textAlign: "center", fontSize: "0.9rem" }}>
+                    {lang === "ar"
+                      ? "اختبر فهمك للمحتوى بالضغط على الزر أعلاه"
+                      : "Test your understanding by clicking the button above"}
+                  </p>
+                </div>
+              )} */}
+
+              {/* Completion Message */}
+              {completedLessons.size === lessons.length && (
+                <div
+                  style={{
+                    marginTop: "32px",
+                    padding: "20px",
+                    backgroundColor: "#fef3c7",
+                    border: "1px solid #fcd34d",
+                    borderRadius: "8px",
+                    textAlign: "center",
+                    fontSize: "0.95rem",
+                    color: "#92400e",
+                    fontWeight: "600",
+                  }}
+                >
+                  🎉{" "}
+                  {lang === "ar"
+                    ? "مبروك! انتهيت من جميع دروس هذا الكورس!"
+                    : "Congratulations! You've completed all lessons!"}
+                </div>
+              )}
+            </div>
+          )}
+
+          {!currentLesson && (
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                height: "100%",
+                padding: "32px",
+              }}
+            >
+              <p style={{ color: "#6b7280", textAlign: "center" }}>
+                {lang === "ar"
+                  ? "اختر درساً من القائمة الجانبية"
+                  : "Select a lesson from the sidebar"}
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </>
