@@ -203,6 +203,13 @@ textarea{
     padding: 8px 12px;
     font-size: 12px;
   }
+:dir(ltr) .main-content-area {
+  padding-left: 0px;
+}
+
+:dir(rtl) .main-content-area {
+  padding-right: 0px;
+}
 }
 
 @media (max-width: 480px) {
@@ -218,4 +225,11 @@ textarea{
     width: 40px;
     height: 40px;
   }
+  :dir(ltr) .main-content-area {
+  padding-left: 0px;
+}
+
+:dir(rtl) .main-content-area {
+  padding-right: 0px;
+}
 }

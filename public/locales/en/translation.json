@@ -293,7 +293,8 @@
     "beginner": "Beginner",
     "intermediate": "Intermediate",
     "advanced": "Advanced",
-    "selectacourse": "Select a course"
+    "selectacourse": "Select a course",
+    "alllevels":"All Levels"
   },
   "faq": {
     "question1": "Why do students prefer online learning?",
@@ -445,6 +446,7 @@
     "lessons": "Lessons",
     "Intermediate": "Intermediate",
     "Advanced": "Advanced",
+    "All Levels":"All Levels",
     "m": "m",
     "removeFromWishlist": "Remove From Wishlist"
   },

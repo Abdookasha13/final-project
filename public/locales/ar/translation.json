@@ -331,7 +331,8 @@
     "beginner": "مبتدئ",
     "intermediate": "متوسط",
     "advanced": "متقدم",
-    "selectacourse": "اختر دورة"
+    "selectacourse": "اختر دورة",
+    "alllevels":"جميع المستويات"
   },
   "price": {
     "Basic Plan": "الخطة الأساسية",
@@ -434,6 +435,7 @@
     "lessons": "الدروس",
     "Intermediate": "متوسط",
     "Advanced": "متقدم",
+    "All Levels":"جميع المستويات",
     "m": "دقيقة",
     "removeFromWishlist": "إزالة من المفضلة"
   },

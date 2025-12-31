@@ -8,7 +8,6 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-
 .dashboard-container {
   padding: 32px;
   border-radius: 20px;
@@ -238,13 +237,23 @@ body {
 }
 
 /* ============ RESPONSIVE ============ */
+@media (max-width: 1024px) {
+  .statCard2 .card {
+    padding: 24px !important;
+  }
+
+  .statCard2 h3 {
+    font-size: 28px !important;
+  }
+}
+
 @media (max-width: 768px) {
   .dashboard-container {
-    padding: 16px;
+    padding: 20px;
   }
 
   .dashboard-container h3 {
-    font-size: 22px;
+    font-size: 24px;
   }
 
   .dashboard-container p {
@@ -253,10 +262,11 @@ body {
 
   .statCard2 {
     margin-bottom: 16px;
+    padding: 10px;
   }
 
   .statCard2 .card {
-    padding: 20px !important;
+    padding: 24px !important;
   }
 
   .statCard2 .card-body {
@@ -264,53 +274,70 @@ body {
   }
 
   .statCard2 i {
-    font-size: 36px !important;
+    font-size: 38px !important;
+    min-width: 60px;
   }
 
   .statCard2 h3 {
-    font-size: 26px !important;
+    font-size: 28px !important;
   }
 
   .statCard2 .card-title {
     font-size: 12px !important;
   }
 
+  .statCard2 small {
+    font-size: 11px !important;
+  }
+
   .chart-container {
-    padding: 20px !important;
-    margin-top: 24px;
+    padding: 24px !important;
+    margin-top: 30px;
   }
 
   .chart-header {
-    flex-direction: column;
     gap: 12px;
-    align-items: flex-start;
+    margin-bottom: 20px;
   }
 
   .chart-header h5 {
     font-size: 18px !important;
   }
 
-  .chart-container {
-    height: 300px;
+  .chart-badge {
+    padding: 6px 12px;
+    font-size: 10px;
+  }
+
+  .recharts-cartesian-axis-tick {
+    font-size: 11px !important;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 576px) {
   .dashboard-container {
-    padding: 12px;
+    padding: 16px;
   }
 
   .dashboard-container h3 {
-    font-size: 18px;
+    font-size: 20px;
+  }
+
+  .statCard2 {
+    margin-bottom: 12px;
+    padding: 8px;
+  }
+
+  .statCard2 .card {
+    padding: 20px !important;
   }
 
   .statCard2 .card-body {
-    flex-direction: column;
-    text-align: center;
+    gap: 12px;
   }
 
-  .statCard2 .card-body > div:last-child {
-    text-align: center;
+  .statCard2 .card-body > div:first-child {
+    min-width: 55px;
   }
 
   .statCard2 i {
@@ -318,15 +345,97 @@ body {
   }
 
   .statCard2 h3 {
-    font-size: 22px !important;
+    font-size: 24px !important;
+  }
+
+  .statCard2 .card-title {
+    font-size: 11px !important;
+  }
+
+  .statCard2 small {
+    font-size: 10px !important;
+  }
+
+  .chart-container {
+    padding: 18px !important;
+    margin-top: 24px;
+    border-radius: 12px !important;
   }
 
   .chart-header {
-    gap: 8px;
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+  }
+
+  .chart-header h5 {
+    font-size: 16px !important;
   }
 
   .chart-badge {
     width: 100%;
     text-align: center;
+    padding: 5px 10px;
+    font-size: 9px;
+  }
+
+  .recharts-cartesian-axis-tick {
+    font-size: 9px !important;
+  }
+
+  .recharts-yaxis-tick {
+    font-size: 9px !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .dashboard-container {
+    padding: 12px;
+  }
+
+  .dashboard-container h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+  }
+
+  .dashboard-container p {
+    font-size: 12px;
+  }
+
+  .statCard2 {
+    margin-bottom: 10px;
+    padding: 6px;
+  }
+
+  .statCard2 .card {
+    padding: 16px !important;
+  }
+
+  .statCard2 i {
+    font-size: 28px !important;
+  }
+
+  .statCard2 h3 {
+    font-size: 20px !important;
+  }
+
+  .statCard2 .card-title {
+    font-size: 10px !important;
+  }
+
+  .chart-container {
+    padding: 16px !important;
+    margin-top: 20px;
+  }
+
+  .chart-header h5 {
+    font-size: 14px !important;
+  }
+
+  .chart-badge {
+    padding: 4px 8px;
+    font-size: 8px;
   }
 }
