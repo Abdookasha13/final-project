@@ -58,6 +58,10 @@
   font-weight: 200;
   color: #333931;
 }
+.old-price-roka{
+  text-decoration: line-through !important;
+  color: #565656;
+}
 
 /* القائمة */
 .course-sidebar-roka ul li {

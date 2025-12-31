@@ -289,6 +289,9 @@ const AddCourse = () => {
                     <option value="Advanced">
                       {t("instructorDashboard.advanced")}
                     </option>
+                        <option value="All Levels">
+                      {t("instructorDashboard.alllevels")}
+                    </option>
                   </select>
                   {errors.skillLevel && (
                     <div className="invalid-feedback">

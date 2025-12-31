@@ -136,7 +136,7 @@ const CourseDetails = () => {
             key={lesson._id}
           >
             <div
-              style={{ fontSize: "15px", color: "#404040ff" }}
+              style={{ fontSize: "16px", color: "#404040ff" }}
               className="d-flex gap-3 align-items-center"
             >
               <MdOutlinePlayLesson size={"18px"} color="#00bfa6" />
@@ -303,12 +303,13 @@ const CourseDetails = () => {
                 <div className="course-price-roka d-flex gap-2">
                   {course.discountPrice ? (
                     <>
-                      <span className="current-price-roka fw-bold">
-                        ${course.price}
-                      </span>
-                      <span className="old-price-roka">
+                       <span className="current-price-roka fw-bold">
                         ${course.discountPrice}
                       </span>
+                      <span className="old-price-roka " >
+                        ${course.price}
+                      </span>
+                   
                     </>
                   ) : (
                     <span className="current-price-roka fw-bold">
