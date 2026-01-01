@@ -87,7 +87,7 @@ function Courses({ filterFn }) {
         {filteredCourses.map((course) => {
            const enrolled = isUserEnrolled(course._id);
           return (
-            <div className="col-xl-4 col-lg-4 col-md-6" key={course._id}>
+            <div className="col-xl-4 col-md-6" key={course._id}>
               <CourseCard
                 imgSrc={course.thumbnailUrl}
                 title={course.title}

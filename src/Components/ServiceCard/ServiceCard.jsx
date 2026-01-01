@@ -10,7 +10,7 @@ const ServiceCard = ({ service }) => {
 
   return (
     <div className="service-card-roka text-center p-4">
-      <div className="icon-wrapper-roka mx-auto mb-4">
+      <div className="icon-wrapper-roka mx-auto mb-4 mt-3">
         <i className={service.icon || "fa-solid fa-graduation-cap"}></i>
       </div>
 
